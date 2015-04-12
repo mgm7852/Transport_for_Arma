@@ -1,0 +1,107 @@
+﻿//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+// CREDITS
+//
+
+This project in its entirety is not a fork of any existing work; it's been built from scratch.
+Admittedly not time effective however I believe it is the best way to learn and well worth  the effort.
+Having said that, I have happily utilized publicly available ideas and code pieces where appropriate.
+
+*Random position generator algorithm is based on several others work including Kronzky, JW Custom and several people on BI forums (too many to list here).
+*Map position updater code directly is taken from ShootingBlanks's proof-of-concept post in axeman's dayz-AI bus thread on opendayz forums.
+*ActionMenu-on-object code is based on the code taken from computermancer's earplugs script
+
+Many thanks to the authors of work listed above. Each bit helped me solve another piece of the big puzzle.
+
+
+I also would like to thank the following for their work. List is in random order. Apologies for those who haven't made it in yet.
+
+
+Bohemia Interactive
+		Good game, excellent wiki.
+		Thank you!
+
+Andrew "AxeMan" Gregory
+		I still remember the moment I opened "dayZ-AI-Bus-Route" armaholic page.
+		The concept AI taking you from A to B in "DayZ world!" made me think of that old TV series twilight zone! :)
+		Thanks for creating the AxeBus and sharing your work with the community.
+		EDIT: axe also gave a hand with my wonderfully named variable named variables thread - eternally grateful.
+
+Face
+		Thank you very much Face, for showing me how to implement variably named variables (arrays with incremented IDs as part of name).
+		Without this technique I wouldn't be able to implement dynamic ACLs but now map-tracking is only available to authorized players 
+		You've been a great help really!!
+		
+vbawol
+		creator of EpochMod.
+		If Epoch did not exist I probably won't be playing this game (Arma) by now so thanks! [more helis and bring back the old mozzie pls]
+		
+killzone_kid
+		I wanted to create _this and possibly a few other scripts but I was  perplexed about where to start. I read a few tutorials but to a long story short it didn't look good.
+		Till I heard about killzone_kid 's blog on a YouTube video. Immediately started reading it took a while to go through most articles and I still keep referring to often.
+		Thanks for helping me and an ever growing army of JIP scripters.
+
+[FOCK] Mikie J
+		Tutorial is good but the humour in it -which made me laugh more than any other scripting reference!- makes it priceless entry point for new scripters.
+		Thanks for sharing your experience!
+
+ShootingBlanks
+		Map position updater code is greatly appreciated - thanks!  ref: http://opendayz.net/threads/dayz-arma-ai-controlled-bus-route.10057/page-15#post-113820
+
+computermancer
+		That earplugs script is excellent and a MUST HAVE. Thanks for releasing your work.
+		I have used (if I may say so optimized) actionMe
+
+Kronzky
+		Urban Patrol Script is a classic taught across the globe in SQF scripting classes or it should be :)
+		Still a tad complicated my taste but I enjoy learning something new from this almost every time I open it.
+		Thanks!
+
+JW Custom	
+		Ultra Simple Patrol Script gave me some useful ideas.
+		
+Vampire
+		"Vampire's Epoch Mission Framework" is one of the detailed scripts I have studied to understand how this SQF-thingie work.
+		(I am also a long time fan of his work BTW)
+		Thanks!
+
+5nine
+		5nine renewed my interest on the subject by posting that forum thread in EpochMod Forums.
+		He then proceeded to releasing the first* ever taxi script for Arma. [* = As far as I know]
+		Hats off!
+
+second_coming
+		second_coming has provided the knowledge to accept payments [i.e.: take cash from an EpochMod player].
+		Cheers SC!
+		
+nedfox	
+		nedfox has provided the knowledge of packing an SQF script into a PBO file in his work: "Community (server side) MOD".
+		Thanks a lot, this will save me at least 4-5 hours!
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+	
+	
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// CREDITS: images & misc.
+
+ScenicBluffs.org
+		The Taxi image was taken from their site - thanks! http://www.scenicbluffs.org/ [ picture: http://www.scenicbluffs.org/portals/0/Images/taxicab4.png ]
+
+Gordon and Penny Curley
+		(taxi request) Approved/Rejected images taken from their site - thanks! http://www.gcurley.info/	http://www.gcurley.info/news/2014/11/4535/		[ picture: http://www.gcurley.info/news/wp-content/uploads/2014/11/rejected-approved-reverse.jpg ]
+
+Venice Classic Radio Italia
+		Thanks for the countless hours of free relaxing  Classical Music		http://www.veniceclassicradio.eu/
+
+http://mybrownpaperpackages.com/
+		clickNGo 'choose destination' picture is taken from this site - thanks!		http://mybrownpaperpackages.com/wp-content/uploads/2015/01/Photoxpress_4403621-choose-destination.jpg
+
+http://www.konnectafrica.net/
+		fixedDestinationTaxis 'please pay' image is taken from this site - thanks!	http://www.konnectafrica.net/wp-content/uploads/2013/10/pay-me-480x270.jpg
+
+http://www.signspecialist.com/
+		fixedDestinationTaxis 'cannot afford' image is taken from this site - thanks!	http://www.signspecialist.com/decals/beevault/images/Phenomena%20and%20History%20072-0487.gif
+http://www.towerswatson.com/
+		payNow icon taken from this site - thanks!				 			http://www.towerswatson.com/~/media/Images/icons/topics/towers-watson-topic-icons-executive-pay-40x40.png?bc=ffffff&h=40&w=40
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
