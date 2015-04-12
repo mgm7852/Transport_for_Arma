@@ -1,0 +1,108 @@
+﻿//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+video #1: Map Markers: "Taxi going to (self) termination"
+This video featuring Map Markers in which basically members of a special group (called totalOmniscience) can see everything related to Transport for Arma services on their map.
+
+totalOmniscience group members can see all Service Requests from Players
+totalOmniscience group members can see all Service Units (i.e.: Fixed Destination Taxis + clickNGo Taxis + PublicBuses + Repair/Support Vehicles)
+The vehicle direction and all other information is updated in real time showing the actual live data about that particular Service Unit.
+Requestor of a service + customer of a service + his buddies (in the same vehicle) can see the map tracker for their service unit only they cannot see any other service units.
+Other players (who are not using a Transport for Arma service) cannot see any TfA markers on their maps at all.
+
+http://www.youtube.com/watch?v=Ml1f6LXVxnQ
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[video #2]     Map Markers: "Taxi pick up point/drop off point/vehicle current status"
+
+[spoiler]
+
+Below is the second YouTube video that finished uploading...
+
+This video is also featuring Map Markers. In this one we can see the pick up point, drop off point, and the current position of the Taxi vehicle along with its status (awaiting get in) and vehicle age + current task age + current task threshold in seconds [the time when driver will stop waiting for the player to get in and go self-destruct, thus open up a new "available driver" slot for other players].
+
+http://www.youtube.com/watch?v=Irwlb622hKI
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[video #3]     Ordering a Fixed Destination Taxi
+
+Note that the player is at a CATP (Call-a-Taxi-Point) - this is a predefined point in the map. By default, the three spawn traders in Altis map.
+CATPs are easily configurable, see the screenshots post above, there is a relevant note in the SPOILER under Screenshot: 01_Arrived_at_a_CATP.
+
+Also "Taxi Fixed Destination" list is easily configurable as well, same logic apply.
+
+https://www.youtube.com/watch?v=DyVV767wqho
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[video #4]     Map Tracking In Action (a very short video)
+
+https://www.youtube.com/watch?v=9DUykyjZZW0
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[video #5]     Full Demo of clickNGo Feature          best video so far
+A 3 minute HD video; full demo of clickNGo feature, this was sized 1.5 GB raw video, so consider viewing in HD. What's covered in this video:
+
+    Player call a taxi by pressing INS key (configurable).
+    Taxi & driver is created, driver go to pick up the player, unlock the doors and send a message to the player: Your Taxi is here please get in
+    Player get in, doors get auto locked.
+    AI driver start driving towards destination. When vehicle is close to destination, doors auto-unlock.
+    Player get off, driver must self-destruct ASAP to free up a driver slot. He picks a random termination point and start driving towards that spot but first says bye using the horn [:)]
+    We see map updates during the whole journey.
+
+I was writing to a NAS on a busy and old computer so there are some frame drops, sorry about that!
+
+http://www.youtube.com/watch?v=0THViuMJ96U
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+// EOF
