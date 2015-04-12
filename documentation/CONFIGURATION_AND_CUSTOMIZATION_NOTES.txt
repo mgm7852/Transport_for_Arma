@@ -1,0 +1,16 @@
+﻿//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CONFIGURATION INSTRUCTIONS
+
+Transport for Arma is designed to be easily customizable using extensive range of configuration options.
+All options are located in a server-side single file called:		_settings.hpp
+
+client-side options are also configured in the file above.
+
+Enjoy!
+mgm
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+// EOF
