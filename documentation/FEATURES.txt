@@ -1,0 +1,160 @@
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			MOD INTRO
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Transport for Arma (TfA) is server-side mod (with some client-side extensions) which aim improving transport aspect of the game by providing Taxi and Public Bus services.
+*Server-side module contain	:		the service units (vehicles+AI characters to control them), management logic, logging and reporting facilities.
+*Client-side module contain	:		client interaction and client<>server communication code.
+
+
+TfA has been designed with the following keypoints on mind:
+* Highly customizable, modular structure
+* Highly reliable & optimized for performance
+* Good documentation user side and in-line code comments
+* Realism by default		[fresh spawn, no radio, ex nihilo "call-a-taxi via magic communications" is a no]
+* Internationalization (I18n) & Localization (L10n) support
+
+
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			MAIN FEATURES 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Transport for Arma has several different SERVICE OPERATION MODEs. Admins can enable or disable service modes in the masterConfig file.
+
+
+
+
+//---------------------------------------
+SERVICE OPERATION MODE #1	:		Fixed Destination Taxi Service
+HOW THIS WORKS			:		In this mode, Players can book taxis from CATPs (Call-a-Taxi Point) which will then take them to Fixed Destination of their choice and will charge a predefined cost.
+								Cost is defined in masterConfig file.
+								List of CATPs defined in masterConfig file.
+								List of FDs defined in masterConfig file.
+DEFAULT KEYS				:		There are no special/custom keys for this. Players 'look' at a CATP object and use the actionMenu item (a.k.a.: MouseWheelOption) to request a FixedDestination taxi.
+TODO 					:		ADD "SHOW ME" LINK HERE
+//---------------------------------------
+
+
+
+
+
+
+//---------------------------------------
+SERVICE OPERATION MODE #2	:		clickNGo Taxi Service
+HOW THIS WORKS			:		In this mode, Players from anywhere on the map can call a taxi to go to any other part of the map.
+								Communication is done via radio thus, player must have a radio item.
+								This service is not based on a fixed fee but taximeter based; as the Taxi keeps driving, driver keeps charging the player every n seconds x amounts of krypto.
+								Cost is defined in masterConfig file.
+								Radio requirement is defined in masterConfig file.
+DEFAULT KEYS				:		Press INS key (default) (configurable in masterConfig) to call a clickNGo Taxi. << You will be asked to choose your destination. A clickNGo taxi will come to pick you up wherever you are and the drivel will take you to your requested destination.
+											While inside a clickNGo Taxi, at any time, press NumPad* key to Set Course [i.e.: change the taxi's destination].
+											ProTip:	do not open map then press * as this will lead to ZOOM IN function.
+													instead, press the * key while map in closed state... 	(TfA will automatically open the map and will close it once you click & set the destination)
+TODO 					:		ADD "SHOW ME" LINK HERE
+// ~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+		
+//---------------------------------------
+NOT IMPLEMENTED
+				SERVICE OPERATION MODE #3	:		Public Transport Units (a.k.a. Bus Service)
+												In this mode, a player can hop on & hop off whenever he desires free of charge.
+												Note that the vehicle type is not 'bus'.
+												Taxi Corp (a for-profit organization) is in commercial contract with several boroughs providing public transport in their areas.
+												Taxi Corp gets paid by the borough however general public (players) don't pay a dime for the bus ride [it's being covered with the taxes].
+				DEFAULT KEYS				:		There are no special/custom keys for this. Players stand by the road and PTU will slow down and stop to let the player in. To get off, players use the actionMenu item (a.k.a.: MouseWheelOption) to request the PublicTransportUnit driver to stop.
+				TODO 					:		ADD "SHOW ME" LINK HERE
+//---------------------------------------
+
+
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+		
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			ADDITIONAL FEATURES
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+FEATURE	:	REALTIME MAP UPDATES 
+				All Transport for Arma SUs (ServiceUnits) (i.e.: vehicles) belong to Taxi Corp.
+				All Taxi Corp assets broadcast their position and actions to the Taxi Corp HQ.
+				Each SU will report the following information:
+							SUID | DriverName | ActionInProgress | NameOfThePlayerBeingServed | Speed | Direction | # of Passengers | DistanceToWaypoint | UnitAge
+				Broadcasted information is visible to members of totalOmniscience group.
+				To be clear members of this group can monitor all TfA vehicles at all times.
+				Vanilla Players: 	(i.e.: not an admin && not a member of totalOmniscience group) can monitor only the vehicle currently serving them.
+							This is useful in many ways; one practical use is monitoring an inbound taxi that is on its journey to pick up the player.
+TODO 	:	ADD "SHOW ME" LINK HERE
+//---------------------------------------
+FEATURE: 		IN-GAME STATUS REPORT
+				Members of totalOmniscience group receive an in-game "status report" that is printed at the bottom right corner of the game map. 
+				In-Game Status Report is similar to the server RPT log report and contain the following:
+						DRIVERS   	Busy | Available | Total
+						REQUESTS   	InProgress | Success | Fail | Total
+						MILEAGE   	Total
+						SERVER UPTIME
+TODO 	:	ADD "SHOW ME" LINK HERE
+//---------------------------------------
+FEATURE	:	SERVER LOG MANAGER (SLM)
+				SLM Report service status to the server RPT log every n seconds [configured in masterConfig]. Status report contains the following:
+				SLM Status Report is similar to the in-game status report and contain the following:
+						DRIVERS   	Busy | Available | Total
+						REQUESTS   	InProgress | Success | Fail | Total
+						MILEAGE   	Total
+						SERVER UPTIME
+TODO 	:	ADD "SHOW ME" LINK HERE
+//---------------------------------------
+FEATURE	:	ANTIHOARDING PROTECTION
+			A player cannot book all taxis at the same time. In fact cannot book more than one at any given time, this is to prevent DoS attacks.
+TODO 	:	ADD "SHOW ME" LINK HERE
+//---------------------------------------
+FEATURE	:	EASY CONFIGURATION & CUSTOMIZATION
+				From ground up this mod is designed to be extremely customizable - almost anything is configurable from one single masterConfig file.
+				Copied below just a few configuration options -- see the masterConfig file for the full list.
+					//Company - New Owner Name
+					//Establish Headquarters?		(i.e.: create the building in 3D game world yes/no)
+					//HQ Location
+					//HQ Building Object Class ID
+					//HQ Map Marker Settings
+					//	HQ 	Create Map Marker?
+					//	HQ	Map Marker Text/Color/Shape etc.
+					//TAXI CORP HR DEPARTMENT SETTINGS
+					//Total Number of Taxi Drivers
+					// Taxi Driver Classname(s)
+					//Taxi Vehicle Settings
+					//Taxi Driver Settings
+					//Introduce an artificial delay while responding to incoming booking requests. Just a few seconds. a random number will be generated within the parameters below.
+					//Radio Position Broadcast Channel Mode
+					//Fixed Destination Settings
+					//List of available destinations for the Taxi service
+					//Kavala
+					mgmTfA_staticgv_taxiFixedDestination01TextString = "KAVALA CITY CENTRE";
+					mgmTfA_staticgv_taxiFixedDestination01PositionArray = [3610.68,12939.6,0.00157928];
+					//Write service status information to server's RPT log file every n seconds // Default: 300
+					//Sleep time in between serverPosManager updates (in seconds) // Default: 2
+TODO 	:	ADD "SHOW ME" LINK HERE
+//---------------------------------------
+NOT IMPLEMENTED
+			FEATURE	:	ACCIDENTAL EJECT RECOVERY
+							For their own safety, players do not have the option to "get out" while vehicle is in transit however (due to emergencies etc.) they DO have the option to jump out via EJECT button.
+							DISCLAIMER:	Taxi Corp strongly recommend seat belts to be fastened during the entirety of journey and customers not eject out of in-transit vehicles as there has been several cases of severe injury and death.
+							In  the event of customer ejecting while in transit, driver will assume this is due to a mistake and will stop the vehicle and await for the customer to get back in.
+							After a while, if the customer does not get back in, driver will be convinced that it was indeed an intentional eject-while-in-transit and he will carry on with his workflow [i.e.: as per customer's wishes, driver will leave the customer behind].
+			TODO 	:	ADD "SHOW ME" LINK HERE
+//---------------------------------------
+FEATURE: 		BANK TRANSFERS 
+				Bank Transfer is an accepted method of payment, meaning player does not have to have cash to use the Taxi Service. Cost will be taken from players Epoch Bank Account.
+TODO 	:	ADD "SHOW ME" LINK HERE
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
