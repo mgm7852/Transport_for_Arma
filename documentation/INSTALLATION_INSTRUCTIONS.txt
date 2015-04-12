@@ -1,0 +1,57 @@
+﻿Hopefully these below should be enough to get you going... Any questions, please ask in the forums. Enjoy!	--mgm
+
+
+
+
+
+
+
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INSTALLATION INSTRUCTIONS FOR EPOCH MOD -- for a NEW TfA test server
+
+NEW - INSTALLATION STEP #1:	OBTAIN.	Download the latest release from project homepage at	https://gitlab.com/themgm/Transport_for_Arma
+NEW - INSTALLATION STEP #2:	SERVER-SIDE.	Copy the 'mgmTfA.pbo'  file into your Epoch mod (server side) autostart addons directory:		<ARMA_3_SERVER_DIRECTORY>\@epochhive\addons\
+NEW - INSTALLATION STEP #3:	CLIENT-SIDE.	Copy the client-side file 'mgmTfA.Altis.pbo' into your MPmissions directory:					<ARMA_3_SERVER_DIRECTORY>\MPmissions\
+That's it - just launch the game with the MPmission you've uploaded and it should work.
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INSTALLATION INSTRUCTIONS FOR EPOCH MOD -- add TfA into an EXISTING server
+
+EXISTING - INSTALLATION STEP #1:	OBTAIN.	Download the latest release from project homepage at	https://gitlab.com/themgm/Transport_for_Arma
+EXISTING - INSTALLATION STEP #2:	SERVER-SIDE.	Copy the 'mgmTfA.pbo'  file into your Epoch mod (server side) autostart addons directory:		<ARMA_3_SERVER_DIRECTORY>\@epochhive\addons\
+EXISTING - INSTALLATION STEP #3:	CS (CLIENT-SIDE).COPYDIR:	Extract the downloaded client-side file 'mgmTfA.Altis.pbo' using PBO Manager v.1.4 or a similar PBO unpacker software and right click on mgmTfA directory [the one with 35+ files inside] and click COPY.
+EXISTING - INSTALLATION STEP #4:	CS.PASTEDIR:	Paste the copied directory into your MPmissions PBO file (or directory) as:	<ARMA_3_SERVER_DIRECTORY>\MPmissions\<yourMission.yourWorld>\custom\mgmTfA
+EXISTING - INSTALLATION STEP #5:	CS.ADDINJECTOR #1:	in your MPmissions PBO file (or directory):					<ARMA_3_SERVER_DIRECTORY>\MPmissions\<yourMission.yourWorld> add the following 3 lines to init.sqf
+								//==================Transport for Arma client-side init==========================		// copy & paste these 3 lines into your existing file as shown on the right side. (if there is no such file, create a new blank text file first, and rename it to what you see on the right). ==>		ARMA_3_SERVER_DIRECTORY\<MPmissions>\<yourMapWorldname>\init.sqf
+								if (!isServer) then {	[] call compile preprocessFileLineNumbers "custom\mgmTfA\psczvuznuilitltt.sqf";	};
+								//==================Transport for Arma client-side init==========================
+EXISTING - INSTALLATION STEP #6:	CS.ADDINJECTOR #2:	in your MPmissions PBO file (or directory):					<ARMA_3_SERVER_DIRECTORY>\MPmissions\<yourMission.yourWorld> add the following 3 lines to onPlayerRespawn.sqf
+								//==================Transport for Arma client-side onPlayerSpawn==================		// copy & paste these 3 lines into your existing file as shown on the right side. (if there is no such file, create a new blank text file first, and rename it to what you see on the right). ==>		ARMA_3_SERVER_DIRECTORY\<MPmissions>\<yourMapWorldname>\onPlayerRespawn.sqf
+								waitUntil {vehicle player == player}; waituntil {!isnull (finddisplay 46)}; [] call compile preprocessFileLineNumbers "custom\mgmTfA\xdrgjzogmpztzxnk.sqf";
+								//==================Transport for Arma client-side onPlayerSpawn==================
+That's it - just launch the game with the MPmission you've uploaded and it should work.
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+//EOF
