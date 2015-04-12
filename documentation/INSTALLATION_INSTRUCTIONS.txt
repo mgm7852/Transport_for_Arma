@@ -10,8 +10,9 @@
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-SECTION A - INSTALLATION INSTRUCTIONS -- Adding TfA to an existing Epoch Mod installation
+INSTALLATION INSTRUCTIONS -- Adding TfA to an existing Epoch Mod installation
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 STEP #1:     OBTAIN and EXTRACT
 Download the latest release from project homepage at	https://gitlab.com/themgm/Transport_for_Arma
