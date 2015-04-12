@@ -9,14 +9,14 @@
 
 
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 INSTALLATION INSTRUCTIONS FOR EPOCH MOD -- for a NEW TfA test server
 
 NEW - INSTALLATION STEP #1:	OBTAIN.	Download the latest release from project homepage at	https://gitlab.com/themgm/Transport_for_Arma
 NEW - INSTALLATION STEP #2:	SERVER-SIDE.	Copy the 'mgmTfA.pbo'  file into your Epoch mod (server side) autostart addons directory:		<ARMA_3_SERVER_DIRECTORY>\@epochhive\addons\
 NEW - INSTALLATION STEP #3:	CLIENT-SIDE.	Copy the client-side file 'mgmTfA.Altis.pbo' into your MPmissions directory:					<ARMA_3_SERVER_DIRECTORY>\MPmissions\
 That's it - just launch the game with the MPmission you've uploaded and it should work.
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
@@ -27,7 +27,7 @@ That's it - just launch the game with the MPmission you've uploaded and it shoul
 
 
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 INSTALLATION INSTRUCTIONS FOR EPOCH MOD -- add TfA into an EXISTING server
 
 EXISTING - INSTALLATION STEP #1:	OBTAIN.	Download the latest release from project homepage at	https://gitlab.com/themgm/Transport_for_Arma
@@ -43,7 +43,7 @@ EXISTING - INSTALLATION STEP #6:	CS.ADDINJECTOR #2:	in your MPmissions PBO file 
 								waitUntil {vehicle player == player}; waituntil {!isnull (finddisplay 46)}; [] call compile preprocessFileLineNumbers "custom\mgmTfA\xdrgjzogmpztzxnk.sqf";
 								//==================Transport for Arma client-side onPlayerSpawn==================
 That's it - just launch the game with the MPmission you've uploaded and it should work.
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 

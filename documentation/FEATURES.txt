@@ -1,6 +1,6 @@
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			MOD INTRO
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Transport for Arma (TfA) is server-side mod (with some client-side extensions) which aim improving transport aspect of the game by providing Taxi and Public Bus services.
 *Server-side module contain	:		the service units (vehicles+AI characters to control them), management logic, logging and reporting facilities.
 *Client-side module contain	:		client interaction and client<>server communication code.
@@ -17,9 +17,9 @@ TfA has been designed with the following keypoints on mind:
 
 
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			MAIN FEATURES 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Transport for Arma has several different SERVICE OPERATION MODEs. Admins can enable or disable service modes in the masterConfig file.
 
 
@@ -157,4 +157,10 @@ NOT IMPLEMENTED
 FEATURE: 		BANK TRANSFERS 
 				Bank Transfer is an accepted method of payment, meaning player does not have to have cash to use the Taxi Service. Cost will be taken from players Epoch Bank Account.
 TODO 	:	ADD "SHOW ME" LINK HERE
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+// EOF
