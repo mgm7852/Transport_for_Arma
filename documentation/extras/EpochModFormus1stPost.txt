@@ -27,10 +27,10 @@ Below video from an old version: Transport for Arma [WIP] v.0.2.4 clickNGo Taxi 
 [*]Your players can press a hotkey [size=3][i]-INS by default-[/i][/size] and choose a destination. A clickNGo Taxi will spawn, pick em up & drop em to the requested destination.[/*]
 [*]Your players can at a spawn trader, talk to the [i]Taxi Dispatcher[/i] [URL=http://i.imgur.com/ceKSE1E.jpg][i]-click4image-[/i][/URL] and a Fixed Destination Taxi will spawn, pick em up & drop em to the chosen destination.[/*]
 [/LIST]
-   
+    
 [i][b]What can this mod do for you in its FUTURE VERSIONS?[/b][/i]
-[SPOILER]
 PLANNED FEATURES
+[SPOILER]
 [LIST]
 [*]Public Buses - players can hop on/off[/*]
 [*]Sea Taxis [size=3][i]similar to current 'LandTaxis', will be two flavours: clickNGo anywhere on the sea and FixedDestination version to major ports/points of interest[/i][/size][/*]
