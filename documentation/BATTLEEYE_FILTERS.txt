@@ -1,0 +1,48 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// TRANSPORT FOR ARMA -- REQUIRED BATTLEEYE FILTER MODIFICATIONS
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+WARNING:	THIS DOCUMENT AND FILTER INFORMATION BELOW IS IN PRE-ALPHA STATE.
+		
+		A THROUGH REVIEW IS STRONGLY RECOMMENDED!
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Script.txt
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+setMarker = !"lay 46)}; [] execVM "custom\mgmTfA\ftiirvgdonrqmlbt.sqf"; deleteMarker "clickNGoTaxiChosenPosition"; mgmTfA_dynamicgv_thisPlayer"
+addEventHandler = !"["vehiclePayNowMenuStatus", 1, false]; _getInEvent = _x addEventHandler ["GetIn", {_this spawn pjnrjlufglijnmup}]; _discoveredNe"
+deleteMarker = !"lay 46)}; [] execVM "custom\mgmTfA\ftiirvgdonrqmlbt.sqf"; deleteMarker "clickNGoTaxiChosenPosition"; mgmTfA_dynamicgv_thisPlayer"
+onMapSingleClick = !" SET DESTINATION"]; systemChat (str _yojhefzumkeobggd); onMapSingleClick " clickNGoTaxiChosenDestinationMarker = createMarkerLoc"
+createMarker = !" onMapSingleClick " clickNGoTaxiChosenDestinationMarker = createMarkerLocal [""clickNGoTaxiChosenPosition"",_pos]; clickNGoTaxiC"
+displayAddEventHandler = !"e bottom of screen" ]; hintC_arr_EH = findDisplay 72 displayAddEventHandler ["unload", { 0 = _this spawn { _this select 0 displa"
+displayRemoveEventHandler = !"dler ["unload", { 0 = _this spawn { _this select 0 displayRemoveEventHandler ["unload", hintC_arr_EH]; hintSilent ""; }; }];"
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// setvariable.txt 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+= !"mgmtfa_dispatcher" = true 2:1074 C_man_polo_1_F"
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// publicvariable.txt
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+= !"mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray" !"mgmTfA_gv_pvs_req_clickNGoTaxiToMyPositionPleaseConfirmPacket" !"mgmTfA_gv_PV_SU1lePointer" !"menuAttachedStatus" !"mgmTfA_gv_PV_SU3lePointer" = 0"
+IMPORTANT:	Had to set my publicvariable.txt to a "3" instead of "5"
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+.
