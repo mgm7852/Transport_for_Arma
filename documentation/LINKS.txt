@@ -1,0 +1,5 @@
+[LIST]
+[*]Faster download speeds.[/*]
+[*]Files are downloaded as "xxxxxxxxxxxxxxxxxxxx-file.extension" where the X=a random hash.[/*]
+[*][s]Files that haven't been updated for the new server, are missing their images, but you can still download them (from the regular server)[/s] Images now load even if they haven't been updated ;) .[/*]
+[/LIST]

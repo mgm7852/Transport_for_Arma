@@ -1,0 +1,66 @@
+[b]QUICK INTRO[/b]
+TfA is a server- and client-side mod which aim improving transport aspect of the game by providing Taxi and Public Bus services.
+
+[b]Server-side[/b] contain: The service unit functionality (vehicles & AI characters to control them), management logic, logging and reporting facilities, client<->server communication code.
+[b]Client-side[/b] contain: Client interaction, pay-as-you-go payment system, and client<->server communication code.
+  
+  
+  
+  
+  
+[color=#ff0000][i][b][font='lucida sans unicode'][size=7]INITIAL PUBLIC ALPHA VERSION 0.3.0 RELEASED![/size][/font][/b][/i][/color]
+[size=5][font='comic sans ms'][b]READ THE [/b][url=http://epochmod.com/forum/index.php?/topic/33927-wip-transport-for-arma-taxi-bus-services/page-2#entry229595]RELEASE NOTES[/url][/font][/size]
+  
+  
+  
+  
+  
+Below video from an old version: Transport for Arma [WIP] v.0.2.4 clickNGo Taxi Demo Video @YouTube
+[url=https://www.youtube.com/watch?v=0THViuMJ96U]https://www.youtube.com/watch?v=0THViuMJ96U[/url]
+  
+  
+  
+  
+  
+[i][b]What can this mod do for you in its CURRENT VERSION?[/b][/i]
+[LIST=1]
+[*]Your players can press a hotkey [size=3][i]-INS by default-[/i][/size] and choose a destination. A clickNGo Taxi will spawn, pick em up & drop em to the requested destination.[/*]
+[*]Your players can at a spawn trader, talk to the [i]Taxi Dispatcher[/i] [URL=http://i.imgur.com/ceKSE1E.jpg][i]-click4image-[/i][/URL] and a Fixed Destination Taxi will spawn, pick em up & drop em to the chosen destination.[/*]
+[/LIST]
+   
+[i][b]What can this mod do for you in its FUTURE VERSIONS?[/b][/i]
+[SPOILER]
+PLANNED FEATURES
+[LIST]
+[*]Public Buses - players can hop on/off[/*]
+[*]Sea Taxis [size=3][i]similar to current 'LandTaxis', will be two flavours: clickNGo anywhere on the sea and FixedDestination version to major ports/points of interest[/i][/size][/*]
+[*]Air Taxis[/*]
+[*]Trains is a wishlist item [size=3][i]only if someone can make a working train without extreme FPS drop in MP[/i][/size][/*]
+[/LIST]
+[/SPOILER]
+ 
+ 
+ 
+[color=#0000ff][b][size=7]PROJECT LINKS[/size][/b][/color]
+[LIST]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/tree/master/release_packages]Download Alpha[/url]          The only file you see here is always the latest version. minified & file/varnames obfuscated for the time being, sorry about that! :([/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma]Project GitLab Homepage[/url][/*]
+[*][url=http://epochmod.com/forum/index.php?/topic/33927-wip-transport-for-arma-taxi-bus-services-latest-dev-version-024/]Project Forums Homepage[/url][/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/raw/master/documentation/CREDITS.txt]Credits[/url][/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/raw/master/documentation/INSTALLATION_INSTRUCTIONS.txt]Installation Instructions[/url][/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/tree/master/documentation]Documentation[/url][/*]
+[*][url=http://epochmod.com/forum/index.php?/topic/33927-wip-transport-for-arma-taxi-bus-services/#entry224967]Screenshots[/url]          Link to a post on Epoch mod forums[/*]
+[*][url=http://epochmod.com/forum/index.php?/topic/33927-wip-transport-for-arma-taxi-bus-services/#entry224968]Videos[/url]          Link to a post on Epoch mod forums[/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/issues]All Issues[/url][/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/issues?label_name=known-issues]Known Issues[/url][/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/issues?label_name=known-no_issues]Known No-Issues[/url][/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/raw/master/documentation/CHANGELOG.txt]Changelog[/url][/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/issues/14]BattlEye Filters[/url]      An initial report from gen0cide can be found here[/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/issues/13]Epoch AntiHack Compatibility[/url]    It appears for the time being only admins can use clickNGo hotkey[/*]
+[/LIST]
+ 
+ 
+ 
+ 
+ 
+. 

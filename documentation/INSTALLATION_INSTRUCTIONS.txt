@@ -46,7 +46,9 @@ Step 3 - Option #2: If you are using a client-side Mission directory [without pa
 STEP #4:     ADD CLIENT-SIDE INJECTOR to init.sqf
 Copy the 3 lines below and paste into the init.sqf file you have in your MPmissions directory:     <ARMA_3_SERVER_DIRECTORY>\MPmissions\<yourMission.yourWorld>\init.sqf
 								//==================Transport for Arma client-side init==========================		// copy & paste these 3 lines into your existing file as shown on the right side. (if there is no such file, create a new blank text file first, and rename it to what you see on the right). ==>		ARMA_3_SERVER_DIRECTORY\<MPmissions>\<yourMapWorldname>\init.sqf
-								if (!isServer) then {	[] call compile preprocessFileLineNumbers "custom\mgmTfA\psczvuznuilitltt.sqf";	};
+								if (!isServer) then {	
+									[] call compile preprocessFileLineNumbers "custom\mgmTfA\psczvuznuilitltt.sqf";
+								};
 								//==================Transport for Arma client-side init==========================
 
 
@@ -54,8 +56,16 @@ Copy the 3 lines below and paste into the init.sqf file you have in your MPmissi
 STEP #5:     ADD CLIENT-SIDE INJECTOR to onPlayerRespawn.sqf
 Copy the 3 lines below and paste into the onPlayerRespawn.sqf file you have in your MPmissions directory:     <ARMA_3_SERVER_DIRECTORY>\MPmissions\<yourMission.yourWorld>\onPlayerRespawn.sqf
 								//==================Transport for Arma client-side onPlayerSpawn==================		// copy & paste these 3 lines into your existing file as shown on the right side. (if there is no such file, create a new blank text file first, and rename it to what you see on the right). ==>		ARMA_3_SERVER_DIRECTORY\<MPmissions>\<yourMapWorldname>\onPlayerRespawn.sqf
-								waitUntil {vehicle player == player}; waituntil {!isnull (finddisplay 46)}; [] call compile preprocessFileLineNumbers "custom\mgmTfA\xdrgjzogmpztzxnk.sqf";
+								[] call compile preprocessFileLineNumbers "custom\mgmTfA\xdrgjzogmpztzxnk.sqf";
 								//==================Transport for Arma client-side onPlayerSpawn==================
+
+
+STEP #6:     BATTLEYE FILTERS
+Read the BattlEye filters forum post and add the necessary exclusions in your BattlEye filters.
+See the link here: 
+Project Forums Homepage         http://epochmod.com/forum/index.php?/topic/33927-wip-transport-for-arma-taxi-bus-services-latest-dev-version-024/
+
+
 
 ALL DONE!		That's it - just launch the game with the MPmission you've modified and your Transport for Arma should be at your service!
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
