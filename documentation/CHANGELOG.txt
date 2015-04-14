@@ -50,4 +50,5 @@ ___New code will be based on limited scope precompiled functions and thus no mor
 0.3.0b2   Misc. minor changes.
 0.3.0b3   A couple of "write debug to log" lines were left in - these have been removed now.
 0.3.0b4   A cosmetic issue has been fixed.
+0.3.0b5   settings file line 459 global variable which is supposed to be "mgmTfA_configgv_createTaxiFixedDestination01Bool" was incorrectly named "mgmTfA_configgv_createTaxiFixedDestination01Bool", fixed now. Thanks for reporting DirtySanchez. Added to Taxi Drivers name database, there's 1 in 1200 chance he might get the next job and make a few bucks :-)
 // EOF
