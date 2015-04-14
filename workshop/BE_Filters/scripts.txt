@@ -1,0 +1,2 @@
+// COPY THE CODE BELOW, PASTE IT TO THE MOST RIGHT SIDE OF YOUR scripts.txt
+!="[] execVM "custom\mgmTfA\myscript.sqf";"
