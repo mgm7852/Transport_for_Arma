@@ -81,6 +81,9 @@ nedfox
 Gen0cide
 		Gen0cide has provided version 0.1 of BattlEye filters.
 		Also information on 3rd party AntiHack test results. Thanks Gen0cide!
+
+DirtySanchez
+		Thanks for being one of the first testers and bug reporters :)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
