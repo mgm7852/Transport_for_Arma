@@ -1,5 +1,5 @@
 //
-//	this is:		default v.0.3.0b4 config file to reference in forums discussions
+//	this is:		default v.0.3.0b5 config file to reference in forums discussions
 //
 
 
@@ -461,7 +461,7 @@ mgmTfA_configgv_clickNGoTaxisDriverWillKeepRemindingThatTheInitialFeeMustBePaidB
 //
 // Does this exist?						(i.e.: ignore the rest of the settings below this line)
 // 		Referred by TODO-FILL-THIS
-mgmTfA_configgv_createTaxiFixedDestination02Bool						= true;
+mgmTfA_configgv_createTaxiFixedDestination01Bool						= true;
 // Taxi Fixed Destination 01 Location
 // 		Referred by mgmTfA_scr_serverInitCreateObjectHQBuilding.sqf when creating the building
 //		Change at your risk. We don't do any collision checks when spawning this building lol
