@@ -1,37 +1,38 @@
 [b]QUICK INTRO[/b]
 TfA is a server- and client-side mod which aim improving transport aspect of the game by providing Taxi and Public Bus services.
-
+[color=#ffffff].[/color]
 [b]Server-side[/b] contain: The service unit functionality (vehicles & AI characters to control them), management logic, logging and reporting facilities, client<->server communication code.
 [b]Client-side[/b] contain: Client interaction, pay-as-you-go payment system, and client<->server communication code.
-  
-  
-  
-  
-  
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
 [color=#ff0000][i][b][size=7]INITIAL PUBLIC ALPHA VERSION 0.3.0 RELEASED![/size][/b][/i][/color]
 [size=5][b]READ THE [/b][url=http://epochmod.com/forum/index.php?/topic/33927-wip-transport-for-arma-taxi-bus-services/page-2#entry229595]RELEASE NOTES[/url][/size]
-  
-  
-  
-  
-  
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
 Below video from an old version: Transport for Arma [WIP] v.0.2.4 clickNGo Taxi Demo Video @YouTube
 http://www.youtube.com/watch?v=0THViuMJ96U
-               [size=3][i]More videos in YouTube Channel![/i][/size]
-  
-  
-  
-  
-  
+[color=#ffffff]...............[/color][size=3][i]More videos in YouTube Channel![/i][/size]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
 [size=5][b]What can this mod do for you in its CURRENT VERSION?[/b][/size]
 [LIST=1]
 [*]Your players can press a hotkey [size=3][i]-INS by default-[/i][/size] and choose a destination. A clickNGo Taxi will spawn, pick em up & drop em to the requested destination.[/*]
 [*]Your players can at a spawn trader, talk to the [i]Taxi Dispatcher[/i] [URL=http://i.imgur.com/ceKSE1E.jpg][i]-click4image-[/i][/URL] and a Fixed Destination Taxi will spawn, pick em up & drop em to the chosen destination.[/*]
 [/LIST]
- 
- 
- 
-  
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
 [size=5][b]What can this mod do for you in its FUTURE VERSIONS?[/b][/size]           [size=3][i]i.e. PLANNED FEATURES[/i][/size]
 [spoiler]
 [LIST]
@@ -41,14 +42,14 @@ http://www.youtube.com/watch?v=0THViuMJ96U
 [*]Trains is a major wishlist item [size=3][i]only if someone can make a working train without extreme FPS drop in MP[/i][/size][/*]
 [/LIST]
 [/spoiler]
-
-
- 
- 
- 
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
 [color=#0000ff][b][size=7]PROJECT LINKS[/size][/b][/color]
 [LIST]
-[*][url=https://gitlab.com/themgm/Transport_for_Arma/tree/master/release_packages]Download Alpha[/url]               [size=3][i]The only file you see here is always the latest version. minified & file/varnames obfuscated for the time being, sorry about that! :([/i][/size][/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/tree/master/release_packages]Download Latest Alpha[/url][color=#ffffff]...............[/color][size=3][i]The only file you see here is always the latest version. minified & file/varnames obfuscated for the time being, sorry about that! :([/i][/size][/*]
 [*][url=https://gitlab.com/themgm/Transport_for_Arma]Project GitLab Homepage[/url][/*]
 [*][url=http://epochmod.com/forum/index.php?/topic/33927-wip-transport-for-arma-taxi-bus-services-latest-dev-version-024/]Project Forums Homepage[/url][/*]
 [*][url=https://gitlab.com/themgm/Transport_for_Arma/raw/master/documentation/CREDITS.txt]Credits[/url][/*]
@@ -61,13 +62,14 @@ http://www.youtube.com/watch?v=0THViuMJ96U
 [*]Issue Tracker - Known [url=https://gitlab.com/themgm/Transport_for_Arma/issues?label_name=known-no_issues]No-Issues[/url][/*]
 [*][url=https://gitlab.com/themgm/Transport_for_Arma/blob/master/documentation/extras/_settings.hpp]Configuration file[/url]               [size=3][i]see what can be customized[/i][/size][/*]
 [*][url=https://gitlab.com/themgm/Transport_for_Arma/raw/master/documentation/CHANGELOG.txt]Changelog[/url][/*]
-[*][url=https://gitlab.com/themgm/Transport_for_Arma/issues/14]BattlEye Filters[/url]               [size=3][i]An initial report from gen0cide can be found here[/i][/size][/*]
-[*][url=https://gitlab.com/themgm/Transport_for_Arma/issues/13]Epoch AntiHack Compatibility[/url]               [size=3][i]Latest reports suggest it's working fine![/i][/size][/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/issues/14]BattlEye Filters[/url][color=#ffffff]..........................................[/color][size=3][i]Available. Initial version, reported to be working fine. Credits: Gen0cide   [url=http://epochmod.com/forum/index.php?/topic/33927-alphareleased-wip-transport-for-arma-taxi-bus-services/page-4#entry229843]read more[/url][/i][/size][/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/issues/13]Epoch AntiHack Compatibility[/url][color=#ffffff]..................[/color][size=3][i]Room for improvement: [url=http://epochmod.com/forum/index.php?/topic/33927-alphareleased-wip-transport-for-arma-taxi-bus-services/page-5#entry231216]read more[/url][/i][/size][/*]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/issues/13]3rd Party AntiHack Compatibility[/url][color=#ffffff]...............[/color][size=3][i]Working. Credits: Gen0cide [url=http://epochmod.com/forum/index.php?/topic/33927-alphareleased-wip-transport-for-arma-taxi-bus-services/page-4#entry229819]read more[/url][/i][/size][/*]
 [/*]
 [/LIST]
- 
- 
- 
- 
-
- .
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
