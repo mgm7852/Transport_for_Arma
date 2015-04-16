@@ -3,44 +3,48 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 I finally got my [url=http://epochmod.com/forum/index.php?/topic/34424-tutorial-quick-bulletpoint-style-notes-to-set-up-a-arma-3-epoch-dedicated-test-server/]Clean Test Environment[/url] ready and did some testing on this script as it stands
- 
+
 [b]CONCLUSIONS[/b]
 As of script version 0.3.0 [u]all players[/u] can use [u]Fixed Destination Taxis[/u] Feature.
 As of script version 0.3.0 [u]only Epoch AntiHack admins[/u] can use [u]clickNGo Taxis[/u] Feature. This is (I think) due to Epoch AH blocking KeyDown event therefore Transport for Arma script can not even receive a clickNGo-request from non-EpochAH-admin-players.
- 
+
 [b]TEST DETAILS[/b]
 [spoiler]Date=20150413
 Arma 3 version=1.42.130244
 Epoch mod version=0.3.0.2_b3
 Environment State=clean Arma3 dedicated server install + clean Epoch mod install + no other mods, no customizations, everything default.
- 
- 
- 
+
+Note1: that definitive list of BattlEye filters are still not ready - for the test purposes, all BE filters set to 3 (log to both console & log file) thus BE did not intervene with the AntiHack tests.
+Note2: I do not have access to 3rd party commercial AntiHack solutions however it has been reported that script (as of v.0.3.0) is working absolutely fine with -at least one- such solution.
+
+
+
+
 //====================
 test:
-    antihack_Enabled = false;
-    irrelevant:        antihack_cfgPatchesCheck = true;
-    irrelevant:        admin state: I am NOT EpochAH admin
-    irrelevant:        antihack_customVariablesCheck = false;
-    all BE filters set to 3 (i.e.: log to both console & logfile)
-    result: in central taxis, fixed destination taxi appeared as per normal. unable to take a ride and fully test as I have no money lol
-    result: clickNGo button has no response at all. this script is currently not using EpochKEYDOWN apparently 'normal' keydown EH is not working
+antihack_Enabled = false;
+irrelevant: antihack_cfgPatchesCheck = true;
+irrelevant: admin state: I am NOT EpochAH admin
+irrelevant: antihack_customVariablesCheck = false;
+all BE filters set to 3 (i.e.: log to both console & logfile)
+result: in central taxis, fixed destination taxi appeared as per normal. unable to take a ride and fully test as I have no money lol
+result: clickNGo button has no response at all. this script is currently not using EpochKEYDOWN apparently 'normal' keydown EH is not working
 //====================
 test:
-    antihack_Enabled = true;
-    antihack_cfgPatchesCheck = true;
-    antihack_customVariablesCheck = false;
-    admin state: I am NOT EpochAH admin
-    all BE filters set to 3 (i.e.: log to both console & logfile)
-    result: in central taxis, fixed destination taxi appeared as per normal. unable to take a ride and fully test as I have no money lol
-    result: clickNGo button has no response at all. this script is currently not using EpochKEYDOWN apparently 'normal' keydown EH is not working
+antihack_Enabled = true;
+antihack_cfgPatchesCheck = true;
+antihack_customVariablesCheck = false;
+admin state: I am NOT EpochAH admin
+all BE filters set to 3 (i.e.: log to both console & logfile)
+result: in central taxis, fixed destination taxi appeared as per normal. unable to take a ride and fully test as I have no money lol
+result: clickNGo button has no response at all. this script is currently not using EpochKEYDOWN apparently 'normal' keydown EH is not working
 //====================
 test:
-    antihack_Enabled = true;
-    antihack_cfgPatchesCheck = true;
-    antihack_customVariablesCheck = false;
-    admin state: I am EpochAH admin
-    all BE filters set to 3 (i.e.: log to both console & logfile)
-    result: in central taxis, fixed destination taxi appeared as per normal. unable to take a ride and fully test as I have no money lol
-    result: clickNGo button DID respond - didn't take a ride, it should work.
+antihack_Enabled = true;
+antihack_cfgPatchesCheck = true;
+antihack_customVariablesCheck = false;
+admin state: I am EpochAH admin
+all BE filters set to 3 (i.e.: log to both console & logfile)
+result: in central taxis, fixed destination taxi appeared as per normal. unable to take a ride and fully test as I have no money lol
+result: clickNGo button DID respond - didn't take a ride, it should work.
 //====================[/spoiler]
