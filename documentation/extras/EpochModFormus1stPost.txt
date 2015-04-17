@@ -8,7 +8,7 @@ TfA is a server- and client-side mod which aim improving transport aspect of the
 [color=#ffffff].[/color]
 [color=#ffffff].[/color]
 [color=#ffffff].[/color]
-[color=#ff0000][i][b][size=7]INITIAL PUBLIC ALPHA VERSION 0.3.0 RELEASED![/size][/b][/i][/color]
+[color=#ff0000][i][b][size=7]INITIAL PUBLIC ALPHA VERSION 0.3.2 RELEASED![/size][/b][/i][/color]
 [size=5][b]READ THE [/b][url=http://epochmod.com/forum/index.php?/topic/33927-wip-transport-for-arma-taxi-bus-services/page-2#entry229595]RELEASE NOTES[/url][/size]
 [color=#ffffff].[/color]
 [color=#ffffff].[/color]
