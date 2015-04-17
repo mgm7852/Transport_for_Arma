@@ -1,16 +1,9 @@
-//
-//	this is:		default v.0.3.0b5 config file to reference in forums discussions
-//
-
-
 //HEADER
 //HEADER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //HEADER $FILE$		:	<mission>/custom/mgmTfA/_settings.hpp
 //HEADER $PURPOSE$	:	This is the shared masterConfiguration file, both server & clients will be aware of & rely on the values herein.
 //HEADER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //HEADER
-
-
 
 //--------------------------------------------------------------------------------
 // EXPIRY TIMEOUT THRESHOLDS		Anti DoS :)
@@ -19,8 +12,12 @@
 //
 // Note: Lowering this, in MP game with a busy server, might cause issues due to client>server>client packet flow and CURRENT_JOB_ID desync // fixed with the rewrite in 0.2 branch?
 //
+//RELEASETODO
 mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber		= 900;
+//RELEASETODO
 mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber			= 900;
+//mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber		= 12;
+//mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber			= 12;
 // If this is false, a player who just joined the server will have to wait out the duration minimumWaitingTimeBetween*BookingsInSecondsNumber
 mgmTfA_configgv_FixedDestinationTaxiBookingFirstTimersCanBookWithoutWaitingBool				= true;
 // If this is false, a player who just joined the server will have to wait out the duration minimumWaitingTimeBetween*BookingsInSecondsNumber
@@ -32,7 +29,9 @@ mgmTfA_configgv_clickNGoTaxiBookingFirstTimersCanBookWithoutWaitingBool					= tr
 // To prevent the above, when a player activate the clickNGoHotkey, a Cooldown Period will be in effect and player has to wait out before regaining access to clickNGoHotkey
 //
 // Default = 900 seconds (15 minutes)
+//RELEASETODO
 mgmTfA_configgv_clickNGoTaxiBookingHotkeyCooldownDurationInSecondsNumber				= 900;
+//mgmTfA_configgv_clickNGoTaxiBookingHotkeyCooldownDurationInSecondsNumber				= 12;
 
 // This is used in mgmTfA_fnc_client_doLocalJanitorWorkForclickNGo.sqf
 // Normally this is 5 minutes (= 300 seconds)
@@ -219,12 +218,14 @@ mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_clickNGoTaxisNumberOfAvailableTaxiDrive
 //TaxiCorp Fixed Destination Taxis will not serve any players with the following playerUIDs.		They must have pissed off an admin! :(
 mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_fixedDestinationTaxisBlacklistedPlayerPUIDsTextStringArray		=	[
 																							"76666666666666666"					,
+//																							"76561198124251001"					,
 																							"76000000000000500"					
 																							];
 
 //TaxiCorp clickNGo Taxis will not serve any players with the following playerUIDs.			They must have pissed off an admin! :(
 mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_clickNGoTaxisBlacklistedPlayerPUIDsTextStringArray =				[
 																							"76666666666666666"					,
+//																							"76561198124251001"					,
 																							"76000000000000500"					
 																							];
 //--------------------------------------------------------------------------------
@@ -341,6 +342,16 @@ mgmTfA_configgv_clickNGoSetCourseHotkeyDIKCodeNumber											= 55										;
 // Whatever 'SetCourseHotkey' you define with the above DIK code will be communicated to customers when they get in (in the INSTRUCTIONS screen) just like this =>		"You may press * key to set a new destination at any time",
 // So we need to know how to refer to that key you define above. Put it's "TextRepresentation" below [examples.: "INSERT" or "NumPad+" and so on]
 mgmTfA_configgv_clickNGoSetCourseHotkeyTextRepresentationTextString									= "*"									;
+//
+// Workaround for:	"Epoch AntiHack is blocking my hotkey for non-admins!" issue
+// TfA can now monitor 'openMap' command and take it as the pre-agreed signal that player request a clickNGo Taxi to his position. If enabled (and constraints below fulfilled), this will have exactly the same effect of player pressing the "clickNGo Call a Taxi Hotkey" meaning cooldowns, first timer settings etc. are in effect // default=yes
+mgmTfA_configgv_clickNGoOpenMapCommandMonitoringEnabledBool										= true									;
+// If the openMap command is issued this many times (within time frame below), TfA will be convinced that player is signalling us
+mgmTfA_configgv_clickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber		= 3										;
+// Whatever number you set above, you should add as many "Zero-And-A-Comma"s below
+mgmTfA_configgv_clickNGoOpenMapCommandMonitoringThisMustBeTheSignalTurnThePage						= [0,0,0]									;
+// Whatever number you set above should happen within a time range of this many seconds otherwise it will not qualify as 'The Signal'
+mgmTfA_configgv_clickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesInSecsNumber	= 8										;
 //--------------------------------------------------------------------------------
 //
 mgmTfA_configgv_fixedDestinationTaxisSpinBeforeDeletionBool											= true									;
@@ -653,8 +664,8 @@ mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber=60;
 //VERSION INFORMATION
 mgmTfA_configgv_TfAScriptVersionMajorNumber											= 0;
 mgmTfA_configgv_TfAScriptVersionMinorNumber											= 3;
-mgmTfA_configgv_TfAScriptVersionRevisionNumber										= 0;
-mgmTfA_configgv_TfAScriptVersionTextString											= "0.3.0";
+mgmTfA_configgv_TfAScriptVersionRevisionNumber										= 2;
+mgmTfA_configgv_TfAScriptVersionTextString											= "0.3.2";
 //-----
 mgmTfA_configgv_TfAScriptVersionMajorMultipliedNumber = (mgmTfA_configgv_TfAScriptVersionMajorNumber * 100)			;
 mgmTfA_configgv_TfAScriptVersionMinorMultipliedNumber = (mgmTfA_configgv_TfAScriptVersionMinorNumber * 10)			;
@@ -676,9 +687,13 @@ mgmTfA_configgv_TfAScriptVersionRevisionSumValueNumber = mgmTfA_configgv_TfAScri
 // 5	Almost everything			All the above plus functions will report every iteration
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // server-side RPT logging verbosity		default = 0
+//RELEASETODO
 mgmTfA_configgv_serverVerbosityLevel												= 0;
+//mgmTfA_configgv_serverVerbosityLevel												= 5;
 // client-side RPT logging verbosity		default = 0
+//RELEASETODO
 mgmTfA_configgv_clientVerbosityLevel												= 0;
+//mgmTfA_configgv_clientVerbosityLevel												= 5;
 //--------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------
