@@ -53,4 +53,11 @@ ___New code will be based on limited scope precompiled functions and thus no mor
 0.3.0b5   settings file line 459 global variable which is supposed to be "mgmTfA_configgv_createTaxiFixedDestination01Bool" was incorrectly named "mgmTfA_configgv_createTaxiFixedDestination01Bool", fixed now. Thanks for reporting DirtySanchez. Added to Taxi Drivers name database, there's 1 in 1200 chance he might get the next job and make a few bucks :-)
 0.3.1		version number completely skipped due to accidentally enabling it while playing with Git/GitFlow and zero motivation to fix it with dirty command line commands :(
 0.3.2   	Major: clickNGo Taxis now 100% Epoch AH compatible. Minor: Various improvements.
+0.3.3		Bugfix: issue #16 fixed. desc:	 Call-A-Taxi-Points just outside East & West Epoch-Altis-spawn-traders are unusable (Central is fine). Also deleted 2 unused files as per below. No other changes made.
+			d96b2b7cd0a320c418e734f8bac4af97189ccd9b Merge branch '2' into hotfix/0.3.3
+			267cf7ce7a0c63b318ddadcfe1ae60c67bf28c43 Finish 0.3.3. issue resolved 2x CATPs not working. https://gitlab.com/themgm/Transport_for_Arma/issues/16
+			b3e2da1ff494a2425e56e340fe560a590dbfefb7 del mgmTfA_scr_server_initCreateObjectCATP01.sqf for capitalization toggle
+			94c48eb1e48f46577bf03271bfdb64e46cd18f40 readd mgmTfA_scr_server_initCreateObjectCATP01.sqf
+			b6a3b439d529e4665ffe9adf8e7b0a78f66ef493 delete unused file description.ext (we are just using Epoch default, hence no reason to distribute it).
+			013ba82e0bd3f0962ae46f2b3b8738b5cd2b960d delete unused file mission.sqm (we are just using Epoch default, hence no reason to distribute it).
 // EOF
