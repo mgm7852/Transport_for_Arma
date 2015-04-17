@@ -1,0 +1,23 @@
+﻿//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// TEST REPORT
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[b]TEST DETAILS[/b]
+[spoiler]Date=20150413 run2
+Arma 3 version=1.42.130244
+Epoch mod version=0.3.0.2_b3
+Environment State=clean Arma3 dedicated server install + clean Epoch mod install + no other mods, no customizations, everything default.
+
+
+
+
+//====================
+test:
+antihack_Enabled = true;
+irrelevant:		antihack_cfgPatchesCheck = true;
+irrelevant:		antihack_customVariablesCheck = false;
+irrelevant:		admin state: I am NOT EpochAH admin
+all BE filters set to 3 (i.e.: log to both console & logfile)
+result: in central taxis, fixed destination taxi 	__	
+result: clickNGo button 					__
+//====================
