@@ -60,4 +60,5 @@ ___New code will be based on limited scope precompiled functions and thus no mor
 			94c48eb1e48f46577bf03271bfdb64e46cd18f40 readd mgmTfA_scr_server_initCreateObjectCATP01.sqf
 			b6a3b439d529e4665ffe9adf8e7b0a78f66ef493 delete unused file description.ext (we are just using Epoch default, hence no reason to distribute it).
 			013ba82e0bd3f0962ae46f2b3b8738b5cd2b960d delete unused file mission.sqm (we are just using Epoch default, hence no reason to distribute it).
+			7d7dd6e50489bd929154d66e5bd61ea9f714fd0d increment version to 0.3.3
 // EOF
