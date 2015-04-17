@@ -1,0 +1,26 @@
+[url=https://gitlab.com/themgm/Transport_for_Arma/tree/master/release_packages][img=http://i.imgur.com/IlqWLN1.png][/url]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[url=https://gitlab.com/themgm/Transport_for_Arma/tree/master/release_packages][color=#ff0000][u][b][size=6]Transport for Arma v.0.3.3[/size][/b][/u][/color][/url]
+[LIST]
+[*][url=https://gitlab.com/themgm/Transport_for_Arma/tree/master/release_packages]Get your free copy![/url][/*]
+[*][b]Changes:[/b] This is a bugfix release and the most important change is [b]Issue #16 fixed[/b]!          -          [url=https://gitlab.com/themgm/Transport_for_Arma/issues/16]Issue Tracker[/url]          -          [url=https://gitlab.com/themgm/Transport_for_Arma/blob/master/documentation/CHANGELOG.txt#L56]CHANGELOG[/url][/*]
+[*][b]Upgrade Notice:[/b] Upgrade strongly recommended for all users[/*]
+[/LIST]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff]..........[/color]
+[b]USUAL HELP CALL[/b]
+I am aware some people can spit out scripts every week[size=3](jealous!)[/size] however[color=#ffffff]..........[/color][url=http://i.imgur.com/mL19lBA.png]it took me[/url][color=#ffffff]..........[/color][url=http://i.imgur.com/t2cpdgl.png]a long time[/url][color=#ffffff]..........[/color]to develop this to the current usable level, still in active development as of today, and I am keen to keep going.
+.
+I do definitely need your help though, [u]please spare a moment of your time and post a brief feedback message[/u]. Paying 5 krpyto for each message come find me in West Taxis.
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[b]OTHER NOTES[/b]
+1. Special thanks to [url=http://epochmod.com/forum/index.php?/user/30514-insem/]Insem[/url] who [url=http://epochmod.com/forum/index.php?/topic/33927-taxi-bus-transport-for-arma-wip-antihack-compatible/page-5#entry230542]reported this issue[/url].
+2. Also special thanks to the two main testers: [url=http://epochmod.com/forum/index.php?/user/26778-dirtysanchez/]DirtySanchez[/url] & [url=http://epochmod.com/forum/index.php?/user/24273-gen0cide/]Gen0cide[/url] keep it up guys! :>
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
+[color=#ffffff].[/color]
