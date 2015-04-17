@@ -1,3 +1,13 @@
+//--------------------------------------------------------------------------------
+//
+// POST-IT
+// this should be 0 for production systems and greater when debugging // WARNING:	possibly massive output, if you leave this on, on a production system it WILL impact performance
+mgmTfA_configgv_serverAndClientDebugVerbosityLevel										= 0;
+//--------------------------------------------------------------------------------
+
+
+
+
 //HEADER
 //HEADER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //HEADER $FILE$		:	<mission>/custom/mgmTfA/_settings.hpp
@@ -12,12 +22,8 @@
 //
 // Note: Lowering this, in MP game with a busy server, might cause issues due to client>server>client packet flow and CURRENT_JOB_ID desync // fixed with the rewrite in 0.2 branch?
 //
-//RELEASETODO
 mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber		= 900;
-//RELEASETODO
 mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber			= 900;
-//mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber		= 12;
-//mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber			= 12;
 // If this is false, a player who just joined the server will have to wait out the duration minimumWaitingTimeBetween*BookingsInSecondsNumber
 mgmTfA_configgv_FixedDestinationTaxiBookingFirstTimersCanBookWithoutWaitingBool				= true;
 // If this is false, a player who just joined the server will have to wait out the duration minimumWaitingTimeBetween*BookingsInSecondsNumber
@@ -29,9 +35,7 @@ mgmTfA_configgv_clickNGoTaxiBookingFirstTimersCanBookWithoutWaitingBool					= tr
 // To prevent the above, when a player activate the clickNGoHotkey, a Cooldown Period will be in effect and player has to wait out before regaining access to clickNGoHotkey
 //
 // Default = 900 seconds (15 minutes)
-//RELEASETODO
 mgmTfA_configgv_clickNGoTaxiBookingHotkeyCooldownDurationInSecondsNumber				= 900;
-//mgmTfA_configgv_clickNGoTaxiBookingHotkeyCooldownDurationInSecondsNumber				= 12;
 
 // This is used in mgmTfA_fnc_client_doLocalJanitorWorkForclickNGo.sqf
 // Normally this is 5 minutes (= 300 seconds)
@@ -202,7 +206,6 @@ mgmTfA_configgv_catp03LocationMapMarkerTextString="East Taxis";
 //Examples situations when a driver could be (in-game) && (in-vehicle) && (without passenger in his car) BUT be UNAVAILABLE nevertheless. 
 // 		Example 1: Driver is driving to the requestorLocation to pick up a passenger -- In HQs Fleet Management system this driver will still appear as BUSY.
 // 		Example 2: Driver, after completing serving a customer, start driving to self_destruction_point -- In HQs Fleet Management system this driver will still appear as BUSY.
-// TODO: SET TO 5 BEFORE RELEASE! 			200? JUST DEBUGGING BRO!
 mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_fixedDestinationTaxisNumberOfAvailableTaxiDriversOnStartNumber		= 5;
 mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_clickNGoTaxisNumberOfAvailableTaxiDriversOnStartNumber			= 5;
 //--------------------------------------------------------------------------------
@@ -413,21 +416,17 @@ mgmTfA_configgv_fixedDestinationTaxisServiceFeeCostForTravellingAdditional100Met
 mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber								= 400;
 // AbsoluteMinimumJourneyTimeInSeconds			(default = 120 seconds; 2 minutes)		A clickNGo journey will always be pre-paid at least for (AbsoluteMinimumJourneyTimeInSeconds). Even if actual journey last shorter, a refund will not be made. Customer MUST pre-pay the cost to prevent unnecessary disputes.
 // RELEASE TODO: enable 120 secs below. delete 10 secs underneath.
-//mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds								= 120;
-mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds								= 10;
+mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds								= 120;
+//mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds								= 10;
 // Note: player is paying for the time of Driver (not for distance). If the vehicle gets stuck, it's still costing a lot of money to Taxi Corp, such as:	(driver's time) + (energy) + (insurance) + (blah blah)
 // This is the cost of 'calling a driver' to your location
 mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber								= 100;
-// RELEASE TODO ACTIVATE THE BELOW LINE AND DELETE THE ONE UNDER THAT 
-//mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber											= 60;
-mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber											= 10;
+mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber											= 60;
 mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber												= 20;
 // if enabled:	every time a 'tick charge' goes through, we will display a hint message and let the player know that he has been charged				(default: false)
-// RELEASE TODO: delete this line, and the one under this. activate the one further down.
 mgmTfA_configgv_clickNGoTaxisDisplayTickChargeHintMessageBool										= true;
-//mgmTfA_configgv_clickNGoTaxisDisplayTickChargeHintMessageBool										= false;
 // if enabled:	every time a 'tick charge' goes through, we will display a systemChat message and let the player know that he has been charged		(default: true)
-mgmTfA_configgv_clickNGoTaxisDisplayTickChargeSystemChatMessageBool									= true;
+mgmTfA_configgv_clickNGoTaxisDisplayTickChargeSystemChatMessageBool									= false;
 mgmTfA_configgv_thresholdNumberOfFailedPAYGTransactionsToPermitBeforeInitiatingPAYGserviceAbruptTerminationNumber	= 2;
 mgmTfA_configgv_monitoringAgentMissedPurchasingPowerCheckAndPAYGTickChargesAgentSleepTime				= mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber;
 // when player get in a clickNGo vehicle, driver will not start driving unless the 'PAYG Initial Fee' is paid.	At this time, 		only for the first get in, player receives a popup window, instructing him TO PAY THE INITIAL FEE,		on any future get ins, player will receive a hint message (no popup), instructing hem to PAY THE INITIAL FEE.		however, it is a proven fact that some people just don't read.		if the setting below is enabled (default option),	driver will continously systemChat message the player [once every second], requesting the 'Initial Fee' payment.
@@ -664,8 +663,8 @@ mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber=60;
 //VERSION INFORMATION
 mgmTfA_configgv_TfAScriptVersionMajorNumber											= 0;
 mgmTfA_configgv_TfAScriptVersionMinorNumber											= 3;
-mgmTfA_configgv_TfAScriptVersionRevisionNumber										= 2;
-mgmTfA_configgv_TfAScriptVersionTextString											= "0.3.2";
+mgmTfA_configgv_TfAScriptVersionRevisionNumber										= 3;
+mgmTfA_configgv_TfAScriptVersionTextString											= "0.3.3";
 //-----
 mgmTfA_configgv_TfAScriptVersionMajorMultipliedNumber = (mgmTfA_configgv_TfAScriptVersionMajorNumber * 100)			;
 mgmTfA_configgv_TfAScriptVersionMinorMultipliedNumber = (mgmTfA_configgv_TfAScriptVersionMinorNumber * 10)			;
@@ -754,3 +753,5 @@ mgmTfA_configgv_serviceModePublicBusSystemEnabled									= true;
 //During server start up phase, enable/disable this wireless radio channel:		0=disabled	1=enabled
 //I BELIEVE THIS IS NOT IN USE							mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_TACOPOSenabled=1;
 //--------------------------------------------------------------------------------
+
+// EOF
