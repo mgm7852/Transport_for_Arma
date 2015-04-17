@@ -51,4 +51,6 @@ ___New code will be based on limited scope precompiled functions and thus no mor
 0.3.0b3   A couple of "write debug to log" lines were left in - these have been removed now.
 0.3.0b4   A cosmetic issue has been fixed.
 0.3.0b5   settings file line 459 global variable which is supposed to be "mgmTfA_configgv_createTaxiFixedDestination01Bool" was incorrectly named "mgmTfA_configgv_createTaxiFixedDestination01Bool", fixed now. Thanks for reporting DirtySanchez. Added to Taxi Drivers name database, there's 1 in 1200 chance he might get the next job and make a few bucks :-)
+0.3.1		version number completely skipped due to accidentally enabling it while playing with Git/GitFlow and zero motivation to fix it with dirty command line commands :(
+0.3.2   	Major: clickNGo Taxis now 100% Epoch AH compatible. Minor: Various improvements.
 // EOF
