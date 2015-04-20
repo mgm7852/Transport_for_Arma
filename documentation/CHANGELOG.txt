@@ -61,4 +61,13 @@ ___New code will be based on limited scope precompiled functions and thus no mor
 			b6a3b439d529e4665ffe9adf8e7b0a78f66ef493 delete unused file description.ext (we are just using Epoch default, hence no reason to distribute it).
 			013ba82e0bd3f0962ae46f2b3b8738b5cd2b960d delete unused file mission.sqm (we are just using Epoch default, hence no reason to distribute it).
 			7d7dd6e50489bd929154d66e5bd61ea9f714fd0d increment version to 0.3.3
+20150420 - on the way to the next version:
+		add: add dates to versions in CHANGELOG.
+		security: improve security by replacing all call compiles with getVar
+		bugfix: for seemingly never ending Call-a-Taxi-Paypoints #2 & #3 not properly added issue (issue #16 in tracker)
+		add: Public Bus System concept design complete & drawBusRouteOnMap code working now. You will see some BUS settings in _settings.hpp file but BUSES ARE NOT WORKING YET (WIP).
+		add: tests with a basic premade GUI, has two buttons so far: 'Call a Taxi' & 'Stop the bus!' << awaiting GUImaker's permission to include his work in the project
+		change: code cleanup: misc. prep. work on the (long) way to opening code - function header standardization & documentation.
+		change: code cleanup: remove some duplicate localvars that were left over during the mad dash to initial public alpha period.
+
 // EOF
