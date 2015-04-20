@@ -1,0 +1,13 @@
+﻿//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//			TRANSPORT FOR ARMA -- COMMIT STYLE GUIDE
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++Do not mass update - each commit should only contain ONE CHANGE.
++Your ONE CHANGE might span across multiple files which is fine. 
+ You might, for example, update every single SQF file in project, to reflect a change to header style.
++Clearly document your changes in commit notes. Up to 4-5 sentences is fine. A commit browser should understand what your commit is doing WITHOUT having to inspect the code.
++Do not imply be explicit in your comments.
++Each commit, especially if updates a single file, should start with file name, followed by semicolon and brief info. e.g.:
+ COMMIT_STYLE_GUIDE.txt: add initial version.
+// EOF
