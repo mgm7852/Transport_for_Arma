@@ -1,0 +1,6 @@
+﻿DevDiary 001 - What what what
+20150421
+
+DevDiary? What what what?
+Due to ever increasing word count in my posts I decided to divert my detailed updates and ramblings to a separate location, namely DevDiary under project's git repo.
+Thus, all the four people who are interested in this stuff can access it and the rest can browse the forum to reach relevant information minus my booklets.
