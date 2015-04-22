@@ -93,10 +93,10 @@ DirtySanchez
 // CREDITS: images & misc.
 
 ScenicBluffs.org
-		The Taxi image was taken from their site - thanks! http://www.scenicbluffs.org/ [ picture: http://www.scenicbluffs.org/portals/0/Images/taxicab4.png ]
+		The Taxi image was taken from their site - thanks! 				http://www.scenicbluffs.org/ [ picture: http://www.scenicbluffs.org/portals/0/Images/taxicab4.png ]
 
 Gordon and Penny Curley
-		(taxi request) Approved/Rejected images taken from their site - thanks! http://www.gcurley.info/	http://www.gcurley.info/news/2014/11/4535/		[ picture: http://www.gcurley.info/news/wp-content/uploads/2014/11/rejected-approved-reverse.jpg ]
+		(taxi request) Approved/Rejected images taken from their site - thanks! 	http://www.gcurley.info/	http://www.gcurley.info/news/2014/11/4535/		[ picture: http://www.gcurley.info/news/wp-content/uploads/2014/11/rejected-approved-reverse.jpg ]
 
 Venice Classic Radio Italia
 		Thanks for the countless hours of free relaxing  Classical Music		http://www.veniceclassicradio.eu/
@@ -110,5 +110,11 @@ http://www.konnectafrica.net/
 http://www.signspecialist.com/
 		fixedDestinationTaxis 'cannot afford' image is taken from this site - thanks!	http://www.signspecialist.com/decals/beevault/images/Phenomena%20and%20History%20072-0487.gif
 http://www.towerswatson.com/
-		payNow icon taken from this site - thanks!				 			http://www.towerswatson.com/~/media/Images/icons/topics/towers-watson-topic-icons-executive-pay-40x40.png?bc=ffffff&h=40&w=40
+		payNow icon taken from this site - thanks!				 	http://www.towerswatson.com/~/media/Images/icons/topics/towers-watson-topic-icons-executive-pay-40x40.png?bc=ffffff&h=40&w=40
+http://www.taximobility.com/blog/wp-content/uploads/2014/12/cover_650x280-1.png
+		fixedDestinationTaxis icon4 taken from this site - thanks! 			http://www.taximobility.com/blog/wp-content/uploads/2014/12/cover_650x280-1.png
+https://www.iru.org/en_taxi
+		taxiAnywhere image4 taken from this site - thanks!				https://www.iru.org/pix/irupolicies/taxi_flexible.gif
+http://www.clipartpanda.com/
+		bus image4 taken from this site - thanks!					http://images.clipartpanda.com/tour-bus-clipart-18085480-illustration-of-a-bus.jpg
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
