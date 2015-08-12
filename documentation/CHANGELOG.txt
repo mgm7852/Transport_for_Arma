@@ -34,11 +34,7 @@ last updated for: v.0.3.0
 0.1.13   Map markers, server-side and client-side working fine with expiry deletion. TODO: move spawn/termination etc. 4-5 markers to client-side.
 0.1.14   Timeouts and map markers working nicely!
 0.1.15   clickNGo improvements.
->>>=========================================================================================================================<<<
-___Subbranch Version Jump from 0.1.x to 0.2.x due to spaghetti code symptom.
-___Rewriting the whole script from scratch.
-___New code will be based on limited scope precompiled functions and thus no more spaghetti, I hope.
->>>=========================================================================================================================<<<
+arghh!!	___Subbranch Version Jump from 0.1.x to 0.2.x due to spaghetti code symptom. Rewriting the whole script from scratch. New code will be based on limited scope precompiled functions and thus no more spaghetti, I hope.
 0.2.0   The first error-less version under 0.2.0
 0.2.1   Fixed Destination Taxis rewrite complete. Basic workflow It is fully functional now. NEXT: review & re-enable map tracking functionality. add clickNGo Service. addBus Service.
 0.2.2   Rewrite complete. map-tracking working. NEXT: add clickNGo feature.
@@ -61,6 +57,7 @@ ___New code will be based on limited scope precompiled functions and thus no mor
 			b6a3b439d529e4665ffe9adf8e7b0a78f66ef493 delete unused file description.ext (we are just using Epoch default, hence no reason to distribute it).
 			013ba82e0bd3f0962ae46f2b3b8738b5cd2b960d delete unused file mission.sqm (we are just using Epoch default, hence no reason to distribute it).
 			7d7dd6e50489bd929154d66e5bd61ea9f714fd0d increment version to 0.3.3
+-----------------
 20150420 - on the way to the next version:
 		add: add dates to versions in CHANGELOG.
 		security: improve security by replacing all call compiles with getVar
@@ -69,5 +66,12 @@ ___New code will be based on limited scope precompiled functions and thus no mor
 		add: tests with a basic premade GUI, has two buttons so far: 'Call a Taxi' & 'Stop the bus!' << awaiting GUImaker's permission to include his work in the project
 		change: code cleanup: misc. prep. work on the (long) way to opening code - function header standardization & documentation.
 		change: code cleanup: remove some duplicate localvars that were left over during the mad dash to initial public alpha period.
-
+-----------------
+draft for post-2015-August version:
+		change:	clickNGo has been renamed to TaxiAnywhere
+		change:	GUI is properly implemented. e.g.: TaxiAnywhere has the following functions, each on a separate button:	"call taxi", "pay 1st mile fee", "change course", "exit vehicle".
+		change:	greatly reduced systemChat clutter
+		add:	New Service: Public Bus system
+		add:	New Feature: StopVehicle function implemented (in the GUI, button is located at the bottom of each column)
+		change:	behavior change - clicking on any GUI button now will also close the map (in addition to the GUI). in most cases map is open on screen just because GUI currently requires map open 3 times, hence convenient way of auto-closing it.
 // EOF
