@@ -5,7 +5,7 @@
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Some of this is purely for taste but most of it is for functionality as build scripts expect things to be done in a certain way. Not following the below most likely WILL break automated build process.
+// Some of this is purely for taste but others for functionality as build scripts expect things to be done in a certain way. Not following the below most likely WILL break automated build process.
 +Comments go above code - not to its right.
 +Tab space is 8.
 +Single whitespace between double slash comment marker and the first word.
