@@ -95,8 +95,6 @@ _SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdc
 _SUCurrentTaskAgeInSecondsNumber = 0;
 //Start the Current Task Age Timer
 _SUCurrentTaskBirthTimeInSecondsNumber = (time);
-//Debug level for this file
-_thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 //// Prep Function Arguments
 _clickNGoRequestorClientIDNumber = (_this select 0);
 _clickNGoRequestorPosition3DArray = (_this select 1);
@@ -364,7 +362,7 @@ while {(_SUTaxiAIVehicleDistanceToWayPointMetersNumber>10) && ((speed _SUTaxiAIV
 	// PING			log only every Nth package			(uiSleep=0.05)		(n=300) => 	log every 15 seconds
 	_counterForLogOnlyEveryNthPINGNumber=_counterForLogOnlyEveryNthPINGNumber+1;
 	if (_counterForLogOnlyEveryNthPINGNumber==300) then {
-		if (_thisFileVerbosityLevelNumber>=1) then {
+		if (_thisFileVerbosityLevelNumber>=2) then {
 			_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time) -_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
 			diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf] [TV2] PING from SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3) | MyAge: (%4) | Distance to WP: (%5) metres | Action In Progress: (%6)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time)), _SUTaxiAIVehicleObjectAgeInSecondsNumber, _SUTaxiAIVehicleDistanceToWayPointMetersNumber, _SUCurrentActionInProgressTextString];
 		};
