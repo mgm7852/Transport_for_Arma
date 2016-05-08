@@ -128,10 +128,11 @@ mgmTfA_configgv_clickNGoTaxisSpinBeforeDeletionBool = true;
 //	parameter  1:		MIN. DISTANCE		The randomly chosen spot MUST not be closer than this value to origin	- number
 //
 //production values
-mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 250;
-mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 200;
-mgmTfA_configgv_clickNGoTaxisSpawnDistanceRadiusInMetresNumber = 250;
-mgmTfA_configgv_clickNGoTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 200;
+// RELEASE TODO:	use 250/200 for release
+mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 50;
+mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;
+mgmTfA_configgv_clickNGoTaxisSpawnDistanceRadiusInMetresNumber = 50;
+mgmTfA_configgv_clickNGoTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;
 
 // Random 'Termination Point' Settings
 mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusInMetresNumber = 350;
