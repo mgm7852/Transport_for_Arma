@@ -1,0 +1,1 @@
+For Contribution guide and all other documentation, please refer to the public git repo at: https://gitlab.com/themgm/Transport_for_Arma
