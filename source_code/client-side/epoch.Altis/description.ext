@@ -1,7 +1,7 @@
 // Epoch Sandbox Survival Gamemode
 #include "epoch_config\sandbox_config.hpp"
 
-//=====BEGIN:	mgmTfA Required description.ext additions ======================
+// BEGIN:	mgmTfA Required description.ext additions
 #include "mgmtfa_defines.hpp"
 #include "mgmtfa_dialogs.hpp"
-//=====END:	mgmTfA Required description.ext additions ======================
+// END:	mgmTfA Required description.ext additions

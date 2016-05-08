@@ -16,8 +16,7 @@ if (!isServer) then {
 	waitUntil {mgmTfA_Client_Init==1};
 };
 
-//if (mgmTfA_dynamicgv_clickNGoRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool) exitWith {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxiViaRapidMapOpen.sqf] ATTEMPTED executing another instance of mgmTfA_fnc_client_clickNGoRequestTaxiViaRapidMapOpen however mgmTfA_dynamicgv_clickNGoRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool is true! Quitting!"];};
-if (mgmTfA_dynamicgv_clickNGoRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool) exitWith {diag_log format ["78347805466"];};
+if (mgmTfA_dynamicgv_clickNGoRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool) exitWith {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxiViaRapidMapOpen.sqf] ATTEMPTED executing another instance of mgmTfA_fnc_client_clickNGoRequestTaxiViaRapidMapOpen however mgmTfA_dynamicgv_clickNGoRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool is true! Quitting!"];};
 mgmTfA_dynamicgv_clickNGoRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool = true;
 
 private	[
@@ -59,7 +58,8 @@ while {alive player} do {
 			// YES, the map has been opened more than n times in the last 8 seconds. Let's log this and activate the clickNGo hotkey, but first ensure the next 2 key presses won't activate this again
 			mgmTfA_dynamicgv_mapOpenedAtTimestampsInSecondTextStringArray = _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalTurnThePage;
 			// launch function.	note that, clickNGoRequestTaxi function has the following code which will make it wait for the main display:		if (!isServer) then {waitUntil {!isnull (finddisplay 46) blah blah 
-			_null = [] spawn mgmTfA_fnc_client_clickNGoRequestTaxi;
+			_null = CreateDialog "MGMTFA_DIALOG"
+			//_null = [] spawn mgmTfA_fnc_client_clickNGoRequestTaxi;
 		} else {
 			// NO, the map has NOT been opened more than 3 times in the last 8 seconds. nothing to be done at this time
 		};
