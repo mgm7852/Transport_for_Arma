@@ -32,7 +32,7 @@ if (!isServer) then {
 	mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions.sqf";
 	mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf";
 	mgmTfA_fnc_client_clickNGoContinuouslyRequestPayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoContinuouslyRequestPayment.sqf";
-	mgmTfA_fnc_client_clickNGoRequestTaxiViaRapidMapOpen = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoRequestTaxiViaRapidMapOpen.sqf";
+	mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen.sqf";
 	// this below MUST be under the one above or will be renamed prematurely!
 	mgmTfA_fnc_client_clickNGoRequestTaxi = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoRequestTaxi.sqf";
 																																		
