@@ -355,13 +355,14 @@
 "mgmTfA_gv_pvc_pos_thanksForFixedDestinationTaxiPaymentWeAreLeavingNowPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
 	private [
-			"_msg2HintTextString",
+			//"_msg2HintTextString",
 			"_msg2SyschatTextString"
 			];
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
-	_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANK YOU<br/>FOR THE PAYMENT<br/><br/>WE ARE NOW HEADING OUT TO:<br/>%2.<br/><br/>HERE SOME GOOD OLD<br/>COUNTRY MUSIC - ENJOY!</t><br/><br/><img size='6' image='custom\mgmTfA\mgmTfA_img_client_taxiGreatMusic.jpg'/><br/>", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	// THIS HINT BOX WAS BEING OVERRIDEN BY 'DOORS LOCKED HINT BOX' thus player never actually saw this one. As a quick hack HINT version of the message is now commented out & image file deleted to save space. Might add it one day with a solution...
+	//_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANK YOU<br/>FOR THE PAYMENT<br/><br/>WE ARE NOW HEADING OUT TO:<br/>%2.<br/><br/>HERE SOME GOOD OLD<br/>COUNTRY MUSIC - ENJOY!</t><br/><br/><img size='6' image='custom\mgmTfA\mgmTfA_img_client_taxiGreatMusic.jpg'/><br/>", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	_msg2SyschatTextString = parsetext format ["%1 THANK YOU FOR THE PAYMENT. WE ARE NOW HEADING OUT TO %2. HERE SOME GOOD OLD COUNTRY MUSIC - ENJOY!", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-	hint _msg2HintTextString;
+	//hint _msg2HintTextString;
 	systemChat 		(str _msg2SyschatTextString);
 		
 };
