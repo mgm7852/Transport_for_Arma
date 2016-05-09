@@ -346,6 +346,69 @@ if (!_emergencyEscapeNeeded) then {
 		// log the 1st Mile Fee setting
 		if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] DETECTED: 1st Mile Fee is ENABLED"];};
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// old code below commented out
+		/*
 		// TAKE PAYMENT from player's wallet	-- 1st Mile Fee/Initial Fee ==> take this much => mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
 		_null = [_requestorPlayerObject, mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber] call EPOCH_server_effectCrypto;
 
@@ -355,12 +418,86 @@ if (!_emergencyEscapeNeeded) then {
 		// inform the customer THANK YOU FOR PAYING THE 1ST MILE FEE		-- Client Communications - Send the message to the Requestor
 		mgmTfA_gv_pvc_pos_youJustPaidclickNGo1stMileFeePacketSignalOnly = ".";
 		_clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_youJustPaidclickNGo1stMileFeePacketSignalOnly";
+		*/
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// new code here
+		//  we will inform the player now:		"He must now pay the 1st-Mile-Fee via the GUI"
+		//Inform the requestor
+		mgmTfA_gv_pvc_pos_clickNGoTaxiDoorsHaveBeenUnlockedPacketSignalOnly = ".";
+		mgmTfA_gv_pvc_req_clickNGoTaxiPleasePayThe1stMileFeePacketSignalOnly = ".";
+		_clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_clickNGoTaxiDoorsHaveBeenUnlockedPacketSignalOnly";
+				if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that his Taxi is here). _clickNGoRequestorProfileNameTextString: (%1)   _clickNGoRequestorClientIDNumber: (%2)", _clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber];};
+
+
+		// send notification
+		// CHARGE the player (take moeny from 's wallet	-- 1st Mile Fee/Initial Fee ==> take this much => mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	} else {
 		// no 1st Mile Fee is not enabled
-
 		// log the 1st Mile Fee setting
 		if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] DETECTED: 1st Mile Fee is ENABLED"];};
-		//nothing else to do
+		//nothing else to do here - carry on
 	};
 };
 
