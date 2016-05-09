@@ -249,7 +249,6 @@
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_blacklist.jpg'/><br/><br/><t size='1.40' color='#00FF00'>SORRY %1<br/><br/>WE CANNOT<br/>SERVE YOU!<br/></t>", (profileName)];
 	_msg2SyschatTextString = parsetext format ["SORRY %1 YOU ARE BLACKLISTED - WE CANNOT SERVE YOU!", (profileName)];
 	hint _msg2HintTextString;
-	// Print the message
 	systemChat (str _msg2SyschatTextString);
 };
 "mgmTfA_gv_pvc_neg_yourclickNGoTaxiRequestHasBeenRejectedAsYouAreBlacklistedPacketSignalOnly" addPublicVariableEventHandler {
@@ -263,7 +262,6 @@
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_blacklist.jpg'/><br/><br/><t size='1.40' color='#00FF00'>SORRY %1<br/><br/>WE CANNOT<br/>SERVE YOU!<br/></t>", (profileName)];
 	_msg2SyschatTextString = parsetext format ["SORRY %1 YOU ARE BLACKLISTED - WE CANNOT SERVE YOU!", (profileName)];
 	hint _msg2HintTextString;
-	// Print the message
 	systemChat (str _msg2SyschatTextString);
 };
 //// Add PublicVariableEventHandler for mgmTfA_gvdb_PV_GUSUIDNumber
@@ -349,7 +347,6 @@
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay.jpg'/><br/><br/><t size='1.40' color='#00FF00'>Greetings<br/>%1<br/><br/><br/>PLEASE PAY:<br/>%2 CRYPTO<br/><br/>FOR:<br/>%3 METRES<br/><br/>TO:<br/>%4<br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	_msg2SyschatTextString = parsetext format ["Greetings %1 PLEASE PAY: %2 CRYPTO  FOR %3 METRES TO: %4. THANKS!", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	hint _msg2HintTextString;
-	// Print the message
 	systemChat (str _msg2SyschatTextString);
 };
 "mgmTfA_gv_pvc_pos_thanksForFixedDestinationTaxiPaymentWeAreLeavingNowPacketSignalOnly" addPublicVariableEventHandler {
@@ -437,7 +434,18 @@
 					NOT IMPLEMENTED
 	*/
 };
-"mgmTfA_gv_pvc_pos_youJustPaidclickNGo1stMileFeePacketSignalOnly" addPublicVariableEventHandler {
+"mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly" addPublicVariableEventHandler {
+	// initialize local variables
+	private [
+			"_msg2HintTextString",
+			"_msg2SyschatTextString"
+			];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay1stMileFee.jpg'/><br/><br/><t size='1.40' color='#00FF00'>Greetings<br/>%1<br/><br/><br/>PLEASE PAY<br/>THE 1ST MILE FEE<br/>%2 CRYPTO<br/><br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+	_msg2SyschatTextString = parsetext format ["Greetings %1 PLEASE PAY THE 1ST MILE FEE: %2 CRYPTO. THANKS!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+	hint _msg2HintTextString;
+	systemChat (str _msg2SyschatTextString);
+};
+"mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
 	private	[
 			"_msg2HintTextString",
