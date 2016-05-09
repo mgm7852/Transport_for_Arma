@@ -1,12 +1,12 @@
 //H
 //H ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_server_clickNGoTaxi_ServicePhase02aa_SendResponse_ChargeTaxiAnywhereInitialBookingFeeRequestActioned.sqf
-//H $PURPOSE$	:	This function sends the response that we have just charged the requestor PAYG Tick Cost.
+//H $PURPOSE$		:	This function sends the response that we have just charged the requestor PAYG Tick Cost.
 //H ~~
 //H
 //HH
 //HH ~~
-//HH	Example usage	:	UPDATE THIS					_null	=	[_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase02aa_SendResponse_ChargeTaxiAnywhereInitialBookingFeeRequestActioned;
+//HH	Example usage	:	UPDATE THIS					_null = [_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase02aa_SendResponse_ChargeTaxiAnywhereInitialBookingFeeRequestActioned;
 //HH	Parameters	:	see the argument parser section below
 //HH	Return Value	:	none
 //HH ~~
@@ -21,11 +21,11 @@
 if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server_Init=0;}; waitUntil {mgmTfA_Server_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 
 private	[
-		"_clickNGoRequestorClientIDNumber",
-		"_clickNGoRequestorPlayerUIDTextString",
-		"_clickNGoRequestorProfileNameTextString",
-		"_SUTaxiAIVehicleObject"
-		];
+	"_clickNGoRequestorClientIDNumber",
+	"_clickNGoRequestorPlayerUIDTextString",
+	"_clickNGoRequestorProfileNameTextString",
+	"_SUTaxiAIVehicleObject"
+	];
 _clickNGoRequestorClientIDNumber = (_this select 0);
 _clickNGoRequestorPlayerUIDTextString = (_this select 1);
 _clickNGoRequestorProfileNameTextString = (_this select 2);
