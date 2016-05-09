@@ -379,7 +379,6 @@
 	if (mgmTfA_configgv_clickNGoTaxisDisplayTickChargeHintMessageBool) then {
 		// display hint messages requested -- let's do that	// let the customer know that he just has been charged $amount
 		private	["_msg2HintTextString"];
-		//_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>PAYG TICK FEE:<br/><br/>%2 CRYPTO<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
 		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>PAYG TICK FEE:<br/><br/>%2 CRYPTO<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str _playerActualCashBalance)];
 		hint _msg2HintTextString;
 	};
