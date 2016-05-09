@@ -210,7 +210,7 @@ class MGMTFA_DIALOG
 		idc = -1;
 		tooltip = "EXIT VEHICLE";
 		text = "custom\mgmTfA\gui_img\9a_shared_btn_exit.jpg";
-		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\script_taxianywhereexitvehicle.sqf""";		
+		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_scr_client_TA_pleaseStopVehicle.sqf""";		
 		x = 0.283437 * safezoneW + safezoneX;
 		y = 0.786047 * safezoneH + safezoneY;
 		w = 0.0360937 * safezoneW;
@@ -304,7 +304,7 @@ class MGMTFA_DIALOG
 		idc = -1;
 		tooltip = "EXIT VEHICLE";
 		text = "custom\mgmTfA\gui_img\9a_shared_btn_exit.jpg";
-		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\script_fixeddestinationtaxiexitvehicle.sqf""";		
+		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_scr_client_FD_pleaseStopVehicle.sqf""";		
 		/*
 		x = 0.646062 * safezoneW + safezoneX;
 		y = 0.764043 * safezoneH + safezoneY;
