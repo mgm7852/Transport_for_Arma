@@ -160,20 +160,20 @@ _SUTerminationPointPosition3DArray = [mgmTfA_configgv_fixedDestinationTaxisTermi
 // We have a new Termination Point.  
 // Inform the authorized Clients so that they can create a local marker for Termination Point
 _SUTerminationPointPositionHasBeenDeterminedBool = true;
-missionNamespace setVariable 		[format ["mgmTfA_gv_PV_SU%1SUTerminationPointPositionHasBeenDeterminedBool", _myGUSUIDNumber], _SUTerminationPointPositionHasBeenDeterminedBool							];
-publicVariable 					 format ["mgmTfA_gv_PV_SU%1SUTerminationPointPositionHasBeenDeterminedBool", _myGUSUIDNumber																	];
-missionNamespace setVariable 		[format ["mgmTfA_gv_PV_SU%1SUTerminationPointPosition3DArray", _myGUSUIDNumber], _SUTerminationPointPosition3DArray										];
-publicVariable 					 format ["mgmTfA_gv_PV_SU%1SUTerminationPointPosition3DArray", _myGUSUIDNumber																	];
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTerminationPointPositionHasBeenDeterminedBool", _myGUSUIDNumber], _SUTerminationPointPositionHasBeenDeterminedBool];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUTerminationPointPositionHasBeenDeterminedBool", _myGUSUIDNumber];
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTerminationPointPosition3DArray", _myGUSUIDNumber], _SUTerminationPointPosition3DArray];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUTerminationPointPosition3DArray", _myGUSUIDNumber];
 _SUTaxiAIVehicleWaypointMainArrayIndexNumber = _SUTaxiAIVehicleWaypointMainArrayIndexNumber + 1;
-_SUTaxiAIVehicleTerminationWaypointPosition3DArray  = _SUTerminationPointPosition3DArray;
+_SUTaxiAIVehicleTerminationWaypointPosition3DArray = _SUTerminationPointPosition3DArray;
 _SUTaxiAIVehicleWaypointMainArray  = _SUAIGroup addWaypoint [_SUTaxiAIVehicleTerminationWaypointPosition3DArray, _SUTaxiWaypointRadiusInMetersNumber,_SUTaxiAIVehicleWaypointMainArrayIndexNumber];
 // When setting the waypoint, make a note: How far are we going to go?
 _iWantToTravelThisManyMetresNumber = (round(_SUTaxiAIVehicleObject distance _SUTaxiAIVehicleTerminationWaypointPosition3DArray));
 // Active Waypoint has changed
 _SUActiveWaypointPositionPosition3DArray = _SUTerminationPointPosition3DArray;
-_SUTaxiAIVehicleWaypointMainArray		setWaypointType						"MOVE";
-_SUTaxiAIVehicleWaypointMainArray		setWaypointSpeed						"FULL";
-_SUTaxiAIVehicleWaypointMainArray		setWaypointTimeout						[1, 1, 1];
+_SUTaxiAIVehicleWaypointMainArray setWaypointType "MOVE";
+_SUTaxiAIVehicleWaypointMainArray setWaypointSpeed "FULL";
+_SUTaxiAIVehicleWaypointMainArray setWaypointTimeout [1, 1, 1];
 	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase06_ToTerminationAndTheEnd.sqf]  [TV4] AFTER adding the WaypointType: _SUTaxiAIVehicleWaypointMainArrayIndexNumber contains: (%1).   _SUTaxiAIVehicleWaypointMainArray contains: (%2)", (str _SUTaxiAIVehicleWaypointMainArrayIndexNumber), (str _SUTaxiAIVehicleWaypointMainArray)];};//dbg
 
 //check distance to our Current Waypoint (_requestorPositionArray) and write to server RPT log
