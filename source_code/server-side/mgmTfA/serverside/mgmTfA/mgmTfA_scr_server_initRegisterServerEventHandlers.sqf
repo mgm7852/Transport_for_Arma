@@ -217,8 +217,8 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	// STAGE IN WORKFLOW:		Action the request = Charge the player
 	_null = [_requestorPlayerObject, mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNegativeNumber] call EPOCH_server_effectCrypto;
 	// Report to log
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] SPAWN'ing function to inform customer: mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_SendResponse_ChargePAYGTickCostRequestActioned"];};//dbg
-	_null = [_clickNGoRequestorClientIDNumber, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_SendResponse_ChargePAYGTickCostRequestActioned;
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] SPAWN'ing function to inform customer: mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned"];};//dbg
+	_null = [_clickNGoRequestorClientIDNumber, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned;
 };
 "mgmTfA_gv_pvs_req_TAChargeMe1stMileFeePacket" addPublicVariableEventHandler {
 	scopeName "mgmTfA_gv_pvs_req_TAChargeMe1stMileFeePacketMainScope";
@@ -266,8 +266,8 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], false];
 	publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
 	// Report to log
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] PLAYER CHARGED:		1ST MILE FEE.			SPAWN'ing function to inform customer: mgmTfA_fnc_server_TA_ServicePhase04_SendResponse_Charge1stMileFeeRequestActioned"];};//dbg
-	_null = [_clickNGoRequestorClientIDNumber, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_fnc_server_TA_ServicePhase04_SendResponse_Charge1stMileFeeRequestActioned;
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] PLAYER CHARGED:		1ST MILE FEE.			SPAWN'ing function to inform customer: mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04a_SendResponse_Charge1stMileFeeRequestActioned"];};//dbg
+	_null = [_clickNGoRequestorClientIDNumber, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04a_SendResponse_Charge1stMileFeeRequestActioned;
 };
 "mgmTfA_gv_pvs_req_clickNGoTaxiChargeMeInitialBookingFeePleaseConfirmPacket" addPublicVariableEventHandler {
 	scopeName "mgmTfA_gv_pvs_req_clickNGoTaxiChargeMeInitialBookingFeePleaseConfirmPacketMainScope";
