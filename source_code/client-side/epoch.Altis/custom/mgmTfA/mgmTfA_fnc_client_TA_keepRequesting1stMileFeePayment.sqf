@@ -11,7 +11,9 @@
 //HH	Parameters	:	GUSUIDNumber Globally Unique Service Unit ID number		Number		Examples: 1, 2, 5, 384, 384728473
 //HH	Return Value	:	Nothing	[outputs to client's local map]
 //H ~~
-//HH	The shared configuration file has the following values this function rely on:	mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
+//HH	The shared configuration file has the following values this function rely on:
+//HH		mgmTfA_configgv_clientVerbosityLevel
+//HH		mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
 //HH	This function does not create/update any global variables.
 //HH	This function does rely on one publicVariable containing the information about the Service Unit:	mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool
 //HH		For example, for Service Unit 27, the publicVariables would be:
@@ -73,11 +75,11 @@ while {_continueRequesting1stMileFeePayment} do
 			if (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber) then {
 				_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE 1ST MILE FEE %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _counterInfinite)];
 				systemChat (str _msg2SyschatTextString);
-				if (mgmTfA_configgv_clientVerbosityLevel>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf]  [TV8]          VEHICLE COMPARISON MATCHED:		the (str _originalVehiclesGUSUIDNumber) is: (%1) == (str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
+				if (mgmTfA_configgv_clientVerbosityLevel>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf]  [TV8]          VEHICLE COMPARISON MATCHED:		the (str _originalVehiclesGUSUIDNumber) is: (%1) == (str _currentVehiclesGUSUIDNumber) is: (%2)					-- 'please pay the 1st Mile Fee' reminder sent to requestor	", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
 			} else {
 				//Player is not in a Taxi vehicle at the moment
 				//Do not display anything about Taxi's doors being locked/unlocked
-				if (mgmTfA_configgv_clientVerbosityLevel>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf]  [TV8]          VEHICLE COMPARISON DID NOT MATCH:		the (str _originalVehiclesGUSUIDNumber) is: (%1) != (str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
+				if (mgmTfA_configgv_clientVerbosityLevel>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf]  [TV8]          VEHICLE COMPARISON DID NOT MATCH:		the (str _originalVehiclesGUSUIDNumber) is: (%1) != (str _currentVehiclesGUSUIDNumber) is: (%2)		.", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
 			};
 		} else {
 			//Player is not in a TaxiAnywhere vehicle at the moment		-- DO NOT remind that he must pay 1st Mile Fee
