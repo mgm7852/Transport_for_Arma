@@ -101,7 +101,8 @@ private	[
 		"_SUTerminationPointPositionHasBeenDeterminedBool",
 		"_SUTerminationPointPosition3DArray",
 
-		"_SUMarkerShouldBeDestroyedAfterExpiryBool"
+		"_SUMarkerShouldBeDestroyedAfterExpiryBool",
+		"_counter55"
 		];
 
 // STEP1:	Prepare information
@@ -155,6 +156,8 @@ _SUMarkerServingOrServedTextWordTextString = " serving ";
 //_SUTerminationPointMarker <= Will be declared later in this file.
 //_SUTerminationPointMarkerPointer <= Will be declared later in this file.
 //_SUTerminationPointMarkerTextLabelString <= Will be declared later in this file.
+// DEBUG SLOW DOWN
+_counter55 = 0;
 
 // Before we begin the loop, CREATE a PICK UP MARKER -- we will want to do this only once
 _SUPickUpPointMarkerTextLabelString = " IN PROGRESS: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " will pick up " + _SURequestorProfileNameTextString + " here";
@@ -186,9 +189,6 @@ if (_SUDropOffPositionHasBeenDeterminedBool) then {
 };
 
 //// Begin looping the main loop -- we will keep looping until server-side signal shut down (it can do this by setting "mgmTfA_gv_PV_SU%1SUMarkerShouldBeDestroyedAfterExpiryBool = true").
-// DEBUG SLOW DOWN
-private ["_counter55"];
-_counter55 = 0;
 while {_continueMapTracking} do
 {
 	// DEBUG SLOW DOWN
@@ -199,7 +199,6 @@ while {_continueMapTracking} do
 	};
 	
 	//	// Sleep a variable amount:		min=1.1 seconds	max=1.7 seconds
-	//	 sleep (1.10 + (random 0.60));
 	uiSleep 1;
 	 
 	// STEP1:	Obtain Latest Information and Update Local Variables Accordingly
