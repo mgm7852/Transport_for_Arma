@@ -228,7 +228,7 @@ if (_bookingPermitted) then {
 	} else {
 		private	[
 				"_msg2HintTextString",
-				"_msg2SyschatTextString1"
+				"_msg2SyschatTextString1",
 				"_msg2SyschatTextString2"
 				];
 		// inform the player that he may not order a new clickNGo Taxi at this time as he already has one serving him!
