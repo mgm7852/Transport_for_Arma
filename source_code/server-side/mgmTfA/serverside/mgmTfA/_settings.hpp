@@ -4,6 +4,10 @@
 //H $PURPOSE$	:	This is the shared masterConfiguration file, both server & clients will be aware of, and rely on, the values herein.
 //H ~~
 //H
+#include "_mgmTfA_dat_version.hpp"
+
+
+
 				//-----
 				//VERBOSITY SETTINGS
 				//
@@ -490,7 +494,7 @@ mgmTfA_configgv_fixedDestinationTaxisServiceFeeCostForTravellingAdditional100Met
 // --Callout Fee--				-- This is the cost of 'calling a driver' to your location
 mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber = 400;
 					////////////////
-					// DON'T TOUCH
+					// don't change unless you know what you're doing!
 					mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNegativeNumber = 0 - mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber;
 					////////////////
 
@@ -508,7 +512,7 @@ mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds = 30;
 // If the vehicle gets stuck, it's still costing a lot of money to Taxi Corp, such as:	(driver's time) + (energy) + (insurance) + (blah blah)
 mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber = 100;
 					////////////////
-					// DON'T TOUCH
+					// don't change unless you know what you're doing!
 					mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber = 0 - mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber;
 					////////////////
 
@@ -518,7 +522,7 @@ mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber = 10;
 // tick cost		-- "pay as you go" payment bit. customer must keep paying to keep going
 mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber = 20;
 					////////////////
-					// DON'T TOUCH
+					// don't change unless you know what you're doing!
 					mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNegativeNumber = 0 - mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber;
 					////////////////
 
@@ -535,9 +539,10 @@ mgmTfA_configgv_clickNGoTaxisDisplayTickChargeCutTextMessageBool = true;
 
 // a minor payment issue don't mean auto-kick but if we can't charge more than n times, PAYG service terminates!
 mgmTfA_configgv_thresholdNumberOfFailedPAYGTransactionsToPermitBeforeInitiatingPAYGserviceAbruptTerminationNumber = 2;
-
-// don't change unless you know what you're doing!
-mgmTfA_configgv_monitoringAgentMissedPurchasingPowerCheckAndPAYGTickChargesAgentSleepTime = mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber;
+					////////////////
+					// don't change unless you know what you're doing!
+					mgmTfA_configgv_monitoringAgentMissedPurchasingPowerCheckAndPAYGTickChargesAgentSleepTime = mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber;
+					////////////////
 
 // when player get in a clickNGo vehicle, driver will not start driving unless the 'PAYG Initial Fee' is paid.
 // At this point in time,
@@ -685,19 +690,6 @@ mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber=60;
 //-----
 // STUFF BELOW - MOSTLY NOT IMPLEMENTED
 //-----
-
-//VERSION INFORMATION
-mgmTfA_configgv_TfAScriptVersionMajorNumber = 0;
-mgmTfA_configgv_TfAScriptVersionMinorNumber = 4;
-mgmTfA_configgv_TfAScriptVersionRevisionNumber = 1;
-mgmTfA_configgv_TfAScriptVersionTextString = "0.4.1";
-//-----
-mgmTfA_configgv_TfAScriptVersionMajorMultipliedNumber = (mgmTfA_configgv_TfAScriptVersionMajorNumber * 100);
-mgmTfA_configgv_TfAScriptVersionMinorMultipliedNumber = (mgmTfA_configgv_TfAScriptVersionMinorNumber * 10);
-//-----
-mgmTfA_configgv_TfAScriptVersionRevisionSumValueNumber = mgmTfA_configgv_TfAScriptVersionMajorMultipliedNumber + mgmTfA_configgv_TfAScriptVersionMinorMultipliedNumber + mgmTfA_configgv_TfAScriptVersionRevisionNumber;
-//-----
-
 
 
 //-----
