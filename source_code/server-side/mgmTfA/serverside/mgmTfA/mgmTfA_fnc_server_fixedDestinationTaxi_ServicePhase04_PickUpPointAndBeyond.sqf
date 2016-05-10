@@ -402,180 +402,299 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 	_fixedDestinationRequestorClientIDNumber		publicVariableClient		"mgmTfA_gv_pvc_pos_fixedDestinationTaxiDoorsHaveBeenLockedPacketSignalOnly";
 	if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that doors have been locked). _fixedDestinationRequestorProfileNameTextString: (%1) on computer (_fixedDestinationRequestorClientIDNumber): (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};//dbg
 };
-//TODO: add code ==>>  Add a button "Stop the car!"		("get out" option is always visible in offroad pickups - all we need to do is stop the car so that passengers won't get hurt!)
-// NEW DESTINATION		// Add new Waypoint data
-_SUTaxiAIVehicleWaypointMainArrayIndexNumber = _SUTaxiAIVehicleWaypointMainArrayIndexNumber + 1;
-_SUDropOffPositionPosition3DArray = _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray;
-_SUTaxiAIVehicleWaypointMainArray = _SUAIGroup addWaypoint [_SUDropOffPositionPosition3DArray, _SUTaxiWaypointRadiusInMetersNumber,_SUTaxiAIVehicleWaypointMainArrayIndexNumber];
-_SUActiveWaypointPositionPosition3DArray = _SUDropOffPositionPosition3DArray;
-//When setting the waypoint, make a note: How far are we going to go?
-_iWantToTravelThisManyMetresNumber = (round (_SUTaxiAIVehicleObject distance _SUDropOffPositionPosition3DArray));
-_SUTaxiAIVehicleWaypointMainArray setWaypointType "MOVE";
-_SUTaxiAIVehicleWaypointMainArray setWaypointSpeed "FULL";
-_SUTaxiAIVehicleWaypointMainArray setWaypointTimeout [1, 1, 1];
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3]          Waypoint Added: %2 at %1", _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray, _SUTaxiAIVehicleWaypointMainArray];};
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3]          Waypoint Added: _SUTaxiAIVehicleWaypointMainArray is: (%1). _SUTaxiAIVehicleWaypointMainArrayIndexNumber is: (%2)",_SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber];};
-//check distance to our Current Waypoint (_fixedDestinationRequestorPosition3DArray) and write to server RPT log
-_SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round(_SUTaxiAIVehicleObject distance _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray));
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3]          Distance to Waypoint _fixedDestinationRequestorPosition3DArray is: (%1) metres. Going there now.", _SUTaxiAIVehicleDistanceToWayPointMetersNumber];};
-// LOOP ON THE WAY TO PICKUP!
-_counterForLogOnlyEveryNthPINGNumber = 0;
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] NEXT, will enter drivingToDropOffPoint250."];};
 
-
-_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiOnTheWayToDropOffInSecondsNumber;
-// Reset Current Task Age
-_SUCurrentTaskAgeInSecondsNumber = 0;
-//Start the Current Task Age Timer
-_SUCurrentTaskBirthTimeInSecondsNumber = (time);
-// We are on the way to Drop Off point
-// This while loop checks whether we are at 250 metres distance to DropOffPoint
-// When it detects that we are closer than 250 metres to distance, it quits the loop [next code bit will unlocks the doors & inform the passanger]
-_broadcastSUInformationCounter = 0;
-while {_SUTaxiAIVehicleDistanceToWayPointMetersNumber>250} do {
-	scopeName "drivingToDropOffPoint250";
-	
-	///
-	// Broadcast ServiceUnit Information
-	///
-	// Only if it has been at least 1 second!	currently uiSleep`ing 0.05 seconds, meaning at least 1 second = 1.00 / 0.05 = 20th package.
-	_broadcastSUInformationCounter = _broadcastSUInformationCounter + 1;
-	if (_broadcastSUInformationCounter >= 20) then {
-		// Need to calculate these now as we will publish it in the next line!
-		_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
-		_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time) -_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
-		_SUAIVehicleObjectAgeInSecondsNumber = _SUTaxiAIVehicleObjectAgeInSecondsNumber;
-		_SUAIVehicleObjectCurrentPositionPosition3DArray = (getPosATL _SUTaxiAIVehicleObject);
-		_SUTaxiAIVehicleVehicleDirectionInDegreesNumber = (getDir _SUTaxiAIVehicleObject) + 45;
-		_SUAIVehicleVehicleDirectionInDegreesNumber = _SUTaxiAIVehicleVehicleDirectionInDegreesNumber;
-		_SUAIVehicleSpeedOfVehicleInKMHNumber = (round (speed _SUTaxiAIVehicleObject));
-		_SUPickUpPositionPosition3DArray = _fixedDestinationRequestorPosition3DArray;
-		_SUAIVehicleObject = _SUTaxiAIVehicleObject;
-		_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
-		_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
-		_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB;
-		_broadcastSUInformationCounter = 0;
+if (_emergencyEscapeNeeded) then {
+	// emergency escape needed = requestor did NOT pay the Fixed Destination Taxi Fee within the threshold time
+	//
+	// EJECT ALL			force eject all passengers - we are going to termination and we're not giving any free rides!
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]		[TV3]		Fixed Destination Taxi Fee was not paid within threshold time - ejecting all passengers and terminating."];};
+	// TODO: ENHANCEMENT:	SPLIT THIS TO A SEPARATE FUNCTION FILE (it will be repeated multiple times, by different clickNGo modules!)
+	private	[
+			"_SUVehicleSpeedOfVehicleInKMHNumber",
+			"_vel",
+			"_dir",
+			"_speedStep"									
+			];
+	//Use the horn to signal upcoming forced eject action
+	driver _SUTaxiAIVehicleObject forceWeaponFire [currentWeapon _SUTaxiAIVehicleObject, currentWeapon _SUTaxiAIVehicleObject];
+	// we should be at full stop by now but double checking never hurts
+	// First, let's bring the vehicle to a full stop, in 5 kmh steps, a new step every 0.25 seconds, until its speed is 0
+	_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
+	while {_SUVehicleSpeedOfVehicleInKMHNumber > 0} do {
+		uiSleep 0.05;
+		// Slow down by 5 kmh
+		_vel = (velocity	_SUTaxiAIVehicleObject);
+		_dir = (direction	_SUTaxiAIVehicleObject);
+		_speedStep			= -5;
+		_SUTaxiAIVehicleObject	setVelocity	[
+											(_vel select 0) + (sin _dir * _speedStep),
+											(_vel select 1) + (cos _dir * _speedStep),
+											(_vel select 2)
+											];
+	_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
 	};
-	///
-
-	//First let's refresh the distance value
-	//check distance to our Current Waypoint (_fixedDestinationRequestorPosition3DArray) and write to server RPT log
-	_SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round (_SUTaxiAIVehicleObject distance _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray));
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] 	[TV3]	TERMINATION SEQUENCE IN PROGRESS:	Stopped vehicle before ejecting all passengers."];};
 	uiSleep 0.05;
-	// Calculate Current Task Age and Initiate Abnormal SU Termination (logged) if necessary
-	_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
-	if (_SUCurrentTaskAgeInSecondsNumber > _SUCurrentTaskThresholdInSecondsNumber) then {
-		// Expiry Timeout Threshold Exceeded. Initiating Abnormal Termination of SU.
-		// We are being abnormally destroyed!
-		_emergencyEscapeNeeded = true;
-	};
-
-	// PING			log only every Nth package			(uiSleep=0.05)		(n=300)  => 	log every 15 seconds
-	// Let emergency escapees pass
-	if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";	};
-	_counterForLogOnlyEveryNthPINGNumber = _counterForLogOnlyEveryNthPINGNumber + 1;
-	if (_counterForLogOnlyEveryNthPINGNumber==300) then {
-		if (_thisFileVerbosityLevelNumber>=1) then {
-			_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time)-_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
-			diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV2] PING from SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3) | MyAge: (%4) | Distance to WP: (%5) metres | Action In Progress: (%6)", _myGUSUIDNumber, _SUDriversFirstnameTextString, round time, _SUTaxiAIVehicleObjectAgeInSecondsNumber, _SUTaxiAIVehicleDistanceToWayPointMetersNumber, _SUCurrentActionInProgressTextString];
+	// prep for forced eject -- once we eject them, we will want the passengers to stay out!
+	_SUTaxiAIVehicleObject lockCargo true;
+	_doorsLockedBool = true;
+	uiSleep 0.05;
+	// Now we can Eject All Passengers (keep the driver in!) and Delete the Vehicle	//Traverse all crew with forEach
+	{
+		//If the crewMember is NOT our dear _SUAICharacterDriverObject, then eject them!
+		if (_x != _SUAICharacterDriverObject) then {
+		_x action ["Eject", _SUTaxiAIVehicleObject];
 		};
-		_counterForLogOnlyEveryNthPINGNumber = 0;
-	};
-
-	// Pit-stop checks: AutoRefuel
-	if (fuel _SUTaxiAIVehicleObject < 0.2) then {
-		_SUTaxiAIVehicleObject setFuel 1;
-		if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
-	};
-	// Pit-stop checks: AutoRepair
-	if (damage _SUTaxiAIVehicleObject>0.2) then {
-		_SUTaxiAIVehicleObject setDamage 0;
-		if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
-	};
+	} forEach crew _SUTaxiAIVehicleObject;
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] TERMINATION SEQUENCE IN PROGRESS:		eject all passengers completed."];};
+	uiSleep 0.05;
 };
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] EXITED LOOP: drivingToDropOffPoint250"];};
 
 
-//We are about to reach passenger drop off point
-//Unlock the vehicle doors
-_SUTaxiAIVehicleObject lockCargo false;
-//Save the new status of vehicleDoorLock
- _doorsLockedBool = false;
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] DOORS unlocked"];};
-uiSleep 0.05;
-//Doors Unlocked
-//Inform the requestor if haven't done so yet
-mgmTfA_gv_pvc_pos_fixedDestinationTaxiDoorsHaveBeenUnlockedPacketSignalOnly = ".";
-_fixedDestinationRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_fixedDestinationTaxiDoorsHaveBeenUnlockedPacketSignalOnly";
-		if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that his Taxi is here). _fixedDestinationRequestorProfileNameTextString: (%1)   _fixedDestinationRequestorClientIDNumber: (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};
 
-// THIS IS PHASE 2 - DO NOT RESET TIME HERE! 		// Reset Current Task Age
 
-//We are on the way to Drop Off Position. We will loop till we are very close to the target.
- broadcastSUInformationCounter = 0;
-while {_SUTaxiAIVehicleDistanceToWayPointMetersNumber>25} do {
-	scopeName "drivingToDropOffPoint25";
-	
-	///
-	// Broadcast ServiceUnit Information
-	///
-	// Only if it has been at least 1 second!	currently uiSleep`ing 0.05 seconds, meaning at least 1 second = 1.00 / 0.05 = 20th package.
-	_broadcastSUInformationCounter = _broadcastSUInformationCounter + 1;
-	if (_broadcastSUInformationCounter >= 20) then {
-		// Need to calculate these now as we will publish it in the next line!
-		_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
-		_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time) -_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
-		_SUAIVehicleObjectAgeInSecondsNumber = _SUTaxiAIVehicleObjectAgeInSecondsNumber;
-		_SUAIVehicleObjectCurrentPositionPosition3DArray = (getPosATL _SUTaxiAIVehicleObject);
-		_SUTaxiAIVehicleVehicleDirectionInDegreesNumber = (getDir _SUTaxiAIVehicleObject) + 45;
-		_SUAIVehicleVehicleDirectionInDegreesNumber = _SUTaxiAIVehicleVehicleDirectionInDegreesNumber;
-		_SUAIVehicleSpeedOfVehicleInKMHNumber = (round (speed _SUTaxiAIVehicleObject));
-		_SUPickUpPositionPosition3DArray = _fixedDestinationRequestorPosition3DArray;
-		_SUAIVehicleObject = _SUTaxiAIVehicleObject;
-		_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
-		_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
-		_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB;
-		_broadcastSUInformationCounter = 0;
-	};
-	///
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// If emergency escape is NOT needed, proceed with the next batch of workflow tasks			which is DRIVING-TO-DESTINATION
+if (!_emergencyEscapeNeeded) then {
+
+	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV8] INSIDE  if (!_emergencyEscapeNeeded) then            now..."];};
+
+	//Change our status to:		4 DRIVING-TO-DESTINATION		driving requestor to requested location
+	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentFixedDestinationTaxiActionInProgressIs04TextString;
+	//Customer has paid and we are about to start driving to our destination. 
+	//On the way and even before we start moving (while we do waypoint calculations etc.) doors should be locked.
+
+	//TODO: add code ==>>  Add a button "Stop the car!"		("get out" option is always visible in offroad pickups - all we need to do is stop the car so that passengers won't get hurt!)
+	// NEW DESTINATION		// Add new Waypoint data
+	_SUTaxiAIVehicleWaypointMainArrayIndexNumber = _SUTaxiAIVehicleWaypointMainArrayIndexNumber + 1;
+	_SUDropOffPositionPosition3DArray = _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray;
+	_SUTaxiAIVehicleWaypointMainArray = _SUAIGroup addWaypoint [_SUDropOffPositionPosition3DArray, _SUTaxiWaypointRadiusInMetersNumber,_SUTaxiAIVehicleWaypointMainArrayIndexNumber];
+	_SUActiveWaypointPositionPosition3DArray = _SUDropOffPositionPosition3DArray;
+	//When setting the waypoint, make a note: How far are we going to go?
+	_iWantToTravelThisManyMetresNumber = (round (_SUTaxiAIVehicleObject distance _SUDropOffPositionPosition3DArray));
+	_SUTaxiAIVehicleWaypointMainArray setWaypointType "MOVE";
+	_SUTaxiAIVehicleWaypointMainArray setWaypointSpeed "FULL";
+	_SUTaxiAIVehicleWaypointMainArray setWaypointTimeout [1, 1, 1];
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3]          Waypoint Added: %2 at %1", _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray, _SUTaxiAIVehicleWaypointMainArray];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3]          Waypoint Added: _SUTaxiAIVehicleWaypointMainArray is: (%1). _SUTaxiAIVehicleWaypointMainArrayIndexNumber is: (%2)",_SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber];};
 	//check distance to our Current Waypoint (_fixedDestinationRequestorPosition3DArray) and write to server RPT log
 	_SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round(_SUTaxiAIVehicleObject distance _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray));
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3]          Distance to Waypoint _fixedDestinationRequestorPosition3DArray is: (%1) metres. Going there now.", _SUTaxiAIVehicleDistanceToWayPointMetersNumber];};
+	// LOOP ON THE WAY TO PICKUP!
+	_counterForLogOnlyEveryNthPINGNumber = 0;
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] NEXT, will enter drivingToDropOffPoint250."];};
 
-	uiSleep 0.05;
-	
-	// Calculate Current Task Age and Initiate Abnormal SU Termination (logged) if necessary
-	_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
-	if (_SUCurrentTaskAgeInSecondsNumber > _SUCurrentTaskThresholdInSecondsNumber) then {
-		// Expiry Timeout Threshold Exceeded. Initiating Abnormal Termination of SU.
-		// We are being abnormally destroyed!
-		_emergencyEscapeNeeded = true;
-		//if (_thisFileVerbosityLevelNumber>=1) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV1]          Expiry Timeout Threshold Exceeded for SU (%1). Initiating Abnormal SU Termination! _SUCurrentTaskAgeInSecondsNumber is: (%2). _SUCurrentTaskThresholdInSecondsNumber is: (%3).", _mgmTfA_gvdb_PV_TfAGUJIDNumber, _SUCurrentTaskAgeInSecondsNumber, _SUCurrentTaskThresholdInSecondsNumber];};
-	};
- 	 // Let emergency escapees pass
-	if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";	};
-
-	// PING			log only every Nth package			(uiSleep=0.05)		(n=300)  => 	log every 15 seconds
-	_counterForLogOnlyEveryNthPINGNumber = _counterForLogOnlyEveryNthPINGNumber + 1;
-	if (_counterForLogOnlyEveryNthPINGNumber==300) then {
-		_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time)-_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
-		if (_thisFileVerbosityLevelNumber>=1) then {
-			diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV1]          PING from vehicle GUSUID: (%1) | Driver: (%2) | ServerUpTime: (%3) | MyAge: (%4) | Distance to WP: (%5) metres | Action In Progress: (%6) (checking 25 m.)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time)), _SUTaxiAIVehicleObjectAgeInSecondsNumber, _SUTaxiAIVehicleDistanceToWayPointMetersNumber, _SUCurrentActionInProgressTextString];
+	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiOnTheWayToDropOffInSecondsNumber;
+	// Reset Current Task Age
+	_SUCurrentTaskAgeInSecondsNumber = 0;
+	//Start the Current Task Age Timer
+	_SUCurrentTaskBirthTimeInSecondsNumber = (time);
+	// We are on the way to Drop Off point
+	// This while loop checks whether we are at 250 metres distance to DropOffPoint
+	// When it detects that we are closer than 250 metres to distance, it quits the loop [next code bit will unlocks the doors & inform the passanger]
+	_broadcastSUInformationCounter = 0;
+	while {_SUTaxiAIVehicleDistanceToWayPointMetersNumber>250} do {
+		scopeName "drivingToDropOffPoint250";
+		// Broadcast ServiceUnit Information
+		// Only if it has been at least 1 second!	currently uiSleep`ing 0.05 seconds, meaning at least 1 second = 1.00 / 0.05 = 20th package.
+		_broadcastSUInformationCounter = _broadcastSUInformationCounter + 1;
+		if (_broadcastSUInformationCounter >= 20) then {
+			// Need to calculate these now as we will publish it in the next line!
+			_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
+			_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time) -_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
+			_SUAIVehicleObjectAgeInSecondsNumber = _SUTaxiAIVehicleObjectAgeInSecondsNumber;
+			_SUAIVehicleObjectCurrentPositionPosition3DArray = (getPosATL _SUTaxiAIVehicleObject);
+			_SUTaxiAIVehicleVehicleDirectionInDegreesNumber = (getDir _SUTaxiAIVehicleObject) + 45;
+			_SUAIVehicleVehicleDirectionInDegreesNumber = _SUTaxiAIVehicleVehicleDirectionInDegreesNumber;
+			_SUAIVehicleSpeedOfVehicleInKMHNumber = (round (speed _SUTaxiAIVehicleObject));
+			_SUPickUpPositionPosition3DArray = _fixedDestinationRequestorPosition3DArray;
+			_SUAIVehicleObject = _SUTaxiAIVehicleObject;
+			_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
+			_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
+			_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB;
+			_broadcastSUInformationCounter = 0;
 		};
-		_counterForLogOnlyEveryNthPINGNumber = 0;
+
+		//First let's refresh the distance value
+		//check distance to our Current Waypoint (_fixedDestinationRequestorPosition3DArray) and write to server RPT log
+		_SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round (_SUTaxiAIVehicleObject distance _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray));
+		uiSleep 0.05;
+		// Calculate Current Task Age and Initiate Abnormal SU Termination (logged) if necessary
+		_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
+		if (_SUCurrentTaskAgeInSecondsNumber > _SUCurrentTaskThresholdInSecondsNumber) then {
+			// Expiry Timeout Threshold Exceeded. Initiating Abnormal Termination of SU.
+			// We are being abnormally destroyed!
+			_emergencyEscapeNeeded = true;
+		};
+
+		// PING			log only every Nth package			(uiSleep=0.05)		(n=300)  => 	log every 15 seconds
+		// Let emergency escapees pass
+		if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";	};
+		_counterForLogOnlyEveryNthPINGNumber = _counterForLogOnlyEveryNthPINGNumber + 1;
+		if (_counterForLogOnlyEveryNthPINGNumber==300) then {
+			if (_thisFileVerbosityLevelNumber>=1) then {
+				_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time)-_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
+				diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV2] PING from SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3) | MyAge: (%4) | Distance to WP: (%5) metres | Action In Progress: (%6)", _myGUSUIDNumber, _SUDriversFirstnameTextString, round time, _SUTaxiAIVehicleObjectAgeInSecondsNumber, _SUTaxiAIVehicleDistanceToWayPointMetersNumber, _SUCurrentActionInProgressTextString];
+			};
+			_counterForLogOnlyEveryNthPINGNumber = 0;
+		};
+
+		// Pit-stop checks: AutoRefuel
+		if (fuel _SUTaxiAIVehicleObject < 0.2) then {
+			_SUTaxiAIVehicleObject setFuel 1;
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+		};
+		// Pit-stop checks: AutoRepair
+		if (damage _SUTaxiAIVehicleObject>0.2) then {
+			_SUTaxiAIVehicleObject setDamage 0;
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+		};
 	};
-	// Pit-stop checks: AutoRefuel
-	if (fuel _SUTaxiAIVehicleObject < 0.2) then {
-		_SUTaxiAIVehicleObject setFuel 1;
-		if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
-	};
-	// Pit-stop checks: AutoRepair
-	if (damage _SUTaxiAIVehicleObject>0.2) then {
-		_SUTaxiAIVehicleObject setDamage 0;
-		if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
-	};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] EXITED LOOP: drivingToDropOffPoint250"];};
 };
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] EXITED LOOP: drivingToDropOffPoint25.		(str _emergencyEscapeNeeded) is: (%1).", (str _emergencyEscapeNeeded)];};//dbg
+
+// If emergency escape needed, do nothing.
+// If emergency escape is NOT needed, proceed with the next batch of workflow tasks
+if (!_emergencyEscapeNeeded) then {
+	// workflow tasks below this line
+
+	//We are about to reach passenger drop off point
+	//Unlock the vehicle doors
+	_SUTaxiAIVehicleObject lockCargo false;
+	//Save the new status of vehicleDoorLock
+	 _doorsLockedBool = false;
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] DOORS unlocked"];};
+	uiSleep 0.05;
+	//Doors Unlocked
+	//Inform the requestor if haven't done so yet
+	mgmTfA_gv_pvc_pos_fixedDestinationTaxiDoorsHaveBeenUnlockedPacketSignalOnly = ".";
+	_fixedDestinationRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_fixedDestinationTaxiDoorsHaveBeenUnlockedPacketSignalOnly";
+			if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that his Taxi is here). _fixedDestinationRequestorProfileNameTextString: (%1)   _fixedDestinationRequestorClientIDNumber: (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};
+
+	// THIS IS PHASE 2 - DO NOT RESET TIME HERE! 		// Reset Current Task Age
+
+	//We are on the way to Drop Off Position. We will loop till we are very close to the target.
+	 broadcastSUInformationCounter = 0;
+	while {_SUTaxiAIVehicleDistanceToWayPointMetersNumber>25} do {
+		scopeName "drivingToDropOffPoint25";
+		
+		///
+		// Broadcast ServiceUnit Information
+		///
+		// Only if it has been at least 1 second!	currently uiSleep`ing 0.05 seconds, meaning at least 1 second = 1.00 / 0.05 = 20th package.
+		_broadcastSUInformationCounter = _broadcastSUInformationCounter + 1;
+		if (_broadcastSUInformationCounter >= 20) then {
+			// Need to calculate these now as we will publish it in the next line!
+			_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
+			_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time) -_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
+			_SUAIVehicleObjectAgeInSecondsNumber = _SUTaxiAIVehicleObjectAgeInSecondsNumber;
+			_SUAIVehicleObjectCurrentPositionPosition3DArray = (getPosATL _SUTaxiAIVehicleObject);
+			_SUTaxiAIVehicleVehicleDirectionInDegreesNumber = (getDir _SUTaxiAIVehicleObject) + 45;
+			_SUAIVehicleVehicleDirectionInDegreesNumber = _SUTaxiAIVehicleVehicleDirectionInDegreesNumber;
+			_SUAIVehicleSpeedOfVehicleInKMHNumber = (round (speed _SUTaxiAIVehicleObject));
+			_SUPickUpPositionPosition3DArray = _fixedDestinationRequestorPosition3DArray;
+			_SUAIVehicleObject = _SUTaxiAIVehicleObject;
+			_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
+			_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
+			_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB;
+			_broadcastSUInformationCounter = 0;
+		};
+		///
+
+		//check distance to our Current Waypoint (_fixedDestinationRequestorPosition3DArray) and write to server RPT log
+		_SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round(_SUTaxiAIVehicleObject distance _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray));
+
+		uiSleep 0.05;
+		
+		// Calculate Current Task Age and Initiate Abnormal SU Termination (logged) if necessary
+		_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
+		if (_SUCurrentTaskAgeInSecondsNumber > _SUCurrentTaskThresholdInSecondsNumber) then {
+			// Expiry Timeout Threshold Exceeded. Initiating Abnormal Termination of SU.
+			// We are being abnormally destroyed!
+			_emergencyEscapeNeeded = true;
+			//if (_thisFileVerbosityLevelNumber>=1) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV1]          Expiry Timeout Threshold Exceeded for SU (%1). Initiating Abnormal SU Termination! _SUCurrentTaskAgeInSecondsNumber is: (%2). _SUCurrentTaskThresholdInSecondsNumber is: (%3).", _mgmTfA_gvdb_PV_TfAGUJIDNumber, _SUCurrentTaskAgeInSecondsNumber, _SUCurrentTaskThresholdInSecondsNumber];};
+		};
+	 	 // Let emergency escapees pass
+		if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";	};
+
+		// PING			log only every Nth package			(uiSleep=0.05)		(n=300)  => 	log every 15 seconds
+		_counterForLogOnlyEveryNthPINGNumber = _counterForLogOnlyEveryNthPINGNumber + 1;
+		if (_counterForLogOnlyEveryNthPINGNumber==300) then {
+			_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time)-_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
+			if (_thisFileVerbosityLevelNumber>=1) then {
+				diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV1]          PING from vehicle GUSUID: (%1) | Driver: (%2) | ServerUpTime: (%3) | MyAge: (%4) | Distance to WP: (%5) metres | Action In Progress: (%6) (checking 25 m.)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time)), _SUTaxiAIVehicleObjectAgeInSecondsNumber, _SUTaxiAIVehicleDistanceToWayPointMetersNumber, _SUCurrentActionInProgressTextString];
+			};
+			_counterForLogOnlyEveryNthPINGNumber = 0;
+		};
+		// Pit-stop checks: AutoRefuel
+		if (fuel _SUTaxiAIVehicleObject < 0.2) then {
+			_SUTaxiAIVehicleObject setFuel 1;
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+		};
+		// Pit-stop checks: AutoRepair
+		if (damage _SUTaxiAIVehicleObject>0.2) then {
+			_SUTaxiAIVehicleObject setDamage 0;
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+		};
+	};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] EXITED LOOP: drivingToDropOffPoint25.		(str _emergencyEscapeNeeded) is: (%1).", (str _emergencyEscapeNeeded)];};//dbg
+};
 
 // If emergency escape needed, skip Phase05 completely, and jump to Phase06
 // If emergency escape is NOT needed, proceed with the next batch of workflow tasks
