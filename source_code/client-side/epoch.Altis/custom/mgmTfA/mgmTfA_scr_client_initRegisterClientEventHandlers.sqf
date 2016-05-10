@@ -97,6 +97,23 @@
 		//Do not display anything about Taxi's doors being locked/unlocked
 	};
 };
+"mgmTfA_gv_pvc_pos_clickNGoTaxiDoorsHaveBeenLockedNoHintPacketSignalOnly" addPublicVariableEventHandler {
+	// initialize local variables
+	private [
+			"_msg2SyschatTextString",
+			"_classnameOfTheCurrentVehicle"
+			];
+	//This below is a relevant message only if the player is still in the Taxi vehicle	i.e.: if player ejected/got out, let's NOT send him this message!
+	//Get current vehicle's Classname
+	_classnameOfTheCurrentVehicle = typeOf (vehicle player);
+	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
+	if (mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
+		_msg2SyschatTextString = parsetext format ["%1 DOORS HAVE BEEN LOCKED FOR YOUR SECURITY AND SAFETY. THANK YOU.", (profileName)];
+		systemChat (str _msg2SyschatTextString);
+	} else {
+		//Player is not in a Taxi vehicle at the moment -- do not display anything about Taxi's doors being locked/unlocked
+	};
+};
 // Fixed Destination Taxi - Doors Unlocked
 "mgmTfA_gv_pvc_pos_fixedDestinationTaxiDoorsHaveBeenUnlockedPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
@@ -434,47 +451,64 @@
 					NOT IMPLEMENTED
 	*/
 };
-"mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly" addPublicVariableEventHandler {
-	// initialize local variables
-	private [
-			"_msg2HintTextString",
-			"_msg2SyschatTextString"
-			];
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay1stMileFee.jpg'/><br/><br/><t size='1.40' color='#00FF00'>Greetings<br/>%1<br/><br/><br/>PLEASE PAY<br/>THE 1ST MILE FEE<br/>%2 CRYPTO<br/><br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
-	_msg2SyschatTextString = parsetext format ["Greetings %1 PLEASE PAY THE 1ST MILE FEE: %2 CRYPTO. THANKS!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
-	hint _msg2HintTextString;
-	systemChat (str _msg2SyschatTextString);
-};
-"mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly" addPublicVariableEventHandler {
+/*
+DUPLICATE - DELETE THIS BLOCK
+DUPLICATE - DELETE THIS BLOCK
+DUPLICATE - DELETE THIS BLOCK
+DUPLICATE - DELETE THIS BLOCK
+																				"mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly" addPublicVariableEventHandler {
+																					// initialize local variables
+																					private [
+																							"_msg2HintTextString",
+																							"_msg2SyschatTextString"
+																							];
+																					_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay1stMileFee.jpg'/><br/><br/><t size='1.40' color='#00FF00'>Greetings<br/>%1<br/><br/><br/>PLEASE PAY<br/>THE 1ST MILE FEE<br/>%2 CRYPTO<br/><br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+																					_msg2SyschatTextString = parsetext format ["Greetings %1 PLEASE PAY THE 1ST MILE FEE: %2 CRYPTO. THANKS!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+																					hint _msg2HintTextString;
+																					systemChat (str _msg2SyschatTextString);
+																				};
+																				"mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly" addPublicVariableEventHandler {
+																					// initialize local variables
+																					private	[
+																							"_msg2HintTextString",
+																							"_msg2SyschatTextString"
+																							];
+																					// inform the player via Hint		-- let the customer know that he just has been charged $amount
+																					private	["_msg2HintTextString"];
+																					_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
+																					hint _msg2HintTextString;
+																					// inform the player via systemChat 	-- only if the global config allows
+																					// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
+																					private	["_messageTextOnlyFormat"];
+																					_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE 1ST MILE FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW CASH BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
+																					systemChat 		(str _messageTextOnlyFormat);
+																					// IDEA/TODO:	inform the player via cutText 	-- only if the global config allows
+																				};
+*/
+"mgmTfA_gv_pvc_pos_yourTaxiAnywhere1stMileFeeChargeRequestActionedPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
 	private	[
 			"_msg2HintTextString",
-			"_msg2SyschatTextString"
+			"_msg2SyschatTextString",
+			"_playerActualCashBalance"
 			];
-	// inform the player via Hint		-- let the customer know that he just has been charged $amount
-	private	["_msg2HintTextString"];
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
-	hint _msg2HintTextString;
+	//it seems we always show the "pre-transaction balance" for some reason. maybe it's due to communication delay? let's try doing the calculation on this side and show the result
+	_playerActualCashBalance = EPOCH_playerCrypto - mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber;
+	// inform the player via Hint 	-- only if the global config allows
+	if (true) then {
+		// not a config option yet - just go ahead & inform the player
+		private	["_msg2HintTextString"];
+		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>TAXI-ANYWHERE 1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/>. THANK YOU FOR THE PAYMENT.<br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
+		hint _msg2HintTextString;
+	};
 	// inform the player via systemChat 	-- only if the global config allows
-	// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
-	private	["_messageTextOnlyFormat"];
-	_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE 1ST MILE FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW CASH BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
-	systemChat 		(str _messageTextOnlyFormat);
-	/*
-					NOT IMPLEMENTED
-					NOT IMPLEMENTED
-					NOT IMPLEMENTED
-						// inform the player via cutText 	-- only if the global config allows
-						if (mgmTfA_configgv_clickNGoTaxisDisplayTickChargeCutTextMessageBool) then {
-							// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
-							private	["_messageTextOnlyFormat"];
-							_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW CASH BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
-							systemChat 		(str _messageTextOnlyFormat);
-						};
-					NOT IMPLEMENTED
-					NOT IMPLEMENTED
-					NOT IMPLEMENTED
-	*/
+	if (true) then {
+		// not a config option yet - just go ahead & inform the player
+		private	["_messageTextOnlyFormat"];
+		_messageTextOnlyFormat = parsetext format ["YOU JUST PAID THE TAXI-ANYWHERE 1ST MILE FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT. YOUR NEW CASH BALANCE: %3 CRYPTO.", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
+		systemChat (str _messageTextOnlyFormat);
+	};
+	/*	NOT IMPLEMENTED	- add cutText option here? */
 };
 "mgmTfA_gv_pvc_req_pleaseBeginPurchasingPowerCheckAndPAYGChargeForTimeTicksSignalOnly" addPublicVariableEventHandler {
 	private	[

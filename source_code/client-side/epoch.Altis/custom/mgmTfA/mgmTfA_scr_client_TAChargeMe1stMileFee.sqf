@@ -27,11 +27,11 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 				"_myVehiclesCommandingCustomerPlayerUIDNumber",
 				"_playerMustPayBool",
 				"_playerCashNumber",
-				"_myGUSUIDNumber"
+				"_myGUSUIDNumber",
 				//"_functionExecutionTimeInSecondsNumber",
 				//"_emergencyEscapeNeeded",
 				//"_tooManyFailedPAYGTransactionsObservedBool",
-				"_myPUID",
+				"_myPUID"
 				//"_playerWentBankruptBool",
 				//"_checkedAndPlayerWasNotInAclickNGoVehicleCountNumber",
 				//"_player"
@@ -62,9 +62,12 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 			// player will be charged the 1st Mile Fee amount now -- SEND REQUEST to server so that server will charge customer's wallet
 			_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
 			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA]  [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
+			// convert to global to put on the wire
 			myGUSUIDNumber = _myGUSUIDNumber;
-			mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacket = [player, mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, myGUSUIDNumber];
-			publicVariableServer "mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacket";
+			// PUID was already set in RequestTaxi section but just ensuring..
+			mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString = (getPlayerUID player);
+			mgmTfA_gv_pvs_req_TAChargeMe1stMileFeePacket = [player, mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, myGUSUIDNumber];
+			publicVariableServer "mgmTfA_gv_pvs_req_TAChargeMe1stMileFeePacket";
 			// report to log
 			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          CHARGED		the player TaxiAnywhere 1st Mile Fee cost	"];};
 
