@@ -208,6 +208,10 @@ missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUfdTxPayNowMenuIsCurren
 publicVariable format ["mgmTfA_gv_PV_SU%1SUfdTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber];
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUfdTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber], false];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUfdTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber];
+// NOTE: a FDT will never require "1st Mile Fee" however if we do not set this, when a requestor get out of TA and jump into a FDT it will break the code. To prevent, simply pass a FALSE here.
+// mark all Fixed Destination Taxis as "1st Mile need not be paid"
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], false];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
 // if *Global variants is used, the effect will be global. otherwise players continue seeing the old items in cargo		ref:	http://www.reddit.com/r/arma/comments/2rpk6e/arma_3_ammo_boxes_and_similar_reset_to_original/cniglrb
 clearMagazineCargoGlobal _SUTaxiAIVehicleObject;
 clearWeaponCargoGlobal _SUTaxiAIVehicleObject;
