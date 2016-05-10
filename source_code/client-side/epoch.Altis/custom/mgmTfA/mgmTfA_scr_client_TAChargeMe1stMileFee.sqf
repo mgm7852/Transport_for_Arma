@@ -114,7 +114,7 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 			// let the customer know via hint && systemChat
 			private	[
 					"_msg2HintTextString",
-					"_messageTextOnlyFormat1"
+					"_messageTextOnlyFormat1",
 					"_messageTextOnlyFormat2"
 					];
 			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/>HAVE A NICE DAY!<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
