@@ -233,6 +233,8 @@
 	// initialize local variables
 	private [
 			"_classnameOfTheCurrentVehicle",
+			"_originalVehiclesGUSUIDNumber",
+			"_currentVehiclesGUSUIDNumber",
 			"_msg2HintTextString",
 			"_msg2SyschatTextString1",
 			"_msg2SyschatTextString2"
@@ -261,7 +263,7 @@
 	} else {
 		//Player is not in a Taxi vehicle at the moment
 		//Do not display anything about Taxi's doors being locked/unlocked
-	};	
+	};
 	// delete the clickNGoTaxi Chosen Position Marker
 	deleteMarker "clickNGoTaxiChosenPosition";
 	// once player exits clickNGo taxi, allow player to use clickNGoHotKey again
