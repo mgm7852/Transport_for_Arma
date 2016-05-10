@@ -6,18 +6,18 @@
 //H
 //HH
 //HH ~~
-//HH	Example usage	:	_null =	[_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString, _positionToSpawnSUVehiclePosition3DArray, _myGUSUIDNumber] spawn mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor;
-//HH	Parameters	:	
-//HH					// We will not need all these but pass everything for now as we might change the script in the future...
-//HH					// Argument #0:		_clickNGoRequestorClientIDNumber
-//HH					// Argument #1:		_clickNGoRequestorPosition3DArray
-//HH					// Argument #2:		_THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber
-//HH					// Argument #3:		_THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString
-//HH					// Argument #4:		_clickNGoRequestorPlayerUIDTextString
-//HH					// Argument #5:		_clickNGoRequestorProfileNameTextString
-//HH					// Argument #6:		_positionToSpawnSUVehiclePosition3DArray
-//HH					// Argument #7:		_myGUSUIDNumber
-//HH	Return Value	:	none	[this function spawns the next function in "clickNGo Taxi - Service Request - Workflow"
+//HH	NEED UPDATE			//HH	Example usage	:	_null =	[_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString, _positionToSpawnSUVehiclePosition3DArray, _myGUSUIDNumber] spawn mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor;
+//HH	NEED UPDATE			//HH	Parameters	:	
+//HH	NEED UPDATE			//HH					// We will not need all these but pass everything for now as we might change the script in the future...
+//HH	NEED UPDATE			//HH					// Argument #0:		_clickNGoRequestorClientIDNumber
+//HH	NEED UPDATE			//HH					// Argument #1:		_clickNGoRequestorPosition3DArray
+//HH	NEED UPDATE			//HH					// Argument #2:		_THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber
+//HH	NEED UPDATE			//HH					// Argument #3:		_THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString
+//HH	NEED UPDATE			//HH					// Argument #4:		_clickNGoRequestorPlayerUIDTextString
+//HH	NEED UPDATE			//HH					// Argument #5:		_clickNGoRequestorProfileNameTextString
+//HH	NEED UPDATE			//HH					// Argument #6:		_positionToSpawnSUVehiclePosition3DArray
+//HH	NEED UPDATE			//HH					// Argument #7:		_myGUSUIDNumber
+//HH	NEED UPDATE			//HH	Return Value	:	none	[this function spawns the next function in "clickNGo Taxi - Service Request - Workflow"
 //HH ~~
 //HH	The server-side master configuration file read (and/or publicVariable publish) the following value(s) this function rely on:
 //HH		mgmTfA_configgv_serverVerbosityLevel

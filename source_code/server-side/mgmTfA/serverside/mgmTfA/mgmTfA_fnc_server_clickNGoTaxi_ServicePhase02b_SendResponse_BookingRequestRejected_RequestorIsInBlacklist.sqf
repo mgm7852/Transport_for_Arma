@@ -8,7 +8,7 @@
 //HH ~~
 //HH	Example usage	:	_null	=	[_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist;
 //HH	Parameters	:	see the parameter parsing section below
-//HH	Return Value	:	none	[this function spawns the next function in "Fixed Destination Taxi - Service Request - Workflow"
+//HH	NEED UPDATE			Return Value	:	none	[this function spawns the next function in "Fixed Destination Taxi - Service Request - Workflow"
 //HH ~~
 //HH	The server-side master configuration file read (and/or publicVariable publish) the following value(s) this function rely on:
 //HH		mgmTfA_configgv_serverVerbosityLevel
