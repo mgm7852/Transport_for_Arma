@@ -69,7 +69,7 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 				// yes 1st Mile Fee is enabled and since it does not need to be paid now, it appears this has already been paid! -- log what we learned and do 1stMileFeePayRequestor comms
 				if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV3] 	DETECTED: 	DUPLICATE PAYMENT ATTEMPT		1st Mile Fee is ENABLED but does NOT NEED TO BE PAID now.		"];};
 				// do 1stMileFeePayRequestor comms
-				_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>1ST MILE FEE<br/>HAS ALREADY BEEN PAID<br/>", (profileName)];
+				_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>1ST MILE FEE<br/>HAS ALREADY<br/>BEEN PAID<br/><br/>", (profileName)];
 				_msg2SyschatTextString = parsetext format ["SORRY %1! 1ST MILE FEE HAS ALREADY BEEN PAID", (profileName)];
 				hint _msg2HintTextString;
 				systemChat (str _msg2SyschatTextString);
@@ -141,7 +141,7 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 			"_msg2SyschatTextString"
 			];
 	// with hint
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#00FF00'>SORRY %1!<br/><br/><br/>YOU CANNOT PAY<br/>TAXI ANYWHERE<br/>1ST MILE FEE<br/>AS YOU ARE NOT<br/>IN A<br/>TAXI ANYWHERE VEHICLE<br/><br/>", (profileName)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#00FF00'><br/>SORRY %1!<br/><br/><br/>YOU CANNOT PAY<br/>TAXI ANYWHERE<br/>1ST MILE FEE<br/>AS YOU ARE NOT<br/>IN A<br/>TAXI ANYWHERE<br/>VEHICLE<br/><br/>", (profileName)];
 	hint _msg2HintTextString;
 	// with systemChat
 	_msg2SyschatTextString = parsetext format ["SORRY %1! YOU CANNOT PAY TAXI-ANYWHERE 1ST MILE FEE AS YOU ARE NOT IN A TAXI-ANYWHERE VEHICLE", (profileName)];

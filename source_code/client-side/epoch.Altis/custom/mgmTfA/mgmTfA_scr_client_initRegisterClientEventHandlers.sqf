@@ -211,7 +211,7 @@
 	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
 	if ((mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) && (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber)) then {
 		// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
-		_msg2HintTextString = parsetext format["<img size='8' image='custom\mgmTfA\img_comms\mgmTfA_img_client_thankYouForYourBusinessHaveANiceDay.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>WE HAVE ARRIVED<br/>%2<br/><br/>THANK YOU FOR<br/>CHOOSING TAXI CORP<br/><br/>HAVE A NICE DAY!<br/><br/></t>", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+		_msg2HintTextString = parsetext format["<img size='8' image='custom\mgmTfA\img_comms\mgmTfA_img_client_thankYouForYourBusinessHaveANiceDay.jpg'/><br/><br/><t size='1.40' color='#00FF00'><br/>%1<br/><br/>WE HAVE ARRIVED<br/>%2<br/><br/>THANK YOU FOR<br/>CHOOSING TAXI CORP<br/><br/>HAVE A NICE DAY!<br/><br/></t>", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 		_msg2SyschatTextString = parsetext format["%1 WE HAVE ARRIVED %2. THANK YOU FOR CHOOSING TAXI CORP. HAVE A NICE DAY!", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 		hint _msg2HintTextString;
 		systemChat (str _msg2SyschatTextString);
@@ -242,7 +242,7 @@
 	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
 	if ((mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) && (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber)) then {
 		// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
-		_msg2HintTextString = parsetext format["<img size='8' image='custom\mgmTfA\img_comms\mgmTfA_img_client_thankYouForYourBusinessHaveANiceDay.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>WE HAVE ARRIVED<br/>AT OUR DESTINATION<br/><br/>THANK YOU FOR<br/>CHOOSING TAXI CORP<br/><br/>HAVE A NICE DAY!<br/><br/></t>", (profileName)];
+		_msg2HintTextString = parsetext format["<img size='8' image='custom\mgmTfA\img_comms\mgmTfA_img_client_thankYouForYourBusinessHaveANiceDay.jpg'/><br/><br/><t size='1.40' color='#00FF00'><br/>%1<br/><br/>WE HAVE ARRIVED<br/>AT OUR DESTINATION<br/><br/>THANK YOU FOR<br/>CHOOSING TAXI CORP<br/><br/>HAVE A NICE DAY!<br/><br/></t>", (profileName)];
 		_msg2SyschatTextString = parsetext format["%1 WE HAVE ARRIVED AT OUR DESTINATION. THANK YOU FOR CHOOSING TAXI CORP. HAVE A NICE DAY!", (profileName)];
 		hint _msg2HintTextString;
 		systemChat (str _msg2SyschatTextString);
