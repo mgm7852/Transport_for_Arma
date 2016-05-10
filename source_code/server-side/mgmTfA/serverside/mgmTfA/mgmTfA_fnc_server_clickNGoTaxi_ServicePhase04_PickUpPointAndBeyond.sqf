@@ -345,11 +345,11 @@ if (!_emergencyEscapeNeeded) then {
 // Is 1st Mile Fee enabled? (NOTE: Phase03 already did the check & marked the vehicle but we can still read the globalVar probably faster)
 if (mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) then {
 	// YES 1st Mile Fee is enabled -- log the 1st Mile Fee setting
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] DETECTED		1st Mile Fee is ENABLED			(mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0)"];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] 		DETECTED		1st Mile Fee is ENABLED			(mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0)"];};
 	// We will inform the requestor now:		"You must now pay the 1st-Mile-Fee"
 	mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly = ".";
 	_clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly";
-			if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor	(mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly)	 (that he MUST pay 1st-Mile-Fee now).	_clickNGoRequestorProfileNameTextString: (%1)   _clickNGoRequestorClientIDNumber: (%2)	", _clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber];};
+			if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV2] 	  SIGNAL SENT to the requestor	(mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly)	 (that he MUST pay 1st-Mile-Fee now).	_clickNGoRequestorProfileNameTextString: (%1)   _clickNGoRequestorClientIDNumber: (%2)	", _clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber];};
 	// Next, we will have to wait for the requestor to pay the 1st Mile Fee (via GUI button OR via ActionMenu) - this is handled in a loop below
 	// NOTE: "_TA1stMileFeeNeedToBePaidBool" is already set to TRUE at the top of file.
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -417,7 +417,7 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 // to wait or not to wait...
 if (_TA1stMileFeeNeedToBePaidBool) then {
 	// We will now wait for the requestor to pay the 1st Mile Fee (via GUI button OR via ActionMenu)
-	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV4] This is _myGUSUIDNumber: (%1)	Entered 		if (_TA1stMileFeeNeedToBePaidBool) then			", (str _myGUSUIDNumber)];};
+	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV5] This is _myGUSUIDNumber: (%1)	Entered 		if (_TA1stMileFeeNeedToBePaidBool) then			", (str _myGUSUIDNumber)];};
 
 	// Change our status to:		3 AWAITING PAYMENT			to proceed, first the requestor must pay...
 	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs03TextString;
@@ -480,7 +480,15 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 		// Let emergency escapees pass
 		if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";	};
 	};
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] EXITed loop _requestorOutsideVehicle"];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] EXITed loop _TA1stMileFeeNeedToBePaidBool"];};
+	// why did we exit the loop?
+	// Option #1:	because commandingCustomer paid the 1st mile fee
+	// Option #2:	because commandingCustomer did not pay the 1st mile fee	and phase timed out and emergencyEspaced!
+	// in either case we have got to stop asking the commandingCustomer for 1st Mile Fee payment (every second via systemChat)
+	//
+	// mark the vehicle accordingly on all MP clients
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], false];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];	
 	uiSleep 0.05;
 };
 // DELETE IN THE NEXT HOUR
