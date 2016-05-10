@@ -299,7 +299,8 @@ class MGMTFA_TEMPLATEACTUALBUTTON: MGMTFA_TEMPLATEBUTTONPIC
 	// dynamic bit -- these below should be customized for each individual button
 	tooltip = "PAY NOW";
 	text = "custom\mgmTfA\gui_img\3b_btn_paynow.jpg";
-	action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\script_paynow.sqf""";		
+	//action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\script_paynow.sqf""";
+	action = "CloseDialog 0;";
 	x = 0.634062 * safezoneW + safezoneX;
 	y = 0.555009 * safezoneH + safezoneY;
 	w = 0.0567187 * safezoneW;
