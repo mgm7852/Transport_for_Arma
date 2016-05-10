@@ -382,6 +382,7 @@
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 	systemChat (str _msg2SyschatTextString);
+	[mgmTfA_gvdb_PV_GUSUIDNumber] spawn mgmTfA_fnc_client_FD_keepRequestingServiceFeePayment;
 };
 "mgmTfA_gv_pvc_pos_thanksForFixedDestinationTaxiPaymentWeAreLeavingNowPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
@@ -515,7 +516,7 @@
 			"_playerActualCashBalance"
 			];
 	//it seems we always show the "pre-transaction balance" for some reason. maybe it's due to communication delay? let's try doing the calculation on this side and show the result
-	_playerActualCashBalance = EPOCH_playerCrypto - mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber;
+	_playerActualCashBalance = (EPOCH_playerCrypto - mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber);
 	// inform the player via Hint 	-- only if the global config allows
 	if (true) then {
 		// not a config option yet - just go ahead & inform the player
@@ -528,6 +529,32 @@
 		// not a config option yet - just go ahead & inform the player
 		private	["_messageTextOnlyFormat"];
 		_messageTextOnlyFormat = parsetext format ["[DRIVER]  YOU PAID TAXI ANYWHERE 1ST MILE FEE %1 CRYPTO, THANKS. NEW BALANCE %2 CRYPTO.", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
+		systemChat (str _messageTextOnlyFormat);
+	};
+	// IDEA/TODO:	inform the player via cutText 	-- only if the global config allows
+};
+"mgmTfA_gv_pvc_pos_yourFDServiceFeeChargeRequestActionedPacketSignalOnly" addPublicVariableEventHandler {
+	// NOTE: this EH rely on mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber still being in memory
+	// initialize local variables
+	private	[
+			"_msg2HintTextString",
+			"_msg2SyschatTextString",
+			"_playerActualCashBalance"
+			];
+	//it seems we always show the "pre-transaction balance" for some reason. maybe it's due to communication delay? let's try doing the calculation on this side and show the result
+	_playerActualCashBalance = (EPOCH_playerCrypto - mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber);
+	// inform the player via Hint 	-- only if the global config allows
+	if (true) then {
+		// not a config option yet - just go ahead & inform the player
+		private	["_msg2HintTextString"];
+		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID<br/>FIXED DESTINATION TAXI<br/>SERVICE FEE<br/><br/>%2 CRYPTO<br/><br/><br/>THANK YOU<br/>FOR THE PAYMENT<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str _playerActualCashBalance)];
+		hint _msg2HintTextString;
+	};
+	// inform the player via systemChat 	-- only if the global config allows
+	if (true) then {
+		// not a config option yet - just go ahead & inform the player
+		private	["_messageTextOnlyFormat"];
+		_messageTextOnlyFormat = parsetext format ["[DRIVER]  YOU PAID FIXED DESTINATION TAXI SERVICE FEE %1 CRYPTO, THANKS. NEW BALANCE %2 CRYPTO.", (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str _playerActualCashBalance)];
 		systemChat (str _messageTextOnlyFormat);
 	};
 	// IDEA/TODO:	inform the player via cutText 	-- only if the global config allows
@@ -564,9 +591,9 @@
 private ["_execmgmTfA_null_client_clickNGoRequestTaxi"];
 mgmTfA_EHInsertKeyDown = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == mgmTfA_configgv_clickNGoCallATaxiHotkeyDIKCodeNumber) then	{_execmgmTfA_null_client_clickNGoRequestTaxi	= [] spawn mgmTfA_fnc_client_clickNGoRequestTaxi;}"];
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ code - end ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// clickNGo Set Course Key and EH
-private ["_execmgmTfA_null_client_clickNGoSetCourse"];
-mgmTfA_EHNumPadMultiplyKeyDown = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == mgmTfA_configgv_clickNGoSetCourseHotkeyDIKCodeNumber) then	{_execmgmTfA_null_client_clickNGoSetCourse	= [] spawn mgmTfA_fnc_client_clickNGoSetCourse;}"];
+// TaxiAnywhere Set Destination Key and EH
+private ["_execmgmTfA_null_client_TA_setDestination"];
+mgmTfA_EHNumPadMultiplyKeyDown = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == mgmTfA_configgv_TA_setDestinationHotkeyDIKCodeNumber) then	{_execmgmTfA_null_client_TA_setDestination	= [] spawn mgmTfA_scr_client_TA_setDestination;}"];
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF FILE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if (mgmTfA_configgv_clientVerbosityLevel>=2) then {diag_log format ["[mgmTfA][mgmTfA_scr_client_initRegisterClientEventHandlers.sqf] END reading file."];};//dbg
 // EOF
