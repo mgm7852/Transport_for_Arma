@@ -35,7 +35,8 @@ if (!isServer) then {
 	mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen.sqf";
 	// this below MUST be under the one above or will be renamed prematurely!
 	mgmTfA_fnc_client_clickNGoRequestTaxi = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoRequestTaxi.sqf";
-																																		
+	mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf";
+
 	//// Reset global variables of counter nature
 	mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingRecordKeeperThisIsTheFirstTimeBool = true;
 	mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
