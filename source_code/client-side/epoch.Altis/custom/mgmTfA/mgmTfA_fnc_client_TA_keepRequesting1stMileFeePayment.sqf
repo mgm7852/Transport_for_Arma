@@ -21,9 +21,8 @@ if (isServer) exitWith {}; if (isNil("mgmTfA_Client_Init")) then {mgmTfA_Client_
 scopeName "mgmTfA_fnc_client_TA_keepRequesting1stMileFeePaymentMainScope";
 if (!isServer) then { waitUntil {!isnull (finddisplay 46)}; };
 
-// lame workaround to prevent the scenario where our SU's data has not been publicVariable broadcasted yet -- we will need a proper solution for this in a later version
-uiSleep 5;
-
+// this script should be instant - thus the copied uiSleep is not appropriate. DELAYED DELETE THIS. 			// lame workaround to prevent the scenario where our SU's data has not been publicVariable broadcasted yet -- we will need a proper solution for this in a later version
+// this script should be instant - thus the copied uiSleep is not appropriate. DELAYED DELETE THIS. 			uiSleep 5;
 private	[
 		"_continueRequesting1stMileFeePayment",
 		"_myGUSUIDNumber",
@@ -55,15 +54,16 @@ while {_continueRequesting1stMileFeePayment} do
 	// log the result
 	if(_continueRequesting1stMileFeePayment) then {
 		// YES continue requesting payment
-		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV4] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequesting1stMileFeePayment) is: (%2)		I WILL CONTINUE LOOPING	", (str _myGUSUIDNumber), (str _continueRequesting1stMileFeePayment)];};
+		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequesting1stMileFeePayment) is: (%2)		I WILL CONTINUE LOOPING	", (str _myGUSUIDNumber), (str _continueRequesting1stMileFeePayment)];};
 		// request payment
-		_msg2SyschatTextString = parsetext format ["Greetings %1 PLEASE PAY THE 1ST MILE FEE: %2 CRYPTO. THANKS!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+		_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 PLEASE PAY THE 1ST MILE FEE: %2 CRYPTO, THANKS!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 		systemChat (str _msg2SyschatTextString);
 	} else {
 		// NO do not request payment any more - we are terminating!
-		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV4] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequesting1stMileFeePayment) is: (%2)		I WILL TERMINATE NOW	", (str _myGUSUIDNumber), (str _continueRequesting1stMileFeePayment)];};
+		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequesting1stMileFeePayment) is: (%2)		I WILL TERMINATE NOW	", (str _myGUSUIDNumber), (str _continueRequesting1stMileFeePayment)];};
 		// Exit the loops, go back to main, from where we will terminate AFTER writing to log.
 		breakTo "mgmTfA_fnc_client_TA_keepRequesting1stMileFeePaymentMainScope";
 	};
 };
+if (_thisFileVerbosityLevelNumber>=9) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV9] This is _myGUSUIDNumber: (%1)		THIS IS THE LAST LINE. TERMINATING.", (str _myGUSUIDNumber)];};
 // EOF
