@@ -369,28 +369,33 @@
 	// initialize local variables
 	private [
 			"_msg2HintTextString",
-			"_msg2SyschatTextString"
+			"_msg2SyschatTextString1",
+			"_msg2SyschatTextString2"
 			];
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay.jpg'/><br/><br/><t size='1.40' color='#00FF00'>GREETINGS<br/>%1<br/><br/><br/>PLEASE PAY<br/>%2 CRYPTO<br/><br/>FOR<br/>%3 METRES<br/><br/>TO<br/>%4<br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-	_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 PLEASE PAY %2 CRYPTO  FOR %3 METRES TO %4. THANKS!", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	_msg2SyschatTextString1 = parsetext format ["[DRIVER]  %1 PLEASE PAY %2 CRYPTO  FOR", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber)];
+	_msg2SyschatTextString2 = parsetext format ["[DRIVER]  %1 METRES TO %2. THANKS!", (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	hint _msg2HintTextString;
+	systemChat (str _msg2SyschatTextString);
 	systemChat (str _msg2SyschatTextString);
 };
 "mgmTfA_gv_pvc_pos_thanksForFixedDestinationTaxiPaymentWeAreLeavingNowPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
 	private [
 			//"_msg2HintTextString",
-			"_msg2SyschatTextString"
+			"_msg2SyschatTextString1",
+			"_msg2SyschatTextString2"
 			];
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	// THIS HINT BOX WAS BEING OVERRIDEN BY 'DOORS LOCKED HINT BOX' thus player never actually saw this one. As a quick hack HINT version of the message is now commented out & image file deleted to save space. Might add it one day with a solution...
 	//_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANK YOU<br/>FOR THE PAYMENT<br/><br/>WE ARE NOW HEADING OUT TO:<br/>%2.<br/><br/>HERE SOME GOOD OLD<br/>COUNTRY MUSIC - ENJOY!</t><br/><br/><img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiGreatMusic.jpg'/><br/>", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-	_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 THANK YOU FOR THE PAYMENT. WE ARE NOW HEADING OUT TO %2. HERE SOME GOOD OLD COUNTRY MUSIC - ENJOY!", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	_msg2SyschatTextString1 = parsetext format ["[DRIVER]  %1 THANK YOU FOR THE PAYMENT", (profileName)];
+	_msg2SyschatTextString2 = parsetext format ["[DRIVER]  WE ARE NOW HEADING OUT TO %1", mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	//hint _msg2HintTextString;
-	systemChat 		(str _msg2SyschatTextString);
-		
+	systemChat 		(str _msg2SyschatTextString1);
+	systemChat 		(str _msg2SyschatTextString2);
 };
 "mgmTfA_gv_pvc_pos_yourclickNGoPAYGTickCostChargeRequestActionedPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables

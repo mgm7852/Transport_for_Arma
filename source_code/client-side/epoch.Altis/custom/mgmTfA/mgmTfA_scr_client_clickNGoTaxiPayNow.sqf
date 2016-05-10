@@ -72,7 +72,8 @@ if (_playerCanAffordAbsoluteMinimumJourneyServiceFeeBool) then {
 	// Player's current cash is NOT adequate to pay for the service fee		// Let the player know
 	private	[
 			"_msg2HintTextString",
-			"_msg2SyschatTextString"
+			"_msg2SyschatTextString1",
+			"_msg2SyschatTextString2"
 			];
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>THE MINIMUM SERVICE FEE:<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH<br/><br/>THANK YOU<br/>", (profileName), (str (round mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber))];
 	_msg2SyschatTextString = parsetext format ["SORRY %1 YOU CANNOT AFFORD THE MINIMUM SERVICE FEE: %2 CRYPTO.   PLEASE TRY AGAIN WHEN YOU HAVE ENOUGH CASH.   THANK YOU", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];

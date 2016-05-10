@@ -36,16 +36,19 @@ if (_playerCanAffordRequestedJourneyServiceFeeBool) then {
 	// Inform the player that he just paid the Service Fee
 	private	[
 			"_msg2HintTextString",
-			"_msg2SyschatTextString",
+			"_msg2SyschatTextString1",
+			"_msg2SyschatTextString2",
 			"_myGUSUIDNumber",
 			"_lePointer",
 			"_actionRemovedMessageText"
 			];
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>THE SERVICE FEE:<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber)];
-	_msg2SyschatTextString = parsetext format ["%1 THANKS FOR PAYING THE SERVICE FEE: %2 CRYPTO. PLEASE WAIT", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber)];
+	_msg2SyschatTextString1 = parsetext format ["[RADIO_IN]  %1 THANKS FOR PAYING THE SERVICE FEE %2 CRYPTO", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber)];
+	_msg2SyschatTextString2 = parsetext format ["[RADIO_IN]  PROCESSING, PLEASE WAIT..."];
 	// Print the message
 	hint _msg2HintTextString;
-	systemChat str _msg2SyschatTextString;
+	systemChat str _msg2SyschatTextString1;
+	systemChat str _msg2SyschatTextString2;
 
 	// signal the server-side that fixedDestination Taxi Service Fee has just been paid!
 	_myGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");

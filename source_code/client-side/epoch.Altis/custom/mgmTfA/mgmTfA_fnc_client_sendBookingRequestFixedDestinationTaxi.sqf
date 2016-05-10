@@ -53,12 +53,15 @@ if	(
 	if (_timeToWaitInSecondsNumber == 0) then { _timeToWaitInSecondsNumber = _timeToWaitInSecondsNumber + 1 };
 	private	[
 			"_msg2HintTextString",
-			"_msg2SyschatTextString"
+			"_msg2SyschatTextString1",
+			"_msg2SyschatTextString2"
 			];
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>YOU MAY NOT BOOK<br/>ANOTHER TAXI<br/>THAT QUICKLY.<br/>PLEASE WAIT ANOTHER<br/>%2 SECONDS<br/>BEFORE TRYING AGAIN.", (profileName), (str _timeToWaitInSecondsNumber)];
-	_msg2SyschatTextString = parsetext format ["SORRY %1! YOU MAY NOT BOOK ANOTHER TAXI THAT QUICKLY. PLEASE WAIT ANOTHER %2 SECONDS BEFORE TRYING AGAIN.", (profileName), (str _timeToWaitInSecondsNumber)];
+	_msg2SyschatTextString1 = parsetext format ["[SYSTEM]  SORRY %1! YOU MAY NOT BOOK ANOTHER TAXI THAT QUICKLY", (profileName)];
+	_msg2SyschatTextString2 = parsetext format ["[SYSTEM]  PLEASE WAIT ANOTHER %1 SECONDS BEFORE TRYING AGAIN", (str _timeToWaitInSecondsNumber)];
 	hint _msg2HintTextString;
-	systemChat (str _msg2SyschatTextString);
+	systemChat (str _msg2SyschatTextString1);
+	systemChat (str _msg2SyschatTextString2);
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_returnNearbyRandomOnRoadPosition3DArray.sqf] [TV3] Player attempted booking too soon. _timeToWaitInSecondsNumber is: (%1)", (str _timeToWaitInSecondsNumber)];};//dbg
 };
 if (_bookingPermitted) then {
@@ -184,13 +187,16 @@ if (_bookingPermitted) then {
 		// Player's current cash is NOT adequate to pay for the full journey cost	// Let the player know
 		private	[
 				"_msg2HintTextString",
-				"_msg2SyschatTextString"
+				"_msg2SyschatTextString1",
+				"_msg2SyschatTextString2"
 				];
 		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>THE COST OF SERVICE:<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH<br/><br/>THANK YOU<br/>", (profileName), (str (round _journeyTotalCostInCryptoNumber))];
-		_msg2SyschatTextString = parsetext format ["SORRY %1 YOU CANNOT AFFORD THE COST OF SERVICE: %2 CRYPTO.   PLEASE TRY AGAIN WHEN YOU HAVE ENOUGH CASH.   THANK YOU", (profileName), (str _journeyTotalCostInCryptoNumber)];
+		_msg2SyschatTextString1 = parsetext format ["[SYSTEM]  SORRY %1 YOU CANNOT AFFORD THE COST OF SERVICE %2 CRYPTO", (profileName), (str _journeyTotalCostInCryptoNumber)];
+		_msg2SyschatTextString2 = parsetext format ["[SYSTEM]  PLEASE TRY AGAIN WHEN YOU HAVE ENOUGH CASH.   THANK YOU"];
 		// Print the message
 		hint _msg2HintTextString;
-		systemChat str _msg2SyschatTextString;
+		systemChat str _msg2SyschatTextString1;
+		systemChat str _msg2SyschatTextString2;
 	};
 };
 //EOF

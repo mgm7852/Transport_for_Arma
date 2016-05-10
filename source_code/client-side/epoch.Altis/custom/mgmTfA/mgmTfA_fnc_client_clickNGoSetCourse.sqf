@@ -30,7 +30,7 @@ openMap true;
 _msg2HintTextString = parsetext format ["AWAITING INPUT<br/><br/>SINGLE LEFT CLICK<br/>TO SET DESTINATION"];
 hint _msg2HintTextString;
 // Inform via systemChat (in Text-Only format)
-_msg2SyschatTextString = parsetext format ["AWAITING INPUT. SINGLE LEFT CLICK TO SET DESTINATION"];
+_msg2SyschatTextString = parsetext format ["[SYSTEM]  AWAITING INPUT. SINGLE LEFT CLICK TO SET DESTINATION"];
 systemChat (str _msg2SyschatTextString);
 // Insert the actual code to handle the mouse-left-click-on-map
 onMapSingleClick "

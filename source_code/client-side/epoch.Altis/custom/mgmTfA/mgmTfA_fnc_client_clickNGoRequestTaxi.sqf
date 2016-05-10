@@ -162,7 +162,7 @@ if (_bookingPermitted) then {
 			_msg2HintTextString = parsetext format ["REQUESTING A TAXI TO<br/>CHOSEN DESTINATION...<br/><br/>"];
 			hint _msg2HintTextString;
 			// Inform via systemChat (in Text-Only format)
-			_msg2SyschatTextString = parsetext format ["REQUESTING A TAXI TO CHOSEN DESTINATION..."];
+			_msg2SyschatTextString = parsetext format ["[SYSTEM]  REQUESTING A TAXI TO CHOSEN DESTINATION..."];
 			systemChat (str _msg2SyschatTextString);
 			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf]  [TV5] REQUESTING A TAXI TO CHOSEN DESTINATION...		(str _clickNGoTaxiRequestedDestinationPosition3DArray) is: (%1).", (str _clickNGoTaxiRequestedDestinationPosition3DArray)];};
 			clickNGoTaxiDestinationChoser_systemReady = nil;
@@ -184,19 +184,22 @@ if (_bookingPermitted) then {
 			// Inform the player that he just paid the Standard Booking Fee
 			private	[
 					"_msg2HintTextString",
-					"_msg2SyschatTextString"
+					"_msg2SyschatTextString1",
+					"_msg2SyschatTextString2"
 					];
 			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>THE CLICKNGO BOOKING FEE:<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
-			_msg2SyschatTextString = parsetext format ["%1 THANKS FOR PAYING THE CLICKNGO BOOKING FEE: %2 CRYPTO. PLEASE WAIT", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
+			_msg2SyschatTextString1 = parsetext format ["[RADIO_IN]  %1 THANKS FOR PAYING THE CLICKNGO BOOKING FEE %2 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
+			_msg2SyschatTextString2 = parsetext format ["[RADIO_IN]  PROCESSING, PLEASE WAIT..."];
 			// Print the message
 			hint _msg2HintTextString;
-			systemChat str _msg2SyschatTextString;
+			systemChat str _msg2SyschatTextString1;
+			systemChat str _msg2SyschatTextString2;
 			// SEND THE BOOKING TO THE SERVER
 			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf] [D4] (_bookingPermitted) is true. executing main function block now."];};//dbg
 
 			// Do these at this stage
-			mgmTfA_dynamicgv_lastclickNGoTaxiBookingRecordKeeperThisIsTheFirstTimeBool									= false;
-			mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber								= (time);
+			mgmTfA_dynamicgv_lastclickNGoTaxiBookingRecordKeeperThisIsTheFirstTimeBool = false;
+			mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
 			// re-enable players access to the hotkey. this does not mean he can successfully place another booking in the next second (as cool down timer will prevent that)
 			mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey = true;
 
@@ -208,13 +211,15 @@ if (_bookingPermitted) then {
 			// Player's current cash is NOT adequate to pay for the service fee		// Let the player know
 			private	[
 					"_msg2HintTextString",
-					"_msg2SyschatTextString"
+					"_msg2SyschatTextString1",
+					"_msg2SyschatTextString2"
 					];
 			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>clickNGo MINIMUM<br/>PREPAY FEE:<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH<br/><br/>THANK YOU<br/>", (profileName), (str (round _journeyInitialCostInCryptoNumber))];
-			_msg2SyschatTextString = parsetext format ["SORRY %1 YOU CANNOT AFFORD clickNGo MINIMUM PREPAY FEE: %2 CRYPTO.  PLEASE TRY AGAIN WHEN YOU HAVE ENOUGH CASH. THANK YOU", (profileName), (str _journeyInitialCostInCryptoNumber)];
-			// Print the message
-			hint 				_msg2HintTextString;
-			systemChat 		str _msg2SyschatTextString;
+			_msg2SyschatTextString1 = parsetext format ["[RADIO_IN]  SORRY %1 YOU CANNOT AFFORD clickNGo MINIMUM PREPAY FEE %2 CRYPTO", (profileName), (str _journeyInitialCostInCryptoNumber)];
+			_msg2SyschatTextString2 = parsetext format ["[RADIO_IN]  PLEASE TRY AGAIN WHEN YOU HAVE ENOUGH CASH. THANK YOU"];
+			hint _msg2HintTextString;
+			systemChat str _msg2SyschatTextString1;
+			systemChat str _msg2SyschatTextString2;
 			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf] [D4] (_bookingPermitted) is true. executing main function block now."];};//dbg
 			
 			// re-enable players access to the hotkey. this does not mean he can successfully place another booking in the next second (as cool down timer will prevent that)
@@ -223,15 +228,18 @@ if (_bookingPermitted) then {
 	} else {
 		private	[
 				"_msg2HintTextString",
-				"_msg2SyschatTextString"
+				"_msg2SyschatTextString1"
+				"_msg2SyschatTextString2"
 				];
 		// inform the player that he may not order a new clickNGo Taxi at this time as he already has one serving him!
 		// with hint (Rich Format)
 		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#00FF00'>SORRY %1!<br/><br/>YOU MAY NOT<br/>PLACE A BOOKING<br/>AT THIS TIME.<br/><br/>YOU ALREADY HAVE A<br/>TAXI SERVING YOU<br/>CURRENTLY", (profileName)];
 		hint _msg2HintTextString;
 		// with systemChat (Text-Only Format)
-		_msg2SyschatTextString = parsetext format ["SORRY %1! YOU MAY NOT PLACE A BOOKING AT THIS TIME.  YOU ALREADY HAVE A TAXI SERVING YOU CURRENTLY", (profileName)];
-		systemChat str _msg2SyschatTextString;
+		_msg2SyschatTextString1 = parsetext format ["[RADIO_IN]  SORRY %1! YOU MAY NOT PLACE A BOOKING AT THIS TIME", (profileName)];
+		_msg2SyschatTextString2 = parsetext format ["[RADIO_IN]  YOU ALREADY HAVE A TAXI SERVING YOU CURRENTLY"];
+		systemChat str _msg2SyschatTextString1;
+		systemChat str _msg2SyschatTextString2;
 	};
 };
 if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf]   [TV5]		Reached checkpoint: End of file."];};
