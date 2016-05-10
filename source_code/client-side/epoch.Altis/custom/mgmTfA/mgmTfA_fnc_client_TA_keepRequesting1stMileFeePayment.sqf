@@ -28,12 +28,14 @@ private	[
 		"_myGUSUIDNumber",
 		"_counterTen",
 		"_counterInfinite",
-		"_msg2SyschatTextString"
+		"_msg2SyschatTextString",
+		"_classnameOfTheCurrentVehicle"
 		];
 // if we have been signalled by mgmTfA_scr_client_initRegisterClientEventHandlers, that means this is initially TRUE
 _continueRequesting1stMileFeePayment = true;
 // debug slow down counter
 _counterTen = 0;
+// this is not reminder count. it is seconds passed count. if customer gets out and back in the vehicle it will show seconds - not reminder ID!
 _counterInfinite = 0;
 _myGUSUIDNumber = _this select 0;
 // log it		-- do not move this line any higher!
@@ -58,11 +60,18 @@ while {_continueRequesting1stMileFeePayment} do
 	if(_continueRequesting1stMileFeePayment) then {
 		// YES continue requesting payment
 		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequesting1stMileFeePayment) is: (%2)		I WILL CONTINUE LOOPING	", (str _myGUSUIDNumber), (str _continueRequesting1stMileFeePayment)];};
-		// request payment
-		_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE 1ST MILE FEE: %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _counterInfinite)];
-		systemChat (str _msg2SyschatTextString);
+		// REQUEST PAYMENT ONLY if customer currently in a TaxiAnywhere Taxi
+		// Get current vehicle's Classname
+		_classnameOfTheCurrentVehicle = typeOf (vehicle player);
+		// STEP2:	Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
+		if (mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
+			_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE 1ST MILE FEE: %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _counterInfinite)];
+			systemChat (str _msg2SyschatTextString);
+		} else {
+			//Player is not in a TaxiAnywhere vehicle at the moment		-- DO NOT remind that he must pay 1st Mile Fee
+		};
 	} else {
-		// NO do not request payment any more - we are terminating!
+		// NO DO NOT request payment any more - we are terminating!
 		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequesting1stMileFeePayment) is: (%2)		I WILL TERMINATE NOW	", (str _myGUSUIDNumber), (str _continueRequesting1stMileFeePayment)];};
 		// Exit the loops, go back to main, from where we will terminate AFTER writing to log.
 		breakTo "mgmTfA_fnc_client_TA_keepRequesting1stMileFeePaymentMainScope";
