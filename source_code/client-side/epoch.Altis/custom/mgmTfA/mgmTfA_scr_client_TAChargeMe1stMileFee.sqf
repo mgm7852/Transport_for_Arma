@@ -28,21 +28,15 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 				"_playerMustPayBool",
 				"_playerCashNumber",
 				"_myGUSUIDNumber",
-				//"_functionExecutionTimeInSecondsNumber",
-				//"_emergencyEscapeNeeded",
-				//"_tooManyFailedPAYGTransactionsObservedBool",
 				"_myPUID"
-				//"_playerWentBankruptBool",
-				//"_checkedAndPlayerWasNotInAclickNGoVehicleCountNumber",
-				//"_player"
 				];
 
 	// obtain vehicle's CommandingCustomer PUID		-- only CommandingCustomer can pay!
 	_myVehiclesCommandingCustomerPlayerUIDNumber = (vehicle player) getVariable "commandingCustomerPlayerUIDNumber";
+	_myPUID = (getPlayerUID player);
 	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          I have just obtained (_myVehiclesCommandingCustomerPlayerUIDNumber) as: (%1).		My PUID is: (%2).", (str _myVehiclesCommandingCustomerPlayerUIDNumber), (str _myPUID)];};
 
 	// is the local player supposed to pay the next tick?	NOTE: currently, we are running this function for all players on board even if they are not the requestor. in the future, on-the-fly "payingCustomer" switching will be supported, meaning requestor running out of money, from inside the vehicle, one of the other players can take over "PAYG payment" duty. this below is the prep.
-	_myPUID = (getPlayerUID player);
 	if (_myPUID == _myVehiclesCommandingCustomerPlayerUIDNumber) then {
 		// YES, player is the commandingCustomer and mustPay the nextTick
 		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          YES, player is the commandingCustomer and mustPay the nextTick.		_playerMustPayBool  is set to true."];};
