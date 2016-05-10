@@ -12,7 +12,7 @@
 			];
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_pleaseWait.jpg'/><br/><br/><t size='1.40' color='#00FF00'>FIXED DESTINATION<br/>TAXI TO:<br/><br/>%1<br/><br/>PROCESSING REQUEST<br/></t>", mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-	_msg2SyschatTextString = parsetext format ["FIXED DESTINATION TAXI TO %1.      PROCESSING - PLEASE WAIT", mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  FIXED DESTINATION TAXI TO %1. PROCESSING, PLEASE WAIT...", mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
@@ -25,7 +25,7 @@
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiclickNGoNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_pleaseWait.jpg'/><br/><br/><t size='1.40' color='#00FF00'>clickNGo TAXI<br/><br/>PROCESSING REQUEST<br/></t>"];
-	_msg2SyschatTextString = parsetext format ["clickNGo TAXI REQUEST.      PROCESSING - PLEASE WAIT"];
+	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  clickNGo TAXI REQUEST. PROCESSING, PLEASE WAIT..."];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
@@ -38,7 +38,7 @@
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiLetsGo.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOUR TAXI<br/>HAS ARRIVED<br/><br/>PLEASE GET IN!<br/></t>", (profileName)];
-	_msg2SyschatTextString = parsetext format ["%1 YOUR TAXI HAS ARRIVED. PLEASE GET IN!", (profileName)];
+	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  %1 YOUR TAXI HAS ARRIVED. PLEASE GET IN!", (profileName)];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
@@ -51,7 +51,7 @@
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiLetsGo.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOUR TAXI<br/>HAS ARRIVED<br/><br/>PLEASE GET IN!<br/></t>", (profileName)];
-	_msg2SyschatTextString = parsetext format ["%1 YOUR TAXI HAS ARRIVED. PLEASE GET IN!", (profileName)];
+	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  %1 YOUR TAXI HAS ARRIVED. PLEASE GET IN!", (profileName)];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
@@ -68,7 +68,7 @@
 	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
 	if (mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
 		_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_doorsLocked.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>DOORS HAVE BEEN LOCKED<br/>FOR YOUR SECURITY<br/>AND SAFETY<br/><br/>THANK YOU<br/><br/></t>", (profileName)];
-		_fixedDestinationTaxiDoorsHaveBeenLockedPacketSignalOnlyTex	=	parsetext format ["%1 DOORS HAVE BEEN LOCKED FOR YOUR SECURITY AND SAFETY. THANK YOU.", (profileName)];
+		_fixedDestinationTaxiDoorsHaveBeenLockedPacketSignalOnlyTex	=	parsetext format ["[DRIVER]  %1 DOORS HAVE BEEN LOCKED FOR YOUR SECURITY AND SAFETY. THANK YOU.", (profileName)];
 		hint _msg2HintTextString;
 		systemChat (str _msg2SyschatTextString);
 	} else {
@@ -89,7 +89,7 @@
 	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
 	if (mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
 		_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_doorsLocked.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>DOORS HAVE BEEN LOCKED<br/>FOR YOUR SECURITY<br/>AND SAFETY<br/><br/>THANK YOU<br/><br/></t>", (profileName)];
-		_msg2SyschatTextString = parsetext format ["%1 DOORS HAVE BEEN LOCKED FOR YOUR SECURITY AND SAFETY. THANK YOU.", (profileName)];
+		_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 DOORS HAVE BEEN LOCKED FOR YOUR SECURITY AND SAFETY. THANK YOU.", (profileName)];
 		hint _msg2HintTextString;
 		systemChat (str _msg2SyschatTextString);
 	} else {
@@ -108,7 +108,7 @@
 	_classnameOfTheCurrentVehicle = typeOf (vehicle player);
 	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
 	if (mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
-		_msg2SyschatTextString = parsetext format ["%1 DOORS HAVE BEEN LOCKED FOR YOUR SECURITY AND SAFETY. THANK YOU.", (profileName)];
+		_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 DOORS HAVE BEEN LOCKED FOR YOUR SECURITY AND SAFETY. THANK YOU.", (profileName)];
 		systemChat (str _msg2SyschatTextString);
 	} else {
 		//Player is not in a Taxi vehicle at the moment -- do not display anything about Taxi's doors being locked/unlocked
@@ -130,7 +130,7 @@
 	if (mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
 		// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 		_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_doorsUnlocked.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>WE ARE ABOUT TO<br/>REACH %2<br/><br/>DOORS HAVE BEEN<br/>UNLOCKED<br/><br/>THANK YOU<br/><br/></t>", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-		_msg2SyschatTextString = parsetext format ["%1 WE ARE ABOUT TO REACH %2. DOORS HAVE BEEN UNLOCKED. THANK YOU.", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+		_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 WE ARE ABOUT TO REACH %2. DOORS HAVE BEEN UNLOCKED. THANK YOU.", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 		hint _msg2HintTextString;
 		systemChat (str _msg2SyschatTextString);
 	} else {
@@ -154,7 +154,7 @@
 	if (mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
 		// We assume, on the client PC "mgmTfA_gv_requestedTaxiclickNGoNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 		_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_doorsUnlocked.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>WE ARE ABOUT TO<br/>REACH OUR DESTINATION<br/><br/>DOORS HAVE BEEN<br/>UNLOCKED<br/><br/>THANK YOU<br/><br/></t>", (profileName)];
-		_msg2SyschatTextString = parsetext format ["%1 WE ARE ABOUT TO REACH OUR DESTINATION. DOORS HAVE BEEN UNLOCKED. THANK YOU.", (profileName)];
+		_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 WE ARE ABOUT TO REACH OUR DESTINATION. DOORS HAVE BEEN UNLOCKED. THANK YOU.", (profileName)];
 		hint _msg2HintTextString;
 		systemChat (str _msg2SyschatTextString);
 	} else {
@@ -172,7 +172,7 @@
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiApproved.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>TAXI REQUEST TO<br/>%2<br/><br/>APPROVED<br/><br/>DRIVER EN ROUTE<br/><br/></t>", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-	_msg2SyschatTextString = parsetext format ["%1 TAXI REQUEST TO %2 APPROVED.     DRIVER EN ROUTE", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  %1 TAXI REQUEST TO %2 APPROVED.     DRIVER EN ROUTE", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
@@ -185,7 +185,7 @@
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiclickNGoNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiApproved.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>CLICKNGO<br/>TAXI REQUEST APPROVED<br/><br/>DRIVER EN ROUTE<br/><br/></t>", (profileName)];
-	_msg2SyschatTextString = parsetext format ["%1 CLICKNGO TAXI REQUEST APPROVED.     DRIVER EN ROUTE", (profileName)];
+	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  %1 CLICKNGO TAXI REQUEST APPROVED.     DRIVER EN ROUTE", (profileName)];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
@@ -212,7 +212,7 @@
 	if ((mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) && (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber)) then {
 		// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 		_msg2HintTextString = parsetext format["<img size='8' image='custom\mgmTfA\img_comms\mgmTfA_img_client_thankYouForYourBusinessHaveANiceDay.jpg'/><br/><br/><t size='1.40' color='#00FF00'><br/>%1<br/><br/>WE HAVE ARRIVED<br/>%2<br/><br/>THANK YOU FOR<br/>CHOOSING TAXI CORP<br/><br/>HAVE A NICE DAY!<br/><br/></t>", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-		_msg2SyschatTextString = parsetext format["%1 WE HAVE ARRIVED %2. THANK YOU FOR CHOOSING TAXI CORP. HAVE A NICE DAY!", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+		_msg2SyschatTextString = parsetext format["[DRIVER]  %1 WE HAVE ARRIVED AT %2. THANK YOU FOR CHOOSING TAXI CORP. HAVE A NICE DAY!", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 		hint _msg2HintTextString;
 		systemChat (str _msg2SyschatTextString);
 	} else {
@@ -243,7 +243,7 @@
 	if ((mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) && (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber)) then {
 		// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 		_msg2HintTextString = parsetext format["<img size='8' image='custom\mgmTfA\img_comms\mgmTfA_img_client_thankYouForYourBusinessHaveANiceDay.jpg'/><br/><br/><t size='1.40' color='#00FF00'><br/>%1<br/><br/>WE HAVE ARRIVED<br/>AT OUR DESTINATION<br/><br/>THANK YOU FOR<br/>CHOOSING TAXI CORP<br/><br/>HAVE A NICE DAY!<br/><br/></t>", (profileName)];
-		_msg2SyschatTextString = parsetext format["%1 WE HAVE ARRIVED AT OUR DESTINATION. THANK YOU FOR CHOOSING TAXI CORP. HAVE A NICE DAY!", (profileName)];
+		_msg2SyschatTextString = parsetext format["[DRIVER]  %1 WE HAVE ARRIVED AT OUR DESTINATION. THANK YOU FOR CHOOSING TAXI CORP. HAVE A NICE DAY!", (profileName)];
 		hint _msg2HintTextString;
 		systemChat (str _msg2SyschatTextString);
 	} else {
@@ -264,7 +264,7 @@
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_blacklist.jpg'/><br/><br/><t size='1.40' color='#00FF00'>SORRY %1<br/><br/>WE CANNOT<br/>SERVE YOU!<br/></t>", (profileName)];
-	_msg2SyschatTextString = parsetext format ["SORRY %1 YOU ARE BLACKLISTED - WE CANNOT SERVE YOU!", (profileName)];
+	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  SORRY %1 YOU ARE BLACKLISTED - WE CANNOT SERVE YOU!", (profileName)];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
@@ -277,7 +277,7 @@
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_blacklist.jpg'/><br/><br/><t size='1.40' color='#00FF00'>SORRY %1<br/><br/>WE CANNOT<br/>SERVE YOU!<br/></t>", (profileName)];
-	_msg2SyschatTextString = parsetext format ["SORRY %1 YOU ARE BLACKLISTED - WE CANNOT SERVE YOU!", (profileName)];
+	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  SORRY %1 YOU ARE BLACKLISTED - WE CANNOT SERVE YOU!", (profileName)];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
@@ -361,8 +361,8 @@
 			];
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay.jpg'/><br/><br/><t size='1.40' color='#00FF00'>Greetings<br/>%1<br/><br/><br/>PLEASE PAY<br/>%2 CRYPTO<br/><br/>FOR<br/>%3 METRES<br/><br/>TO<br/>%4<br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-	_msg2SyschatTextString = parsetext format ["Greetings %1 PLEASE PAY: %2 CRYPTO  FOR %3 METRES TO: %4. THANKS!", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay.jpg'/><br/><br/><t size='1.40' color='#00FF00'>GREETINGS<br/>%1<br/><br/><br/>PLEASE PAY<br/>%2 CRYPTO<br/><br/>FOR<br/>%3 METRES<br/><br/>TO<br/>%4<br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 PLEASE PAY: %2 CRYPTO  FOR %3 METRES TO: %4. THANKS!", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
@@ -375,7 +375,7 @@
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	// THIS HINT BOX WAS BEING OVERRIDEN BY 'DOORS LOCKED HINT BOX' thus player never actually saw this one. As a quick hack HINT version of the message is now commented out & image file deleted to save space. Might add it one day with a solution...
 	//_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANK YOU<br/>FOR THE PAYMENT<br/><br/>WE ARE NOW HEADING OUT TO:<br/>%2.<br/><br/>HERE SOME GOOD OLD<br/>COUNTRY MUSIC - ENJOY!</t><br/><br/><img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiGreatMusic.jpg'/><br/>", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-	_msg2SyschatTextString = parsetext format ["%1 THANK YOU FOR THE PAYMENT. WE ARE NOW HEADING OUT TO %2. HERE SOME GOOD OLD COUNTRY MUSIC - ENJOY!", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 THANK YOU FOR THE PAYMENT. WE ARE NOW HEADING OUT TO %2. HERE SOME GOOD OLD COUNTRY MUSIC - ENJOY!", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	//hint _msg2HintTextString;
 	systemChat 		(str _msg2SyschatTextString);
 		
@@ -401,8 +401,7 @@
 		// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
 		private	["_messageTextOnlyFormat"];
 		// same issue as above! _messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW CASH BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
-		_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW CASH BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str _playerActualCashBalance)];
-		_messageTextOnlyFormat = parsetext format ["CHARGED PAYG TICK FEE %1 CRYPTO, THANKS!   NEW CASH BALANCE: %2 CRYPTO", (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str _playerActualCashBalance)];
+		_messageTextOnlyFormat = parsetext format ["[DRIVER]  CHARGED PAYG TICK FEE %1 CRYPTO, THANKS!   NEW CASH BALANCE: %2 CRYPTO", (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str _playerActualCashBalance)];
 		systemChat (str _messageTextOnlyFormat);
 	};
 	/*
@@ -434,7 +433,7 @@
 	// inform the player via systemChat 	-- only if the global config allows
 	// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
 	private	["_messageTextOnlyFormat"];
-	_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG BOOKING FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW CASH BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber), (str EPOCH_playerCrypto)];
+	_messageTextOnlyFormat = parsetext format ["[RADIO_IN]  YOU PAID PAYG BOOKING FEE: %1 CRYPTO, THANKS. NEW CASH BALANCE: %2 CRYPTO", (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber), (str EPOCH_playerCrypto)];
 	systemChat 		(str _messageTextOnlyFormat);
 	/*
 					NOT IMPLEMENTED
@@ -459,8 +458,8 @@
 			"_msg2HintTextString",
 			"_msg2SyschatTextString"
 			];
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay1stMileFee.jpg'/><br/><br/><t size='1.40' color='#00FF00'>Greetings<br/>%1<br/><br/><br/>PLEASE PAY<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
-	_msg2SyschatTextString = parsetext format ["Greetings %1 PLEASE PAY THE 1ST MILE FEE: %2 CRYPTO. THANKS!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay1stMileFee.jpg'/><br/><br/><t size='1.40' color='#00FF00'>GREETINGS<br/>%1<br/><br/><br/>PLEASE PAY<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+	_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 PLEASE PAY THE 1ST MILE FEE: %2 CRYPTO. THANKS!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 	// now let's keep reminding player that he must pay the 1st Mile Fee via systemChat, we will keep doing this as long as:
@@ -506,7 +505,7 @@
 	if (true) then {
 		// not a config option yet - just go ahead & inform the player
 		private	["_messageTextOnlyFormat"];
-		_messageTextOnlyFormat = parsetext format ["YOU JUST PAID THE TAXI ANYWHERE 1ST MILE FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT. YOUR NEW CASH BALANCE: %3 CRYPTO.", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
+		_messageTextOnlyFormat = parsetext format ["[DRIVER]  YOU PAID TAXI ANYWHERE 1ST MILE FEE: %1 CRYPTO, THANKS. NEW CASH BALANCE: %2 CRYPTO.", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
 		systemChat (str _messageTextOnlyFormat);
 	};
 	// IDEA/TODO:	inform the player via cutText 	-- only if the global config allows
