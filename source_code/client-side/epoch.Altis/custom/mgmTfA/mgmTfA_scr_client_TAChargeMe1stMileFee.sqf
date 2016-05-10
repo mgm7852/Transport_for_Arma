@@ -114,15 +114,18 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 			// let the customer know via hint && systemChat
 			private	[
 					"_msg2HintTextString",
-					"_messageTextOnlyFormat"
+					"_messageTextOnlyFormat1"
+					"_messageTextOnlyFormat2"
 					];
 			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/>HAVE A NICE DAY!<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
-			_messageTextOnlyFormat = parsetext format ["%1 SORRY BUT YOU CANNOT AFFORD THE 1ST MILE FEE %2 CRYPTO! HAVE A NICE DAY!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+			_messageTextOnlyFormat1 = parsetext format ["[DRIVER]  %1 SORRY BUT YOU CANNOT AFFORD THE 1ST MILE FEE %2 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+			_messageTextOnlyFormat2 = parsetext format ["[DRIVER]  HAVE A NICE DAY!"];
 			// Print the message
 			hint _msg2HintTextString;
-			systemChat (str _messageTextOnlyFormat);
+			systemChat (str _messageTextOnlyFormat1);
+			systemChat (str _messageTextOnlyFormat2);
 			_playerWentBankruptBool = true;
-			if (_playerWentBankruptBool) then {	if (mgmTfA_configgv_clientVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV5]				I noticed (_playerWentBankruptBool) is  true!	"];};						};
+			if (_playerWentBankruptBool) then {if (mgmTfA_configgv_clientVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV5]				I noticed (_playerWentBankruptBool) is  true!	"];};};
 			// signal the server via customerCannotAffordService=true
 			(vehicle player) setVariable ["customerCannotAffordService", true, true];
 			// break out of main loop
@@ -138,13 +141,16 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 	// let the player know via hint && systemChat
 	private	[
 			"_msg2HintTextString",
-			"_msg2SyschatTextString"
+			"_msg2SyschatTextString1",
+			"_msg2SyschatTextString2"
 			];
 	// with hint
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#00FF00'><br/>SORRY %1!<br/><br/><br/>YOU CANNOT PAY<br/>TAXI ANYWHERE<br/>1ST MILE FEE<br/><br/>AS YOU ARE<br/>NOT IN A<br/>TAXI ANYWHERE<br/>VEHICLE<br/><br/>", (profileName)];
 	hint _msg2HintTextString;
 	// with systemChat
-	_msg2SyschatTextString = parsetext format ["SORRY %1! YOU CANNOT PAY TAXI ANYWHERE 1ST MILE FEE AS YOU ARE NOT IN A TAXI ANYWHERE VEHICLE", (profileName)];
-	systemChat str _msg2SyschatTextString;
+	_msg2SyschatTextString1 = parsetext format ["[SYSTEM]  SORRY %1! YOU CANNOT PAY TAXI ANYWHERE 1ST MILE FEE", (profileName)];
+	_msg2SyschatTextString2 = parsetext format ["[SYSTEM]  AS YOU ARE NOT IN A TAXI ANYWHERE VEHICLE"];
+	systemChat str _msg2SyschatTextString1;
+	systemChat str _msg2SyschatTextString2;
 };
 // EOF
