@@ -148,7 +148,7 @@ if (_bookingPermitted) then {
 				"_msg2SyschatTextString"
 				];
 		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>THE BOOKING FEE:<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_fixedDestinationTaxisNonRefundableStandardBookingFeeCostInCryptoNumber)];
-		_msg2SyschatTextString = parsetext format ["BOOKING FEE %1 CRYPTO PAID, THANKS! PLEASE WAIT...", (str mgmTfA_configgv_fixedDestinationTaxisNonRefundableStandardBookingFeeCostInCryptoNumber)];
+		_msg2SyschatTextString = parsetext format ["[TAXI DISPATCHER] BOOKING FEE %1 CRYPTO PAID, THANKS! PLEASE WAIT...", (str mgmTfA_configgv_fixedDestinationTaxisNonRefundableStandardBookingFeeCostInCryptoNumber)];
 		// Print the message
 		hint _msg2HintTextString;
 		systemChat str _msg2SyschatTextString;
