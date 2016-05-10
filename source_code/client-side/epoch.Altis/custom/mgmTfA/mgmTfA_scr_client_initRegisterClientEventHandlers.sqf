@@ -119,7 +119,8 @@
 	// initialize local variables
 	private [
 			"_msg2HintTextString",
-			"_msg2SyschatTextString",
+			"_msg2SyschatTextString1",
+			"_msg2SyschatTextString2",
 			"_classnameOfTheCurrentVehicle"
 			];
 	
@@ -130,9 +131,11 @@
 	if (mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
 		// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 		_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_doorsUnlocked.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>WE ARE ABOUT TO<br/>REACH %2<br/><br/>DOORS HAVE BEEN<br/>UNLOCKED<br/><br/>THANK YOU<br/><br/></t>", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-		_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 WE ARE ABOUT TO REACH %2. DOORS HAVE BEEN UNLOCKED. THANK YOU.", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+		_msg2SyschatTextString1 = parsetext format ["[DRIVER]  %1 WE ARE ABOUT TO REACH %2", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+		_msg2SyschatTextString2 = parsetext format ["[DRIVER]  DOORS HAVE BEEN UNLOCKED"];
 		hint _msg2HintTextString;
-		systemChat (str _msg2SyschatTextString);
+		systemChat (str _msg2SyschatTextString1);
+		systemChat (str _msg2SyschatTextString2);
 	} else {
 		//Player is not in a Taxi vehicle at the moment
 		//Do not display anything about Taxi's doors being locked/unlocked
@@ -142,9 +145,10 @@
 "mgmTfA_gv_pvc_pos_clickNGoTaxiDoorsHaveBeenUnlockedPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
 	private [
+			"_classnameOfTheCurrentVehicle",
 			"_msg2HintTextString",
-			"_msg2SyschatTextString",
-			"_classnameOfTheCurrentVehicle"
+			"_msg2SyschatTextString1",
+			"_msg2SyschatTextString2"
 			];
 	
 	//This below is a relevant message only if the player is still in the Taxi vehicle	i.e.: if player ejected/got out, let's NOT send him this message!
@@ -154,9 +158,11 @@
 	if (mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
 		// We assume, on the client PC "mgmTfA_gv_requestedTaxiclickNGoNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 		_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_doorsUnlocked.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>WE ARE ABOUT TO<br/>REACH OUR DESTINATION<br/><br/>DOORS HAVE BEEN<br/>UNLOCKED<br/><br/>THANK YOU<br/><br/></t>", (profileName)];
-		_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 WE ARE ABOUT TO REACH OUR DESTINATION. DOORS HAVE BEEN UNLOCKED. THANK YOU.", (profileName)];
+		_msg2SyschatTextString1 = parsetext format ["[DRIVER]  %1 WE ARE ABOUT TO REACH OUR DESTINATION", (profileName)];
+		_msg2SyschatTextString2 = parsetext format ["[DRIVER]  DOORS HAVE BEEN UNLOCKED"];
 		hint _msg2HintTextString;
-		systemChat (str _msg2SyschatTextString);
+		systemChat (str _msg2SyschatTextString1);
+		systemChat (str _msg2SyschatTextString2);
 	} else {
 		//Player is not in a Taxi vehicle at the moment
 		//Do not display anything about Taxi's doors being locked/unlocked
@@ -192,9 +198,10 @@
 "mgmTfA_gv_pvc_pos_yourFixedDestinationTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket" addPublicVariableEventHandler {
 	// initialize local variables
 	private [
+			"_classnameOfTheCurrentVehicle",
 			"_msg2HintTextString",
-			"_msg2SyschatTextString",
-			"_classnameOfTheCurrentVehicle"
+			"_msg2SyschatTextString1",
+			"_msg2SyschatTextString2"
 			];
 			
 	// Comparing only 'Classname' is not good enough because Requestor might have ejected the original vehicle and later got on a DIFFERENT TfA vehicle, in which case we should not inform him that his previous TfA vehicle has reached its destination!
@@ -212,9 +219,11 @@
 	if ((mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) && (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber)) then {
 		// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 		_msg2HintTextString = parsetext format["<img size='8' image='custom\mgmTfA\img_comms\mgmTfA_img_client_thankYouForYourBusinessHaveANiceDay.jpg'/><br/><br/><t size='1.40' color='#00FF00'><br/>%1<br/><br/>WE HAVE ARRIVED<br/>%2<br/><br/>THANK YOU FOR<br/>CHOOSING TAXI CORP<br/><br/>HAVE A NICE DAY!<br/><br/></t>", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-		_msg2SyschatTextString = parsetext format["[DRIVER]  %1 WE HAVE ARRIVED AT %2. THANK YOU FOR CHOOSING TAXI CORP. HAVE A NICE DAY!", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+		_msg2SyschatTextString1 = parsetext format["[DRIVER]  %1 WE HAVE ARRIVED AT %2", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+		_msg2SyschatTextString2 = parsetext format["[DRIVER]  THANK YOU FOR CHOOSING TAXI CORP. HAVE A NICE DAY!"];
 		hint _msg2HintTextString;
-		systemChat (str _msg2SyschatTextString);
+		systemChat (str _msg2SyschatTextString1);
+		systemChat (str _msg2SyschatTextString2);
 	} else {
 		//Player is not in a Taxi vehicle at the moment
 		//Do not display anything about Taxi's doors being locked/unlocked
@@ -223,9 +232,10 @@
 "mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket" addPublicVariableEventHandler {
 	// initialize local variables
 	private [
+			"_classnameOfTheCurrentVehicle",
 			"_msg2HintTextString",
-			"_msg2SyschatTextString",
-			"_classnameOfTheCurrentVehicle"
+			"_msg2SyschatTextString1",
+			"_msg2SyschatTextString2"
 			];
 			
 	// Comparing only 'Classname' is not good enough because Requestor might have ejected the original vehicle and later got on a DIFFERENT TfA vehicle, in which case we should not inform him that his previous TfA vehicle has reached its destination!
@@ -243,9 +253,11 @@
 	if ((mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) && (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber)) then {
 		// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 		_msg2HintTextString = parsetext format["<img size='8' image='custom\mgmTfA\img_comms\mgmTfA_img_client_thankYouForYourBusinessHaveANiceDay.jpg'/><br/><br/><t size='1.40' color='#00FF00'><br/>%1<br/><br/>WE HAVE ARRIVED<br/>AT OUR DESTINATION<br/><br/>THANK YOU FOR<br/>CHOOSING TAXI CORP<br/><br/>HAVE A NICE DAY!<br/><br/></t>", (profileName)];
-		_msg2SyschatTextString = parsetext format["[DRIVER]  %1 WE HAVE ARRIVED AT OUR DESTINATION. THANK YOU FOR CHOOSING TAXI CORP. HAVE A NICE DAY!", (profileName)];
+		_msg2SyschatTextString1 = parsetext format["[DRIVER]  %1 WE HAVE ARRIVED AT OUR DESTINATION", (profileName)];
+		_msg2SyschatTextString2 = parsetext format["[DRIVER]  THANK YOU FOR CHOOSING TAXI CORP. HAVE A NICE DAY!"];
 		hint _msg2HintTextString;
-		systemChat (str _msg2SyschatTextString);
+		systemChat (str _msg2SyschatTextString1);
+		systemChat (str _msg2SyschatTextString2);
 	} else {
 		//Player is not in a Taxi vehicle at the moment
 		//Do not display anything about Taxi's doors being locked/unlocked
@@ -400,8 +412,8 @@
 	if (mgmTfA_configgv_clickNGoTaxisDisplayTickChargeSystemChatMessageBool) then {
 		// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
 		private	["_messageTextOnlyFormat"];
-		// same issue as above! _messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW CASH BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
-		_messageTextOnlyFormat = parsetext format ["[DRIVER]  CHARGED PAYG TICK FEE %1 CRYPTO, THANKS!   NEW CASH BALANCE: %2 CRYPTO", (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str _playerActualCashBalance)];
+		// same issue as above! _messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
+		_messageTextOnlyFormat = parsetext format ["[DRIVER]  CHARGED PAYG TICK FEE %1 CRYPTO, THANKS!   NEW BALANCE: %2 CRYPTO", (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str _playerActualCashBalance)];
 		systemChat (str _messageTextOnlyFormat);
 	};
 	/*
@@ -412,7 +424,7 @@
 						if (mgmTfA_configgv_clickNGoTaxisDisplayTickChargeCutTextMessageBool) then {
 							// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
 							private	["_messageTextOnlyFormat"];
-							_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW CASH BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
+							_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
 							systemChat 		(str _messageTextOnlyFormat);
 						};
 					NOT IMPLEMENTED
@@ -433,7 +445,7 @@
 	// inform the player via systemChat 	-- only if the global config allows
 	// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
 	private	["_messageTextOnlyFormat"];
-	_messageTextOnlyFormat = parsetext format ["[RADIO_IN]  YOU PAID PAYG BOOKING FEE: %1 CRYPTO, THANKS. NEW CASH BALANCE: %2 CRYPTO", (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber), (str EPOCH_playerCrypto)];
+	_messageTextOnlyFormat = parsetext format ["[RADIO_IN]  YOU PAID PAYG BOOKING FEE: %1 CRYPTO, THANKS. NEW BALANCE: %2 CRYPTO", (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber), (str EPOCH_playerCrypto)];
 	systemChat 		(str _messageTextOnlyFormat);
 	/*
 					NOT IMPLEMENTED
@@ -443,7 +455,7 @@
 						if (mgmTfA_configgv_clickNGoTaxisDisplayTickChargeCutTextMessageBool) then {
 							// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
 							private	["_messageTextOnlyFormat"];
-							_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW CASH BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
+							_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
 							systemChat 		(str _messageTextOnlyFormat);
 						};
 					NOT IMPLEMENTED
@@ -482,7 +494,7 @@
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	// inform the player via systemChat 	-- only if the global config allows
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	private	["_messageTextOnlyFormat"];
-																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE 1ST MILE FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW CASH BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE 1ST MILE FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	systemChat 		(str _messageTextOnlyFormat);
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	};
 "mgmTfA_gv_pvc_pos_yourTaxiAnywhere1stMileFeeChargeRequestActionedPacketSignalOnly" addPublicVariableEventHandler {
@@ -505,7 +517,7 @@
 	if (true) then {
 		// not a config option yet - just go ahead & inform the player
 		private	["_messageTextOnlyFormat"];
-		_messageTextOnlyFormat = parsetext format ["[DRIVER]  YOU PAID TAXI ANYWHERE 1ST MILE FEE: %1 CRYPTO, THANKS. NEW CASH BALANCE: %2 CRYPTO.", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
+		_messageTextOnlyFormat = parsetext format ["[DRIVER]  YOU PAID TAXI ANYWHERE 1ST MILE FEE: %1 CRYPTO, THANKS. NEW BALANCE: %2 CRYPTO.", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
 		systemChat (str _messageTextOnlyFormat);
 	};
 	// IDEA/TODO:	inform the player via cutText 	-- only if the global config allows
