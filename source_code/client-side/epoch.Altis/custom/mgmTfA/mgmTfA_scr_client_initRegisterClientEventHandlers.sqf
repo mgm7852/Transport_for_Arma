@@ -11,7 +11,7 @@
 			"_msg2SyschatTextString"							
 			];
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_pleaseWait.jpg'/><br/><br/><t size='1.40' color='#00FF00'>FIXED DESTINATION<br/>TAXI TO:<br/><br/>%1<br/><br/>PROCESSING REQUEST<br/></t>", mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_pleaseWait.jpg'/><br/><br/><t size='1.40' color='#00FF00'>FIXED DESTINATION<br/>TAXI TO<br/><br/>%1<br/><br/>PROCESSING REQUEST<br/></t>", mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  FIXED DESTINATION TAXI TO %1. PROCESSING...", mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
@@ -374,7 +374,7 @@
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay.jpg'/><br/><br/><t size='1.40' color='#00FF00'>GREETINGS<br/>%1<br/><br/><br/>PLEASE PAY<br/>%2 CRYPTO<br/><br/>FOR<br/>%3 METRES<br/><br/>TO<br/>%4<br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-	_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 PLEASE PAY: %2 CRYPTO  FOR %3 METRES TO: %4. THANKS!", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 PLEASE PAY %2 CRYPTO  FOR %3 METRES TO %4. THANKS!", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };

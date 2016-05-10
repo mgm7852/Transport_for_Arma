@@ -319,7 +319,7 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 	_broadcastSUInformationCounter = 0;
 	
 	
-	//Customer Communications:	"%1 PLEASE PAY: %2 CRYPTO  FOR %3 METRES TO: %4. THANKS!"
+	//Customer Communications:	"%1 PLEASE PAY %2 CRYPTO  FOR %3 METRES TO: %4. THANKS!"
 	// Signal the requestor that he needs to pay now
 	mgmTfA_gv_pvc_req_fixedDestinationTaxiPleasePayTheServiceFeePacketSignalOnly = ".";
 	_fixedDestinationRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_req_fixedDestinationTaxiPleasePayTheServiceFeePacketSignalOnly";
