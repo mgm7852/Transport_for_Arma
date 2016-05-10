@@ -5,7 +5,7 @@
 	"Driver will then drive towards chosen destination",
 	"When pre-paid credits run out, PAY AS YOU GO will kick in",
 	"You may set a new destination at any time",
-	"PAYG Fees and SetCourseHotkey listed at the bottom of screen"
+	"PAYG Fees and SetDestinationHotkey listed at the bottom of screen"
 ];
 hintC_arr_EH = findDisplay 72 displayAddEventHandler ["unload", {
 	0 = _this spawn {

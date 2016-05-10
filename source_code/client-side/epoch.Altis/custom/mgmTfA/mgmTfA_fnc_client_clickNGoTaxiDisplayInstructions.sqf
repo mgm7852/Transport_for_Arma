@@ -89,7 +89,7 @@ private	[
 _systemChatMessageTextLine1 = parsetext format ["PAY AS YOU GO PRICING"];
 _systemChatMessageTextLine2 = parsetext format ["Service fee is	%1 cryptos	every %2 seconds", (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber)];
 _systemChatMessageTextLine3 = parsetext format [" "];
-_systemChatMessageTextLine4 = parsetext format ["Set Course Hotkey is:		%1", (str mgmTfA_configgv_clickNGoSetCourseHotkeyTextRepresentationTextString)];
+_systemChatMessageTextLine4 = parsetext format ["Set Destination Hotkey is:		%1", (str mgmTfA_configgv_TA_setDestinationHotkeyTextRepresentationTextString)];
 
 // FUNCTIONS
 // ~~
@@ -127,7 +127,7 @@ _text4 = "<t color='#FFFFFF' size='1.2' align='left'>Please pay the<br/>Minimum 
 _text5 = "<t color='#FFFFFF' size='1.2' align='left'>Driver will then drive towards chosen destination<br/><br/></t>";
 _text6 = "<t color='#FFFFFF' size='1.2' align='left'>When pre-paid credits run out, PAY AS YOU GO will kick in<br/><br/></t>";
 _text7 = "<t color='#FFFFFF' size='1.2' align='left'>You may set a new destination at any time<br/><br/></t>";
-_text8 = "<t color='#FFFFFF' size='1.2' align='left'>PAYG Fees and SetCourseHotkey listed at the bottom of screen<br/><br/></t>";
+_text8 = "<t color='#FFFFFF' size='1.2' align='left'>PAYG Fees and SetDestinationHotkey listed at the bottom of screen<br/><br/></t>";
 hint parseText (_text1 + _text2 + _text3 + _text4 + _text5 + _text6 + _text7 + _text8);
 };
 // ~~
