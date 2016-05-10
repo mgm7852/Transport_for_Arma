@@ -29,7 +29,7 @@ _VehEntered = (_this select 0);
 // passed argument
 _myGUSUIDNumber = (_this select 1);
 // add the Action to the vehicle, save the action ID in a local variable
-_mgmTfAActionIDPayFDTServiceFeeAction = _VehEntered addAction ["<img image='custom\mgmTfA\mgmTfA_ico_client_taxiPayment.paa' /><t color=""#FF0000""> Pay Now</t>", "custom\mgmTfA\mgmTfA_scr_client_fixedDestinationTaxiPayNow.sqf",[_VehEntered], -5, false, true,"", "(vehicle player) == _target"];
+_mgmTfAActionIDPayFDTServiceFeeAction = _VehEntered addAction ["<img image='custom\mgmTfA\img_actmenu\mgmTfA_ico_client_taxiPayment.paa' /><t color=""#FF0000""> Pay Now</t>", "custom\mgmTfA\mgmTfA_scr_client_fixedDestinationTaxiPayNow.sqf",[_VehEntered], -5, false, true,"", "(vehicle player) == _target"];
 if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doProcessFixedDestinationTaxiAddActionWork.sqf] [TV7] 		DEVDEBUG		(str _mgmTfAActionIDPayFDTServiceFeeAction) is:	(%1).", (str _mgmTfAActionIDPayFDTServiceFeeAction)];};//dbg
 // save actionID
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%SUActionIDPointer", _myGUSUIDNumber], _mgmTfAActionIDPayFDTServiceFeeAction];
