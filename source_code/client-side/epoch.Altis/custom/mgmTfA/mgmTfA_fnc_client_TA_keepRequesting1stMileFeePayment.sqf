@@ -26,7 +26,7 @@ if (!isServer) then { waitUntil {!isnull (finddisplay 46)}; };
 private	[
 		"_continueRequesting1stMileFeePayment",
 		"_originalVehiclesGUSUIDNumber",
-		"_currentVehiclesGUSUIDNumber"
+		"_currentVehiclesGUSUIDNumber",
 		"_counterTen",
 		"_counterInfinite",
 		"_msg2SyschatTextString",
