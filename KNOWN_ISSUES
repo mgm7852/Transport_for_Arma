@@ -1,0 +1,7 @@
+-Public Bus Module is not implemented yet
+-Elements in the GUI not working:
+	-bus module 'stop the bus (let me in)' button
+	-all 'exit vehicle' buttons
+	-TaxiAnywhere 'change destination' button
+	-Fixed Destination Taxi 'pay service fee' button
+-Hotkey is not working:		players will be able to press a masterConfig file configurable hotkey to bring up the GUI. currently Epoch AntiHack is blocking it.
