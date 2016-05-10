@@ -390,8 +390,8 @@ if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA]  [mgmTfA_
 
 	// inform the customer THANK YOU FOR PAYING THE 1ST MILE FEE		-- Client Communications - Send the message to the Requestor
 	///// RENAMED: mgmTfA_gv_pvc_pos_youJustPaidclickNGo1stMileFeePacketSignalOnly = ".";
-	mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly = ".";
-	_clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly";
+	//COMMENTED OUT NOW mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly = ".";
+	//COMMENTED OUT NOW _clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly";
 	*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

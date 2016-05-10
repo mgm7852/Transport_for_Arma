@@ -205,8 +205,8 @@
 	_classnameOfTheCurrentVehicle = typeOf (vehicle player);
 	_originalVehiclesGUSUIDNumber = (_this select 1);
 	_currentVehiclesGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");
-	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [D3]          I have received mgmTfA_gv_pvc_pos_yourFixedDestinationTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. _this is: (%1).", (str _this)];};
-	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [D3]          I have received mgmTfA_gv_pvc_pos_yourFixedDestinationTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. the (str _originalVehiclesGUSUIDNumber) is: (%1)	(str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourFixedDestinationTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. _this is: (%1).", (str _this)];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourFixedDestinationTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. the (str _originalVehiclesGUSUIDNumber) is: (%1)	(str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
 	
 	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
 	if ((mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) && (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber)) then {
@@ -236,8 +236,8 @@
 	_classnameOfTheCurrentVehicle = typeOf (vehicle player);
 	_originalVehiclesGUSUIDNumber = (_this select 1);
 	_currentVehiclesGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");
-	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [D3]          I have received mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. _this is: (%1).", (str _this)];};
-	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [D3]          I have received mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. the (str _originalVehiclesGUSUIDNumber) is: (%1)	(str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. _this is: (%1).", (str _this)];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. the (str _originalVehiclesGUSUIDNumber) is: (%1)	(str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
 	
 	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
 	if ((mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) && (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber)) then {
@@ -295,7 +295,7 @@
 	_uid = (getPlayerUID player);
 	_totalOmniscienceGroupMatchFound = false;
 	_quickEscapeNow = false;
-	// check for BYPASS:	mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool		// if this is enabled, respond to every single request with "a member of Total Omniscience found!"
+	// IF BYPASS IS REQUESTED in masterConfig file, let's do it!		mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool		// if this is enabled, respond to every single request with "a member of Total Omniscience found!"
 	if (mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool) then {
 		_totalOmniscienceGroupMatchFound = true;
 		if (mgmTfA_configgv_clientVerbosityLevel>=2) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf] [TV2] A _totalOmniscienceGroupMatchFound has been found due to mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool. Launching mgmTfA_fnc_client_doLocalMarkerWork.sqf as totalOmniscienceGroup member to continuously map-track the new SU until Termination Stage!"];};
@@ -452,6 +452,7 @@
 	*/
 };
 "mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly" addPublicVariableEventHandler {
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly package. _this is: (%1).", (str _this)];};
 	// initialize local variables
 	private [
 			"_msg2HintTextString",
@@ -466,25 +467,24 @@
 	//			b. it is not paid within phase-timeout-value-seconds and now phase timed out therefore a payment is no longer possible!
 	//
 	// spawn a script with a while loop to keep reminding
-	[mgmTfA_gvdb_PV_GUSUIDNumber] spawnmgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment;
+	[mgmTfA_gvdb_PV_GUSUIDNumber] spawn mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment;
 };
-"mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly" addPublicVariableEventHandler {
-	// initialize local variables
-	private	[
-			"_msg2HintTextString",
-			"_msg2SyschatTextString"
-			];
-	// inform the player via Hint		-- let the customer know that he just has been charged $amount
-	private	["_msg2HintTextString"];
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
-	hint _msg2HintTextString;
-	// inform the player via systemChat 	-- only if the global config allows
-	// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
-	private	["_messageTextOnlyFormat"];
-	_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE 1ST MILE FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW CASH BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
-	systemChat 		(str _messageTextOnlyFormat);
-	// IDEA/TODO:	inform the player via cutText 	-- only if the global config allows
-};
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- "mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly" addPublicVariableEventHandler {
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	// initialize local variables
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	private	[
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 			"_msg2HintTextString",
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 			"_msg2SyschatTextString"
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 			];
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	// inform the player via Hint		-- let the customer know that he just has been charged $amount
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	private	["_msg2HintTextString"];
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	hint _msg2HintTextString;
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	// inform the player via systemChat 	-- only if the global config allows
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	private	["_messageTextOnlyFormat"];
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE 1ST MILE FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW CASH BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	systemChat 		(str _messageTextOnlyFormat);
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	};
 "mgmTfA_gv_pvc_pos_yourTaxiAnywhere1stMileFeeChargeRequestActionedPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
 	private	[
@@ -498,7 +498,7 @@
 	if (true) then {
 		// not a config option yet - just go ahead & inform the player
 		private	["_msg2HintTextString"];
-		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID<br/>TAXI-ANYWHERE<br/>1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/>THANK YOU FOR THE PAYMENT<br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
+		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID<br/>TAXI-ANYWHERE<br/>1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/><br/>THANK YOU<br/>FOR THE PAYMENT<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
 		hint _msg2HintTextString;
 	};
 	// inform the player via systemChat 	-- only if the global config allows
@@ -508,7 +508,7 @@
 		_messageTextOnlyFormat = parsetext format ["YOU JUST PAID THE TAXI-ANYWHERE 1ST MILE FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT. YOUR NEW CASH BALANCE: %3 CRYPTO.", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
 		systemChat (str _messageTextOnlyFormat);
 	};
-	/*	NOT IMPLEMENTED	- add cutText option here? */
+	// IDEA/TODO:	inform the player via cutText 	-- only if the global config allows
 };
 "mgmTfA_gv_pvc_req_pleaseBeginPurchasingPowerCheckAndPAYGChargeForTimeTicksSignalOnly" addPublicVariableEventHandler {
 	private	[
