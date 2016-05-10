@@ -215,7 +215,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME TICK COST]    RECEIVED chargeMeTickCost REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME TICK COST]    RECEIVED chargeMeTickCost REQUEST    _clickNGoRequestorClientIDNumber: (%1).	_clickNGoRequestorProfileNameTextString: (%2).		_clickNGoRequestorPlayerUIDTextString: (%3).", _clickNGoRequestorClientIDNumber, _clickNGoRequestorProfileNameTextString, _clickNGoRequestorPlayerUIDTextString];};//dbg
 	// STAGE IN WORKFLOW:		Action the request = Charge the player
-	_null = [_requestorPlayerObject, mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber] call EPOCH_server_effectCrypto;
+	_null = [_requestorPlayerObject, mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber] call EPOCH_server_effectCrypto;
 	// Report to log
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] SPAWN'ing function to inform customer: mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_SendResponse_ChargePAYGTickCostRequestActioned"];};//dbg
 	_null = [_clickNGoRequestorClientIDNumber, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_SendResponse_ChargePAYGTickCostRequestActioned;
