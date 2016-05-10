@@ -33,8 +33,8 @@ private	[
 // if we have been signalled by mgmTfA_scr_client_initRegisterClientEventHandlers, that means this is initially TRUE
 _continueRequesting1stMileFeePayment = true;
 // debug slow down counter
-_counterTen = 1;
-_counterInfinite = 1;
+_counterTen = 0;
+_counterInfinite = 0;
 _myGUSUIDNumber = _this select 0;
 // log it		-- do not move this line any higher!
 if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf]  [TV5]	BEGIN RUNNING FUNCTION		I will  keep requesting 1st Mile Fee Payment till it is paid or phase timeout, for SU: (%1).", (str _myGUSUIDNumber)];};
