@@ -2,13 +2,14 @@
 //H
 //H ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_client_doLocalMarkerWork.sqf
-//H $PURPOSE$	:	This function will be spawn'd with one argument only SU ID (GUSUIDNumber) and it will track movements of it until (a) SU is terminated OR (b) client is no longer authorized to map-track its movements
+//H $PURPOSE$	:	This function will be spawn'd with 2 arguments SU ID (GUSUIDNumber) and _trackerIsTotalOmniscienceGroupMember. It will track movements of a given SU until (a) SU is terminated OR (b) client is no longer authorized to map-track its movements
 //H ~~
 //H
 //HH
 //H ~~
 //HH	Syntax		:	_null = [SU_ID] mgmTfA_fnc_client_doLocalMarkerWork
-//HH	Parameters	:	GUSUIDNumber Globally Unique Service Unit ID number		Number		Examples: 1, 2, 5, 384, 384728473
+//HH	Parameters	:	0:	GUSUIDNumber Globally Unique Service Unit ID number		Number		Examples: 1, 2, 5, 384, 384728473
+//HH	Parameters	:	1:	trackerIsTotalOmniscienceGroupMember	Bool		Examples: true,false
 //HH	Return Value	:	Nothing	[outputs to client's local map]
 //H ~~
 //HH	The shared configuration file has the following values this function rely on: none
