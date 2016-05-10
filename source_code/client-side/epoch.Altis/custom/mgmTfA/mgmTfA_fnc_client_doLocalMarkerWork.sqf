@@ -198,7 +198,7 @@ while {_continueMapTracking} do
 		_counter55 = 0;
 	};
 	
-	//	// Sleep a variable amount:		min=1.1 seconds	max=1.7 seconds
+	// sleep a sec
 	uiSleep 1;
 	 
 	// STEP1:	Obtain Latest Information and Update Local Variables Accordingly
