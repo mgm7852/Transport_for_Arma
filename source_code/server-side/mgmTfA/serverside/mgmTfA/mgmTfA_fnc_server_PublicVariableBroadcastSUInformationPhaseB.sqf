@@ -55,7 +55,7 @@ private	[
 		];
 
 //// Step 1:		PARSE Function Arguments
-_thisFileVerbosityLevelNumber = 9;
+_thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 
 // WARNING! THIS LINE MUST* BE above the next one or _myGUSUIDNumber will throw error: "Error Undefined variable in expression: _mygusuidnumber"
 _myGUSUIDNumber = (_this select 0);

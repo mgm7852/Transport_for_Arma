@@ -6,18 +6,18 @@
 //H
 //HH
 //HH ~~
-//HH	Example usage	:	_null =	[_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString, _positionToSpawnSUVehiclePosition3DArray, _myGUSUIDNumber] spawn mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor;
-//HH	Parameters	:	
-//HH					// We will not need all these but pass everything for now as we might change the script in the future...
-//HH					// Argument #0:		_clickNGoRequestorClientIDNumber
-//HH					// Argument #1:		_clickNGoRequestorPosition3DArray
-//HH					// Argument #2:		_THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber
-//HH					// Argument #3:		_THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString
-//HH					// Argument #4:		_clickNGoRequestorPlayerUIDTextString
-//HH					// Argument #5:		_clickNGoRequestorProfileNameTextString
-//HH					// Argument #6:		_positionToSpawnSUVehiclePosition3DArray
-//HH					// Argument #7:		_myGUSUIDNumber
-//HH	Return Value	:	none	[this function spawns the next function in "clickNGo Taxi - Service Request - Workflow"
+//HH	NEED UPDATE			//HH	Example usage	:	_null =	[_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString, _positionToSpawnSUVehiclePosition3DArray, _myGUSUIDNumber] spawn mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor;
+//HH	NEED UPDATE			//HH	Parameters	:	
+//HH	NEED UPDATE			//HH					// We will not need all these but pass everything for now as we might change the script in the future...
+//HH	NEED UPDATE			//HH					// Argument #0:		_clickNGoRequestorClientIDNumber
+//HH	NEED UPDATE			//HH					// Argument #1:		_clickNGoRequestorPosition3DArray
+//HH	NEED UPDATE			//HH					// Argument #2:		_THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber
+//HH	NEED UPDATE			//HH					// Argument #3:		_THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString
+//HH	NEED UPDATE			//HH					// Argument #4:		_clickNGoRequestorPlayerUIDTextString
+//HH	NEED UPDATE			//HH					// Argument #5:		_clickNGoRequestorProfileNameTextString
+//HH	NEED UPDATE			//HH					// Argument #6:		_positionToSpawnSUVehiclePosition3DArray
+//HH	NEED UPDATE			//HH					// Argument #7:		_myGUSUIDNumber
+//HH	NEED UPDATE			//HH	Return Value	:	none	[this function spawns the next function in "clickNGo Taxi - Service Request - Workflow"
 //HH ~~
 //HH	The server-side master configuration file read (and/or publicVariable publish) the following value(s) this function rely on:
 //HH		mgmTfA_configgv_serverVerbosityLevel
@@ -95,8 +95,6 @@ _SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdc
 _SUCurrentTaskAgeInSecondsNumber = 0;
 //Start the Current Task Age Timer
 _SUCurrentTaskBirthTimeInSecondsNumber = (time);
-//Debug level for this file
-_thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 //// Prep Function Arguments
 _clickNGoRequestorClientIDNumber = (_this select 0);
 _clickNGoRequestorPosition3DArray = (_this select 1);
@@ -215,6 +213,22 @@ missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxPayNowMenuIsCurr
 publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber];
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber], false];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber];
+// Is 1st Mile Fee enabled on the server?
+if (mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) then {
+	// yes 1st Mile Fee is enabled and thus it need to be paid -- log the detected 1st Mile Fee setting
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf] [TV3] DETECTED: 1st Mile Fee is ENABLED"];};
+	// mark the vehicle accordingly on all MP clients
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], true];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
+} else {
+	// no 1st Mile Fee is not enabled and thus it does not need to be paid -- log the detected 1st Mile Fee setting
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf] [TV3] DETECTED: 1st Mile Fee is ENABLED"];};
+	// mark the vehicle accordingly on all MP clients
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], false];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
+};
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber], false];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
 // if *Global variants is used, the effect will be global. otherwise players continue seeing the old items in cargo		ref:	http://www.reddit.com/r/arma/comments/2rpk6e/arma_3_ammo_boxes_and_similar_reset_to_original/cniglrb
 clearMagazineCargoGlobal _SUTaxiAIVehicleObject;
 clearWeaponCargoGlobal _SUTaxiAIVehicleObject;
@@ -364,7 +378,7 @@ while {(_SUTaxiAIVehicleDistanceToWayPointMetersNumber>10) && ((speed _SUTaxiAIV
 	// PING			log only every Nth package			(uiSleep=0.05)		(n=300) => 	log every 15 seconds
 	_counterForLogOnlyEveryNthPINGNumber=_counterForLogOnlyEveryNthPINGNumber+1;
 	if (_counterForLogOnlyEveryNthPINGNumber==300) then {
-		if (_thisFileVerbosityLevelNumber>=1) then {
+		if (_thisFileVerbosityLevelNumber>=2) then {
 			_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time) -_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
 			diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf] [TV2] PING from SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3) | MyAge: (%4) | Distance to WP: (%5) metres | Action In Progress: (%6)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time)), _SUTaxiAIVehicleObjectAgeInSecondsNumber, _SUTaxiAIVehicleDistanceToWayPointMetersNumber, _SUCurrentActionInProgressTextString];
 		};

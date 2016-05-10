@@ -59,8 +59,8 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 			};
 		}  forEach mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray;
 	};
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] [Call-a-fdTaxi-Hotline]    RECEIVED FIXED DESTINATION TAXI REQUEST		here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] [Call-a-fdTaxi-Hotline]    RECEIVED FIXED DESTINATION TAXI REQUEST		_fixedDestinationRequestorClientIDNumber: (%1).		_fixedDestinationRequestorPosition3DArray: (%2).		_fixedDestinationRequestedTaxiFixedDestinationIDNumber: (%3) / resolved to locationName: (%4).		_fixedDestinationRequestorPlayerUIDTextString: (%5) / resolved to profileName: (%6)", (str _fixedDestinationRequestorClientIDNumber), (str _fixedDestinationRequestorPosition3DArray), (str _fixedDestinationRequestedTaxiFixedDestinationIDNumber), _fixedDestinationRequestedDestinationNameTextString, _fixedDestinationRequestorPlayerUIDTextString, _fixedDestinationRequestorProfileNameTextString];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] [Call-a-fdTaxi]    RECEIVED FIXED DESTINATION TAXI REQUEST		here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] [Call-a-fdTaxi]    RECEIVED FIXED DESTINATION TAXI REQUEST		_fixedDestinationRequestorClientIDNumber: (%1).		_fixedDestinationRequestorPosition3DArray: (%2).		_fixedDestinationRequestedTaxiFixedDestinationIDNumber: (%3) / resolved to locationName: (%4).		_fixedDestinationRequestorPlayerUIDTextString: (%5) / resolved to profileName: (%6)", (str _fixedDestinationRequestorClientIDNumber), (str _fixedDestinationRequestorPosition3DArray), (str _fixedDestinationRequestedTaxiFixedDestinationIDNumber), _fixedDestinationRequestedDestinationNameTextString, _fixedDestinationRequestorPlayerUIDTextString, _fixedDestinationRequestorProfileNameTextString];};//dbg
 	// STAGE IN WORKFLOW:		Determine what the response should be (accept or reject) and pass the request to the appropriate function via SPAWN	(the next function will inject artificial delay via uiSleep)
 	// Let's make a decision here: are we going to APPROVE or REJECT the booking request? Then pass the request to appropriate script to respond AFTER an artificial delay.
 	// Is the Requestor blacklisted?		is his PUID in mgmTfA_dynamicgv_fixedDestinationTaxisBlacklistedPlayerPUIDsTextStringArray?
@@ -139,8 +139,8 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 			};
 		}  forEach mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray;
 	};
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [Call-a-clickNGo-Taxi-Hotline]    RECEIVED clickNGo REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [Call-a-clickNGo-Taxi-Hotline]    RECEIVED clickNGo REQUEST    _clickNGoRequestorClientIDNumber: (%1).	_clickNGoRequestorProfileNameTextString: (%2).		Requestor Position: (%3).		_clickNGoRequestorPlayerUIDTextString: (%4).		_clickNGoTaxiRequestedDestinationPosition3DArray: (%5).", _clickNGoRequestorClientIDNumber, _clickNGoRequestorProfileNameTextString, _clickNGoRequestorPosition3DArray, _clickNGoRequestorPlayerUIDTextString, _clickNGoTaxiRequestedDestinationPosition3DArray];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [Call-a-clickNGo-Taxi]    RECEIVED clickNGo REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [Call-a-clickNGo-Taxi]    RECEIVED clickNGo REQUEST    _clickNGoRequestorClientIDNumber: (%1).	_clickNGoRequestorProfileNameTextString: (%2).		Requestor Position: (%3).		_clickNGoRequestorPlayerUIDTextString: (%4).		_clickNGoTaxiRequestedDestinationPosition3DArray: (%5).", _clickNGoRequestorClientIDNumber, _clickNGoRequestorProfileNameTextString, _clickNGoRequestorPosition3DArray, _clickNGoRequestorPlayerUIDTextString, _clickNGoTaxiRequestedDestinationPosition3DArray];};//dbg
 	// STAGE IN WORKFLOW:		Determine what the response should be (accept or reject) and pass the request to the appropriate function via SPAWN	(the next function will inject artificial delay via uiSleep)
 	// Let's make a decision here: are we going to APPROVE or REJECT the booking request? Then pass the request to appropriate script to respond AFTER an artificial delay.
 	// Is the Requestor blacklisted?		is his PUID in mgmTfA_dynamicgv_clickNGoTaxisBlacklistedPlayerPUIDsTextStringArray?
@@ -175,7 +175,6 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 		_null = [_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString, _clickNGoTaxiRequestedDestinationPosition3DArray] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase02a_SendResponse_BookingRequestAccepted;
 	};
 };
-
 "mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacket" addPublicVariableEventHandler {
 	scopeName "mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacketMainScope";
 	private	[
@@ -213,15 +212,118 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 			};
 		}  forEach mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray;
 	};
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME TICK COST Hotline]    RECEIVED chargeMeTickCost REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME TICK COST Hotline]    RECEIVED chargeMeTickCost REQUEST    _clickNGoRequestorClientIDNumber: (%1).	_clickNGoRequestorProfileNameTextString: (%2).		_clickNGoRequestorPlayerUIDTextString: (%3).", _clickNGoRequestorClientIDNumber, _clickNGoRequestorProfileNameTextString, _clickNGoRequestorPlayerUIDTextString];};//dbg
-	// STAGE IN WORKFLOW:		Action the request
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME TICK COST]    RECEIVED chargeMeTickCost REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME TICK COST]    RECEIVED chargeMeTickCost REQUEST    _clickNGoRequestorClientIDNumber: (%1).	_clickNGoRequestorProfileNameTextString: (%2).		_clickNGoRequestorPlayerUIDTextString: (%3).", _clickNGoRequestorClientIDNumber, _clickNGoRequestorProfileNameTextString, _clickNGoRequestorPlayerUIDTextString];};//dbg
+	// STAGE IN WORKFLOW:		Action the request = Charge the player
 	_null = [_requestorPlayerObject, mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNegativeNumber] call EPOCH_server_effectCrypto;
 	// Report to log
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] SPAWN'ing function to inform customer: mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_SendResponse_ChargePAYGTickCostRequestActioned"];};//dbg
-	_null = [_clickNGoRequestorClientIDNumber, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_SendResponse_ChargePAYGTickCostRequestActioned;
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] SPAWN'ing function to inform customer: mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned"];};//dbg
+	_null = [_clickNGoRequestorClientIDNumber, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned;
 };
-
+"mgmTfA_gv_pvs_req_TAChargeMe1stMileFeePacket" addPublicVariableEventHandler {
+	scopeName "mgmTfA_gv_pvs_req_TAChargeMe1stMileFeePacketMainScope";
+	private	[
+			"_clickNGoRequestorClientIDNumber",
+			"_clickNGoRequestorPlayerUIDTextString",
+			"_clickNGoRequestorProfileNameTextString",
+			"_myGUSUIDNumber",
+			"_requestorPlayerObject",
+			"_null"
+			];
+	// STAGE IN WORKFLOW:		Parse Arguments & Prepare Local Variables
+	_clickNGoRequestorClientIDNumber = (owner (_this select 1 select 0));
+	_requestorPlayerObject = (_this select 1 select 0);
+	_clickNGoRequestorPlayerUIDTextString = (_this select 1 select 1);
+	_myGUSUIDNumber = (_this select 1 select 2);
+	// STAGE IN WORKFLOW:		Determine Requestor's profileName
+	// NOTE: Clients, in client-side init stage, pushBack their PUID & profileNames to a PV =>	mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray	<= we will use this array to find matching profileName
+	private	["_PUIDsAndPlayernamesTextStringArrayCountNumber"];
+	_PUIDsAndPlayernamesTextStringArrayCountNumber = count	(mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray);
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] _PUIDsAndPlayernamesTextStringArrayCountNumber is: (%1).", _PUIDsAndPlayernamesTextStringArrayCountNumber];};//dbg
+	// Now that we know the size, if there's anything at all in the array, let's traverse it
+	if (_PUIDsAndPlayernamesTextStringArrayCountNumber >0) then {
+	scopeName "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
+		// We will traverse each array element
+		// We will compare the 0th element [playerUID] with the playerUID we have been provided
+		// If PUID  matches, we will return the profileName
+		{
+			if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3]          Traversing the mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray. Current index is: (%1)     Content PUID/name is: (%2)/(%3)", _forEachIndex, (_x select 0), (_x select 1)];};//dbg
+			if (_clickNGoRequestorPlayerUIDTextString == (_x select 0)) then {
+				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3]          We got a match! Player with PUID (%1) has the following profileName: (%2).", (_x select 0), (_x select 1)];};//dbg
+				_clickNGoRequestorProfileNameTextString = (_x select 1);
+				// This below is just to report in STATUS REPORT...
+				mgmTfA_dynamicgv_clickNGoTaxisTheLastServedPlayerNameTextString = _clickNGoRequestorProfileNameTextString;
+				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3]          _clickNGoRequestorProfileNameTextString is now set to: (%1). issuing (breakTo _PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope) now.", (_x select 1)];};//dbg
+				breakTo "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
+			};
+		}  forEach mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray;
+	// TODO: add error handling - what if we cannot find it in the array? this most likely affect all similar traverses!
+	};
+	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [TAXI ANYWHERE CHARGE ME 1ST MILE FEE REQUEST]    RECEIVED REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [TAXI ANYWHERE CHARGE ME 1ST MILE FEE REQUEST]    RECEIVED REQUEST    _clickNGoRequestorClientIDNumber: (%1).	_clickNGoRequestorProfileNameTextString: (%2).		_clickNGoRequestorPlayerUIDTextString: (%3).", _clickNGoRequestorClientIDNumber, _clickNGoRequestorProfileNameTextString, _clickNGoRequestorPlayerUIDTextString];};//dbg
+	// STAGE IN WORKFLOW:		Action the request = Charge the player
+	_null = [_requestorPlayerObject, mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber] call EPOCH_server_effectCrypto;
+	// mark vehicle as 1st Mile Fee paid
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], false];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
+	// Report to log
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] PLAYER CHARGED:		1ST MILE FEE			SPAWN'ing function to inform customer: mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04a_SendResponse_Charge1stMileFeeRequestActioned"];};//dbg
+	_null = [_clickNGoRequestorClientIDNumber, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04a_SendResponse_Charge1stMileFeeRequestActioned;
+};
+"mgmTfA_gv_pvs_req_FD_chargeMeServiceFeePacket" addPublicVariableEventHandler {
+	scopeName "mgmTfA_gv_pvs_req_FD_chargeMeServiceFeePacketMainScope";
+	private	[
+			"_FD_RequestorClientIDNumber",
+			"_FD_RequestorPlayerUIDTextString",
+			"_FD_RequestorProfileNameTextString",
+			"_myGUSUIDNumber",
+			"_requestorPlayerObject",
+			"_FD_journeyServiceFeeCostInCryptoNumber",
+			"_journeyServiceFeeCostInCryptoNegativeNumber",
+			"_null"
+			];
+	// STAGE IN WORKFLOW:		Parse Arguments & Prepare Local Variables
+	_FD_RequestorClientIDNumber = (owner (_this select 1 select 0));
+	_requestorPlayerObject = (_this select 1 select 0);
+	_FD_RequestorPlayerUIDTextString = (_this select 1 select 1);
+	_myGUSUIDNumber = (_this select 1 select 2);
+	_FD_journeyServiceFeeCostInCryptoNumber = (_this select 1 select 3);
+	_journeyServiceFeeCostInCryptoNegativeNumber = 0 - _FD_journeyServiceFeeCostInCryptoNumber;
+	// STAGE IN WORKFLOW:		Determine Requestor's profileName
+	// NOTE: Clients, in client-side init stage, pushBack their PUID & profileNames to a PV =>	mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray	<= we will use this array to find matching profileName
+	private	["_PUIDsAndPlayernamesTextStringArrayCountNumber"];
+	_PUIDsAndPlayernamesTextStringArrayCountNumber = count	(mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray);
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] _PUIDsAndPlayernamesTextStringArrayCountNumber is: (%1).", _PUIDsAndPlayernamesTextStringArrayCountNumber];};//dbg
+	// Now that we know the size, if there's anything at all in the array, let's traverse it
+	if (_PUIDsAndPlayernamesTextStringArrayCountNumber >0) then {
+	scopeName "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
+		// We will traverse each array element
+		// We will compare the 0th element [playerUID] with the playerUID we have been provided
+		// If PUID  matches, we will return the profileName
+		{
+			if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3]          Traversing the mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray. Current index is: (%1)     Content PUID/name is: (%2)/(%3)", _forEachIndex, (_x select 0), (_x select 1)];};//dbg
+			if (_FD_RequestorPlayerUIDTextString == (_x select 0)) then {
+				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3]          We got a match! Player with PUID (%1) has the following profileName: (%2).", (_x select 0), (_x select 1)];};//dbg
+				_FD_RequestorProfileNameTextString = (_x select 1);
+				// This below is just to report in STATUS REPORT...
+				mgmTfA_dynamicgv_clickNGoTaxisTheLastServedPlayerNameTextString = _FD_RequestorProfileNameTextString;
+				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3]          _FD_RequestorProfileNameTextString is now set to: (%1). issuing (breakTo _PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope) now.", (_x select 1)];};//dbg
+				breakTo "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
+			};
+		}  forEach mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray;
+	// TODO: add error handling - what if we cannot find it in the array? this most likely affect all similar traverses!
+	};
+	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [FIXED DESTINATION TAXI CHARGE ME SERVICE FEE REQUEST]    RECEIVED REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [FIXED DESTINATION TAXI CHARGE ME SERVICE FEE REQUEST]    RECEIVED REQUEST    _FD_RequestorClientIDNumber: (%1).	_FD_RequestorProfileNameTextString: (%2).		_FD_RequestorPlayerUIDTextString: (%3).", _FD_RequestorClientIDNumber, _FD_RequestorProfileNameTextString, _FD_RequestorPlayerUIDTextString];};//dbg
+	// STAGE IN WORKFLOW:		Action the request = Charge the player
+	_null = [_requestorPlayerObject, _journeyServiceFeeCostInCryptoNegativeNumber] call EPOCH_server_effectCrypto;
+	// mark vehicle as SERVICE FEE paid
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUFDServiceFeeNeedToBePaidBool", _myGUSUIDNumber], false];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUFDServiceFeeNeedToBePaidBool", _myGUSUIDNumber];
+	// Report to log
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]  [TV3] PLAYER CHARGED:		SERVICE FEE				SPAWN'ing function to inform customer: mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04a_SendResponse_Charge1stMileFeeRequestActioned"];};//dbg
+	_null = [_FD_RequestorClientIDNumber, _FD_RequestorPlayerUIDTextString, _FD_RequestorProfileNameTextString, _FD_journeyServiceFeeCostInCryptoNumber] spawn mgmTfA_fnc_server_FD_ServicePhase04a_SendResponse_ChargeServiceFeeRequestActioned;
+};
 "mgmTfA_gv_pvs_req_clickNGoTaxiChargeMeInitialBookingFeePleaseConfirmPacket" addPublicVariableEventHandler {
 	scopeName "mgmTfA_gv_pvs_req_clickNGoTaxiChargeMeInitialBookingFeePleaseConfirmPacketMainScope";
 	private	[
@@ -257,8 +359,8 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 			};
 		}  forEach mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray;
 	};
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME INITIAL BOOKING FEE Hotline]    RECEIVED chargeMeInitialBookingFee REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME INITIAL BOOKING FEE Hotline]    RECEIVED chargeMeInitialBookingFee REQUEST    _clickNGoRequestorClientIDNumber: (%1).	_clickNGoRequestorProfileNameTextString: (%2).		_clickNGoRequestorPlayerUIDTextString: (%3).", _clickNGoRequestorClientIDNumber, _clickNGoRequestorProfileNameTextString, _clickNGoRequestorPlayerUIDTextString];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME INITIAL BOOKING FEE ]    RECEIVED chargeMeInitialBookingFee REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME INITIAL BOOKING FEE ]    RECEIVED chargeMeInitialBookingFee REQUEST    _clickNGoRequestorClientIDNumber: (%1).	_clickNGoRequestorProfileNameTextString: (%2).		_clickNGoRequestorPlayerUIDTextString: (%3).", _clickNGoRequestorClientIDNumber, _clickNGoRequestorProfileNameTextString, _clickNGoRequestorPlayerUIDTextString];};//dbg
 	// STAGE IN WORKFLOW:		Action the request
 	_null = [_requestorPlayerObject, mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNegativeNumber] call EPOCH_server_effectCrypto;
 	// Report to log

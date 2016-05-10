@@ -23,19 +23,17 @@ if (!isServer) then {
 	mgmTfA_fnc_client_returnTrueIfThereIsACatpNearby = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_returnTrueIfThereIsACatpNearby.sqf";
 	mgmTfA_fnc_client_sendBookingRequestFixedDestinationTaxi = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_sendBookingRequestFixedDestinationTaxi.sqf";
 	mgmTfA_fnc_client_doLocalMarkerWork = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_doLocalMarkerWork.sqf";
-	mgmTfA_fnc_client_clickNGoSetCourse = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoSetCourse.sqf";
+	mgmTfA_scr_client_TA_setDestination = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_scr_client_TA_setDestination.sqf";
 	mgmTfA_fnc_client_doLocalJanitorWorkForclickNGo = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_doLocalJanitorWorkForclickNGo.sqf";
-	mgmTfA_fnc_client_doScanVicinityForFixedDestinationTaxiVehicles = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_doScanVicinityForFixedDestinationTaxiVehicles.sqf";
-	mgmTfA_fnc_client_doScanVicinityForclickNGoTaxiVehicles = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_doScanVicinityForclickNGoTaxiVehicles.sqf";
-	mgmTfA_fnc_client_doProcessFixedDestinationTaxiAddActionWork = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_doProcessFixedDestinationTaxiAddActionWork.sqf";
-	mgmTfA_fnc_client_doProcessclickNGoTaxiAddActionWork = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_doProcessclickNGoTaxiAddActionWork.sqf";
 	mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions.sqf";
 	mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf";
-	mgmTfA_fnc_client_clickNGoContinuouslyRequestPayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoContinuouslyRequestPayment.sqf";
-	mgmTfA_fnc_client_clickNGoRequestTaxiViaRapidMapOpen = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoRequestTaxiViaRapidMapOpen.sqf";
+	//NOT USED ANY MORE -- DELAYED DELETE THIS					mgmTfA_fnc_client_clickNGoContinuouslyRequestPayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoContinuouslyRequestPayment.sqf";
+	mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen.sqf";
 	// this below MUST be under the one above or will be renamed prematurely!
 	mgmTfA_fnc_client_clickNGoRequestTaxi = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoRequestTaxi.sqf";
-																																		
+	mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf";
+	mgmTfA_fnc_client_FD_keepRequestingServiceFeePayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_FD_keepRequestingServiceFeePayment.sqf";
+
 	//// Reset global variables of counter nature
 	mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingRecordKeeperThisIsTheFirstTimeBool = true;
 	mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
@@ -59,11 +57,7 @@ if (!isServer) then {
 
 	// spawn the clickNGo janitor function
 	_null =	[] spawn mgmTfA_fnc_client_doLocalJanitorWorkForclickNGo;
-	// spawn the fixedDestination VicinityTaxiScanner function
-	_null =	[] spawn mgmTfA_fnc_client_doScanVicinityForFixedDestinationTaxiVehicles;
-	// spawn the clickNGo VicinityTaxiScanner function
-	_null =	[] spawn mgmTfA_fnc_client_doScanVicinityForclickNGoTaxiVehicles;
-	
+
 	////Register Client-side Event Handlers
 	[] execVM "custom\mgmTfA\mgmTfA_scr_client_initRegisterClientEventHandlers.sqf";
 	if (isNil("mgmTfA_Client_Init")) then {

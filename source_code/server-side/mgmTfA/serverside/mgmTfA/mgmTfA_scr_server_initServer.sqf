@@ -31,10 +31,10 @@ if (isServer) then {
 	//mgmTfA_fnc_server_publicVariableBroadcastSUInformation = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_publicVariableBroadcastSUInformation.sqf";
 	mgmTfA_fnc_server_PublicVariableBroadcastSUInformationInitialBroadcast = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_PublicVariableBroadcastSUInformationInitialBroadcast.sqf";
 	mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB.sqf";
-	mgmTfA_fnc_server_returnARandomFirstnameTextString	 = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_returnARandomFirstnameTextString.sqf";
-	mgmTfA_fnc_server_pubBus_doBusProvision			 = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_pubBus_doBusProvision.sqf";
-	// NEW GROUP
-	mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_SendResponse_ChargePAYGTickCostRequestActioned = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_SendResponse_ChargePAYGTickCostRequestActioned.sqf";
+	mgmTfA_fnc_server_returnARandomFirstnameTextString = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_returnARandomFirstnameTextString.sqf";
+	mgmTfA_fnc_server_pubBus_doBusProvision = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_pubBus_doBusProvision.sqf";
+	mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04a_SendResponse_Charge1stMileFeeRequestActioned = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04a_SendResponse_Charge1stMileFeeRequestActioned.sqf";
+	mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned.sqf";
 	// 3rd Party Functions
 	EPOCH_effectCrypto = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\fnc__3rd_party\EPOCH_effectCrypto.sqf";
 	EPOCH_server_effectCrypto = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\fnc__3rd_party\EPOCH_server_effectCrypto.sqf";
@@ -229,8 +229,8 @@ if (isServer) then {
 	publicVariable "mgmTfA_configgv_currentFixedDestinationTaxiActionInProgressIs07TextString";
 	publicVariable "mgmTfA_configgv_currentFixedDestinationTaxiActionInProgressIs08TextString";
 	publicVariable "mgmTfA_configgv_clickNGoCallATaxiHotkeyDIKCodeNumber";
-	publicVariable "mgmTfA_configgv_clickNGoSetCourseHotkeyDIKCodeNumber";
-	publicVariable "mgmTfA_configgv_clickNGoSetCourseHotkeyTextRepresentationTextString";
+	publicVariable "mgmTfA_configgv_TA_setDestinationHotkeyDIKCodeNumber";
+	publicVariable "mgmTfA_configgv_TA_setDestinationHotkeyTextRepresentationTextString";
 	publicVariable "mgmTfA_configgv_clickNGoTaxiBookingHotkeyCooldownDurationInSecondsNumber";
 	publicVariable "mgmTfA_configgv_clickNGoJanitorSleepDurationInSecondsNumber";
 	publicVariable "mgmTfA_configgv_clickNGoJanitorInitialRandomSleepDurationMinimumBaseInSecondsNumber";
@@ -247,6 +247,7 @@ if (isServer) then {
 	publicVariable "mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber";
 	publicVariable "mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber";
 	publicVariable "mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNegativeNumber";
+	publicVariable "mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber";
 	publicVariable "mgmTfA_configgv_clickNGoTaxisDisplayTickHintMessagesBool";
 	publicVariable "mgmTfA_configgv_fixedDestinationTaxisClientSideScannerSleepDurationBetweenScansInSecondsNumber";
 	publicVariable "mgmTfA_configgv_clickNGoTaxisClientSideScannerSleepDurationBetweenScansInSecondsNumber";

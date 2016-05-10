@@ -6,9 +6,9 @@
 //H
 //HH
 //HH ~~
-//HH	Example usage	:	_null	=	[_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString, _myGUSUIDNumber, _iWantToTravelThisManyMetresNumber, _SUTaxiAIVehicleObject, _SUDriversFirstnameTextString, _clickNGoTaxiRequestedDestinationPosition3DArray, _doorsLockedBool, _SUAIGroup, _SUTaxiWaypointRadiusInMetersNumber, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUAICharacterDriverObject, _SUTypeTextString, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffPositionNameTextString, _SUDropOffPositionPosition3DArray, _SUDropOffHasOccurredBool, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond;
-//HH	Parameters	:	too many to list
-//HH	Return Value	:	none	[this function spawns the next function in the workflow
+//HH	NEED UPDATE			Example usage	:	_null	=	[_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString, _myGUSUIDNumber, _iWantToTravelThisManyMetresNumber, _SUTaxiAIVehicleObject, _SUDriversFirstnameTextString, _clickNGoTaxiRequestedDestinationPosition3DArray, _doorsLockedBool, _SUAIGroup, _SUTaxiWaypointRadiusInMetersNumber, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUAICharacterDriverObject, _SUTypeTextString, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffPositionNameTextString, _SUDropOffPositionPosition3DArray, _SUDropOffHasOccurredBool, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond;
+//HH	NEED UPDATE			Parameters	:	too many to list
+//HH	NEED UPDATE			Return Value	:	none	[this function spawns the next function in the workflow
 //HH ~~
 //HH	The server-side master configuration file read (and/or publicVariable publish) the following value(s) this function rely on:
 //HH		mgmTfA_configgv_serverVerbosityLevel
@@ -84,7 +84,9 @@ private	[
 		"_SUPAYGisActiveBool",
 		"_paygIsItTimeYetCheckCounterNumber",
 		"_paygCustomerCanAffordTheNextPaymentBool",
-		"_paygLastCheckCounterNumber"
+		"_paygLastCheckCounterNumber",
+		"_TA1stMileFeeNeedToBePaidBool",
+		"_currentTimeInSecondsNumber"
 		];
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 _clickNGoRequestorClientIDNumber = (_this select 0);
@@ -158,6 +160,8 @@ _SUclickNGoTaxiPrepaidAbsoluteMinimumJourneyTimeInSeconds = mgmTfA_configgv_clic
 _SUPAYGisActiveBool = false;
 _paygIsItTimeYetCheckCounterNumber = 0;
 _paygCustomerCanAffordTheNextPaymentBool = false;
+_TA1stMileFeeNeedToBePaidBool = true;
+// do NOT set it yet:	_currentTimeInSecondsNumber
 
 //We are at the requestorPosition
 _broadcastSUInformationCounter = 0;
@@ -334,58 +338,232 @@ if (!_emergencyEscapeNeeded) then {
 	};
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] EXITed loop _requestorOutsideVehicle"];};
 	uiSleep 0.05;
-
-	//Change our status to:		3 AWAITING PAYMENT			to proceed, first the requestor must pay...
-	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs03TextString;
-
-	// is 1st Mile Fee enabled?
-	//check here 
-	if (mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) then {
-		// yes 1st Mile Fee is enabled
-
-		// log the 1st Mile Fee setting
-		if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] DETECTED: 1st Mile Fee is ENABLED"];};
-
-		// TAKE PAYMENT from player's wallet	-- 1st Mile Fee/Initial Fee ==> take this much => mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
-		_null = [_requestorPlayerObject, mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber] call EPOCH_server_effectCrypto;
-
-		// log the fee charge
-		diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]		CHARGED PLAYER		just called EPOCH_server_effectCrypto and processed player's wallet by (mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber)=(%1)", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber)];//dbg
-
-		// inform the customer THANK YOU FOR PAYING THE 1ST MILE FEE		-- Client Communications - Send the message to the Requestor
-		mgmTfA_gv_pvc_pos_youJustPaidclickNGo1stMileFeePacketSignalOnly = ".";
-		_clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_youJustPaidclickNGo1stMileFeePacketSignalOnly";
-	} else {
-		// no 1st Mile Fee is not enabled
-
-		// log the 1st Mile Fee setting
-		if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] DETECTED: 1st Mile Fee is ENABLED"];};
-		//nothing else to do
-	};
 };
 
-//Change our status to:		4 DRIVING-TO-DESTINATION		driving requestor to requested location
-_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs04TextString;
-//Customer has paid and we are about to start driving to our destination. 
-//On the way and even before we start moving (while we do waypoint calculations etc.) doors should be locked.
+// Requestor is in vehicle
+
+// Is 1st Mile Fee enabled? (NOTE: Phase03 already did the check & marked the vehicle but we can still read the globalVar probably faster)
+if (mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) then {
+	// YES 1st Mile Fee is enabled -- log the 1st Mile Fee setting
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] 		DETECTED		1st Mile Fee is ENABLED			(mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0)"];};
+	// We will inform the requestor now:		"You must now pay the 1st-Mile-Fee"
+	mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly = ".";
+	_clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly";
+			if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV2] 	  SIGNAL SENT to the requestor	(mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly)	 (that he MUST pay 1st-Mile-Fee now).	_clickNGoRequestorProfileNameTextString: (%1)   _clickNGoRequestorClientIDNumber: (%2)	", _clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber];};
+	// Next, we will have to wait for the requestor to pay the 1st Mile Fee (via GUI button OR via ActionMenu) - this is handled in a loop below
+	// NOTE: "_TA1stMileFeeNeedToBePaidBool" is already set to TRUE at the top of file.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+} else {
+	// NO 1st Mile Fee is not enabled -- log the 1st Mile Fee setting
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] DETECTED		1st Mile Fee IS NOT ENABLED			!(mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0)"];};
+	// nothing else to do here. allow loop escape & carry on
+	_TA1stMileFeeNeedToBePaidBool = false;
+};
+
+
+
+/*
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], true];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
+_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
+if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_clickNGoContinuouslyRequestPayment.sqf] [TV4] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
+*/
+
+
+
+// CHARGE the player (take moeny from 's wallet	-- 1st Mile Fee/Initial Fee ==> take this much => mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// old code below commented out
+	/*
+	// TAKE PAYMENT from player's wallet	-- 1st Mile Fee/Initial Fee ==> take this much => mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
+	_null = [_requestorPlayerObject, mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber] call EPOCH_server_effectCrypto;
+
+	// log the fee charge
+	diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]		CHARGED PLAYER		just called EPOCH_server_effectCrypto and processed player's wallet by (mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber)=(%1)", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber)];//dbg
+
+	// inform the customer THANK YOU FOR PAYING THE 1ST MILE FEE		-- Client Communications - Send the message to the Requestor
+	///// RENAMED: mgmTfA_gv_pvc_pos_youJustPaidclickNGo1stMileFeePacketSignalOnly = ".";
+	//COMMENTED OUT NOW mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly = ".";
+	//COMMENTED OUT NOW _clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly";
+	*/
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 //Lock the vehicle doors
 _SUTaxiAIVehicleObject lockCargo true;
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS locked"];};
 uiSleep 0.05;
-//Doors Locked
-//Inform the requestor
-mgmTfA_gv_pvc_pos_clickNGoTaxiDoorsHaveBeenLockedPacketSignalOnly = ".";
-_clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_clickNGoTaxiDoorsHaveBeenLockedPacketSignalOnly";
+//Doors Locked -- Inform the requestor (noHint version!)
+mgmTfA_gv_pvc_pos_clickNGoTaxiDoorsHaveBeenLockedNoHintPacketSignalOnly = ".";
+_clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_clickNGoTaxiDoorsHaveBeenLockedNoHintPacketSignalOnly";
 if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that doors have been locked). _clickNGoRequestorProfileNameTextString: (%1) on computer (_clickNGoRequestorClientIDNumber): (%2)", _clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber];};
 
 
 
-// If emergency escape needed, do nothing.
+
+// to wait or not to wait...
+if (_TA1stMileFeeNeedToBePaidBool) then {
+	// We will now wait for the requestor to pay the 1st Mile Fee (via GUI button OR via ActionMenu)
+	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV5] This is _myGUSUIDNumber: (%1)	Entered 		if (_TA1stMileFeeNeedToBePaidBool) then			", (str _myGUSUIDNumber)];};
+
+	// Change our status to:		3 AWAITING PAYMENT			to proceed, first the requestor must pay...
+	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs03TextString;
+	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiRequestorHasNotPaidInSecondsNumber;
+	// Reset Current Task Age
+	_SUCurrentTaskAgeInSecondsNumber = 0;
+	// Start the Current Task Age Timer
+	_SUCurrentTaskBirthTimeInSecondsNumber = (time);
+	// 1st Mile Fee is enabled but the requestor has not paid it yet. Keep looping & waiting...
+	_broadcastSUInformationCounter = 0;
+
+	while {_TA1stMileFeeNeedToBePaidBool} do {
+		// WAIT FOR PLAYER TO PAY - keep looping till either(player accept the charge) or (phase timeout & SU auto self destruction)
+		// if player pays, we will break out at next iteration
+		// if player does not pay, we will time out and break out via emergency routine
+		scopeName "TheRequestorHasNotPaidThe1stMileFeeLoop";
+		uiSleep 0.05;
+
+		// inside loop evaluation -- can we escape the loop yet?
+		_TA1stMileFeeNeedToBePaidBool = call compile format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
+		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV4] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_TA1stMileFeeNeedToBePaidBool) is: (%2)			", (str _myGUSUIDNumber), (str _TA1stMileFeeNeedToBePaidBool)];};
+
+		///
+		// Broadcast ServiceUnit Information
+		///
+		// Only if it has been at least 1 second!	currently uiSleep`ing 0.05 seconds, meaning at least 1 second = 1.00 / 0.05 = 20th package.
+		_broadcastSUInformationCounter = _broadcastSUInformationCounter + 1;
+		if (_broadcastSUInformationCounter >= 20) then {
+			_broadcastSUInformationCounter = 0;
+			// Need to calculate these now as we will publish it in the next line!
+			_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
+			_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time) -_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
+			_SUAIVehicleObjectAgeInSecondsNumber = _SUTaxiAIVehicleObjectAgeInSecondsNumber;
+			_SUAIVehicleObjectCurrentPositionPosition3DArray		= (getPosATL _SUTaxiAIVehicleObject);
+			_SUTaxiAIVehicleVehicleDirectionInDegreesNumber = (getDir _SUTaxiAIVehicleObject) + 45;
+			_SUAIVehicleVehicleDirectionInDegreesNumber = _SUTaxiAIVehicleVehicleDirectionInDegreesNumber;
+			_SUAIVehicleSpeedOfVehicleInKMHNumber = (round (speed _SUTaxiAIVehicleObject));
+			_SUPickUpPositionPosition3DArray = _clickNGoRequestorPosition3DArray;
+			_SUAIVehicleObject = _SUTaxiAIVehicleObject;
+			_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
+			_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
+			[_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB;
+		};
+		///
+		// Pit-stop checks: AutoRefuel
+		if (fuel _SUTaxiAIVehicleObject < 0.2) then {
+			_SUTaxiAIVehicleObject setFuel 1;
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+		};
+		// Pit-stop checks: AutoRepair
+		if (damage _SUTaxiAIVehicleObject>0.2) then {
+			_SUTaxiAIVehicleObject setDamage 0;
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+		};
+		// Calculate Current Task Age and Initiate Abnormal SU Termination (logged) if necessary
+		_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
+		if (_SUCurrentTaskAgeInSecondsNumber > _SUCurrentTaskThresholdInSecondsNumber) then {
+			// Expiry Timeout Threshold Exceeded. Initiating Abnormal Termination of SU.
+			// We are being abnormally destroyed!
+			_emergencyEscapeNeeded = true;
+		};
+		// Let emergency escapees pass
+		//if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyondMainScope"; };
+		if(_emergencyEscapeNeeded) then { breakOut "TheRequestorHasNotPaidThe1stMileFeeLoop"; };
+	};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] EXITed loop _TA1stMileFeeNeedToBePaidBool"];};
+	// why did we exit the loop?
+	// Option #1:	because commandingCustomer paid the 1st mile fee
+	// Option #2:	because commandingCustomer did not pay the 1st mile fee	and phase timed out and emergencyEspaced!
+	// in either case we have got to stop asking the commandingCustomer for 1st Mile Fee payment (every second via systemChat)
+	//
+	// mark the vehicle accordingly on all MP clients
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], false];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];	
+	uiSleep 0.05;
+};
+if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV8] OUTSIDE  if (_TA1stMileFeeNeedToBePaidBool) then { now..."];};
+
+if (_emergencyEscapeNeeded) then {
+	// emergency escape needed = requestor did NOT pay the 1st Mile Fee within the threshold time
+	//
+	// EJECT ALL			force eject all passengers - we are going to termination and we're not giving any free rides!
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]		[TV3]		1st Mile Fee was not paid within threshold time - ejecting all passengers and terminating."];};
+	// TODO: ENHANCEMENT:	SPLIT THIS TO A SEPARATE FUNCTION FILE (it will be repeated multiple times, by different clickNGo modules!)
+	private	[
+			"_SUVehicleSpeedOfVehicleInKMHNumber",
+			"_vel",
+			"_dir",
+			"_speedStep"									
+			];
+	//Use the horn to signal upcoming forced eject action
+	driver _SUTaxiAIVehicleObject forceWeaponFire [currentWeapon _SUTaxiAIVehicleObject, currentWeapon _SUTaxiAIVehicleObject];
+	// we should be at full stop by now but double checking never hurts
+	// First, let's bring the vehicle to a full stop, in 5 kmh steps, a new step every 0.25 seconds, until its speed is 0
+	_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
+	while {_SUVehicleSpeedOfVehicleInKMHNumber > 0} do {
+		uiSleep 0.05;
+		// Slow down by 5 kmh
+		_vel = (velocity	_SUTaxiAIVehicleObject);
+		_dir = (direction	_SUTaxiAIVehicleObject);
+		_speedStep			= -5;
+		_SUTaxiAIVehicleObject	setVelocity	[
+											(_vel select 0) + (sin _dir * _speedStep),
+											(_vel select 1) + (cos _dir * _speedStep),
+											(_vel select 2)
+											];
+	_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
+	};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] 	[TV3]	TERMINATION SEQUENCE IN PROGRESS:	Stopped vehicle before ejecting all passengers."];};
+	uiSleep 0.05;
+	// prep for forced eject -- once we eject them, we will want the passengers to stay out!
+	_SUTaxiAIVehicleObject lockCargo true;
+	_doorsLockedBool = true;
+	uiSleep 0.05;
+	// Now we can Eject All Passengers (keep the driver in!) and Delete the Vehicle	//Traverse all crew with forEach
+	{
+		//If the crewMember is NOT our dear _SUAICharacterDriverObject, then eject them!
+		if (_x != _SUAICharacterDriverObject) then {
+		_x action ["Eject", _SUTaxiAIVehicleObject];
+		};
+	} forEach crew _SUTaxiAIVehicleObject;
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] TERMINATION SEQUENCE IN PROGRESS:		eject all passengers completed."];};
+	uiSleep 0.05;
+};
+
 // If emergency escape is NOT needed, proceed with the next batch of workflow tasks
 if (!_emergencyEscapeNeeded) then {
-	// workflow tasks below this line
-	//TODO: add code ==>>  Add a button "Stop the car!"		("get out" option is always visible in offroad pickups - all we need to do is stop the car so that passengers won't get hurt!)
+
+	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV8] INSIDE  if (!_emergencyEscapeNeeded) then            now..."];};
+
+	//Change our status to:		4 DRIVING-TO-DESTINATION		driving requestor to requested location
+	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs04TextString;
+	//Customer has paid and we are about to start driving to our destination. 
+	//On the way and even before we start moving (while we do waypoint calculations etc.) doors should be locked.
+
+	// if execution hit this point, it must be because 1st Mile Fee has been paid. Let's start the '1st Mile Fee covered time period' now:
+	_currentTimeInSecondsNumber = (time);
+	_SUclickNGoTaxiPrepaidPaymentTransactionTimeInSecondsNumber = _currentTimeInSecondsNumber;
+
+	// initial check to eliminate any extremely low values (e.g.: 2 second PrepaidAbsoluteMinimum setting in config file)
+	if (_currentTimeInSecondsNumber - (_SUclickNGoTaxiPrepaidPaymentTransactionTimeInSecondsNumber+_SUclickNGoTaxiPrepaidAbsoluteMinimumJourneyTimeInSeconds)>=0) then {
+		_SUPrepaidCreditsStillCoveringBool = true;
+	};
+
 	// NEW DESTINATION		// Add new Waypoint data
+	//TODO: add code ==>>  Add a button "Stop the car!"		("get out" option is always visible in offroad pickups - all we need to do is stop the car so that passengers won't get hurt!)
 	_SUTaxiAIVehicleWaypointMainArrayIndexNumber = _SUTaxiAIVehicleWaypointMainArrayIndexNumber + 1;
 	_SUDropOffPositionPosition3DArray = _clickNGoTaxiRequestedDestinationPosition3DArray;
 	_SUTaxiAIVehicleWaypointMainArray = _SUAIGroup addWaypoint [_SUDropOffPositionPosition3DArray, _SUTaxiWaypointRadiusInMetersNumber,_SUTaxiAIVehicleWaypointMainArrayIndexNumber];
@@ -408,7 +586,6 @@ if (!_emergencyEscapeNeeded) then {
 	_SUCurrentTaskAgeInSecondsNumber = 0;
 	//Start the Current Task Age Timer
 	_SUCurrentTaskBirthTimeInSecondsNumber = (time);
-	_SUPrepaidCreditsStillCoveringBool = true;
 	// We are on the way to Drop Off point
 	// This while loop checks whether we are at 250 metres distance to DropOffPoint
 	// When it detects that we are closer than 250 metres to distance, it quits the loop [next code bit will unlocks the doors & inform the passanger]
@@ -472,7 +649,7 @@ if (!_emergencyEscapeNeeded) then {
 			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
 		};
 ///
-// BEGIN:	clickNGo Payment System
+// BEGIN:	TaxiAnywhere Pay as you Go Payment System
 ///
 		// increment the counter
 		_paygLastCheckCounterNumber = _paygLastCheckCounterNumber + 1;
@@ -480,7 +657,17 @@ if (!_emergencyEscapeNeeded) then {
 		if (_paygLastCheckCounterNumber == 20) then {
 			// reset the counter
 			_paygLastCheckCounterNumber = 0;
-			// check: is PAYG active?		if it is not active, that means prePaid time is still active?
+
+							//	---
+							//	CHEAT SHEET
+							//	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber], false];
+							//	publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
+							//	---
+			// INSIDE LOOP CHECK
+			// is PAYG active?				if it is not active, that means (a)1st Mile Fee has not been paid yet		OR		(b) TaxiAnywhere-prePaid-Initial-Journey-time is still active
+			_SUPAYGisActiveBool = call compile format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
+			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV4] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_TA1stMileFeeNeedToBePaidBool) is: (%2)			", (str _myGUSUIDNumber), (str _TA1stMileFeeNeedToBePaidBool)];};
+
 			if (_SUPAYGisActiveBool) then {
 				// PAYG is active
 				if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV7]	PAYG payment model is active on this vehicle"];};//dbg
@@ -535,7 +722,11 @@ if (!_emergencyEscapeNeeded) then {
 					breakTo "mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";
 				} else {
 					// requestor and his friends in vehicle CAN AFFORD the service.
-					// ADD CHARGE CODE HERE! 			OLD SYSTEM WAS CHARGING ON CLIENT SIDE >> nothing special needed, carry on as usual	Note that charges are incurred on the client-side so we won't charge here.
+					// 
+					// New PAYG Tick Payment System:
+					// 		we send a mgmTfA_gv_pvc_req_pleaseBeginPurchasingPowerCheckAndPAYGChargeForTimeTicksSignalOnly
+					// 		it spawns mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks
+					//		which does the checks and if player is eligible to pay then, signals the server-side to incur the charge with mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacket
 				};
 			} else {
 				// PAYG is not active yet - process here => is time to activate PAYG payment model?
@@ -545,7 +736,8 @@ if (!_emergencyEscapeNeeded) then {
 				if (_currentTimeInSecondsNumber - (_SUclickNGoTaxiPrepaidPaymentTransactionTimeInSecondsNumber+_SUclickNGoTaxiPrepaidAbsoluteMinimumJourneyTimeInSeconds)>=0) then {
 					// Yes it is time to activate PAYG now!
 					if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV4] Yes it is time to activate PAYG now!"];};//dbg
-					_SUPAYGisActiveBool = true;
+					missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber], true];
+					publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
 					// TODO:	CURRENTLY SENDING TO A SINGLE PLAYER ONLY. 		CHANGE THIS IN THE FUTURE, SEND TO ALL PASSENGERS IN VEHICLE!		// add publicVariableClient code here ==> let all passengers in clickNGo taxi now that from now on he will be charged according to PAYG payment model. display costs in hint box as reminder.		// note that only commandingCustomer will be charged but the mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks function will actively run on oll passengers computers [this is because in the future we will allow switch commandingCustomer on the fly]
 					mgmTfA_gv_pvc_req_pleaseBeginPurchasingPowerCheckAndPAYGChargeForTimeTicksSignalOnly = ".";
 					_clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_req_pleaseBeginPurchasingPowerCheckAndPAYGChargeForTimeTicksSignalOnly";
@@ -556,20 +748,17 @@ if (!_emergencyEscapeNeeded) then {
 				};
 			};
 		};
-///
-// END:	clickNGo Payment System
-///
+				///
+				// END:	clickNGo Payment System
+				///
 	};
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] EXITED LOOP: drivingToDropOffPoint250"];};
 };
 
-
-
 // If emergency escape needed, do nothing.
 // If emergency escape is NOT needed, proceed with the next batch of workflow tasks
-if (!_emergencyEscapeNeeded) then { 
+if (!_emergencyEscapeNeeded) then {
 	// workflow tasks below this line
-	
 	
 	//We are about to reach passenger drop off point
 	//Unlock the vehicle doors
@@ -660,6 +849,9 @@ if (!_emergencyEscapeNeeded) then {
  } else {
 	// we have an emergency and we need to shutdown ASAP. forget about the normal workflow next phase and go directly to termination phase!
 	if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV2] <<<reached end-of-file>>>.   there is an EMERGENCY therefore skipping Phase05 completely 	and SPAWN'ing Phase06 immediately now (mgmTfA_fnc_server_clickNGoTaxi_ServicePhase06_ToTerminationAndTheEnd)"];};//dbg
+	// Deactivate PAYG on this vehicle
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber], false];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
 	_null = [_clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _emergencyEscapeNeeded] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase06_ToTerminationAndTheEnd;
  };
 // EOF

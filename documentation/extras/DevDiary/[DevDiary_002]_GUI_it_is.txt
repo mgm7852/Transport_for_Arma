@@ -1,8 +1,0 @@
-﻿DevDiary 002 - GUI It Is
-20150421
-
-I am done with trying to find ways around Epoch AntiHack (and other AntiHacks) and its tendency to get in the way.
-I will bite the bullet, learn "this gui stuff" which I have been avoiding like the plague and get a functional GUI, everything about Transport for Arma in one place.
-
-At least the testing will be a BOOLEAN, it will either work or not, and if doesn't work we will know where to look.
-PLUS IT SHOULD WORK! Even the basic GUI I've been testing (kindly provided by Mikie boy) is working just fine under any circumstance I could test so far.

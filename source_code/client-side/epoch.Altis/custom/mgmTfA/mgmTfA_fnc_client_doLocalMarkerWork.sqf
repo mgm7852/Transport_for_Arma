@@ -2,13 +2,14 @@
 //H
 //H ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_client_doLocalMarkerWork.sqf
-//H $PURPOSE$	:	This function will be spawn'd with one argument only SU ID (GUSUIDNumber) and it will track movements of it until (a) SU is terminated OR (b) client is no longer authorized to map-track its movements
+//H $PURPOSE$	:	This function will be spawn'd with 2 arguments SU ID (GUSUIDNumber) and _trackerIsTotalOmniscienceGroupMember. It will track movements of a given SU until (a) SU is terminated OR (b) client is no longer authorized to map-track its movements
 //H ~~
 //H
 //HH
 //H ~~
 //HH	Syntax		:	_null = [SU_ID] mgmTfA_fnc_client_doLocalMarkerWork
-//HH	Parameters	:	GUSUIDNumber Globally Unique Service Unit ID number		Number		Examples: 1, 2, 5, 384, 384728473
+//HH	Parameters	:	0:	GUSUIDNumber Globally Unique Service Unit ID number		Number		Examples: 1, 2, 5, 384, 384728473
+//HH	Parameters	:	1:	trackerIsTotalOmniscienceGroupMember	Bool		Examples: true,false
 //HH	Return Value	:	Nothing	[outputs to client's local map]
 //H ~~
 //HH	The shared configuration file has the following values this function rely on: none
@@ -100,7 +101,8 @@ private	[
 		"_SUTerminationPointPositionHasBeenDeterminedBool",
 		"_SUTerminationPointPosition3DArray",
 
-		"_SUMarkerShouldBeDestroyedAfterExpiryBool"
+		"_SUMarkerShouldBeDestroyedAfterExpiryBool",
+		"_counter55"
 		];
 
 // STEP1:	Prepare information
@@ -154,9 +156,11 @@ _SUMarkerServingOrServedTextWordTextString = " serving ";
 //_SUTerminationPointMarker <= Will be declared later in this file.
 //_SUTerminationPointMarkerPointer <= Will be declared later in this file.
 //_SUTerminationPointMarkerTextLabelString <= Will be declared later in this file.
+// debug slow down counter
+_counter55 = 0;
 
 // Before we begin the loop, CREATE a PICK UP MARKER -- we will want to do this only once
-_SUPickUpPointMarkerTextLabelString = " IN PROGRESS: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " will pick up " + _SURequestorProfileNameTextString + " here";
+_SUPickUpPointMarkerTextLabelString = " IN PROGRESS: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " pick up point for: " + _SURequestorProfileNameTextString;
 if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV6] I have set _SUPickUpPointMarkerTextLabelString to: (%1).", _SUPickUpPointMarkerTextLabelString];};
 _SUPickUpPointMarker = format["SU%1PickUpMarker", _myGUSUIDNumber];
 _SUPickUpPointMarkerPointer = createMarkerLocal [_SUPickUpPointMarker,[0,0]];
@@ -172,7 +176,7 @@ if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_f
 // ONLY IF it has been determined:	Work on the DropOff Position
 if (_SUDropOffPositionHasBeenDeterminedBool) then {
 	_SUDropOffPositionPosition3DArray = call compile format ["mgmTfA_gv_PV_SU%1SUDropOffPositionPosition3DArray", _myGUSUIDNumber];
-	_SUDropOffPointMarkerTextLabelString = " IN PROGRESS: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " will drop off " + _SURequestorProfileNameTextString + " here";
+	_SUDropOffPointMarkerTextLabelString = " IN PROGRESS: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " drop off point for: " + _SURequestorProfileNameTextString;
 	if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV6] I have set _SUDropOffPointMarkerTextLabelString to: (%1).", _SUDropOffPointMarkerTextLabelString];};
 	_SUDropOffPointMarker = format["SU%1DropOffMarker", _myGUSUIDNumber];
 	_SUDropOffPointMarkerPointer = createMarkerLocal [_SUDropOffPointMarker,[0,0]];
@@ -185,9 +189,6 @@ if (_SUDropOffPositionHasBeenDeterminedBool) then {
 };
 
 //// Begin looping the main loop -- we will keep looping until server-side signal shut down (it can do this by setting "mgmTfA_gv_PV_SU%1SUMarkerShouldBeDestroyedAfterExpiryBool = true").
-// DEBUG SLOW DOWN
-private ["_counter55"];
-_counter55 = 0;
 while {_continueMapTracking} do
 {
 	// DEBUG SLOW DOWN
@@ -197,8 +198,7 @@ while {_continueMapTracking} do
 		_counter55 = 0;
 	};
 	
-	//	// Sleep a variable amount:		min=1.1 seconds	max=1.7 seconds
-	//	 sleep (1.10 + (random 0.60));
+	// sleep a sec
 	uiSleep 1;
 	 
 	// STEP1:	Obtain Latest Information and Update Local Variables Accordingly
@@ -258,7 +258,7 @@ while {_continueMapTracking} do
 		while {(((time) - _delayedDeletionStartTimeInSecondsNumber) <= mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber)} do {
 			_SUTerminationPointMarker = format["SU%1TerminationMarker", _myGUSUIDNumber];
 			 uiSleep 1;
-			_SUTerminationPointMarkerTextLabelString = " completed: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " Terminated here (Delayed Deletion in: " + (str (round (mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber - ((time) - _delayedDeletionStartTimeInSecondsNumber)))) + " s.)";
+			_SUTerminationPointMarkerTextLabelString = " completed: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " Terminated here  (served: "  + _SURequestorProfileNameTextString + ")  (Delayed Deletion in: " + (str (round (mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber - ((time) - _delayedDeletionStartTimeInSecondsNumber)))) + " s.)";
 			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf] I have set _SUTerminationPointMarkerTextLabelString to: (%1).", _SUTerminationPointMarkerTextLabelString];};
 			// Possibly we do not need to re-create it every time! just update text!
 			_SUTerminationPointMarker setMarkerTextLocal _SUTerminationPointMarkerTextLabelString;

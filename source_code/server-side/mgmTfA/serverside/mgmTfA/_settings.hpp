@@ -4,6 +4,10 @@
 //H $PURPOSE$	:	This is the shared masterConfiguration file, both server & clients will be aware of, and rely on, the values herein.
 //H ~~
 //H
+#include "_mgmTfA_dat_version.hpp"
+
+
+
 				//-----
 				//VERBOSITY SETTINGS
 				//
@@ -25,15 +29,15 @@
 //-----
 // --master debug level server&client side logging verbosity--			-- should be 0 for production systems and greater for debugging.
 // WARNING: MASSIVE LOG OUTPUT! If you leave this on, on your production system it WILL impact performance
-mgmTfA_configgv_serverAndClientDebugVerbosityLevel = 0;
+mgmTfA_configgv_serverAndClientDebugVerbosityLevel = 10;
 
 // --server-side RPT logging verbosity--					-- should be 0 for production systems and greater for debugging.
 // default: 0
-mgmTfA_configgv_serverVerbosityLevel = 0;
+mgmTfA_configgv_serverVerbosityLevel = 10;
 
 // --client-side RPT logging verbosity--					-- should be 0 for production systems and greater for debugging.
 // default: 0
-mgmTfA_configgv_clientVerbosityLevel = 0;
+mgmTfA_configgv_clientVerbosityLevel = 10;
 //-----
 
 
@@ -128,10 +132,11 @@ mgmTfA_configgv_clickNGoTaxisSpinBeforeDeletionBool = true;
 //	parameter  1:		MIN. DISTANCE		The randomly chosen spot MUST not be closer than this value to origin	- number
 //
 //production values
-mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 250;
-mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 200;
-mgmTfA_configgv_clickNGoTaxisSpawnDistanceRadiusInMetresNumber = 250;
-mgmTfA_configgv_clickNGoTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 200;
+// RELEASE TODO:	use 250/200 for release
+mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 50;
+mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;
+mgmTfA_configgv_clickNGoTaxisSpawnDistanceRadiusInMetresNumber = 50;
+mgmTfA_configgv_clickNGoTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;
 
 // Random 'Termination Point' Settings
 mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusInMetresNumber = 350;
@@ -182,7 +187,7 @@ mgmTfA_configgv_taxiCorpHqLocationMapMarkerShapeTextString = "ICON";
 // --CATP presence check time--
 //How often should the clients check whether a CATP is nearby?
 //uiSleep will be used to wait for the next one.
-mgmTfA_configgv_catpCheckFrequencySecondsNumber = 2.5;
+mgmTfA_configgv_catpCheckFrequencySecondsNumber = 2;
 
 // These are referred by createMapMarker scripts
 // detection range to activate "NEAR CATP" status
@@ -400,14 +405,14 @@ mgmTfA_configgv_expiryTimeOutThresholdTAstopVehicleReqAutoCancelInSecondsNumber 
 // Define the key to be used for the action: "Call-a-Taxi-to-my-position"
 mgmTfA_configgv_clickNGoCallATaxiHotkeyDIKCodeNumber = 210;
 //
-mgmTfA_configgv_clickNGoSetCourseHotkeyDIKCodeNumber = 55;
+mgmTfA_configgv_TA_setDestinationHotkeyDIKCodeNumber = 55;
 //
-// Whatever 'SetCourseHotkey' you define with the above DIK code will be communicated to customers when they get in (in the INSTRUCTIONS screen) just like this:
+// Whatever 'SetDestinationHotkey' you define with the above DIK code will be communicated to customers when they get in (in the INSTRUCTIONS screen) just like this:
 // "You may press * key to set a new destination at any time",
 // 
 // So we need to know how to refer to that key you define above.
 // Define it's "TextRepresentation" below [examples.: "INSERT" or "NumPad+" and so on]
-mgmTfA_configgv_clickNGoSetCourseHotkeyTextRepresentationTextString = "*";
+mgmTfA_configgv_TA_setDestinationHotkeyTextRepresentationTextString = "*";
 //
 // Workaround for:	"Epoch AntiHack is blocking the hotkey for non-admins!" issue
 // TfA can now monitor 'openMap' command and take it as the pre-agreed signal that player request a clickNGo Taxi to his position.
@@ -489,7 +494,7 @@ mgmTfA_configgv_fixedDestinationTaxisServiceFeeCostForTravellingAdditional100Met
 // --Callout Fee--				-- This is the cost of 'calling a driver' to your location
 mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber = 400;
 					////////////////
-					// DON'T TOUCH
+					// don't change unless you know what you're doing!
 					mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNegativeNumber = 0 - mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber;
 					////////////////
 
@@ -498,7 +503,7 @@ mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber = 400;
 // Even if actual journey last shorter, a refund will not be made.
 // Customer MUST pre-pay the cost to prevent unnecessary disputes.
 // default: 60 seconds (1 minute)
-mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds = 60;
+mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds = 30;
 
 // --1st Mile Fee--				-- This is the cost of first few seconds of journey
 // After this "1st Mile" run out, TaxiAnywhere tick fee keep taking money from players' wallet. 
@@ -507,7 +512,7 @@ mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds = 60;
 // If the vehicle gets stuck, it's still costing a lot of money to Taxi Corp, such as:	(driver's time) + (energy) + (insurance) + (blah blah)
 mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber = 100;
 					////////////////
-					// DON'T TOUCH
+					// don't change unless you know what you're doing!
 					mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber = 0 - mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber;
 					////////////////
 
@@ -517,7 +522,7 @@ mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber = 10;
 // tick cost		-- "pay as you go" payment bit. customer must keep paying to keep going
 mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber = 20;
 					////////////////
-					// DON'T TOUCH
+					// don't change unless you know what you're doing!
 					mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNegativeNumber = 0 - mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber;
 					////////////////
 
@@ -534,9 +539,10 @@ mgmTfA_configgv_clickNGoTaxisDisplayTickChargeCutTextMessageBool = true;
 
 // a minor payment issue don't mean auto-kick but if we can't charge more than n times, PAYG service terminates!
 mgmTfA_configgv_thresholdNumberOfFailedPAYGTransactionsToPermitBeforeInitiatingPAYGserviceAbruptTerminationNumber = 2;
-
-// don't change unless you know what you're doing!
-mgmTfA_configgv_monitoringAgentMissedPurchasingPowerCheckAndPAYGTickChargesAgentSleepTime = mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber;
+					////////////////
+					// don't change unless you know what you're doing!
+					mgmTfA_configgv_monitoringAgentMissedPurchasingPowerCheckAndPAYGTickChargesAgentSleepTime = mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber;
+					////////////////
 
 // when player get in a clickNGo vehicle, driver will not start driving unless the 'PAYG Initial Fee' is paid.
 // At this point in time,
@@ -684,19 +690,6 @@ mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber=60;
 //-----
 // STUFF BELOW - MOSTLY NOT IMPLEMENTED
 //-----
-
-//VERSION INFORMATION
-mgmTfA_configgv_TfAScriptVersionMajorNumber = 0;
-mgmTfA_configgv_TfAScriptVersionMinorNumber = 4;
-mgmTfA_configgv_TfAScriptVersionRevisionNumber = 1;
-mgmTfA_configgv_TfAScriptVersionTextString = "0.4.1";
-//-----
-mgmTfA_configgv_TfAScriptVersionMajorMultipliedNumber = (mgmTfA_configgv_TfAScriptVersionMajorNumber * 100);
-mgmTfA_configgv_TfAScriptVersionMinorMultipliedNumber = (mgmTfA_configgv_TfAScriptVersionMinorNumber * 10);
-//-----
-mgmTfA_configgv_TfAScriptVersionRevisionSumValueNumber = mgmTfA_configgv_TfAScriptVersionMajorMultipliedNumber + mgmTfA_configgv_TfAScriptVersionMinorMultipliedNumber + mgmTfA_configgv_TfAScriptVersionRevisionNumber;
-//-----
-
 
 
 //-----

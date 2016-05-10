@@ -1,0 +1,12 @@
+﻿REFERENCE - VEHICLE CODES
+
+
+---------------------------------------------------------
+2-letter	6-letter	full text
+---------------------------------------------------------
+TA		TxAnyw		Taxi Anywhere Taxi
+FD		TxFdtx		Fixed Destination Taxi
+---------------------------------------------------------
+
+
+//EOF

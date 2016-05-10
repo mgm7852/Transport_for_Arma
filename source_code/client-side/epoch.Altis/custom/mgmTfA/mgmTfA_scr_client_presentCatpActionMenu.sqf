@@ -105,8 +105,8 @@ while {true} do {
 				//Show the "You have arrived a Call-a-Taxi-Point" message only if the player is on foot
 				if (vehicle player == player) then {
 					// player is on foot
-					systemChat "Call-a-Taxi menu option has been added.";
-					hint parseText format["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_taxiCanCall.jpg'/><br/><br/><t size='1.40' color='#00FF00'>You have arrived at a Call-a-Taxi-Point.</t>", 5];
+					systemChat "[SYSTEM]  CALL-A-TAXI MENU OPTION HAS BEEN ADDED";
+					hint parseText format["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCanCall.jpg'/><br/><br/><t size='1.40' color='#00FF00'>You have arrived at a Call-a-Taxi-Point.</t>", 5];
 				} else {
 					// Player in a vehicle at the moment
 					// Do not display anything about Catp
@@ -128,8 +128,8 @@ while {true} do {
 					//Show the "You have left a Call-A-Taxi-Point" message only if the player is on foot
 					if (vehicle player == player) then {
 						// player is on foot
-						systemChat "Call-a-Taxi menu option has been removed.";
-						hint parseText format["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_taxiCanNotCall.jpg'/><br/><br/><t size='1.40' color='#FF2828'>You have left a Call-a-Taxi-Point.</t>", 5];
+						systemChat "[SYSTEM]  CALL-A-TAXI MENU OPTION HAS BEEN REMOVED";
+						hint parseText format["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCanNotCall.jpg'/><br/><br/><t size='1.40' color='#FF2828'>You have left a Call-a-Taxi-Point.</t>", 5];
 					} else {
 						//I'm in a vehicle at the moment	//Do not display anything about Catp
 					};

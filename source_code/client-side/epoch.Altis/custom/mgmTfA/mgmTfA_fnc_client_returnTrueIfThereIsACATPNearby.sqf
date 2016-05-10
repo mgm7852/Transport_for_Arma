@@ -37,7 +37,7 @@ if (_numberOfCatpObjectsNearMe>0) then {
 	// there are matching objects but is it just same class object or really a Catp?	check now
 	{
 		if (_x	getVariable ["mgmTfA_Dispatcher",false]) then {
-			// we found an mgmTfA_Dispatcher here
+			// we found a mgmTfA_Dispatcher here
 			_returnValue=true;
 			breakTo "mgmTfA_fnc_client_returnTrueIfThereIsACatpNearbyMainScope";
 		};

@@ -1,0 +1,1 @@
+hint "Pay Now clicked";

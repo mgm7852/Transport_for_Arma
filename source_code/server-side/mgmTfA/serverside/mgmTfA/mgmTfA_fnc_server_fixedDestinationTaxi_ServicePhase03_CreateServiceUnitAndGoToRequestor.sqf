@@ -144,7 +144,7 @@ _SUDistanceToActiveWaypointInMetersNumber = -1;
 //_SUAIVehicleSpeedOfVehicleInKMHNumber						//<=	do not set this variable yet (it will be done later in this file)
 // start with false
 _emergencyEscapeNeeded = false;
-if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV4] <ThisIs:%1> I have been SPAWN'd. Here is the raw dump of the arguments I have in (_this)=(%2).", _myGUSUIDNumber, (str _this)];};//dbg
+if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV4] <ThisIs:%1> I have been SPAWN'd. Here is the raw dump of the arguments I have in (_this)=(%2).", _myGUSUIDNumber, (str _this)];};//dbg
 if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV2] A fixed destination taxi request was FORWARDED to me.			This is what I have received:		_fixedDestinationRequestorClientIDNumber: (%1).		_fixedDestinationRequestorPosition3DArray: (%2).		_fixedDestinationRequestedTaxiFixedDestinationIDNumber: (%3) / resolved to locationName: (%4).		_fixedDestinationRequestorPlayerUIDTextString: (%5) / resolved to profileName: (%6).		_positionToSpawnSUVehiclePosition3DArray is: (%7).		_myGUSUIDNumber is: (%8).", _fixedDestinationRequestorClientIDNumber, (str _fixedDestinationRequestorPosition3DArray), _fixedDestinationRequestedTaxiFixedDestinationIDNumber, _fixedDestinationRequestedDestinationNameTextString, _fixedDestinationRequestorPlayerUIDTextString, _fixedDestinationRequestorProfileNameTextString, (str _positionToSpawnSUVehiclePosition3DArray), _myGUSUIDNumber];};//dbg
 
 //Set Sides (Only If Hasn't Been Done Before)
@@ -202,12 +202,17 @@ _SUTaxiAIVehicleObject setFuel 1;
 _SUTaxiAIVehicleObject allowDammage false;
 _SUTaxiAIVehicleObject addEventHandler ["HandleDamage", {false}];	
 _SUTaxiAIVehicleObject setVariable ["isMemberOfTaxiCorpFleet", _SUAIGroup, true];
-_SUTaxiAIVehicleObject setVariable ["isfixedDestinationTaxi", true, true];
+_SUTaxiAIVehicleObject setVariable ["mgmTfAisfixedDestinationTaxi", true, true];
 _SUTaxiAIVehicleObject setVariable ["GUSUIDNumber", _myGUSUIDNumber, true];
+_SUTaxiAIVehicleObject setVariable ["commandingCustomerPlayerUIDNumber", _fixedDestinationRequestorPlayerUIDTextString, true];
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUFDServiceFeeNeedToBePaidBool", _myGUSUIDNumber], true];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUFDServiceFeeNeedToBePaidBool", _myGUSUIDNumber];
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUfdTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber], true];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUfdTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber];
-missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUfdTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber], false];
-publicVariable format ["mgmTfA_gv_PV_SU%1SUfdTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber];
+// NOTE: a FDT will never require "1st Mile Fee" however if we do not set this, when a requestor get out of TA and jump into a FDT it will break the code. To prevent, simply pass a FALSE here.
+// mark all Fixed Destination Taxis as "1st Mile need not be paid"
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], false];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
 // if *Global variants is used, the effect will be global. otherwise players continue seeing the old items in cargo		ref:	http://www.reddit.com/r/arma/comments/2rpk6e/arma_3_ammo_boxes_and_similar_reset_to_original/cniglrb
 clearMagazineCargoGlobal _SUTaxiAIVehicleObject;
 clearWeaponCargoGlobal _SUTaxiAIVehicleObject;

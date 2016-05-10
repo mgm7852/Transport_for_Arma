@@ -1,12 +1,12 @@
 //H
 // ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_client_clickNGoSetCourse.sqf
-//H $PURPOSE$	:	This client side script contains the code to set the course of a clickNGo taxi.
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_scr_client_TA_setDestination.sqf
+//H $PURPOSE$	:	This client side script contains the code to set the destination of a clickNGo taxi.
 // ~~
 //H
 private ["_thisFileVerbosityLevelNumber"];
 _thisFileVerbosityLevelNumber = 0;
-scopeName "mgmTfA_fnc_client_clickNGoSetCourseMainScope";
+scopeName "mgmTfA_scr_client_TA_setDestinationMainScope";
 if (isServer) exitWith {};
 if (!isServer) then {
 	waitUntil {!isnull (finddisplay 46)};
@@ -22,7 +22,7 @@ private	[
 		"_posOld"
 		];
 _posOld = getMarkerPos "clickNGoTaxiChosenPosition";
-diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoSetCourse.sqf]      clickNGoTaxiChosenPosition INITIAL SPOT is: (%1)", (str _posOld)];
+diag_log format ["[mgmTfA] [mgmTfA_scr_client_TA_setDestination.sqf]      clickNGoTaxiChosenPosition INITIAL SPOT is: (%1)", (str _posOld)];
 deleteMarker "clickNGoTaxiChosenPosition";
 // Open the map
 openMap true;
@@ -30,7 +30,7 @@ openMap true;
 _msg2HintTextString = parsetext format ["AWAITING INPUT<br/><br/>SINGLE LEFT CLICK<br/>TO SET DESTINATION"];
 hint _msg2HintTextString;
 // Inform via systemChat (in Text-Only format)
-_msg2SyschatTextString = parsetext format ["AWAITING INPUT. SINGLE LEFT CLICK TO SET DESTINATION"];
+_msg2SyschatTextString = parsetext format ["[SYSTEM]  AWAITING INPUT. SINGLE LEFT CLICK TO SET DESTINATION"];
 systemChat (str _msg2SyschatTextString);
 // Insert the actual code to handle the mouse-left-click-on-map
 onMapSingleClick "
@@ -38,7 +38,7 @@ onMapSingleClick "
 	clickNGoTaxiChosenDestinationMarker			setMarkerTypeLocal		""hd_dot"";
 	clickNGoTaxiChosenDestinationMarker			setMarkerColorLocal		""ColorBlue"";
 	clickNGoTaxiChosenDestinationMarker			setMarkerTextLocal		""clickNGo Taxi Destination"";
-	diag_log format [""[mgmTfA] [mgmTfA_fnc_client_clickNGoSetCourse.sqf]      clickNGoTaxiChosenPosition NEW SPOT is: (%1)"", (str _pos)];
+	diag_log format [""[mgmTfA] [mgmTfA_scr_client_TA_setDestination.sqf]      clickNGoTaxiChosenPosition NEW SPOT is: (%1)"", (str _pos)];
 	clickNGoTaxiDestinationChoser_mapClicked								= true;
 	onMapSingleClick {};
 	hint """";

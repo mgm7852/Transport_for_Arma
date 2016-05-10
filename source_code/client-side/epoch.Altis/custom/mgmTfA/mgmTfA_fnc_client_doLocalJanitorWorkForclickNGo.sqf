@@ -2,7 +2,9 @@
 //H
 //H ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_client_doLocalJanitorWorkForclickNGo.sqf
-//H $PURPOSE$	:	This function will be launched by client init, and it will kick in every 5 minutes; (if player is not in a clickNGo vehicle) && (if it has been more than 15 minutes since player's clickNGoTaxiHotkeyLastSuccessfulUse) then this script sets players status to "mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey=true"
+//H $PURPOSE$	:	This function will be launched by client init, and it will kick in every 5 minutes; 
+//H					(if player is not in a clickNGo vehicle) && (if it has been more than 15 minutes since player's clickNGoTaxiHotkeyLastSuccessfulUse) 
+//H					then this script sets player's status to "mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey=true"
 //H ~~
 //H
 //HH
