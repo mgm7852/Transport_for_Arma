@@ -148,7 +148,7 @@ if (_bookingPermitted) then {
 				"_msg2SyschatTextString"
 				];
 		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>THE BOOKING FEE:<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_fixedDestinationTaxisNonRefundableStandardBookingFeeCostInCryptoNumber)];
-		_msg2SyschatTextString = parsetext format ["%1 THANKS FOR PAYING THE BOOKING FEE: %2 CRYPTO. PLEASE WAIT", (profileName), (str mgmTfA_configgv_fixedDestinationTaxisNonRefundableStandardBookingFeeCostInCryptoNumber)];
+		_msg2SyschatTextString = parsetext format ["BOOKING FEE %1 CRYPTO PAID, THANKS! PLEASE WAIT...", (str mgmTfA_configgv_fixedDestinationTaxisNonRefundableStandardBookingFeeCostInCryptoNumber)];
 		// Print the message
 		hint _msg2HintTextString;
 		systemChat str _msg2SyschatTextString;
@@ -178,7 +178,7 @@ if (_bookingPermitted) then {
 		// Clear the hint are
 		hint "";
 		// Print the message
-		_bookingRequestSubmittedPleaseStandByForDespatchersResponseMessageTextOnly = parsetext format ["ALRIGHT %1! TAXI TO %2.<br/>PROCESSING YOUR REQUEST.<br/>PLEASE STAND BY...</t>", (profileName), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+		_bookingRequestSubmittedPleaseStandByForDespatchersResponseMessageTextOnly = parsetext format ["[RADIO_OUT] TAXI REQUEST SUBMITTED, PLEASE STAND BY"];
 		systemChat str _bookingRequestSubmittedPleaseStandByForDespatchersResponseMessageTextOnly;
 	} else {
 		// Player's current cash is NOT adequate to pay for the full journey cost	// Let the player know
