@@ -74,7 +74,7 @@ private	[
 		"_SUTerminationPointPositionHasBeenDeterminedBool",
 		"_SUTerminationPointPosition3DArray",
 		"_SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray",
-		"_SUfdTxserviceFeeHasBeenPaidBool"
+		"_SUFDServiceFeeNeedToBePaidBool"
 		];
 //// Prep Function Arguments	&	Assign Initial Values for Local Variables
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
@@ -377,11 +377,14 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 		if(_emergencyEscapeNeeded) then { breakTo "mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";	};
 
 		// payment check code here
-		_SUfdTxserviceFeeHasBeenPaidBool = call compile format ["mgmTfA_gv_PV_SU%1SUfdTxserviceFeeHasBeenPaidBool", _myGUSUIDNumber];
-		if (_SUfdTxserviceFeeHasBeenPaidBool) then {
-			// if "_SUfdTxserviceFeeHasBeenPaidBool" is true, Requestor (or one of his buddies) have paid the full journey cost so we can proceed with rest of the fixedDestinationTaxi workflow
+		_SUFDServiceFeeNeedToBePaidBool = call compile format ["mgmTfA_gv_PV_SU%1SUFDServiceFeeNeedToBePaidBool", _myGUSUIDNumber];
+		if (_SUFDServiceFeeNeedToBePaidBool) then {
+			// Service Fee has not been paid yet -- log it
+			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] REQUESTOR STILL HASN'T PAID!	 	will keep looping till paid or phase timeout...		"];};//dbg
+		} else {
+			// Service Fee has been paid 	-- log it and allow break out of loop
+			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] REQUESTOR HAS PAID!	 Breaking out of loop - will begin driving to the requested FixedTaxiDestination...		"];};//dbg
 			_requestorHasNotPaid = false;
-				if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] Requestor has paid! Now will begin driving to the requested FixedTaxiDestination..."];};//dbg
 		};
 		uiSleep 0.05;
 	};

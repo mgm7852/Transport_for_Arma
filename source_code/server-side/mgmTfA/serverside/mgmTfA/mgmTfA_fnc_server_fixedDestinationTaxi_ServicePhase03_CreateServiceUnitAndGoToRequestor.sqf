@@ -202,12 +202,12 @@ _SUTaxiAIVehicleObject setFuel 1;
 _SUTaxiAIVehicleObject allowDammage false;
 _SUTaxiAIVehicleObject addEventHandler ["HandleDamage", {false}];	
 _SUTaxiAIVehicleObject setVariable ["isMemberOfTaxiCorpFleet", _SUAIGroup, true];
-_SUTaxiAIVehicleObject setVariable ["isfixedDestinationTaxi", true, true];
+_SUTaxiAIVehicleObject setVariable ["mgmTfAisfixedDestinationTaxi", true, true];
 _SUTaxiAIVehicleObject setVariable ["GUSUIDNumber", _myGUSUIDNumber, true];
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUFDServiceFeeNeedToBePaidBool", _myGUSUIDNumber], true];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUFDServiceFeeNeedToBePaidBool", _myGUSUIDNumber];
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUfdTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber], true];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUfdTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber];
-missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUfdTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber], false];
-publicVariable format ["mgmTfA_gv_PV_SU%1SUfdTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber];
 // NOTE: a FDT will never require "1st Mile Fee" however if we do not set this, when a requestor get out of TA and jump into a FDT it will break the code. To prevent, simply pass a FALSE here.
 // mark all Fixed Destination Taxis as "1st Mile need not be paid"
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], false];
