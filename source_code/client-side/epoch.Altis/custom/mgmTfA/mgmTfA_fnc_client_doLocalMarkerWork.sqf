@@ -156,7 +156,7 @@ _SUMarkerServingOrServedTextWordTextString = " serving ";
 //_SUTerminationPointMarker <= Will be declared later in this file.
 //_SUTerminationPointMarkerPointer <= Will be declared later in this file.
 //_SUTerminationPointMarkerTextLabelString <= Will be declared later in this file.
-// DEBUG SLOW DOWN
+// debug slow down counter
 _counter55 = 0;
 
 // Before we begin the loop, CREATE a PICK UP MARKER -- we will want to do this only once
