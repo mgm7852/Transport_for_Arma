@@ -26,13 +26,15 @@ if (!isServer) then { waitUntil {!isnull (finddisplay 46)}; };
 private	[
 		"_continueRequesting1stMileFeePayment",
 		"_myGUSUIDNumber",
-		"_counter55",
+		"_counterTen",
+		"_counterInfinite",
 		"_msg2SyschatTextString"
 		];
 // if we have been signalled by mgmTfA_scr_client_initRegisterClientEventHandlers, that means this is initially TRUE
 _continueRequesting1stMileFeePayment = true;
 // debug slow down counter
-_counter55 = 0;
+_counterTen = 1;
+_counterInfinite = 1;
 _myGUSUIDNumber = _this select 0;
 // log it		-- do not move this line any higher!
 if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf]  [TV5]	BEGIN RUNNING FUNCTION		I will  keep requesting 1st Mile Fee Payment till it is paid or phase timeout, for SU: (%1).", (str _myGUSUIDNumber)];};
@@ -41,10 +43,11 @@ if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_f
 while {_continueRequesting1stMileFeePayment} do
 {
 	// DEBUG SLOW DOWN
-	_counter55 = _counter55 +1;
-	if (_counter55 >= 10) then {
+	_counterTen = _counterTen + 1;
+	_counterInfinite = _counterInfinite + 1;
+	if (_counterTen >= 10) then {
 		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf]  [TV8] Reached checkpoint: Running main loop. Now executing the very top, just above sleep."];};
-		_counter55 = 0;
+		_counterTen = 0;
 	};
 	// sleep a sec
 	uiSleep 1;
@@ -56,7 +59,7 @@ while {_continueRequesting1stMileFeePayment} do
 		// YES continue requesting payment
 		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequesting1stMileFeePayment) is: (%2)		I WILL CONTINUE LOOPING	", (str _myGUSUIDNumber), (str _continueRequesting1stMileFeePayment)];};
 		// request payment
-		_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE 1ST MILE FEE: %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _counter55)];
+		_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE 1ST MILE FEE: %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _counterInfinite)];
 		systemChat (str _msg2SyschatTextString);
 	} else {
 		// NO do not request payment any more - we are terminating!
