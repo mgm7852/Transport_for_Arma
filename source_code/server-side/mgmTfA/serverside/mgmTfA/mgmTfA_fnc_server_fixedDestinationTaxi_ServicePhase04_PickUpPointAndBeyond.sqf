@@ -401,7 +401,7 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 	mgmTfA_gv_pvc_pos_fixedDestinationTaxiDoorsHaveBeenLockedPacketSignalOnly = ".";
 	_fixedDestinationRequestorClientIDNumber		publicVariableClient		"mgmTfA_gv_pvc_pos_fixedDestinationTaxiDoorsHaveBeenLockedPacketSignalOnly";
 	if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that doors have been locked). _fixedDestinationRequestorProfileNameTextString: (%1) on computer (_fixedDestinationRequestorClientIDNumber): (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};//dbg
- };
+};
 //TODO: add code ==>>  Add a button "Stop the car!"		("get out" option is always visible in offroad pickups - all we need to do is stop the car so that passengers won't get hurt!)
 // NEW DESTINATION		// Add new Waypoint data
 _SUTaxiAIVehicleWaypointMainArrayIndexNumber = _SUTaxiAIVehicleWaypointMainArrayIndexNumber + 1;
