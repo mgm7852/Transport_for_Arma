@@ -475,6 +475,8 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 		// Calculate Current Task Age and Initiate Abnormal SU Termination (logged) if necessary
 		_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
 		if (_SUCurrentTaskAgeInSecondsNumber > _SUCurrentTaskThresholdInSecondsNumber) then {
+			// Expiry Timeout Threshold Exceeded. Initiating Abnormal Termination of SU.
+			// We are being abnormally destroyed!
 			_emergencyEscapeNeeded = true;
 		};
 		// Let emergency escapees pass
@@ -752,13 +754,10 @@ if (!_emergencyEscapeNeeded) then {
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] EXITED LOOP: drivingToDropOffPoint250"];};
 };
 
-
-
 // If emergency escape needed, do nothing.
 // If emergency escape is NOT needed, proceed with the next batch of workflow tasks
 if (!_emergencyEscapeNeeded) then {
 	// workflow tasks below this line
-	
 	
 	//We are about to reach passenger drop off point
 	//Unlock the vehicle doors
