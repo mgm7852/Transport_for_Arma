@@ -248,6 +248,7 @@ if (isServer) then {
 	publicVariable "mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber";
 	publicVariable "mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber";
 	publicVariable "mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNegativeNumber";
+	publicVariable "mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber";
 	publicVariable "mgmTfA_configgv_clickNGoTaxisDisplayTickHintMessagesBool";
 	publicVariable "mgmTfA_configgv_fixedDestinationTaxisClientSideScannerSleepDurationBetweenScansInSecondsNumber";
 	publicVariable "mgmTfA_configgv_clickNGoTaxisClientSideScannerSleepDurationBetweenScansInSecondsNumber";

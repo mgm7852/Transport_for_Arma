@@ -39,10 +39,10 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 	// is the local player supposed to pay the next tick?	NOTE: currently, we are running this function for all players on board even if they are not the requestor. in the future, on-the-fly "payingCustomer" switching will be supported, meaning requestor running out of money, from inside the vehicle, one of the other players can take over "PAYG payment" duty. this below is the prep.
 	if (_myPUID == _myVehiclesCommandingCustomerPlayerUIDNumber) then {
 		// YES, player is the commandingCustomer and mustPay the nextTick
-		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          YES, player is the commandingCustomer and mustPay the nextTick.		_playerMustPayBool  is set to true."];};
+		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          YES, player is the commandingCustomer and mustPay the 1st Mile Fee.		_playerMustPayBool  is set to true."];};
 		_playerMustPayBool = true;
 	} else {
-		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          NO, player is NOT the commandingCustomer and will not pay the nextTick.		_playerMustPayBool  is set to false."];};
+		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          NO, player is NOT the commandingCustomer and will not pay 1st Mile Fee.		_playerMustPayBool  is set to false."];};
 		_playerMustPayBool = false;
 	};
 	// if player mustPay, 	CHECK: can the player afford the 1st Mile Fee?
@@ -74,20 +74,12 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 					"_messageTextOnlyFormat"
 					];
 			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/>HAVE A NICE DAY!<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
-			hint _msg2HintTextString;
-			_messageTextOnlyFormat = parsetext format ["%1 SORRY BUT YOU CANNOT AFFORD THE 1ST MILE FEE %2 CRYPTO! HAVE A NICE DAY!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
-			systemChat str _messageTextOnlyFormat;
-
-			private	[
-					"_msg2HintTextString",
-					"_messageTextOnlyFormat"
-					];
-			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/>HAVE A NICE DAY!<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 			_messageTextOnlyFormat = parsetext format ["%1 SORRY BUT YOU CANNOT AFFORD THE 1ST MILE FEE %2 CRYPTO! HAVE A NICE DAY!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 			// Print the message
 			hint _msg2HintTextString;
 			systemChat (str _messageTextOnlyFormat);
 			_playerWentBankruptBool = true;
+			if (_playerWentBankruptBool) then {	if (mgmTfA_configgv_clientVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV5]				I noticed (_playerWentBankruptBool) is  true!	"];};						};
 			// signal the server via customerCannotAffordService=true
 			(vehicle player) setVariable ["customerCannotAffordService", true, true];
 			// break out of main loop
