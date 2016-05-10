@@ -164,7 +164,7 @@ class MGMTFA_DIALOG
 		idc = -1;
 		tooltip = "PAY 1ST MILE FEE";
 		text = "custom\mgmTfA\img_gui\1c_btn_1stmilepaynow.jpg";
-		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\script_taxianywhere1stmilepaynow.sqf""";		
+		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_scr_client_TAChargeMe1stMileFee.sqf""";		
 		x = 0.283437 * safezoneW + safezoneX;
 		y = 0.577013 * safezoneH + safezoneY;
 		w = 0.04125 * safezoneW;
