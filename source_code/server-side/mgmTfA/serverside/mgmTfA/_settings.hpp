@@ -187,7 +187,7 @@ mgmTfA_configgv_taxiCorpHqLocationMapMarkerShapeTextString = "ICON";
 // --CATP presence check time--
 //How often should the clients check whether a CATP is nearby?
 //uiSleep will be used to wait for the next one.
-mgmTfA_configgv_catpCheckFrequencySecondsNumber = 2.5;
+mgmTfA_configgv_catpCheckFrequencySecondsNumber = 2;
 
 // These are referred by createMapMarker scripts
 // detection range to activate "NEAR CATP" status
@@ -405,14 +405,14 @@ mgmTfA_configgv_expiryTimeOutThresholdTAstopVehicleReqAutoCancelInSecondsNumber 
 // Define the key to be used for the action: "Call-a-Taxi-to-my-position"
 mgmTfA_configgv_clickNGoCallATaxiHotkeyDIKCodeNumber = 210;
 //
-mgmTfA_configgv_clickNGoSetCourseHotkeyDIKCodeNumber = 55;
+mgmTfA_configgv_TA_setDestinationHotkeyDIKCodeNumber = 55;
 //
-// Whatever 'SetCourseHotkey' you define with the above DIK code will be communicated to customers when they get in (in the INSTRUCTIONS screen) just like this:
+// Whatever 'SetDestinationHotkey' you define with the above DIK code will be communicated to customers when they get in (in the INSTRUCTIONS screen) just like this:
 // "You may press * key to set a new destination at any time",
 // 
 // So we need to know how to refer to that key you define above.
 // Define it's "TextRepresentation" below [examples.: "INSERT" or "NumPad+" and so on]
-mgmTfA_configgv_clickNGoSetCourseHotkeyTextRepresentationTextString = "*";
+mgmTfA_configgv_TA_setDestinationHotkeyTextRepresentationTextString = "*";
 //
 // Workaround for:	"Epoch AntiHack is blocking the hotkey for non-admins!" issue
 // TfA can now monitor 'openMap' command and take it as the pre-agreed signal that player request a clickNGo Taxi to his position.
