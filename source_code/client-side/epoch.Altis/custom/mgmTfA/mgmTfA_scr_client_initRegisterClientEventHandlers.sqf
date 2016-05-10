@@ -498,7 +498,7 @@ DUPLICATE - DELETE THIS BLOCK
 	if (true) then {
 		// not a config option yet - just go ahead & inform the player
 		private	["_msg2HintTextString"];
-		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>TAXI-ANYWHERE 1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/>. THANK YOU FOR THE PAYMENT.<br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
+		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID<br/>TAXI-ANYWHERE<br/>1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/>THANK YOU FOR THE PAYMENT<br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
 		hint _msg2HintTextString;
 	};
 	// inform the player via systemChat 	-- only if the global config allows
