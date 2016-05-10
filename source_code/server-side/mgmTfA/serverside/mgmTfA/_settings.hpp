@@ -499,7 +499,7 @@ mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber = 400;
 // Even if actual journey last shorter, a refund will not be made.
 // Customer MUST pre-pay the cost to prevent unnecessary disputes.
 // default: 60 seconds (1 minute)
-mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds = 60;
+mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds = 30;
 
 // --1st Mile Fee--				-- This is the cost of first few seconds of journey
 // After this "1st Mile" run out, TaxiAnywhere tick fee keep taking money from players' wallet. 
