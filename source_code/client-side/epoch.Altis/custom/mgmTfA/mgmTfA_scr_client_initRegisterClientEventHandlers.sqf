@@ -12,7 +12,7 @@
 			];
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_pleaseWait.jpg'/><br/><br/><t size='1.40' color='#00FF00'>FIXED DESTINATION<br/>TAXI TO:<br/><br/>%1<br/><br/>PROCESSING REQUEST<br/></t>", mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  FIXED DESTINATION TAXI TO %1. PROCESSING, PLEASE WAIT...", mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  FIXED DESTINATION TAXI TO %1. PROCESSING...", mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
@@ -25,7 +25,7 @@
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiclickNGoNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_pleaseWait.jpg'/><br/><br/><t size='1.40' color='#00FF00'>clickNGo TAXI<br/><br/>PROCESSING REQUEST<br/></t>"];
-	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  clickNGo TAXI REQUEST. PROCESSING, PLEASE WAIT..."];
+	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  clickNGo TAXI REQUEST. PROCESSING..."];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
