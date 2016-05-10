@@ -102,6 +102,9 @@ while {true} do {
 				if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          YES, player can afford the next PAYGtickCost	"];};
 				// are we supposed to charge PAYG now?		-- we should not charge if PAYG is not active yet
 
+				// DO NOT move this below!	prep for PAYG check
+				_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
+
 				// is PAYG active?				if it is not active, that means (a)1st Mile Fee has not been paid yet		OR		(b) TaxiAnywhere-prePaid-Initial-Journey-time is still active
 				_SUPAYGisActiveBool = call compile format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
 				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_SUPAYGisActiveBool) is: (%2)			", (str _myGUSUIDNumber), (str _SUPAYGisActiveBool)];};
@@ -109,7 +112,6 @@ while {true} do {
 				// if PAYG is active, charge the PAYG tickCost now -- SEND REQUEST to server so that server will charge customer's wallet
 				if (_SUPAYGisActiveBool) then {
 					// CHARGE PLAYER NOW
-					_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
 					if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
 					myGUSUIDNumber = _myGUSUIDNumber;
 					mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacket = [player, mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, myGUSUIDNumber];
