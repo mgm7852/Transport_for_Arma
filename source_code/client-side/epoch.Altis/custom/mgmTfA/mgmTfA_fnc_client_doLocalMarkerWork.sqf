@@ -160,7 +160,7 @@ _SUMarkerServingOrServedTextWordTextString = " serving ";
 _counter55 = 0;
 
 // Before we begin the loop, CREATE a PICK UP MARKER -- we will want to do this only once
-_SUPickUpPointMarkerTextLabelString = " IN PROGRESS: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " pick up point for " + _SURequestorProfileNameTextString;
+_SUPickUpPointMarkerTextLabelString = " IN PROGRESS: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " pick up point for: " + _SURequestorProfileNameTextString;
 if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV6] I have set _SUPickUpPointMarkerTextLabelString to: (%1).", _SUPickUpPointMarkerTextLabelString];};
 _SUPickUpPointMarker = format["SU%1PickUpMarker", _myGUSUIDNumber];
 _SUPickUpPointMarkerPointer = createMarkerLocal [_SUPickUpPointMarker,[0,0]];
@@ -176,7 +176,7 @@ if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_f
 // ONLY IF it has been determined:	Work on the DropOff Position
 if (_SUDropOffPositionHasBeenDeterminedBool) then {
 	_SUDropOffPositionPosition3DArray = call compile format ["mgmTfA_gv_PV_SU%1SUDropOffPositionPosition3DArray", _myGUSUIDNumber];
-	_SUDropOffPointMarkerTextLabelString = " IN PROGRESS: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " drop off point " + _SURequestorProfileNameTextString;
+	_SUDropOffPointMarkerTextLabelString = " IN PROGRESS: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " drop off point for: " + _SURequestorProfileNameTextString;
 	if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV6] I have set _SUDropOffPointMarkerTextLabelString to: (%1).", _SUDropOffPointMarkerTextLabelString];};
 	_SUDropOffPointMarker = format["SU%1DropOffMarker", _myGUSUIDNumber];
 	_SUDropOffPointMarkerPointer = createMarkerLocal [_SUDropOffPointMarker,[0,0]];
