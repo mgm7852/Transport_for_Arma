@@ -133,6 +133,10 @@ mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDay
 _clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket";
 if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond.sqf]      SIGNAL SENT to the Requestor (We have arrived. Thank you for your business. Have a nice day.). _clickNGoRequestorProfileNameTextString: (%1)  on computer (_clickNGoRequestorClientIDNumber)=(%2). The _myGUSUIDNumber is: (%3).", _clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber, _myGUSUIDNumber];};
 
+// Deactivate PAYG on this vehicle
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber], false];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
+
 //On arrival to waypoint (drop off point) add the travelled distance to the global counter and then reset our local counter
 mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond.sqf] [TV3] mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg

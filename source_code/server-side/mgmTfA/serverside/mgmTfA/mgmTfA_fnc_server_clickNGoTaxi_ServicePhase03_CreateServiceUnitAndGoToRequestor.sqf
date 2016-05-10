@@ -227,6 +227,8 @@ if (mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) th
 	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], false];
 	publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
 };
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber], false];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
 // if *Global variants is used, the effect will be global. otherwise players continue seeing the old items in cargo		ref:	http://www.reddit.com/r/arma/comments/2rpk6e/arma_3_ammo_boxes_and_similar_reset_to_original/cniglrb
 clearMagazineCargoGlobal _SUTaxiAIVehicleObject;
 clearWeaponCargoGlobal _SUTaxiAIVehicleObject;

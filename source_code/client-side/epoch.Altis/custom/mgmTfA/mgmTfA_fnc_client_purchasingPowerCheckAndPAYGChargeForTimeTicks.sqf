@@ -31,7 +31,8 @@ private		[
 			"_playerMustPayBool",
 			"_playerWentBankruptBool",
 			"_checkedAndPlayerWasNotInAclickNGoVehicleCountNumber",
-			"_player"
+			"_player",
+			"_SUPAYGisActiveBool"
 			];
 _functionExecutionTimeInSecondsNumber= (time);
 if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf]  [TV8] 		DEVDEBUG		I have been SPAWN'd		at: (%1).		This is what I have received:	(%2).", (str _functionExecutionTimeInSecondsNumber), (str _this)];};
@@ -50,6 +51,8 @@ _playerMustPayBool = false;
 _playerWentBankruptBool = false;
 _checkedAndPlayerWasNotInAclickNGoVehicleCountNumber = 0;
 _player = player;
+// not active unless otherwise proven
+_SUPAYGisActiveBool = false;
 if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          Just set this to true => (mgmTfA_PurchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool).		Current time is: (%1).", (str (time))];};
 
 //// now that we are 'running', let's do any other necessary initial variable assignments
@@ -75,14 +78,12 @@ while {true} do {
 	// CHECK: is the player in a mgmTfAisclickNGoTaxi at the moment?
 	if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 		// YES, the player is in a mgmTfAisclickNGoTaxi at the moment
-	
 		_checkedAndPlayerWasNotInAclickNGoVehicleCountNumber = 0;
 		// player IS in a TfA clickNGo vehicle at the moment
 		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          I have determined player is currently in a clickNGoTaxi."];};
 		// obtain vehicle's CommandingCustomer PUID -- do this only if player is in a clickNGoTaxi
 		_myVehiclesCommandingCustomerPlayerUIDNumber								= (vehicle player) getVariable "commandingCustomerPlayerUIDNumber";
 		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          I have just obtained (_myVehiclesCommandingCustomerPlayerUIDNumber) as: (%1).		My PUID is: (%2).", (str _myVehiclesCommandingCustomerPlayerUIDNumber), (str _myPUID)];};
-
 		// is the local player supposed to pay the next tick?	NOTE: currently, we are running this function for all players on board even if they are not the requestor. in the future, on-the-fly "payingCustomer" switching will be supported, meaning requestor running out of money, from inside the vehicle, one of the other players can take over "PAYG payment" duty. this below is the prep.
 		if (_myPUID == _myVehiclesCommandingCustomerPlayerUIDNumber) then {
 			// YES, player is the commandingCustomer and mustPay the nextTick
@@ -95,21 +96,31 @@ while {true} do {
 		// if player mustPay, 	check: can the player afford the next PAYG tick?
 		if (_playerMustPayBool) then {
 			// YES, player mustPay the next PAYG tick cost
-
 			_playerCashNumber = (EPOCH_playerCrypto);
 			if (_playerCashNumber >=mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber) then {
-				// YES, player can afford the next PAYGtickCost	-- do nothing at this deep level, just proceed.
-				if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          YES, player can afford the next PAYGtickCost	-- charging now"];};
+				// YES, player can afford the next PAYGtickCost
+				if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          YES, player can afford the next PAYGtickCost	"];};
+				// are we supposed to charge PAYG now?		-- we should not charge if PAYG is not active yet
 
-				// charge the PAYG tickCost now -- SEND REQUEST to server so that server will charge customer's wallet
-				_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
-				if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
-				myGUSUIDNumber = _myGUSUIDNumber;
-				mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacket = [player, mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, myGUSUIDNumber];
-				publicVariableServer "mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacket";
-				// report to log
-				if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          CHARGED		the player TaxiAnywhere PAYG tick cost"];};
+				// is PAYG active?				if it is not active, that means (a)1st Mile Fee has not been paid yet		OR		(b) TaxiAnywhere-prePaid-Initial-Journey-time is still active
+				_SUPAYGisActiveBool = call compile format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_SUPAYGisActiveBool) is: (%2)			", (str _myGUSUIDNumber), (str _SUPAYGisActiveBool)];};
 
+				// if PAYG is active, charge the PAYG tickCost now -- SEND REQUEST to server so that server will charge customer's wallet
+				if (_SUPAYGisActiveBool) then {
+					// CHARGE PLAYER NOW
+					_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
+					if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
+					myGUSUIDNumber = _myGUSUIDNumber;
+					mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacket = [player, mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, myGUSUIDNumber];
+					publicVariableServer "mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacket";
+					// report to log
+					if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          CHARGED 		the player TaxiAnywhere PAYG tick cost as PAYG is ACTIVE and all other conditions are met.		"];};
+				} else {
+					// DO NOT CHARGE PLAYER NOW
+					// report to log
+					if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          DID NOT CHARGE 		the player TaxiAnywhere PAYG tick cost as PAYG is NOT ACTIVE"];};
+				};
 			} else {
 				// NO, player cannot afford the next PAYGtickCost
 				if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          NO, player cannot afford the next PAYGtickCost.	let him & the server now."];};
