@@ -213,6 +213,20 @@ missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxPayNowMenuIsCurr
 publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber];
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber], false];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber];
+// Is 1st Mile Fee enabled on the server?
+if (mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) then {
+	// yes 1st Mile Fee is enabled and thus it need to be paid -- log the detected 1st Mile Fee setting
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf] [TV3] DETECTED: 1st Mile Fee is ENABLED"];};
+	// mark the vehicle accordingly on all MP clients
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], true];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
+} else {
+	// no 1st Mile Fee is not enabled and thus it does not need to be paid -- log the detected 1st Mile Fee setting
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf] [TV3] DETECTED: 1st Mile Fee is ENABLED"];};
+	// mark the vehicle accordingly on all MP clients
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], false];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
+};
 // if *Global variants is used, the effect will be global. otherwise players continue seeing the old items in cargo		ref:	http://www.reddit.com/r/arma/comments/2rpk6e/arma_3_ammo_boxes_and_similar_reset_to_original/cniglrb
 clearMagazineCargoGlobal _SUTaxiAIVehicleObject;
 clearWeaponCargoGlobal _SUTaxiAIVehicleObject;

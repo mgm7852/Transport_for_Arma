@@ -17,8 +17,6 @@
 //HH
 if (isServer) exitWith {}; if (isNil("mgmTfA_Client_Init")) then {mgmTfA_Client_Init=0;}; waitUntil {mgmTfA_Client_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
 
-private ["_thisFileVerbosityLevelNumber"];	if (isNil("mgmTfA_Client_Init")) then {mgmTfA_Client_Init=0;};	waitUntil {mgmTfA_Client_Init==1};	_thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
-
 // TODO:		PVEH:		[GUSUID] mgmTfA_gv_pvc_req_pleaseBeginPurchasingPowerCheckAndPAYGChargeForTimeTicksSignal
 // when PVEH trigger, TfA client on the local computer will launch the function:	[GUSUID] mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks
 // declare local variables
@@ -120,7 +118,7 @@ while {true} do {
 						"_msg2HintTextString",
 						"_messageTextOnlyFormat"
 						];
-				_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THIS SERVICE ANY MORE!<br/><br/>HAVE A NICE DAY!<br/>", (profileName)];
+				_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THIS SERVICE ANY MORE!<br/><br/>HAVE A NICE DAY!<br/>", (profileName)];
 				_messageTextOnlyFormat = parsetext format ["%1 SORRY BUT YOU CANNOT AFFORD THIS SERVICE ANY MORE! HAVE A NICE DAY!", (profileName)];
 				// Print the message
 				hint _msg2HintTextString;

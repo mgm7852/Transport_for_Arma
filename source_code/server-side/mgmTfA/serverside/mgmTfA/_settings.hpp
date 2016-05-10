@@ -25,15 +25,15 @@
 //-----
 // --master debug level server&client side logging verbosity--			-- should be 0 for production systems and greater for debugging.
 // WARNING: MASSIVE LOG OUTPUT! If you leave this on, on your production system it WILL impact performance
-mgmTfA_configgv_serverAndClientDebugVerbosityLevel = 0;
+mgmTfA_configgv_serverAndClientDebugVerbosityLevel = 10;
 
 // --server-side RPT logging verbosity--					-- should be 0 for production systems and greater for debugging.
 // default: 0
-mgmTfA_configgv_serverVerbosityLevel = 0;
+mgmTfA_configgv_serverVerbosityLevel = 10;
 
 // --client-side RPT logging verbosity--					-- should be 0 for production systems and greater for debugging.
 // default: 0
-mgmTfA_configgv_clientVerbosityLevel = 0;
+mgmTfA_configgv_clientVerbosityLevel = 10;
 //-----
 
 
@@ -499,7 +499,7 @@ mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber = 400;
 // Even if actual journey last shorter, a refund will not be made.
 // Customer MUST pre-pay the cost to prevent unnecessary disputes.
 // default: 60 seconds (1 minute)
-mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds = 60;
+mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds = 30;
 
 // --1st Mile Fee--				-- This is the cost of first few seconds of journey
 // After this "1st Mile" run out, TaxiAnywhere tick fee keep taking money from players' wallet. 

@@ -1,0 +1,1 @@
+hint "Public Bus Exit Vehicle clicked";

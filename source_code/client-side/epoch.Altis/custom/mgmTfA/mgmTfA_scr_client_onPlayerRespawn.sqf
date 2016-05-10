@@ -9,7 +9,7 @@ if (!isServer) then {
 	// Compile and execute SQF Script: adds actionMenu when player is near a Catp (Call-a-Taxi Phonepoint).
 	[] execVM "custom\mgmTfA\mgmTfA_scr_client_presentCatpActionMenu.sqf";
 	// spawn the clickNGo Taxi Request Hotkey-replacement function
-	_null = [] spawn mgmTfA_fnc_client_clickNGoRequestTaxiViaRapidMapOpen;
+	_null = [] spawn mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen;
 	// Since we are just spawning now, we cannot have a clickNGo taxi chosen destination
 	deleteMarker "clickNGoTaxiChosenPosition";
 	mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey = true;

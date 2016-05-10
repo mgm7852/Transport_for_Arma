@@ -326,7 +326,9 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] SIGNAL SENT to the requestor (that he needs to pay now). _fixedDestinationRequestorProfileNameTextString: (%1)  on computer (_fixedDestinationRequestorClientIDNumber): (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};//dbg
 
 	// DEVDEBUG	slowdown
-	uiSleep 10;
+	// WHY 10??
+	//uiSleep 10;
+	uiSleep 3;
 
 	while {_requestorHasNotPaid} do {
 		scopeName "TheRequestorHasNotPaidLoop";

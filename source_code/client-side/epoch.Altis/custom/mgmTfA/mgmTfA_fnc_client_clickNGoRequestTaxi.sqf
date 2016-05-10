@@ -1,7 +1,7 @@
 //H
 //H ~~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_client_clickNGoRequestTaxi.sqf
-//H $PURPOSE$	:	This client side script contains request clickNGo taxi code.
+//H $PURPOSE$	:	This client side script contains 'request clickNGo taxi' code.
 //H ~~~
 //H
 if (isServer) exitWith {}; if (isNil("mgmTfA_Client_Init")) then {mgmTfA_Client_Init=0;}; waitUntil {mgmTfA_Client_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
@@ -16,7 +16,7 @@ if ((vehicle player) != player) exitWith {
 			"_msg2SyschatTextString"
 			];
 	// with hint
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#00FF00'>SORRY %1!<br/>YOU MAY NOT PLACE<br/>A BOOKING FROM<br/>INSIDE ANOTHER VEHICLE", (profileName)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#00FF00'>SORRY %1!<br/>YOU MAY NOT PLACE<br/>A BOOKING FROM<br/>INSIDE ANOTHER VEHICLE", (profileName)];
 	hint _msg2HintTextString;
 	// with systemChat
 	_msg2SyschatTextString = parsetext format ["SORRY %1! YOU MAY NOT PLACE A clickNGo BOOKING REQUEST FROM INSIDE ANOTHER VEHICLE", (profileName)];
@@ -50,7 +50,7 @@ if	(
 	_timeToWaitInSecondsNumber = (round (mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber - ((time) - mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber)));
 	// Note that anything below 1 second and above 0 second (e.g.: 0.374s) will cause the message "PLEASE WAIT 0 SECONDS" to be displayed, so artificially increment by 1 if it is zero.
 	if (_timeToWaitInSecondsNumber == 0) then { _timeToWaitInSecondsNumber = _timeToWaitInSecondsNumber + 1 };
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>YOU MAY NOT BOOK<br/>ANOTHER TAXI<br/>THAT QUICKLY.<br/>PLEASE WAIT ANOTHER<br/>%2 SECONDS<br/>BEFORE TRYING AGAIN.", (profileName), (str _timeToWaitInSecondsNumber)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>YOU MAY NOT BOOK<br/>ANOTHER TAXI<br/>THAT QUICKLY.<br/>PLEASE WAIT ANOTHER<br/>%2 SECONDS<br/>BEFORE TRYING AGAIN.", (profileName), (str _timeToWaitInSecondsNumber)];
 	_msg2SyschatTextString = parsetext format ["SORRY %1! YOU MAY NOT BOOK ANOTHER TAXI THAT QUICKLY. PLEASE WAIT ANOTHER %2 SECONDS BEFORE TRYING AGAIN.", (profileName), (str _timeToWaitInSecondsNumber)];
 	hint 				_msg2HintTextString;
 	systemChat		(str _msg2SyschatTextString);
@@ -128,13 +128,12 @@ if (_bookingPermitted) then {
 
 		if (_playerCanAffordRequestedJourneyCostBool) then {
 			// Player's current cash amount IS adequate to pay for the full journey cost
-
 			deleteMarker "clickNGoTaxiChosenPosition";
 
 			// Open the map
 			openMap true;
 			// Inform via hint (in Rich format)
-			_msg2HintTextString 						= parsetext format ["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_taxiChooseDestination.jpg'/><br/><br/>AWAITING INPUT<br/><br/>SINGLE LEFT CLICK<br/>TO SET DESTINATION"];
+			_msg2HintTextString 						= parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiChooseDestination.jpg'/><br/><br/>AWAITING INPUT<br/><br/>SINGLE LEFT CLICK<br/>TO SET DESTINATION"];
 			hint 										_msg2HintTextString;
 			// Inform via systemChat (in Text-Only format)
 			_msg2SyschatTextString 					= parsetext format ["AWAITING INPUT. SINGLE LEFT CLICK TO SET DESTINATION"];
@@ -170,8 +169,8 @@ if (_bookingPermitted) then {
 
 			///////// STEP:	PREPARE CLICKNGO REQUEST DETAILS
 			// ~~
-			mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString			= (getPlayerUID player);
-			mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D				= (getPosATL player);
+			mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString = (getPlayerUID player);
+			mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D = (getPosATL player);
 			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf]	[TV4]    clickNGo - I HAVE THE FOLLOWING DETAILS: mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString is: (%1).		mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D is: (%2).", mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, (str mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D)];};
 			
 			///////// STEP:	MORE FINANCIAL STUFF
@@ -187,7 +186,7 @@ if (_bookingPermitted) then {
 					"_msg2HintTextString",
 					"_msg2SyschatTextString"
 					];
-			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>THE CLICKNGO BOOKING FEE:<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
+			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>THE CLICKNGO BOOKING FEE:<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
 			_msg2SyschatTextString = parsetext format ["%1 THANKS FOR PAYING THE CLICKNGO BOOKING FEE: %2 CRYPTO. PLEASE WAIT", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
 			// Print the message
 			hint _msg2HintTextString;
@@ -211,7 +210,7 @@ if (_bookingPermitted) then {
 					"_msg2HintTextString",
 					"_msg2SyschatTextString"
 					];
-			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>clickNGo MINIMUM<br/>PREPAY FEE:<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH<br/><br/>THANK YOU<br/>", (profileName), (str (round _journeyInitialCostInCryptoNumber))];
+			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>clickNGo MINIMUM<br/>PREPAY FEE:<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH<br/><br/>THANK YOU<br/>", (profileName), (str (round _journeyInitialCostInCryptoNumber))];
 			_msg2SyschatTextString = parsetext format ["SORRY %1 YOU CANNOT AFFORD clickNGo MINIMUM PREPAY FEE: %2 CRYPTO.  PLEASE TRY AGAIN WHEN YOU HAVE ENOUGH CASH. THANK YOU", (profileName), (str _journeyInitialCostInCryptoNumber)];
 			// Print the message
 			hint 				_msg2HintTextString;
@@ -228,7 +227,7 @@ if (_bookingPermitted) then {
 				];
 		// inform the player that he may not order a new clickNGo Taxi at this time as he already has one serving him!
 		// with hint (Rich Format)
-		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#00FF00'>SORRY %1!<br/><br/>YOU MAY NOT<br/>PLACE A BOOKING<br/>AT THIS TIME.<br/><br/>YOU ALREADY HAVE A<br/>TAXI SERVING YOU<br/>CURRENTLY", (profileName)];
+		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#00FF00'>SORRY %1!<br/><br/>YOU MAY NOT<br/>PLACE A BOOKING<br/>AT THIS TIME.<br/><br/>YOU ALREADY HAVE A<br/>TAXI SERVING YOU<br/>CURRENTLY", (profileName)];
 		hint _msg2HintTextString;
 		// with systemChat (Text-Only Format)
 		_msg2SyschatTextString = parsetext format ["SORRY %1! YOU MAY NOT PLACE A BOOKING AT THIS TIME.  YOU ALREADY HAVE A TAXI SERVING YOU CURRENTLY", (profileName)];
