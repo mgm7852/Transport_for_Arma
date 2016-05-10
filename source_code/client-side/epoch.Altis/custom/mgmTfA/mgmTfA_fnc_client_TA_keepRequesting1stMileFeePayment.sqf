@@ -25,7 +25,8 @@ if (!isServer) then { waitUntil {!isnull (finddisplay 46)}; };
 // this script should be instant - thus the copied uiSleep is not appropriate. DELAYED DELETE THIS. 			uiSleep 5;
 private	[
 		"_continueRequesting1stMileFeePayment",
-		"_myGUSUIDNumber",
+		"_originalVehiclesGUSUIDNumber",
+		"_currentVehiclesGUSUIDNumber"
 		"_counterTen",
 		"_counterInfinite",
 		"_msg2SyschatTextString",
@@ -37,9 +38,9 @@ _continueRequesting1stMileFeePayment = true;
 _counterTen = 0;
 // this is not reminder count. it is seconds passed count. if customer gets out and back in the vehicle it will show seconds - not reminder ID!
 _counterInfinite = 0;
-_myGUSUIDNumber = _this select 0;
+_originalVehiclesGUSUIDNumber = _this select 0;
 // log it		-- do not move this line any higher!
-if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf]  [TV5]	BEGIN RUNNING FUNCTION		I will  keep requesting 1st Mile Fee Payment till it is paid or phase timeout, for SU: (%1).", (str _myGUSUIDNumber)];};
+if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf]  [TV5]	BEGIN RUNNING FUNCTION		I will  keep requesting 1st Mile Fee Payment till it is paid or phase timeout, for SU: (%1).", (str _originalVehiclesGUSUIDNumber)];};
 
 //// Begin looping the main loop -- we will keep looping as long as ""mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool" is true		-- it can be false only if (a) paid, or (b) phase time out
 while {_continueRequesting1stMileFeePayment} do
@@ -55,27 +56,38 @@ while {_continueRequesting1stMileFeePayment} do
 	uiSleep 1;
 	// STEP1:	Obtain Latest Information and Update Local Variables Accordingly
 	// inside loop evaluation -- Are we supposed to terminate now?
-	_continueRequesting1stMileFeePayment = call compile format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
+	_continueRequesting1stMileFeePayment = call compile format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _originalVehiclesGUSUIDNumber];
 	// log the result
 	if(_continueRequesting1stMileFeePayment) then {
 		// YES continue requesting payment
-		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequesting1stMileFeePayment) is: (%2)		I WILL CONTINUE LOOPING	", (str _myGUSUIDNumber), (str _continueRequesting1stMileFeePayment)];};
+		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV5] This is _originalVehiclesGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequesting1stMileFeePayment) is: (%2)		I WILL CONTINUE LOOPING	", (str _originalVehiclesGUSUIDNumber), (str _continueRequesting1stMileFeePayment)];};
 		// REQUEST PAYMENT ONLY if customer currently in a TaxiAnywhere Taxi
 		// Get current vehicle's Classname
 		_classnameOfTheCurrentVehicle = typeOf (vehicle player);
-		// STEP2:	Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
+		// STEP2:	Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, proceed down the work flow. Otherwise do nothing.
 		if (mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
-			_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE 1ST MILE FEE: %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _counterInfinite)];
-			systemChat (str _msg2SyschatTextString);
+			// STEP3: Is the player in this particular TaxiAnywhere vehicle now? (he might have hopped out and got in a friend's Taxi!)
+			// add comparison code here
+			_currentVehiclesGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");
+			//Compare current vehicle's GUSUID with the supplied-as-parameter GUSUID; if they match, message the player. Otherwise do nothing.
+			if (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber) then {
+				_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE 1ST MILE FEE: %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _counterInfinite)];
+				systemChat (str _msg2SyschatTextString);
+				if (mgmTfA_configgv_clientVerbosityLevel>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf]  [TV8]          VEHICLE COMPARISON MATCHED:		the (str _originalVehiclesGUSUIDNumber) is: (%1) == (str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
+			} else {
+				//Player is not in a Taxi vehicle at the moment
+				//Do not display anything about Taxi's doors being locked/unlocked
+				if (mgmTfA_configgv_clientVerbosityLevel>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf]  [TV8]          VEHICLE COMPARISON DID NOT MATCH:		the (str _originalVehiclesGUSUIDNumber) is: (%1) != (str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
+			};
 		} else {
 			//Player is not in a TaxiAnywhere vehicle at the moment		-- DO NOT remind that he must pay 1st Mile Fee
 		};
 	} else {
 		// NO DO NOT request payment any more - we are terminating!
-		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequesting1stMileFeePayment) is: (%2)		I WILL TERMINATE NOW	", (str _myGUSUIDNumber), (str _continueRequesting1stMileFeePayment)];};
+		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV5] This is _originalVehiclesGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequesting1stMileFeePayment) is: (%2)		I WILL TERMINATE NOW	", (str _originalVehiclesGUSUIDNumber), (str _continueRequesting1stMileFeePayment)];};
 		// Exit the loops, go back to main, from where we will terminate AFTER writing to log.
 		breakTo "mgmTfA_fnc_client_TA_keepRequesting1stMileFeePaymentMainScope";
 	};
 };
-if (_thisFileVerbosityLevelNumber>=9) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV9] This is _myGUSUIDNumber: (%1)		THIS IS THE LAST LINE. TERMINATING.", (str _myGUSUIDNumber)];};
+if (_thisFileVerbosityLevelNumber>=9) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV9] This is _originalVehiclesGUSUIDNumber: (%1)		THIS IS THE LAST LINE. TERMINATING.", (str _originalVehiclesGUSUIDNumber)];};
 // EOF
