@@ -25,28 +25,72 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 
 	private		[
 				"_myVehiclesCommandingCustomerPlayerUIDNumber",
-				"_playerMustPayBool",
+				"_playerAuthorizedToPayBool",
 				"_playerCashNumber",
 				"_myGUSUIDNumber",
-				"_myPUID"
+				"_myPUID",
+				"_TA1stMileFeeNeedToBePaidBool"
 				];
 
+	_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
+	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA]  [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
+	// check vehicle payment await status here
+	_TA1stMileFeeNeedToBePaidBool = call compile format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
+	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV4] This is _myGUSUIDNumber: (%1)		TOP OF FUNCTION EVALUATION 		(_TA1stMileFeeNeedToBePaidBool) is DETECTED: (%2)			", (str _myGUSUIDNumber), (str _TA1stMileFeeNeedToBePaidBool)];};
 	// obtain vehicle's CommandingCustomer PUID		-- only CommandingCustomer can pay!
 	_myVehiclesCommandingCustomerPlayerUIDNumber = (vehicle player) getVariable "commandingCustomerPlayerUIDNumber";
 	_myPUID = (getPlayerUID player);
 	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          I have just obtained (_myVehiclesCommandingCustomerPlayerUIDNumber) as: (%1).		My PUID is: (%2).", (str _myVehiclesCommandingCustomerPlayerUIDNumber), (str _myPUID)];};
 
-	// is the local player supposed to pay the next tick?	NOTE: currently, we are running this function for all players on board even if they are not the requestor. in the future, on-the-fly "payingCustomer" switching will be supported, meaning requestor running out of money, from inside the vehicle, one of the other players can take over "PAYG payment" duty. this below is the prep.
+	// is the local player authorized to pay the 1st Mile Fee?	NOTE: currently, we are running this function for all players on board even if they are not the requestor. in the future, on-the-fly "payingCustomer" switching will be supported, meaning requestor running out of money, from inside the vehicle, one of the other players can take over "PAYG payment" duty. this below is the prep.
 	if (_myPUID == _myVehiclesCommandingCustomerPlayerUIDNumber) then {
-		// YES, player is the commandingCustomer and mustPay the nextTick
-		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          YES, player is the commandingCustomer and mustPay the 1st Mile Fee.		_playerMustPayBool  is set to true."];};
-		_playerMustPayBool = true;
+		// YES, player is the commandingCustomer and therefore authorized to pay the 1st Mile Fee
+		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          YES, player is the commandingCustomer and mustPay the 1st Mile Fee.		_playerAuthorizedToPayBool  is set to true."];};
+		_playerAuthorizedToPayBool = true;
 	} else {
-		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          NO, player is NOT the commandingCustomer and will not pay 1st Mile Fee.		_playerMustPayBool  is set to false."];};
-		_playerMustPayBool = false;
+		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          NO, player is NOT the commandingCustomer and will not pay 1st Mile Fee.		_playerAuthorizedToPayBool  is set to false."];};
+		_playerAuthorizedToPayBool = false;
 	};
-	// if player mustPay, 	CHECK: can the player afford the 1st Mile Fee?
-	if (_playerMustPayBool) then {
+
+	// if _playerAuthorizedToPayBool, 	CHECK: is this vehicle waiting for 1st Mile Fee payment?
+	if (_playerAuthorizedToPayBool) then {
+		if (_TA1stMileFeeNeedToBePaidBool) then {
+			// YES, this vehicle is awaiting 1st Mile Fee payment (and player is authorized to pay)
+			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          YES, this vehicle is awaiting 1st Mile Fee payment.	"];};
+		} else {
+			// NO, this vehicle IS NOT awaiting 1st Mile Fee payment
+			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          NO, this vehicle IS NOT awaiting 1st Mile Fee payment.	"];};
+			private	[
+					"_msg2HintTextString",
+					"_messageTextOnlyFormat"
+					];
+			// do a check here - is the 1st Mile Fee TURNED OFF or has it been ALREADY PAID?
+			if (mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) then {
+				// yes 1st Mile Fee is enabled and since it does not need to be paid now, it appears this has already been paid! -- log what we learned and do 1stMileFeePayRequestor comms
+				if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV3] 	DETECTED: 	DUPLICATE PAYMENT ATTEMPT		1st Mile Fee is ENABLED but does NOT NEED TO BE PAID now.		"];};
+				// do 1stMileFeePayRequestor comms
+				_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>1ST MILE FEE<br/>HAS ALREADY BEEN PAID<br/>", (profileName)];
+				_msg2SyschatTextString = parsetext format ["SORRY %1! 1ST MILE FEE HAS ALREADY BEEN PAID", (profileName)];
+				hint _msg2HintTextString;
+				systemChat (str _msg2SyschatTextString);
+			} else {
+				// no 1st Mile Fee is not enabled and thus it does not need to be paid -- log what we learned
+				if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV3] 	DETECTED: 	PLAYER ATTEMPTED TO PAY UNNECESSARILY 		1st Mile Fee is NOT ENABLED on this server.		"];};
+				// do 1stMileFeePayRequestor comms
+				_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>1ST MILE FEE<br/>IS DISABLED<br/>", (profileName)];
+				_msg2SyschatTextString = parsetext format ["SORRY %1! 1ST MILE FEE IS DISABLED", (profileName)];
+				hint _msg2HintTextString;
+				systemChat (str _msg2SyschatTextString);
+			};
+
+			// ADD break out CODE HERE
+		};
+	} else {
+		// NO, player is not authorized to pay the 1st Mile Fee
+		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          NO, player is not authorized to pay the 1st Mile Fee"];};
+	};
+	// if _playerAuthorizedToPayBool AND vehicle waiting for payment, then, 	CHECK: can the player afford the 1st Mile Fee?
+	if (_playerAuthorizedToPayBool && _TA1stMileFeeNeedToBePaidBool) then {
 		_playerCashNumber = (EPOCH_playerCrypto);
 
 		if (_playerCashNumber >= mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber) then {
@@ -64,10 +108,9 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 			publicVariableServer "mgmTfA_gv_pvs_req_TAChargeMe1stMileFeePacket";
 			// report to log
 			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          CHARGED		the player TaxiAnywhere 1st Mile Fee cost	"];};
-
 		} else {
 			// NO, player cannot afford the 1st Mile Fee - log it
-			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          NO, player cannot afford the next PAYGtickCost.	let him & the server now.	"];};
+			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_TAChargeMe1stMileFee.sqf] [TV8]          NO, player cannot afford the next 1st Mile Fee.	let him & the server now.	"];};
 			// let the customer know via hint && systemChat
 			private	[
 					"_msg2HintTextString",
@@ -104,3 +147,4 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 	_msg2SyschatTextString = parsetext format ["SORRY %1! YOU CANNOT PAY TAXI-ANYWHERE 1ST MILE FEE AS YOU ARE NOT IN A TAXI-ANYWHERE VEHICLE", (profileName)];
 	systemChat str _msg2SyschatTextString;
 };
+// EOF
