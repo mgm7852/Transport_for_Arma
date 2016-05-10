@@ -491,15 +491,59 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 	publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];	
 	uiSleep 0.05;
 };
-// DELETE IN THE NEXT HOUR
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] OUTSIDE  if (_TA1stMileFeeNeedToBePaidBool) then { now..."];};
+if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV8] OUTSIDE  if (_TA1stMileFeeNeedToBePaidBool) then { now..."];};
 
-// If emergency escape needed, do nothing.
+if (_emergencyEscapeNeeded) then {
+	// emergency escape needed = requestor did NOT pay the 1st Mile Fee within the threshold time
+	//
+	// EJECT ALL			force eject all passengers - we are going to termination and we're not giving any free rides!
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]		[TV3]		1st Mile Fee was not paid within threshold time - ejecting all passengers and terminating."];};
+	// TODO: ENHANCEMENT:	SPLIT THIS TO A SEPARATE FUNCTION FILE (it will be repeated multiple times, by different clickNGo modules!)
+	private	[
+			"_SUVehicleSpeedOfVehicleInKMHNumber",
+			"_vel",
+			"_dir",
+			"_speedStep"									
+			];
+	//Use the horn to signal upcoming forced eject action
+	driver _SUTaxiAIVehicleObject forceWeaponFire [currentWeapon _SUTaxiAIVehicleObject, currentWeapon _SUTaxiAIVehicleObject];
+	// we should be at full stop by now but double checking never hurts
+	// First, let's bring the vehicle to a full stop, in 5 kmh steps, a new step every 0.25 seconds, until its speed is 0
+	_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
+	while {_SUVehicleSpeedOfVehicleInKMHNumber > 0} do {
+		uiSleep 0.05;
+		// Slow down by 5 kmh
+		_vel = (velocity	_SUTaxiAIVehicleObject);
+		_dir = (direction	_SUTaxiAIVehicleObject);
+		_speedStep			= -5;
+		_SUTaxiAIVehicleObject	setVelocity	[
+											(_vel select 0) + (sin _dir * _speedStep),
+											(_vel select 1) + (cos _dir * _speedStep),
+											(_vel select 2)
+											];
+	_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
+	};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] 	[TV3]	TERMINATION SEQUENCE IN PROGRESS:	Stopped vehicle before ejecting all passengers."];};
+	uiSleep 0.05;
+	// prep for forced eject -- once we eject them, we will want the passengers to stay out!
+	_SUTaxiAIVehicleObject lockCargo true;
+	_doorsLockedBool = true;
+	uiSleep 0.05;
+	// Now we can Eject All Passengers (keep the driver in!) and Delete the Vehicle	//Traverse all crew with forEach
+	{
+		//If the crewMember is NOT our dear _SUAICharacterDriverObject, then eject them!
+		if (_x != _SUAICharacterDriverObject) then {
+		_x action ["Eject", _SUTaxiAIVehicleObject];
+		};
+	} forEach crew _SUTaxiAIVehicleObject;
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] TERMINATION SEQUENCE IN PROGRESS:		eject all passengers completed."];};
+	uiSleep 0.05;
+};
+
 // If emergency escape is NOT needed, proceed with the next batch of workflow tasks
 if (!_emergencyEscapeNeeded) then {
 
-	// DELETE IN THE NEXT HOUR
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] INSIDE  if (!_emergencyEscapeNeeded) then            now..."];};
+	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV8] INSIDE  if (!_emergencyEscapeNeeded) then            now..."];};
 
 	//Change our status to:		4 DRIVING-TO-DESTINATION		driving requestor to requested location
 	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs04TextString;
@@ -701,7 +745,7 @@ if (!_emergencyEscapeNeeded) then {
 
 // If emergency escape needed, do nothing.
 // If emergency escape is NOT needed, proceed with the next batch of workflow tasks
-if (!_emergencyEscapeNeeded) then { 
+if (!_emergencyEscapeNeeded) then {
 	// workflow tasks below this line
 	
 	
