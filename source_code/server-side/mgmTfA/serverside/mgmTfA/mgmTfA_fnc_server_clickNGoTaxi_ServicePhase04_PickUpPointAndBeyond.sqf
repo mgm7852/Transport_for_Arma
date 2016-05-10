@@ -362,7 +362,6 @@ if (mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) th
 
 
 
-
 /*
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], true];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
@@ -484,10 +483,16 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] EXITed loop _requestorOutsideVehicle"];};
 	uiSleep 0.05;
 };
+// DELETE IN THE NEXT HOUR
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] OUTSIDE  if (_TA1stMileFeeNeedToBePaidBool) then { now..."];};
 
 // If emergency escape needed, do nothing.
 // If emergency escape is NOT needed, proceed with the next batch of workflow tasks
 if (!_emergencyEscapeNeeded) then {
+
+	// DELETE IN THE NEXT HOUR
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] INSIDE  if (!_emergencyEscapeNeeded) then            now..."];};
+
 	//Change our status to:		4 DRIVING-TO-DESTINATION		driving requestor to requested location
 	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs04TextString;
 	//Customer has paid and we are about to start driving to our destination. 
@@ -673,9 +678,10 @@ if (!_emergencyEscapeNeeded) then {
 				};
 			};
 		};
-///
-// END:	clickNGo Payment System
-///
+				///
+				// END:	clickNGo Payment System
+				///
+	};
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] EXITED LOOP: drivingToDropOffPoint250"];};
 };
 
