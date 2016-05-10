@@ -458,7 +458,7 @@
 			"_msg2HintTextString",
 			"_msg2SyschatTextString"
 			];
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay1stMileFee.jpg'/><br/><br/><t size='1.40' color='#00FF00'>Greetings<br/>%1<br/><br/><br/>PLEASE PAY<br/>THE 1ST MILE FEE<br/>%2 CRYPTO<br/><br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay1stMileFee.jpg'/><br/><br/><t size='1.40' color='#00FF00'>Greetings<br/>%1<br/><br/><br/>PLEASE PAY<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 	_msg2SyschatTextString = parsetext format ["Greetings %1 PLEASE PAY THE 1ST MILE FEE: %2 CRYPTO. THANKS!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
