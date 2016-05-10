@@ -17,8 +17,6 @@
 //HH
 if (isServer) exitWith {}; if (isNil("mgmTfA_Client_Init")) then {mgmTfA_Client_Init=0;}; waitUntil {mgmTfA_Client_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
 
-private ["_thisFileVerbosityLevelNumber"];	if (isNil("mgmTfA_Client_Init")) then {mgmTfA_Client_Init=0;};	waitUntil {mgmTfA_Client_Init==1};	_thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
-
 // TODO:		PVEH:		[GUSUID] mgmTfA_gv_pvc_req_pleaseBeginPurchasingPowerCheckAndPAYGChargeForTimeTicksSignal
 // when PVEH trigger, TfA client on the local computer will launch the function:	[GUSUID] mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks
 // declare local variables
