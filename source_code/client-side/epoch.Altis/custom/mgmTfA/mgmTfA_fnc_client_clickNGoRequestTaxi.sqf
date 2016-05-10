@@ -169,8 +169,8 @@ if (_bookingPermitted) then {
 
 			///////// STEP:	PREPARE CLICKNGO REQUEST DETAILS
 			// ~~
-			mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString			= (getPlayerUID player);
-			mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D				= (getPosATL player);
+			mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString = (getPlayerUID player);
+			mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D = (getPosATL player);
 			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf]	[TV4]    clickNGo - I HAVE THE FOLLOWING DETAILS: mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString is: (%1).		mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D is: (%2).", mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, (str mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D)];};
 			
 			///////// STEP:	MORE FINANCIAL STUFF
