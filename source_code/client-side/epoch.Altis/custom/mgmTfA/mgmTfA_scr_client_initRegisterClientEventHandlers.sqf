@@ -499,14 +499,14 @@
 	if (true) then {
 		// not a config option yet - just go ahead & inform the player
 		private	["_msg2HintTextString"];
-		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID<br/>TAXI-ANYWHERE<br/>1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/><br/>THANK YOU<br/>FOR THE PAYMENT<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
+		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID<br/>TAXI ANYWHERE<br/>1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/><br/>THANK YOU<br/>FOR THE PAYMENT<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
 		hint _msg2HintTextString;
 	};
 	// inform the player via systemChat 	-- only if the global config allows
 	if (true) then {
 		// not a config option yet - just go ahead & inform the player
 		private	["_messageTextOnlyFormat"];
-		_messageTextOnlyFormat = parsetext format ["YOU JUST PAID THE TAXI-ANYWHERE 1ST MILE FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT. YOUR NEW CASH BALANCE: %3 CRYPTO.", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
+		_messageTextOnlyFormat = parsetext format ["YOU JUST PAID THE TAXI ANYWHERE 1ST MILE FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT. YOUR NEW CASH BALANCE: %3 CRYPTO.", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
 		systemChat (str _messageTextOnlyFormat);
 	};
 	// IDEA/TODO:	inform the player via cutText 	-- only if the global config allows

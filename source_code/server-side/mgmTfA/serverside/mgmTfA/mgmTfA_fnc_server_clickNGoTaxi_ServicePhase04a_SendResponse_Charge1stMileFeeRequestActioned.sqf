@@ -31,7 +31,7 @@ _clickNGoRequestorClientIDNumber = (_this select 0);
 _clickNGoRequestorPlayerUIDTextString = (_this select 1);
 _clickNGoRequestorProfileNameTextString = (_this select 2);
 
-if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04a_SendResponse_Charge1stMileFeeRequestActioned.sqf]  [TV4] TAXI-ANYWHERE Charge request received. This is what I have received:		_clickNGoRequestorClientIDNumber: (%1).		_clickNGoRequestorPlayerUIDTextString: (%2).		_clickNGoRequestorProfileNameTextString: (%3)", _clickNGoRequestorClientIDNumber, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString];};//dbg
+if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04a_SendResponse_Charge1stMileFeeRequestActioned.sqf]  [TV4] TAXI ANYWHERE Charge request received. This is what I have received:		_clickNGoRequestorClientIDNumber: (%1).		_clickNGoRequestorPlayerUIDTextString: (%2).		_clickNGoRequestorProfileNameTextString: (%3)", _clickNGoRequestorClientIDNumber, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString];};//dbg
 
 // Client Communications - Send the message to the Requestor
 mgmTfA_gv_pvc_pos_yourTaxiAnywhere1stMileFeeChargeRequestActionedPacketSignalOnly = ".";

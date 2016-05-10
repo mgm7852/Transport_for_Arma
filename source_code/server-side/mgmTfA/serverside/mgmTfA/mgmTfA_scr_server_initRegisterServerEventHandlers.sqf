@@ -258,8 +258,8 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 		}  forEach mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray;
 	// TODO: add error handling - what if we cannot find it in the array? this most likely affect all similar traverses!
 	};
-	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [TAXI-ANYWHERE CHARGE ME 1ST MILE FEE REQUEST]    RECEIVED REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
-	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [TAXI-ANYWHERE CHARGE ME 1ST MILE FEE REQUEST]    RECEIVED REQUEST    _clickNGoRequestorClientIDNumber: (%1).	_clickNGoRequestorProfileNameTextString: (%2).		_clickNGoRequestorPlayerUIDTextString: (%3).", _clickNGoRequestorClientIDNumber, _clickNGoRequestorProfileNameTextString, _clickNGoRequestorPlayerUIDTextString];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [TAXI ANYWHERE CHARGE ME 1ST MILE FEE REQUEST]    RECEIVED REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initRegisterServerEventHandlers.sqf]      [TAXI ANYWHERE CHARGE ME 1ST MILE FEE REQUEST]    RECEIVED REQUEST    _clickNGoRequestorClientIDNumber: (%1).	_clickNGoRequestorProfileNameTextString: (%2).		_clickNGoRequestorPlayerUIDTextString: (%3).", _clickNGoRequestorClientIDNumber, _clickNGoRequestorProfileNameTextString, _clickNGoRequestorPlayerUIDTextString];};//dbg
 	// STAGE IN WORKFLOW:		Action the request = Charge the player
 	_null = [_requestorPlayerObject, mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber] call EPOCH_server_effectCrypto;
 	// mark vehicle as 1st Mile Fee paid
