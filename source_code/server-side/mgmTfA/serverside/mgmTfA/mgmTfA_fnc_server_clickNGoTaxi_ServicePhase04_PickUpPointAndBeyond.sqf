@@ -85,7 +85,8 @@ private	[
 		"_paygIsItTimeYetCheckCounterNumber",
 		"_paygCustomerCanAffordTheNextPaymentBool",
 		"_paygLastCheckCounterNumber",
-		"_TA1stMileFeeNeedToBePaidBool"
+		"_TA1stMileFeeNeedToBePaidBool",
+		"_currentTimeInSecondsNumber"
 		];
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 _clickNGoRequestorClientIDNumber = (_this select 0);
@@ -160,6 +161,7 @@ _SUPAYGisActiveBool = false;
 _paygIsItTimeYetCheckCounterNumber = 0;
 _paygCustomerCanAffordTheNextPaymentBool = false;
 _TA1stMileFeeNeedToBePaidBool = true;
+// do NOT set it yet:	_currentTimeInSecondsNumber
 
 //We are at the requestorPosition
 _broadcastSUInformationCounter = 0;
@@ -411,6 +413,8 @@ _clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_clickNG
 if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that doors have been locked). _clickNGoRequestorProfileNameTextString: (%1) on computer (_clickNGoRequestorClientIDNumber): (%2)", _clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber];};
 
 
+
+
 // to wait or not to wait...
 if (_TA1stMileFeeNeedToBePaidBool) then {
 	// We will now wait for the requestor to pay the 1st Mile Fee (via GUI button OR via ActionMenu)
@@ -481,17 +485,25 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 	uiSleep 0.05;
 };
 
-//Change our status to:		4 DRIVING-TO-DESTINATION		driving requestor to requested location
-_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs04TextString;
-//Customer has paid and we are about to start driving to our destination. 
-//On the way and even before we start moving (while we do waypoint calculations etc.) doors should be locked.
-
 // If emergency escape needed, do nothing.
 // If emergency escape is NOT needed, proceed with the next batch of workflow tasks
 if (!_emergencyEscapeNeeded) then {
-	// workflow tasks below this line
-	//TODO: add code ==>>  Add a button "Stop the car!"		("get out" option is always visible in offroad pickups - all we need to do is stop the car so that passengers won't get hurt!)
+	//Change our status to:		4 DRIVING-TO-DESTINATION		driving requestor to requested location
+	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs04TextString;
+	//Customer has paid and we are about to start driving to our destination. 
+	//On the way and even before we start moving (while we do waypoint calculations etc.) doors should be locked.
+
+	// if execution hit this point, it must be because 1st Mile Fee has been paid. Let's start the '1st Mile Fee covered time period' now:
+	_currentTimeInSecondsNumber = (time);
+	_SUclickNGoTaxiPrepaidPaymentTransactionTimeInSecondsNumber = _currentTimeInSecondsNumber;
+
+	// initial check to eliminate any extremely low values (e.g.: 2 second PrepaidAbsoluteMinimum setting in config file)
+	if (_currentTimeInSecondsNumber - (_SUclickNGoTaxiPrepaidPaymentTransactionTimeInSecondsNumber+_SUclickNGoTaxiPrepaidAbsoluteMinimumJourneyTimeInSeconds)>=0) then {
+		_SUPrepaidCreditsStillCoveringBool = true;
+	};
+
 	// NEW DESTINATION		// Add new Waypoint data
+	//TODO: add code ==>>  Add a button "Stop the car!"		("get out" option is always visible in offroad pickups - all we need to do is stop the car so that passengers won't get hurt!)
 	_SUTaxiAIVehicleWaypointMainArrayIndexNumber = _SUTaxiAIVehicleWaypointMainArrayIndexNumber + 1;
 	_SUDropOffPositionPosition3DArray = _clickNGoTaxiRequestedDestinationPosition3DArray;
 	_SUTaxiAIVehicleWaypointMainArray = _SUAIGroup addWaypoint [_SUDropOffPositionPosition3DArray, _SUTaxiWaypointRadiusInMetersNumber,_SUTaxiAIVehicleWaypointMainArrayIndexNumber];
@@ -514,7 +526,6 @@ if (!_emergencyEscapeNeeded) then {
 	_SUCurrentTaskAgeInSecondsNumber = 0;
 	//Start the Current Task Age Timer
 	_SUCurrentTaskBirthTimeInSecondsNumber = (time);
-	_SUPrepaidCreditsStillCoveringBool = true;
 	// We are on the way to Drop Off point
 	// This while loop checks whether we are at 250 metres distance to DropOffPoint
 	// When it detects that we are closer than 250 metres to distance, it quits the loop [next code bit will unlocks the doors & inform the passanger]
@@ -665,7 +676,6 @@ if (!_emergencyEscapeNeeded) then {
 ///
 // END:	clickNGo Payment System
 ///
-	};
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] EXITED LOOP: drivingToDropOffPoint250"];};
 };
 
