@@ -657,7 +657,11 @@ if (!_emergencyEscapeNeeded) then {
 					breakTo "mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";
 				} else {
 					// requestor and his friends in vehicle CAN AFFORD the service.
-					// ADD CHARGE CODE HERE! 			OLD SYSTEM WAS CHARGING ON CLIENT SIDE >> nothing special needed, carry on as usual	Note that charges are incurred on the client-side so we won't charge here.
+					// 
+					// New PAYG Tick Payment System:
+					// 		we send a mgmTfA_gv_pvc_req_pleaseBeginPurchasingPowerCheckAndPAYGChargeForTimeTicksSignalOnly
+					// 		it spawns mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks
+					//		which does the checks and if player is eligible to pay then, signals the server-side to incur the charge with mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacket
 				};
 			} else {
 				// PAYG is not active yet - process here => is time to activate PAYG payment model?
