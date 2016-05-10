@@ -136,7 +136,7 @@ if (_bookingPermitted) then {
 			_msg2HintTextString 						= parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiChooseDestination.jpg'/><br/><br/>AWAITING INPUT<br/><br/>SINGLE LEFT CLICK<br/>TO SET DESTINATION"];
 			hint 										_msg2HintTextString;
 			// Inform via systemChat (in Text-Only format)
-			_msg2SyschatTextString 					= parsetext format ["AWAITING INPUT. SINGLE LEFT CLICK TO SET DESTINATION"];
+			_msg2SyschatTextString 					= parsetext format ["[SYSTEM]  AWAITING INPUT. SINGLE LEFT CLICK TO SET DESTINATION"];
 			systemChat 								(str _msg2SyschatTextString);
 			// Insert the actual code to handle the mouse-left-click-on-map
 			onMapSingleClick "

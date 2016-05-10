@@ -416,10 +416,13 @@
 	// inform the player via systemChat 	-- only if the global config allows
 	if (mgmTfA_configgv_clickNGoTaxisDisplayTickChargeSystemChatMessageBool) then {
 		// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
-		private	["_messageTextOnlyFormat"];
+		private	["_messageTextOnlyFormat1"];
+		private	["_messageTextOnlyFormat2"];
 		// same issue as above! _messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
-		_messageTextOnlyFormat = parsetext format ["[DRIVER]  CHARGED PAYG TICK FEE %1 CRYPTO, THANKS!   NEW BALANCE: %2 CRYPTO", (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str _playerActualCashBalance)];
-		systemChat (str _messageTextOnlyFormat);
+		_messageTextOnlyFormat1 = parsetext format ["[DRIVER]  CHARGED PAYG TICK FEE %1 CRYPTO, THANKS", (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber)];
+		_messageTextOnlyFormat2 = parsetext format ["[DRIVER]  NEW BALANCE: %1 CRYPTO", (str _playerActualCashBalance)];
+		systemChat (str _messageTextOnlyFormat1);
+		systemChat (str _messageTextOnlyFormat2);
 	};
 	/*
 					NOT IMPLEMENTED

@@ -56,7 +56,7 @@ while {_continueRequesting1stMileFeePayment} do
 		// YES continue requesting payment
 		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequesting1stMileFeePayment) is: (%2)		I WILL CONTINUE LOOPING	", (str _myGUSUIDNumber), (str _continueRequesting1stMileFeePayment)];};
 		// request payment
-		_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 PLEASE PAY THE 1ST MILE FEE: %2 CRYPTO, THANKS!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+		_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE 1ST MILE FEE: %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _counter55)];
 		systemChat (str _msg2SyschatTextString);
 	} else {
 		// NO do not request payment any more - we are terminating!
