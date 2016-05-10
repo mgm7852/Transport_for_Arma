@@ -187,7 +187,7 @@ if (_bookingPermitted) then {
 					"_msg2SyschatTextString1",
 					"_msg2SyschatTextString2"
 					];
-			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>THE CLICKNGO BOOKING FEE:<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
+			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>THE CLICKNGO BOOKING FEE<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
 			_msg2SyschatTextString1 = parsetext format ["[RADIO_IN]  %1 THANKS FOR PAYING THE CLICKNGO BOOKING FEE %2 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
 			_msg2SyschatTextString2 = parsetext format ["[RADIO_IN]  PROCESSING, PLEASE WAIT..."];
 			hint _msg2HintTextString;
@@ -213,7 +213,7 @@ if (_bookingPermitted) then {
 					"_msg2SyschatTextString1",
 					"_msg2SyschatTextString2"
 					];
-			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>clickNGo MINIMUM<br/>PREPAY FEE:<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH<br/><br/>THANK YOU<br/>", (profileName), (str (round _journeyInitialCostInCryptoNumber))];
+			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>clickNGo MINIMUM<br/>PREPAY FEE<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH<br/><br/>THANK YOU<br/>", (profileName), (str (round _journeyInitialCostInCryptoNumber))];
 			_msg2SyschatTextString1 = parsetext format ["[RADIO_IN]  SORRY %1 YOU CANNOT AFFORD clickNGo MINIMUM PREPAY FEE %2 CRYPTO", (profileName), (str _journeyInitialCostInCryptoNumber)];
 			_msg2SyschatTextString2 = parsetext format ["[RADIO_IN]  PLEASE TRY AGAIN WHEN YOU HAVE ENOUGH CASH. THANK YOU"];
 			hint _msg2HintTextString;

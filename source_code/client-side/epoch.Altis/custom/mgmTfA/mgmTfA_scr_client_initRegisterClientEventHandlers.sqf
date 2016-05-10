@@ -412,7 +412,7 @@
 	if (mgmTfA_configgv_clickNGoTaxisDisplayTickChargeHintMessageBool) then {
 		// display hint messages requested -- let's do that	// let the customer know that he just has been charged $amount
 		private	["_msg2HintTextString"];
-		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>PAYG TICK FEE:<br/><br/>%2 CRYPTO<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str _playerActualCashBalance)];
+		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>PAYG TICK FEE<br/><br/>%2 CRYPTO<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str _playerActualCashBalance)];
 		hint _msg2HintTextString;
 	};
 	// inform the player via systemChat 	-- only if the global config allows
@@ -420,9 +420,9 @@
 		// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
 		private	["_messageTextOnlyFormat1"];
 		private	["_messageTextOnlyFormat2"];
-		// same issue as above! _messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
+		// same issue as above! _messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
 		_messageTextOnlyFormat1 = parsetext format ["[DRIVER]  CHARGED PAYG TICK FEE %1 CRYPTO, THANKS", (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber)];
-		_messageTextOnlyFormat2 = parsetext format ["[DRIVER]  NEW BALANCE: %1 CRYPTO", (str _playerActualCashBalance)];
+		_messageTextOnlyFormat2 = parsetext format ["[DRIVER]  NEW BALANCE %1 CRYPTO", (str _playerActualCashBalance)];
 		systemChat (str _messageTextOnlyFormat1);
 		systemChat (str _messageTextOnlyFormat2);
 	};
@@ -434,7 +434,7 @@
 						if (mgmTfA_configgv_clickNGoTaxisDisplayTickChargeCutTextMessageBool) then {
 							// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
 							private	["_messageTextOnlyFormat"];
-							_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
+							_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
 							systemChat 		(str _messageTextOnlyFormat);
 						};
 					NOT IMPLEMENTED
@@ -450,12 +450,12 @@
 			];
 	// inform the player via Hint		-- let the customer know that he just has been charged $amount
 	private	["_msg2HintTextString"];
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>PAYG BOOKING FEE:<br/><br/>%2 CRYPTO<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber), (str EPOCH_playerCrypto)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>PAYG BOOKING FEE<br/><br/>%2 CRYPTO<br/><br/><br/><br/>YOUR NEW<br/>CASH _SUTaxiAIVehicleObject lockCargo false<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber), (str EPOCH_playerCrypto)];
 	hint _msg2HintTextString;
 	// inform the player via systemChat 	-- only if the global config allows
 	// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
 	private	["_messageTextOnlyFormat"];
-	_messageTextOnlyFormat = parsetext format ["[RADIO_IN]  YOU PAID PAYG BOOKING FEE: %1 CRYPTO, THANKS. NEW BALANCE: %2 CRYPTO", (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber), (str EPOCH_playerCrypto)];
+	_messageTextOnlyFormat = parsetext format ["[RADIO_IN]  YOU PAID PAYG BOOKING FEE %1 CRYPTO, THANKS. NEW BALANCE %2 CRYPTO", (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber), (str EPOCH_playerCrypto)];
 	systemChat 		(str _messageTextOnlyFormat);
 	/*
 					NOT IMPLEMENTED
@@ -465,7 +465,7 @@
 						if (mgmTfA_configgv_clickNGoTaxisDisplayTickChargeCutTextMessageBool) then {
 							// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
 							private	["_messageTextOnlyFormat"];
-							_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
+							_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE PAYG TICK FEE %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber), (str EPOCH_playerCrypto)];
 							systemChat 		(str _messageTextOnlyFormat);
 						};
 					NOT IMPLEMENTED
@@ -481,7 +481,7 @@
 			"_msg2SyschatTextString"
 			];
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPleasePay1stMileFee.jpg'/><br/><br/><t size='1.40' color='#00FF00'>GREETINGS<br/>%1<br/><br/><br/>PLEASE PAY<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
-	_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 PLEASE PAY THE 1ST MILE FEE: %2 CRYPTO. THANKS!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+	_msg2SyschatTextString = parsetext format ["[DRIVER]  %1 PLEASE PAY THE 1ST MILE FEE %2 CRYPTO. THANKS!", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 	// now let's keep reminding player that he must pay the 1st Mile Fee via systemChat, we will keep doing this as long as:
@@ -499,12 +499,12 @@
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 			];
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	// inform the player via Hint		-- let the customer know that he just has been charged $amount
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	private	["_msg2HintTextString"];
-																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID THE<br/>1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	hint _msg2HintTextString;
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	// inform the player via systemChat 	-- only if the global config allows
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	private	["_messageTextOnlyFormat"];
-																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE 1ST MILE FEE: %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE: %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
+																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	_messageTextOnlyFormat = parsetext format ["%1 YOU JUST PAID THE 1ST MILE FEE %2 CRYPTO. THANK YOU FOR THE PAYMENT! YOUR NEW BALANCE %3 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str EPOCH_playerCrypto)];
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	systemChat 		(str _messageTextOnlyFormat);
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	};
 "mgmTfA_gv_pvc_pos_yourTaxiAnywhere1stMileFeeChargeRequestActionedPacketSignalOnly" addPublicVariableEventHandler {
@@ -520,14 +520,14 @@
 	if (true) then {
 		// not a config option yet - just go ahead & inform the player
 		private	["_msg2HintTextString"];
-		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID<br/>TAXI ANYWHERE<br/>1ST MILE FEE:<br/><br/>%2 CRYPTO<br/><br/><br/>THANK YOU<br/>FOR THE PAYMENT<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE:<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
+		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID<br/>TAXI ANYWHERE<br/>1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/><br/>THANK YOU<br/>FOR THE PAYMENT<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
 		hint _msg2HintTextString;
 	};
 	// inform the player via systemChat 	-- only if the global config allows
 	if (true) then {
 		// not a config option yet - just go ahead & inform the player
 		private	["_messageTextOnlyFormat"];
-		_messageTextOnlyFormat = parsetext format ["[DRIVER]  YOU PAID TAXI ANYWHERE 1ST MILE FEE: %1 CRYPTO, THANKS. NEW BALANCE: %2 CRYPTO.", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
+		_messageTextOnlyFormat = parsetext format ["[DRIVER]  YOU PAID TAXI ANYWHERE 1ST MILE FEE %1 CRYPTO, THANKS. NEW BALANCE %2 CRYPTO.", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
 		systemChat (str _messageTextOnlyFormat);
 	};
 	// IDEA/TODO:	inform the player via cutText 	-- only if the global config allows

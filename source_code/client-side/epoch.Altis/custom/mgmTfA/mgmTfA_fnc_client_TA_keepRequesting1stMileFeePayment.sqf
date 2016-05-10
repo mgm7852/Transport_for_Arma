@@ -71,7 +71,7 @@ while {_continueRequesting1stMileFeePayment} do
 			_currentVehiclesGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");
 			//Compare current vehicle's GUSUID with the supplied-as-parameter GUSUID; if they match, message the player. Otherwise do nothing.
 			if (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber) then {
-				_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE 1ST MILE FEE: %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _counterInfinite)];
+				_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE 1ST MILE FEE %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _counterInfinite)];
 				systemChat (str _msg2SyschatTextString);
 				if (mgmTfA_configgv_clientVerbosityLevel>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf]  [TV8]          VEHICLE COMPARISON MATCHED:		the (str _originalVehiclesGUSUIDNumber) is: (%1) == (str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
 			} else {

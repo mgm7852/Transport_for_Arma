@@ -27,7 +27,7 @@ if (_playerCanAffordRequestedJourneyServiceFeeBool) then {
 			"_msg2SyschatTextString",
 			"_actionRemovedMessageText"
 			];
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#FF0037'>%1<br/><br/>THANKS FOR PAYING<br/>THE SERVICE FEE:<br/>%2 CRYPTO<br/><br/>", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#FF0037'>%1<br/><br/>THANKS FOR PAYING<br/>THE SERVICE FEE<br/>%2 CRYPTO<br/><br/>", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber)];
 	_msg2SyschatTextString = parsetext format ["[DRIVER]  SERVICE FEE %2 CRYPTO PAID, THANKS!", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber)];
 	hint _msg2HintTextString;
 	systemChat str _msg2SyschatTextString;
@@ -52,7 +52,7 @@ if (_playerCanAffordRequestedJourneyServiceFeeBool) then {
 			"_msg2SyschatTextString1",
 			"_msg2SyschatTextString2"
 			];
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>THE SERVICE FEE:<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>THE SERVICE FEE<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber)];
 	_msg2SyschatTextString1 = parsetext format ["[RADIO_IN]  SORRY %1 YOU CANNOT AFFORD THE SERVICE FEE %2 CRYPTO.", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber)];
 	_msg2SyschatTextString2 = parsetext format ["[RADIO_IN]  PLEASE TRY AGAIN WHEN YOU HAVE ENOUGH CASH."];
 	hint _msg2HintTextString;
