@@ -480,7 +480,8 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 			_emergencyEscapeNeeded = true;
 		};
 		// Let emergency escapees pass
-		if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";	};
+		//if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyondMainScope"; };
+		if(_emergencyEscapeNeeded) then { breakOut "TheRequestorHasNotPaidThe1stMileFeeLoop"; };
 	};
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] EXITed loop _TA1stMileFeeNeedToBePaidBool"];};
 	// why did we exit the loop?
