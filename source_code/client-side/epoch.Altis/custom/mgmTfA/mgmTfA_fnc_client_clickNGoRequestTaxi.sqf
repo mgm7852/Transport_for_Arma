@@ -159,10 +159,10 @@ if (_bookingPermitted) then {
 			// Close the map
 			openMap false;
 			// Inform via hint (in Rich format)
-			_msg2HintTextString = parsetext format ["REQUESTING A TAXI TO<br/>CHOSEN DESTINATION...<br/><br/>(POSITION=%1)", (str _clickNGoTaxiRequestedDestinationPosition3DArray)];
+			_msg2HintTextString = parsetext format ["REQUESTING A TAXI TO<br/>CHOSEN DESTINATION...<br/><br/>"];
 			hint _msg2HintTextString;
 			// Inform via systemChat (in Text-Only format)
-			_msg2SyschatTextString = parsetext format ["REQUESTING A TAXI TO CHOSEN DESTINATION... (POSITION=%1)", (str _clickNGoTaxiRequestedDestinationPosition3DArray)];
+			_msg2SyschatTextString = parsetext format ["REQUESTING A TAXI TO CHOSEN DESTINATION..."];
 			systemChat (str _msg2SyschatTextString);
 			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf]  [TV5] REQUESTING A TAXI TO CHOSEN DESTINATION...		(str _clickNGoTaxiRequestedDestinationPosition3DArray) is: (%1).", (str _clickNGoTaxiRequestedDestinationPosition3DArray)];};
 			clickNGoTaxiDestinationChoser_systemReady = nil;
