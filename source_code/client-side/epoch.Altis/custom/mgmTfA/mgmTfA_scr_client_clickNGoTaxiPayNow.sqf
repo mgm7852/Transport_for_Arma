@@ -42,7 +42,6 @@ if (_playerCanAffordAbsoluteMinimumJourneyServiceFeeBool) then {
 			];
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>MINIMUM JOURNEY SERVICE FEE:<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 	_msg2SyschatTextString = parsetext format ["%1 THANKS FOR PAYING MINIMUM JOURNEY SERVICE FEE: %2 CRYPTO.  PLEASE WAIT", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
-	// Print the message
 	hint _msg2HintTextString;
 	systemChat str _msg2SyschatTextString;
 
@@ -65,7 +64,6 @@ if (_playerCanAffordAbsoluteMinimumJourneyServiceFeeBool) then {
 			];
 	_actionRemovedMessageText = parsetext format ["'PAYNOW' ACTION HAS BEEN REMOVED"];
 	systemChat " ";
-	// Print the message
 	systemChat 		str _actionRemovedMessageText;
 } else {
 	// cannot afford
@@ -77,7 +75,6 @@ if (_playerCanAffordAbsoluteMinimumJourneyServiceFeeBool) then {
 			];
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>THE MINIMUM SERVICE FEE:<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH<br/><br/>THANK YOU<br/>", (profileName), (str (round mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber))];
 	_msg2SyschatTextString = parsetext format ["SORRY %1 YOU CANNOT AFFORD THE MINIMUM SERVICE FEE: %2 CRYPTO.   PLEASE TRY AGAIN WHEN YOU HAVE ENOUGH CASH.   THANK YOU", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
-	// Print the message
 	hint _msg2HintTextString;
 	systemChat str _msg2SyschatTextString;
 };

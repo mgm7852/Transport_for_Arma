@@ -120,7 +120,6 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/>HAVE A NICE DAY!<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 			_messageTextOnlyFormat1 = parsetext format ["[DRIVER]  %1 SORRY BUT YOU CANNOT AFFORD THE 1ST MILE FEE %2 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 			_messageTextOnlyFormat2 = parsetext format ["[DRIVER]  HAVE A NICE DAY!"];
-			// Print the message
 			hint _msg2HintTextString;
 			systemChat (str _messageTextOnlyFormat1);
 			systemChat (str _messageTextOnlyFormat2);

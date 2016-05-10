@@ -152,7 +152,6 @@ if (_bookingPermitted) then {
 				];
 		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>THE BOOKING FEE:<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_fixedDestinationTaxisNonRefundableStandardBookingFeeCostInCryptoNumber)];
 		_msg2SyschatTextString = parsetext format ["[TAXI DISPATCHER] BOOKING FEE %1 CRYPTO PAID, THANKS! PLEASE WAIT...", (str mgmTfA_configgv_fixedDestinationTaxisNonRefundableStandardBookingFeeCostInCryptoNumber)];
-		// Print the message
 		hint _msg2HintTextString;
 		systemChat str _msg2SyschatTextString;
 		// Player just paid for the standard booking fee. The outstanding balance (assuming he will complete the journey fully) is:		_journeyServiceFeeCostInCryptoNumber	<= we should charge him this much when he gets in the vehicle!
@@ -180,7 +179,6 @@ if (_bookingPermitted) then {
 		// TODO:	do we need this clear hint area at this point?
 		// Clear the hint are
 		hint "";
-		// Print the message
 		_bookingRequestSubmittedPleaseStandByForDespatchersResponseMessageTextOnly = parsetext format ["[RADIO_OUT] TAXI REQUEST SUBMITTED, PLEASE STAND BY"];
 		systemChat str _bookingRequestSubmittedPleaseStandByForDespatchersResponseMessageTextOnly;
 	} else {
@@ -193,7 +191,6 @@ if (_bookingPermitted) then {
 		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>THE COST OF SERVICE:<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH<br/><br/>THANK YOU<br/>", (profileName), (str (round _journeyTotalCostInCryptoNumber))];
 		_msg2SyschatTextString1 = parsetext format ["[SYSTEM]  SORRY %1 YOU CANNOT AFFORD THE COST OF SERVICE %2 CRYPTO", (profileName), (str _journeyTotalCostInCryptoNumber)];
 		_msg2SyschatTextString2 = parsetext format ["[SYSTEM]  PLEASE TRY AGAIN WHEN YOU HAVE ENOUGH CASH.   THANK YOU"];
-		// Print the message
 		hint _msg2HintTextString;
 		systemChat str _msg2SyschatTextString1;
 		systemChat str _msg2SyschatTextString2;

@@ -190,7 +190,6 @@ if (_bookingPermitted) then {
 			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>THE CLICKNGO BOOKING FEE:<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
 			_msg2SyschatTextString1 = parsetext format ["[RADIO_IN]  %1 THANKS FOR PAYING THE CLICKNGO BOOKING FEE %2 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
 			_msg2SyschatTextString2 = parsetext format ["[RADIO_IN]  PROCESSING, PLEASE WAIT..."];
-			// Print the message
 			hint _msg2HintTextString;
 			systemChat str _msg2SyschatTextString1;
 			systemChat str _msg2SyschatTextString2;
