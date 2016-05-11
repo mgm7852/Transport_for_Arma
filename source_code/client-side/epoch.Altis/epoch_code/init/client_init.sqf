@@ -77,7 +77,7 @@ call EPOCH_clientInit;
 //==========
 // Transport for Arma client-side init	
 if (hasInterface) then {
-	[] call compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_scr_client_init.sqf";
+	[] call compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_CO_scr_init.sqf";
 };
 //==========
 
@@ -86,7 +86,7 @@ if (hasInterface) then {
 // Transport for Arma client-side init onPlayerSpawn
 //waitUntil {vehicle player == player}; 
 //waituntil {!isnull (finddisplay 46)}; 
-[] call compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_scr_client_onPlayerRespawn.sqf";
+[] call compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_CO_scr_onPlayerRespawn.sqf";
 //================================================================================
 
 true
