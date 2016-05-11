@@ -204,7 +204,7 @@ class MGMTFA_PICBUTTON
 	font = "PuristaMedium";
 	size = 0.03921;
 	sizeEx = 0.03921;
-	text = "custom\mgmTfA\gui_img\9a_shared_btn_exit.paa";
+	text = "custom\mgmTfA\img\9a_shared_btn_exit.paa";
 	soundEnter[] = {"",0.09,1};
 	soundPush[] = {"",0.0,0};
 	soundClick[] = {"",0.07,1};
@@ -273,7 +273,7 @@ class MGMTFA_TEMPLATEBUTTONPIC
 	soundClick[] = {"\A3\ui_f\data\sound\RscButton\soundClick",1,1};
 	soundEscape[] = {"\A3\ui_f\data\sound\ReadOut\ReadoutHideClick1",1,1};
 	// dynamic bit -- these below should be customized for each individual button
-	text = "custom\mgmTfA\gui_img\3b_btn_paynow.jpg";
+	text = "custom\mgmTfA\img\3b_btn_paynow.jpg";
 };
 
 class MGMTFA_TEMPLATEACTUALBUTTON: MGMTFA_TEMPLATEBUTTONPIC
@@ -298,7 +298,7 @@ class MGMTFA_TEMPLATEACTUALBUTTON: MGMTFA_TEMPLATEBUTTONPIC
 
 	// dynamic bit -- these below should be customized for each individual button
 	tooltip = "PAY NOW";
-	text = "custom\mgmTfA\gui_img\3b_btn_paynow.jpg";
+	text = "custom\mgmTfA\img\3b_btn_paynow.jpg";
 	//action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\script_paynow.sqf""";
 	action = "CloseDialog 0;";
 	x = 0.634062 * safezoneW + safezoneX;

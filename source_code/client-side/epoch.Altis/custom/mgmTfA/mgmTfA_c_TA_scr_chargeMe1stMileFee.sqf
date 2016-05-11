@@ -69,7 +69,7 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 				// yes 1st Mile Fee is enabled and since it does not need to be paid now, it appears this has already been paid! -- log what we learned and do 1stMileFeePayRequestor comms
 				if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV3] 	DETECTED: 	DUPLICATE PAYMENT ATTEMPT		1st Mile Fee is ENABLED but does NOT NEED TO BE PAID now.		"];};
 				// do 1stMileFeePayRequestor comms
-				_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>1ST MILE FEE<br/>HAS ALREADY<br/>BEEN PAID<br/><br/>", (profileName)];
+				_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>1ST MILE FEE<br/>HAS ALREADY<br/>BEEN PAID<br/><br/>", (profileName)];
 				_msg2SyschatTextString = parsetext format ["SORRY %1! 1ST MILE FEE HAS ALREADY BEEN PAID", (profileName)];
 				hint _msg2HintTextString;
 				systemChat (str _msg2SyschatTextString);
@@ -77,7 +77,7 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 				// no 1st Mile Fee is not enabled and thus it does not need to be paid -- log what we learned
 				if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV3] 	DETECTED: 	PLAYER ATTEMPTED TO PAY UNNECESSARILY 		1st Mile Fee is NOT ENABLED on this server.		"];};
 				// do 1stMileFeePayRequestor comms
-				_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>1ST MILE FEE<br/>IS DISABLED<br/><br/>", (profileName)];
+				_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>1ST MILE FEE<br/>IS DISABLED<br/><br/>", (profileName)];
 				_msg2SyschatTextString = parsetext format ["SORRY %1! 1ST MILE FEE IS DISABLED", (profileName)];
 				hint _msg2HintTextString;
 				systemChat (str _msg2SyschatTextString);
@@ -115,7 +115,7 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 					"_messageTextOnlyFormat1",
 					"_messageTextOnlyFormat2"
 					];
-			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/>HAVE A NICE DAY!<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/>HAVE A NICE DAY!<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 			_messageTextOnlyFormat1 = parsetext format ["[DRIVER]  %1 SORRY BUT YOU CANNOT AFFORD THE 1ST MILE FEE %2 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 			_messageTextOnlyFormat2 = parsetext format ["[DRIVER]  HAVE A NICE DAY!"];
 			hint _msg2HintTextString;
@@ -142,7 +142,7 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 			"_msg2SyschatTextString2"
 			];
 	// with hint
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#00FF00'><br/>SORRY %1!<br/><br/><br/>YOU CANNOT PAY<br/>TAXI ANYWHERE<br/>1ST MILE FEE<br/><br/>AS YOU ARE<br/>NOT IN A<br/>TAXI ANYWHERE<br/>VEHICLE<br/><br/>", (profileName)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#00FF00'><br/>SORRY %1!<br/><br/><br/>YOU CANNOT PAY<br/>TAXI ANYWHERE<br/>1ST MILE FEE<br/><br/>AS YOU ARE<br/>NOT IN A<br/>TAXI ANYWHERE<br/>VEHICLE<br/><br/>", (profileName)];
 	hint _msg2HintTextString;
 	// with systemChat
 	_msg2SyschatTextString1 = parsetext format ["[SYSTEM]  SORRY %1! YOU CANNOT PAY TAXI ANYWHERE 1ST MILE FEE", (profileName)];
