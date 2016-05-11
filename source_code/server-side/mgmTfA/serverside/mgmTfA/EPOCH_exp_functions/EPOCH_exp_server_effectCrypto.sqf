@@ -36,7 +36,7 @@ if (!isNull _player && isPlayer _player) then {
 	// add input number to existing variable while keeping it within min and max range.
 	_current_crypto = ((_current_crypto + _crypto) min _playerCryptoLimitMax) max _playerCryptoLimitMin;
 	// send final value back to the player
-	_current_crypto remoteExec ['EPOCH_exp_effectCrypto',_player];
+	_current_crypto remoteExec ['EPOCH_effectCrypto',_player];
 	// set final variable
 	_vars set[_cIndex, _current_crypto];
 	// save modified custom variables array
