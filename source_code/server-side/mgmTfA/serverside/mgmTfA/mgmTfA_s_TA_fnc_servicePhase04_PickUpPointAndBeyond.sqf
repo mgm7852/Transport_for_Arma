@@ -417,7 +417,7 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s
 // to wait or not to wait...
 if (_TA1stMileFeeNeedToBePaidBool) then {
 	// We will now wait for the requestor to pay the 1st Mile Fee (via GUI button OR via ActionMenu)
-	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV5] This is _myGUSUIDNumber: (%1)	Entered 		if (_TA1stMileFeeNeedToBePaidBool) then			", (str _myGUSUIDNumber)];};
+	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV5] This is _myGUSUIDNumber: (%1)	Entered 		if (_TA1stMileFeeNeedToBePaidBool) then			", (str _myGUSUIDNumber)];};
 
 	// Change our status to:		3 AWAITING PAYMENT			to proceed, first the requestor must pay...
 	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs03TextString;
@@ -438,7 +438,7 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 
 		// inside loop evaluation -- can we escape the loop yet?
 		_TA1stMileFeeNeedToBePaidBool = call compile format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
-		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV4] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_TA1stMileFeeNeedToBePaidBool) is: (%2)			", (str _myGUSUIDNumber), (str _TA1stMileFeeNeedToBePaidBool)];};
+		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV4] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_TA1stMileFeeNeedToBePaidBool) is: (%2)			", (str _myGUSUIDNumber), (str _TA1stMileFeeNeedToBePaidBool)];};
 
 		///
 		// Broadcast ServiceUnit Information
@@ -666,7 +666,7 @@ if (!_emergencyEscapeNeeded) then {
 			// INSIDE LOOP CHECK
 			// is PAYG active?				if it is not active, that means (a)1st Mile Fee has not been paid yet		OR		(b) TaxiAnywhere-prePaid-Initial-Journey-time is still active
 			_SUPAYGisActiveBool = call compile format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
-			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV4] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_TA1stMileFeeNeedToBePaidBool) is: (%2)			", (str _myGUSUIDNumber), (str _TA1stMileFeeNeedToBePaidBool)];};
+			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV4] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_TA1stMileFeeNeedToBePaidBool) is: (%2)			", (str _myGUSUIDNumber), (str _TA1stMileFeeNeedToBePaidBool)];};
 
 			if (_SUPAYGisActiveBool) then {
 				// PAYG is active
