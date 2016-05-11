@@ -6,15 +6,15 @@
 //H
 //HH
 //HH ~~
-//HH	NEED UPDATE			//HH	Example usage	:	_null =	[_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString, _positionToSpawnSUVehiclePosition3DArray, _myGUSUIDNumber] spawn mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor;
+//HH	NEED UPDATE			//HH	Example usage	:	_null =	[_taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorPosition3DArray, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereRequestorProfileNameTextString, _positionToSpawnSUVehiclePosition3DArray, _myGUSUIDNumber] spawn mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor;
 //HH	NEED UPDATE			//HH	Parameters	:	
 //HH	NEED UPDATE			//HH					// We will not need all these but pass everything for now as we might change the script in the future...
-//HH	NEED UPDATE			//HH					// Argument #0:		_clickNGoRequestorClientIDNumber
-//HH	NEED UPDATE			//HH					// Argument #1:		_clickNGoRequestorPosition3DArray
+//HH	NEED UPDATE			//HH					// Argument #0:		_taxiAnywhereRequestorClientIDNumber
+//HH	NEED UPDATE			//HH					// Argument #1:		_taxiAnywhereRequestorPosition3DArray
 //HH	NEED UPDATE			//HH					// Argument #2:		_THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber
 //HH	NEED UPDATE			//HH					// Argument #3:		_THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString
-//HH	NEED UPDATE			//HH					// Argument #4:		_clickNGoRequestorPlayerUIDTextString
-//HH	NEED UPDATE			//HH					// Argument #5:		_clickNGoRequestorProfileNameTextString
+//HH	NEED UPDATE			//HH					// Argument #4:		_taxiAnywhereRequestorPlayerUIDTextString
+//HH	NEED UPDATE			//HH					// Argument #5:		_taxiAnywhereRequestorProfileNameTextString
 //HH	NEED UPDATE			//HH					// Argument #6:		_positionToSpawnSUVehiclePosition3DArray
 //HH	NEED UPDATE			//HH					// Argument #7:		_myGUSUIDNumber
 //HH	NEED UPDATE			//HH	Return Value	:	none	[this function spawns the next function in "clickNGo Taxi - Service Request - Workflow"
@@ -29,11 +29,11 @@
 if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server_Init=0;}; waitUntil {mgmTfA_Server_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 scopeName "mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestorMainScope";
 private	[
-		"_clickNGoRequestorClientIDNumber",
-		"_clickNGoRequestorPosition3DArray",
-		"_clickNGoRequestorPlayerUIDTextString",
-		"_clickNGoRequestorProfileNameTextString",
-		"_clickNGoTaxiRequestedDestinationPosition3DArray",
+		"_taxiAnywhereRequestorClientIDNumber",
+		"_taxiAnywhereRequestorPosition3DArray",
+		"_taxiAnywhereRequestorPlayerUIDTextString",
+		"_taxiAnywhereRequestorProfileNameTextString",
+		"_taxiAnywhereTaxiRequestedDestinationPosition3DArray",
 		"_positionToSpawnSUVehiclePosition3DArray",
 		"_myGUSUIDNumber",
 		"_SUCurrentTaskThresholdInSecondsNumber",
@@ -96,11 +96,11 @@ _SUCurrentTaskAgeInSecondsNumber = 0;
 //Start the Current Task Age Timer
 _SUCurrentTaskBirthTimeInSecondsNumber = (time);
 //// Prep Function Arguments
-_clickNGoRequestorClientIDNumber = (_this select 0);
-_clickNGoRequestorPosition3DArray = (_this select 1);
-_clickNGoRequestorPlayerUIDTextString = (_this select 2);
-_clickNGoRequestorProfileNameTextString = (_this select 3);
-_clickNGoTaxiRequestedDestinationPosition3DArray = (_this select 4);
+_taxiAnywhereRequestorClientIDNumber = (_this select 0);
+_taxiAnywhereRequestorPosition3DArray = (_this select 1);
+_taxiAnywhereRequestorPlayerUIDTextString = (_this select 2);
+_taxiAnywhereRequestorProfileNameTextString = (_this select 3);
+_taxiAnywhereTaxiRequestedDestinationPosition3DArray = (_this select 4);
 _positionToSpawnSUVehiclePosition3DArray = (_this select 5);
 _myGUSUIDNumber = (_this select 6);
 
@@ -115,9 +115,9 @@ _SUTaxiAIVehicleDistanceToWayPointMetersNumber = 0;
 _SUCurrentActionInProgressTextString = "UNDEFINED";
 _initiateServiceUnitAbnormalShutdownImmediatelyBool = false;
 // These below are a duplicate variables - they are created just to keep function-calling-code consistent.
-	_SUActiveWaypointPositionPosition3DArray = _clickNGoRequestorPosition3DArray;
-	_SURequestorPlayerUIDTextString = _clickNGoRequestorPlayerUIDTextString;
-	_SURequestorProfileNameTextString = _clickNGoRequestorProfileNameTextString;
+	_SUActiveWaypointPositionPosition3DArray = _taxiAnywhereRequestorPosition3DArray;
+	_SURequestorPlayerUIDTextString = _taxiAnywhereRequestorPlayerUIDTextString;
+	_SURequestorProfileNameTextString = _taxiAnywhereRequestorProfileNameTextString;
 // This below should not be necessary at this stage. It is added to this function to keep function-calling-code consistent.
 _SUMarkerShouldBeDestroyedAfterExpiryBool = false;
 
@@ -149,7 +149,7 @@ _SUDistanceToActiveWaypointInMetersNumber = -1;
 _emergencyEscapeNeeded = false;
 
 if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV4] <ThisIs:%1> I have been SPAWN'd. Here is the raw dump of the arguments I have in (_this)=(%2).", _myGUSUIDNumber, (str _this)];};//dbg
-if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV2] A clickNGo taxi request was FORWARDED to me.			This is what I have received:		_clickNGoRequestorClientIDNumber: (%1).		_clickNGoRequestorPosition3DArray: (%2).		_clickNGoRequestorPlayerUIDTextString: (%3) / resolved to _clickNGoRequestorProfileNameTextString: (%4).		_clickNGoTaxiRequestedDestinationPosition3DArray: (%5).	_positionToSpawnSUVehiclePosition3DArray is: (%6).		_myGUSUIDNumber is: (%7).", _clickNGoRequestorClientIDNumber, (str _clickNGoRequestorPosition3DArray), _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString, _clickNGoTaxiRequestedDestinationPosition3DArray, (str _positionToSpawnSUVehiclePosition3DArray), _myGUSUIDNumber];};//dbg
+if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV2] A clickNGo taxi request was FORWARDED to me.			This is what I have received:		_taxiAnywhereRequestorClientIDNumber: (%1).		_taxiAnywhereRequestorPosition3DArray: (%2).		_taxiAnywhereRequestorPlayerUIDTextString: (%3) / resolved to _taxiAnywhereRequestorProfileNameTextString: (%4).		_taxiAnywhereTaxiRequestedDestinationPosition3DArray: (%5).	_positionToSpawnSUVehiclePosition3DArray is: (%6).		_myGUSUIDNumber is: (%7).", _taxiAnywhereRequestorClientIDNumber, (str _taxiAnywhereRequestorPosition3DArray), _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereTaxiRequestedDestinationPosition3DArray, (str _positionToSpawnSUVehiclePosition3DArray), _myGUSUIDNumber];};//dbg
 
 // ANYTHING BELOW HERE HAS NOT BEEN MOVED UP YET ***		ANYTHING BELOW HERE HAS NOT BEEN MOVED UP YET ***		ANYTHING BELOW HERE HAS NOT BEEN MOVED UP YET ***		ANYTHING BELOW HERE HAS NOT BEEN MOVED UP YET ***
 	// lol wut?
@@ -170,27 +170,27 @@ if (mgmTfA_dynamicgv_sideRelationSetupHasNotBeenDoneYetBool) then {
 };
 
 _SUTaxiAIVehicleWaypointMainArrayIndexNumber = 2;
-_SUTaxiAIVehicleFirstWaypointPosition3DArray = _clickNGoRequestorPosition3DArray;
+_SUTaxiAIVehicleFirstWaypointPosition3DArray = _taxiAnywhereRequestorPosition3DArray;
 //Note:	_SUTaxiAIVehicleWaypointMainArrayIndexNumber is still pointing at 2. by default 0 & 1 exist, so we are at the right index value to insert the 3rd item!
 _SUTaxiAIVehicleWaypointMainArray = _SUAIGroup addWaypoint [_SUTaxiAIVehicleFirstWaypointPosition3DArray, _SUTaxiWaypointRadiusInMetersNumber,_SUTaxiAIVehicleWaypointMainArrayIndexNumber];
 _SUTaxiAIVehicleWaypointMainArray setWaypointType "MOVE";
 _SUTaxiAIVehicleWaypointMainArray setWaypointTimeout [1, 1, 1];
 
-//Our goal (after picking up the Requestor, will be) reaching =>		_clickNGoTaxiRequestedDestinationPosition3DArray
-_SUDropOffPositionPosition3DArray = _clickNGoTaxiRequestedDestinationPosition3DArray;
+//Our goal (after picking up the Requestor, will be) reaching =>		_taxiAnywhereTaxiRequestedDestinationPosition3DArray
+_SUDropOffPositionPosition3DArray = _taxiAnywhereTaxiRequestedDestinationPosition3DArray;
 // Need the below to fix the issue with dropOffMarker being placed exactly on top of clickNGoMarker causing the latter to be difficult to read
 _SUDropOffPositionPosition3DArray	set [1,((_SUDropOffPositionPosition3DArray select 1)+15)];
 
 // Inform all clients so that authorized clients can create a local marker for Drop Off Point
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV3]           Waypoint Added: %2 at %1", _clickNGoRequestorPosition3DArray, _SUTaxiAIVehicleWaypointMainArray];};//dbg
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV3]           Waypoint Added: %2 at %1", _taxiAnywhereRequestorPosition3DArray, _SUTaxiAIVehicleWaypointMainArray];};//dbg
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV3]           Waypoints Added: The current Waypoint Array is: (%1). _SUTaxiAIVehicleWaypointMainArrayIndexNumber is: (%2)",_SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber];};//dbg
 
 // Reduce number of available clickNGoTaxis TaxiDrivers by one
-mgmTfA_gvdb_PV_clickNGoTaxisNumberOfCurrentlyAvailableTaxiDriversNumber = mgmTfA_gvdb_PV_clickNGoTaxisNumberOfCurrentlyAvailableTaxiDriversNumber - 1;
+mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber = mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber - 1;
 
 //Create the vehicle for AI-Service-Unit
 _SUTaxiAIVehicleVehicleDirectionInDegreesNumber = (floor (random 361));
-_SUTaxiAIVehicleObject = mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString createVehicle _SUTaxiVehicleSpawnPosition3DArray;
+_SUTaxiAIVehicleObject = mgmTfA_configgv_taxiAnywhereTaxisTaxiVehicleClassnameTextString createVehicle _SUTaxiVehicleSpawnPosition3DArray;
 if (mgmTfA_configgv_currentMod == "EPOCH") then {
 	_SUTaxiAIVehicleObject		call		EPOCH_server_setVToken;
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV3]           Server is running EPOCH MOD. Post vehicle creation, setVToken issued to prevent accidental-clean up."];};//dbg
@@ -200,21 +200,21 @@ _SUTaxiAIVehicleObject setFormDir _SUTaxiAIVehicleVehicleDirectionInDegreesNumbe
 _SUTaxiAIVehicleObject setDir _SUTaxiAIVehicleVehicleDirectionInDegreesNumber;
 _SUTaxiAIVehicleObject setPos getPos _SUTaxiAIVehicleObject;
 _SUTaxiAIVehicleObject setVariable ["BIS_enableRandomization", false];
-_SUTaxiAIVehicleObject setObjectTextureGlobal [0, mgmTfA_configgv_clickNGoTaxisTaxiVehicleActiveColorSchemeTextString];
+_SUTaxiAIVehicleObject setObjectTextureGlobal [0, mgmTfA_configgv_taxiAnywhereTaxisTaxiVehicleActiveColorSchemeTextString];
 _SUTaxiAIVehicleObject setFuel 1;
 _SUTaxiAIVehicleObject allowDammage false;
 _SUTaxiAIVehicleObject addEventHandler ["HandleDamage", {false}];	
 _SUTaxiAIVehicleObject setVariable ["isMemberOfTaxiCorpFleet", _SUAIGroup, true];
 _SUTaxiAIVehicleObject setVariable ["mgmTfAisclickNGoTaxi", true, true];
 _SUTaxiAIVehicleObject setVariable ["GUSUIDNumber", _myGUSUIDNumber, true];
-_SUTaxiAIVehicleObject setVariable ["commandingCustomerPlayerUIDNumber", _clickNGoRequestorPlayerUIDTextString, true];
+_SUTaxiAIVehicleObject setVariable ["commandingCustomerPlayerUIDNumber", _taxiAnywhereRequestorPlayerUIDTextString, true];
 _SUTaxiAIVehicleObject setVariable ["customerCannotAffordService", false, true];
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber], true];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber];
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber], false];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber];
 // Is 1st Mile Fee enabled on the server?
-if (mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) then {
+if (mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) then {
 	// yes 1st Mile Fee is enabled and thus it need to be paid -- log the detected 1st Mile Fee setting
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf] [TV3] DETECTED: 1st Mile Fee is ENABLED"];};
 	// mark the vehicle accordingly on all MP clients
@@ -290,7 +290,7 @@ waitUntil{!isNull _SUTaxiAIVehicleObject};
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV3] SPAWN Completed. Vehicle: (%1) | GUSUID: (%2) | Driver: (%3)", _SUTaxiAIVehicleObject, _myGUSUIDNumber, _SUDriversFirstnameTextString];};//dbg
 
 //When setting the waypoint, make a note: How far are we going to go?
-_iWantToTravelThisManyMetresNumber = (round (_SUTaxiAIVehicleObject distance _clickNGoRequestorPosition3DArray));
+_iWantToTravelThisManyMetresNumber = (round (_SUTaxiAIVehicleObject distance _taxiAnywhereRequestorPosition3DArray));
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV3] current value:   (_iWantToTravelThisManyMetresNumber)=(%1)   ]", _iWantToTravelThisManyMetresNumber];};//dbg
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV4] SLEEPing now for %1 seconds before locking doors.", mgmTfA_configgv_timeToSleepBeforeLockingSpawnedclickNGoVehicleDoors];};//dbg
 uiSleep mgmTfA_configgv_timeToSleepBeforeLockingSpawnedclickNGoVehicleDoors;
@@ -299,10 +299,10 @@ _SUTaxiAIVehicleObject lockDriver true;
 _SUTaxiAIVehicleObject lockCargo true;
 //Save the new status of vehicleDoorLock
 _doorsLockedBool=true;
-//check distance to our Current Waypoint (_clickNGoRequestorPosition3DArray) and write to server RPT log
-_SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round (_SUTaxiAIVehicleObject distance _clickNGoRequestorPosition3DArray));
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV4] Distance to Waypoint _clickNGoRequestorPosition3DArray is: (%1). Locked the doors & going there now.", _SUTaxiAIVehicleDistanceToWayPointMetersNumber];};//dbg
-//Change our status to:		1 DRIVING-TO-REQUESTOR		to _clickNGoRequestorPosition3DArray
+//check distance to our Current Waypoint (_taxiAnywhereRequestorPosition3DArray) and write to server RPT log
+_SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round (_SUTaxiAIVehicleObject distance _taxiAnywhereRequestorPosition3DArray));
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV4] Distance to Waypoint _taxiAnywhereRequestorPosition3DArray is: (%1). Locked the doors & going there now.", _SUTaxiAIVehicleDistanceToWayPointMetersNumber];};//dbg
+//Change our status to:		1 DRIVING-TO-REQUESTOR		to _taxiAnywhereRequestorPosition3DArray
 _SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs01TextString;
 
 // LOOP ON THE WAY TO PICKUP!
@@ -319,7 +319,7 @@ _SUAIVehicleObjectCurrentPositionPosition3DArray = (getPosATL _SUTaxiAIVehicleOb
 _SUTaxiAIVehicleVehicleDirectionInDegreesNumber = (getDir _SUTaxiAIVehicleObject) + 45;
 _SUAIVehicleVehicleDirectionInDegreesNumber = _SUTaxiAIVehicleVehicleDirectionInDegreesNumber;
 _SUAIVehicleSpeedOfVehicleInKMHNumber = (round (speed _SUTaxiAIVehicleObject));
-_SUPickUpPositionPosition3DArray = _clickNGoRequestorPosition3DArray;
+_SUPickUpPositionPosition3DArray = _taxiAnywhereRequestorPosition3DArray;
 _SUAIVehicleObject = _SUTaxiAIVehicleObject;
 _SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
 _SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
@@ -328,8 +328,8 @@ _null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3D
 
 // Client Communications - Send the initial "we are processing your request - please wait" message to the Requestor
 mgmTfA_gv_pvc_pos_yourclickNGoTaxiRequestApprovedDriverEnRoutePacketSignalOnly = ".";
-_clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_yourclickNGoTaxiRequestApprovedDriverEnRoutePacketSignalOnly";
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV3] SENT RESPONSE    (mgmTfA_gv_pvc_pos_yourclickNGoTaxiRequestApprovedDriverEnRoutePacketSignalOnly) to Requestor:  (%1)		on computer (_clickNGoRequestorClientIDNumber)=(%2).", _clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber];};//dbg
+_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_yourclickNGoTaxiRequestApprovedDriverEnRoutePacketSignalOnly";
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV3] SENT RESPONSE    (mgmTfA_gv_pvc_pos_yourclickNGoTaxiRequestApprovedDriverEnRoutePacketSignalOnly) to Requestor:  (%1)		on computer (_taxiAnywhereRequestorClientIDNumber)=(%2).", _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorClientIDNumber];};//dbg
 
 //We are on the way to requestorPosition to pick up the requestor... We will loop till we are very close to the requestorPosition
 _broadcastSUInformationCounter = 0;
@@ -352,7 +352,7 @@ while {(_SUTaxiAIVehicleDistanceToWayPointMetersNumber>10) && ((speed _SUTaxiAIV
 		_SUTaxiAIVehicleVehicleDirectionInDegreesNumber = (getDir _SUTaxiAIVehicleObject) + 45;
 		_SUAIVehicleVehicleDirectionInDegreesNumber = _SUTaxiAIVehicleVehicleDirectionInDegreesNumber;
 		_SUAIVehicleSpeedOfVehicleInKMHNumber = (round (speed _SUTaxiAIVehicleObject));
-		_SUPickUpPositionPosition3DArray = _clickNGoRequestorPosition3DArray;
+		_SUPickUpPositionPosition3DArray = _taxiAnywhereRequestorPosition3DArray;
 		_SUAIVehicleObject = _SUTaxiAIVehicleObject;
 		_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
 		_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
@@ -404,12 +404,12 @@ if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_f
 if (!_emergencyEscapeNeeded) then { 
 	// proceed to next Phase as per normal
 	if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf] [TV2] <<<reached end-of-file>>>.   no emergency. proceeding with normal next phase in the workflow.			SPAWN'ing (mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond)."];};//dbg
-	_null = [_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString, _myGUSUIDNumber, _iWantToTravelThisManyMetresNumber, _SUTaxiAIVehicleObject, _SUDriversFirstnameTextString, _clickNGoTaxiRequestedDestinationPosition3DArray, _doorsLockedBool, _SUAIGroup, _SUTaxiWaypointRadiusInMetersNumber, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUAICharacterDriverObject, _SUTypeTextString, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffPositionNameTextString, _SUDropOffPositionPosition3DArray, _SUDropOffHasOccurredBool, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond;
+	_null = [_taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorPosition3DArray, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedTaxiFixedDestinationIDNumber, _THISDOESNOTEXISTINTHISFILE__fixedDestinationRequestedDestinationNameTextString, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereRequestorProfileNameTextString, _myGUSUIDNumber, _iWantToTravelThisManyMetresNumber, _SUTaxiAIVehicleObject, _SUDriversFirstnameTextString, _taxiAnywhereTaxiRequestedDestinationPosition3DArray, _doorsLockedBool, _SUAIGroup, _SUTaxiWaypointRadiusInMetersNumber, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUAICharacterDriverObject, _SUTypeTextString, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffPositionNameTextString, _SUDropOffPositionPosition3DArray, _SUDropOffHasOccurredBool, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond;
  } else {
 	// we have an emergency and we need to shutdown ASAP. forget about the normal workflow next phase(s) and go directly to termination phase!
 	if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV2] <<<reached end-of-file>>>.   there is an EMERGENCY therefore skipping Phases 04 & 05 completely 	and SPAWN'ing Phase06 immediately now (mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd)"];};//dbg
 	private	["_requestorPlayerObject"];
 	_requestorPlayerObject = objNull;
-	_null = [_clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _emergencyEscapeNeeded] spawn mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd;
+	_null = [_taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _emergencyEscapeNeeded] spawn mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd;
  };
 // EOF

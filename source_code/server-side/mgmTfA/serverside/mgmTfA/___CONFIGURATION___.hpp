@@ -70,38 +70,38 @@ mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber = 1
 // If false, a player who just joined the server will have to wait out the duration minimumWaitingTimeBetween*BookingsInSecondsNumber
 // default: true
 mgmTfA_configgv_FixedDestinationTaxiBookingFirstTimersCanBookWithoutWaitingBool = true;
-mgmTfA_configgv_clickNGoTaxiBookingFirstTimersCanBookWithoutWaitingBool = true;
+mgmTfA_configgv_taxiAnywhereTaxiBookingFirstTimersCanBookWithoutWaitingBool = true;
 
 // -- hotkey DoS protection --
 // We do not want any single player to be able to press TaxiAnywhereHotkey multiple times & book all available TaxiAnywhere Taxis,
 // as this would prevent other players from booking one of the limited number of TaxiAnywhere Taxis (practically a DoS!).
 // To prevent, when a player activate the TaxiAnywhereHotkey, a Cooldown Period will kick in and player will have to wait out before being able to use TaxiAnywhereHotkey again
 // default: 900 seconds (15 minutes)
-//mgmTfA_configgv_clickNGoTaxiBookingHotkeyCooldownDurationInSecondsNumber = 900;
+//mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber = 900;
 //RELEASETODO
-mgmTfA_configgv_clickNGoTaxiBookingHotkeyCooldownDurationInSecondsNumber = 60;
+mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber = 60;
 
 // --janitor initial sleep time--
 // When a player join the game, Janitor process will sleep a random amount of seconds before it starts it duty.
 // With the settings below, the random duration will be Min=24 seconds & Max=48 seconds.
-mgmTfA_configgv_clickNGoJanitorInitialRandomSleepDurationMinimumBaseInSecondsNumber = 24; // default: 24 seconds
-mgmTfA_configgv_clickNGoJanitorInitialRandomSleepDurationMinimumAdditionInSecondsNumber = 24; // default: 24 seconds
+mgmTfA_configgv_taxiAnywhereJanitorInitialRandomSleepDurationMinimumBaseInSecondsNumber = 24; // default: 24 seconds
+mgmTfA_configgv_taxiAnywhereJanitorInitialRandomSleepDurationMinimumAdditionInSecondsNumber = 24; // default: 24 seconds
 
 // --janitor sleep time--
 // This is used in mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf
 // default: 300 seconds (5 minutes)
-mgmTfA_configgv_clickNGoJanitorSleepDurationInSecondsNumber = 300;
+mgmTfA_configgv_taxiAnywhereJanitorSleepDurationInSecondsNumber = 300;
 
 // --TaxiAnywhere Display Instructions?--
-mgmTfA_dynamicgv_clickNGoTaxiDisplayInstructionsOnGetInEnabledBool = true;
+mgmTfA_dynamicgv_taxiAnywhereTaxiDisplayInstructionsOnGetInEnabledBool = true;
 //
 //	method #1:	show popup first time, in the future, show memory refresher as hint
 //	method #2:	always show as popup
 //	method #3:	always show as hint
-mgmTfA_dynamicgv_clickNGoTaxiDisplayInstructionsOnGetInDisplayMethodNumber = 1;
+mgmTfA_dynamicgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber = 1;
 
 // for quick hop on/offs we do not wish to re-display instructions every time. do not display if the last get in time was sooner than this threshold below.
-mgmTfA_dynamicgv_clickNGoTaxiReDisplayInstructionsOnGetInTimeThresholdInSecondsNumber = 300;
+mgmTfA_dynamicgv_taxiAnywhereTaxiReDisplayInstructionsOnGetInTimeThresholdInSecondsNumber = 300;
 //-----
 
 
@@ -125,7 +125,7 @@ mgmTfA_configgv_timeToSleepBeforeLockingSpawnedclickNGoVehicleDoors = 5;
 
 // --Vehicle Spin before deletion--
 mgmTfA_configgv_fixedDestinationTaxisSpinBeforeDeletionBool = true;
-mgmTfA_configgv_clickNGoTaxisSpinBeforeDeletionBool = true;
+mgmTfA_configgv_taxiAnywhereTaxisSpinBeforeDeletionBool = true;
 
 ///////
 //	parameter  0:		RADIUS 			The radius where to randomly place the Service Unit - number
@@ -135,14 +135,14 @@ mgmTfA_configgv_clickNGoTaxisSpinBeforeDeletionBool = true;
 //mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 5|0;//__builder___UNCOMMENT_THIS
 mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 50;//__builder___DELETE_THIS
 mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;//release_builder.delete_this_line
-mgmTfA_configgv_clickNGoTaxisSpawnDistanceRadiusInMetresNumber = 50;//release_builder.delete_this_line
-mgmTfA_configgv_clickNGoTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;//release_builder.delete_this_line
+mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber = 50;//release_builder.delete_this_line
+mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;//release_builder.delete_this_line
 
 // Random 'Termination Point' Settings
 mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusInMetresNumber = 350;
 mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusMinDistanceInMetresNumber = 200;
-mgmTfA_configgv_clickNGoTaxisTerminationDistanceRadiusInMetresNumber = 350;
-mgmTfA_configgv_clickNGoTaxisTerminationDistanceRadiusMinDistanceInMetresNumber = 200;
+mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusInMetresNumber = 350;
+mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusMinDistanceInMetresNumber = 200;
 
 
 // --Establish Headquarters-- (i.e.: create the building in 3D game world yes/no)
@@ -263,7 +263,7 @@ mgmTfA_configgv_catp03LocationMapMarkerTextString="East Taxis";
 // 	Example 1: Driver is driving to the requestorLocation to pick up a passenger -- In HQs Fleet Management system this driver will still appear as BUSY.
 //	Example 2: Driver, after completing serving a customer, start driving to self_destruction_point -- In HQs Fleet Management system this driver will still appear as BUSY.
 mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_fixedDestinationTaxisNumberOfAvailableTaxiDriversOnStartNumber	= 5;
-mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_clickNGoTaxisNumberOfAvailableTaxiDriversOnStartNumber		= 5;
+mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_taxiAnywhereTaxisNumberOfAvailableTaxiDriversOnStartNumber		= 5;
 //-----
 
 
@@ -279,7 +279,7 @@ mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_fixedDestinationTaxisBlacklistedPlayerP
 													"76000000000000500"					
 													];
 //TaxiCorp TaxiAnywhere Taxis will not serve any players with the following playerUIDs.
-mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_clickNGoTaxisBlacklistedPlayerPUIDsTextStringArray	=	[
+mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_taxiAnywhereTaxisBlacklistedPlayerPUIDsTextStringArray	=	[
 													"76666666666666666",
 													"76000000000000500"
 													];
@@ -341,7 +341,7 @@ mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs08TextString = "Terminated 
 //-----
 //Taxi Vehicle Settings for Fixed Destination Taxi Service
 mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString = "C_Offroad_01_F";
-mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString = "C_Offroad_01_F";
+mgmTfA_configgv_taxiAnywhereTaxisTaxiVehicleClassnameTextString = "C_Offroad_01_F";
 //
 // --Vehicle Color--
 //
@@ -351,12 +351,12 @@ mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString = "C_Offroad_01_F";
 mgmTfA_configgv_fixedDestinationTaxisVehicleColorObjectTextureGlobalTextStringYellow1 = "#(rgb,8,8,3)color(255,255,0,0.8)";
 mgmTfA_configgv_fixedDestinationTaxisVehicleColorObjectTextureGlobalTextStringRed1 = "#(rgb,8,8,3)color(255,0,0,1)";
 //
-mgmTfA_configgv_clickNGoTaxisVehicleColorObjectTextureGlobalTextStringYellow1 = "#(rgb,8,8,3)color(255,255,0,0.8)";
-mgmTfA_configgv_clickNGoTaxisVehicleColorObjectTextureGlobalTextStringRed1 = "#(rgb,8,8,3)color(255,0,0,1)";
+mgmTfA_configgv_taxiAnywhereTaxisVehicleColorObjectTextureGlobalTextStringYellow1 = "#(rgb,8,8,3)color(255,255,0,0.8)";
+mgmTfA_configgv_taxiAnywhereTaxisVehicleColorObjectTextureGlobalTextStringRed1 = "#(rgb,8,8,3)color(255,0,0,1)";
 //
 // Set the active color option here; use one of the options above [or add your own choice]
 mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleActiveColorSchemeTextString = mgmTfA_configgv_fixedDestinationTaxisVehicleColorObjectTextureGlobalTextStringYellow1;
-mgmTfA_configgv_clickNGoTaxisTaxiVehicleActiveColorSchemeTextString = mgmTfA_configgv_clickNGoTaxisVehicleColorObjectTextureGlobalTextStringYellow1;
+mgmTfA_configgv_taxiAnywhereTaxisTaxiVehicleActiveColorSchemeTextString = mgmTfA_configgv_taxiAnywhereTaxisVehicleColorObjectTextureGlobalTextStringYellow1;
 //-----
 
 //-----
@@ -403,7 +403,7 @@ mgmTfA_configgv_expiryTimeOutThresholdTAstopVehicleReqAutoCancelInSecondsNumber 
 //DIK_DIVIDE 	[Num/] 	0xB5 	181 	[/] on numeric keypad 
 //
 // Define the key to be used for the action: "Call-a-Taxi-to-my-position"
-mgmTfA_configgv_clickNGoCallATaxiHotkeyDIKCodeNumber = 210;
+mgmTfA_configgv_taxiAnywhereCallATaxiHotkeyDIKCodeNumber = 210;
 //
 mgmTfA_configgv_TA_setDestinationHotkeyDIKCodeNumber = 55;
 //
@@ -421,17 +421,17 @@ mgmTfA_configgv_TA_setDestinationHotkeyTextRepresentationTextString = "*";
 mgmTfA_configgv_GUIOpenMapCommandMonitoringEnabledBool = true;
 //
 // If the openMap command is issued this many times (within time frame below), TfA will be convinced that player is signalling us
-mgmTfA_configgv_clickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber = 3;
+mgmTfA_configgv_taxiAnywhereOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber = 3;
 // Whatever number you set above, you should add as many "Zero-And-A-Comma"s below		-- these represent the "previous map open times" and at server start each map-open-time is zero
-mgmTfA_configgv_clickNGoOpenMapCommandMonitoringThisMustBeTheSignalTurnThePage = [0,0,0];
+mgmTfA_configgv_taxiAnywhereOpenMapCommandMonitoringThisMustBeTheSignalTurnThePage = [0,0,0];
 //
 // Whatever number you set above should happen within a time range of this many seconds otherwise it will not qualify as 'The Signal'
-mgmTfA_configgv_clickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesInSecsNumber	= 8;
+mgmTfA_configgv_taxiAnywhereOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesInSecsNumber	= 8;
 //-----
 mgmTfA_configgv_fixedDestinationTaxisClientSideScannerSleepDurationBetweenScansInSecondsNumber = 5;
 mgmTfA_configgv_fixedDestinationTaxisClientSideScannerScanRadiusInMetresNumber = 250;
-mgmTfA_configgv_clickNGoTaxisClientSideScannerSleepDurationBetweenScansInSecondsNumber = 5;
-mgmTfA_configgv_clickNGoTaxisClientSideScannerScanRadiusInMetresNumber = 250;
+mgmTfA_configgv_taxiAnywhereTaxisClientSideScannerSleepDurationBetweenScansInSecondsNumber = 5;
+mgmTfA_configgv_taxiAnywhereTaxisClientSideScannerScanRadiusInMetresNumber = 250;
 //-----
 
 
@@ -492,10 +492,10 @@ mgmTfA_configgv_fixedDestinationTaxisServiceFeeCostForTravellingAdditional100Met
 // --TaxiAnywhere Payment Settings--		-- This is the PAYG (Pay-as-You-Go) module of Transport for Arma
 //
 // --Callout Fee--				-- This is the cost of 'calling a driver' to your location
-mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber = 400;
+mgmTfA_configgv_taxiAnywhereTaxisNonRefundableBookingFeeCostInCryptoNumber = 400;
 					////////////////
 					// don't change unless you know what you're doing!
-					mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNegativeNumber = 0 - mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber;
+					mgmTfA_configgv_taxiAnywhereTaxisNonRefundableBookingFeeCostInCryptoNegativeNumber = 0 - mgmTfA_configgv_taxiAnywhereTaxisNonRefundableBookingFeeCostInCryptoNumber;
 					////////////////
 
 // --AbsoluteMinimumJourneyTimeInSeconds--
@@ -503,45 +503,45 @@ mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber = 400;
 // Even if actual journey last shorter, a refund will not be made.
 // Customer MUST pre-pay the cost to prevent unnecessary disputes.
 // default: 60 seconds (1 minute)
-mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds = 30;
+mgmTfA_configgv_taxiAnywhereTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds = 30;
 
 // --1st Mile Fee--				-- This is the cost of first few seconds of journey
 // After this "1st Mile" run out, TaxiAnywhere tick fee keep taking money from players' wallet. 
 // If the money left is inadequate for the next tick, customer will be politely auto-ejected from the vehicle and will be notified.
 // Player is paying for the time of Driver (not for distance).
 // If the vehicle gets stuck, it's still costing a lot of money to Taxi Corp, such as:	(driver's time) + (energy) + (insurance) + (blah blah)
-mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber = 100;
+mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber = 100;
 					////////////////
 					// don't change unless you know what you're doing!
-					mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber = 0 - mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber;
+					mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber = 0 - mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber;
 					////////////////
 
 // tick frequency (in seconds): This controls how often the customer will be charged (the next Pay-As-You-Go fee)
-mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber = 10;
+mgmTfA_configgv_taxiAnywhereTaxisTickStepTimeInSecondsNumber = 10;
 
 // tick cost		-- "pay as you go" payment bit. customer must keep paying to keep going
-mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber = 20;
+mgmTfA_configgv_taxiAnywhereTaxisTickCostInCryptoNumber = 20;
 					////////////////
 					// don't change unless you know what you're doing!
-					mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNegativeNumber = 0 - mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber;
+					mgmTfA_configgv_taxiAnywhereTaxisTickCostInCryptoNegativeNumber = 0 - mgmTfA_configgv_taxiAnywhereTaxisTickCostInCryptoNumber;
 					////////////////
 
 // if enabled:	every time a 'tick charge' goes through, we will display a hint message and let the player know that he has been charged				(default: false)
-//mgmTfA_configgv_clickNGoTaxisDisplayTickChargeHintMessageBool = false;
+//mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeHintMessageBool = false;
 //RELEASETODO
-mgmTfA_configgv_clickNGoTaxisDisplayTickChargeHintMessageBool = true;
+mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeHintMessageBool = true;
 
 // if enabled:	every time a 'tick charge' goes through, we will display a systemChat message and let the player know that he has been charged		(default: true)
-mgmTfA_configgv_clickNGoTaxisDisplayTickChargeSystemChatMessageBool = true;
+mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeSystemChatMessageBool = true;
 
 // if enabled:	every time a 'tick charge' goes through, we will display a systemChat message and let the player know that he has been charged		(default: true)
-mgmTfA_configgv_clickNGoTaxisDisplayTickChargeCutTextMessageBool = true;
+mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeCutTextMessageBool = true;
 
 // a minor payment issue don't mean auto-kick but if we can't charge more than n times, PAYG service terminates!
 mgmTfA_configgv_thresholdNumberOfFailedPAYGTransactionsToPermitBeforeInitiatingPAYGserviceAbruptTerminationNumber = 2;
 					////////////////
 					// don't change unless you know what you're doing!
-					mgmTfA_configgv_monitoringAgentMissedPurchasingPowerCheckAndPAYGTickChargesAgentSleepTime = mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber;
+					mgmTfA_configgv_monitoringAgentMissedPurchasingPowerCheckAndPAYGTickChargesAgentSleepTime = mgmTfA_configgv_taxiAnywhereTaxisTickStepTimeInSecondsNumber;
 					////////////////
 
 // when player get in a clickNGo vehicle, driver will not start driving unless the 'PAYG Initial Fee' is paid.
@@ -551,7 +551,7 @@ mgmTfA_configgv_thresholdNumberOfFailedPAYGTransactionsToPermitBeforeInitiatingP
 //
 // however, it is a proven fact that some people just don't read.
 // if the setting below is enabled (default option), driver will continously systemChat message the player [once every second], requesting the 'Initial Fee' payment.
-mgmTfA_configgv_clickNGoTaxisDriverWillKeepRemindingThatTheInitialFeeMustBePaidBool = true;
+mgmTfA_configgv_taxiAnywhereTaxisDriverWillKeepRemindingThatTheInitialFeeMustBePaidBool = true;
 //=====
 
 

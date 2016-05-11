@@ -35,7 +35,7 @@ if (!isServer) then {
 			"_iterationIDNumber"
 			];
 	_iterationIDNumber = 0;
-	_randomOneTimeOnlyDelay = mgmTfA_configgv_clickNGoJanitorInitialRandomSleepDurationMinimumBaseInSecondsNumber + (floor (random mgmTfA_configgv_clickNGoJanitorInitialRandomSleepDurationMinimumAdditionInSecondsNumber));
+	_randomOneTimeOnlyDelay = mgmTfA_configgv_taxiAnywhereJanitorInitialRandomSleepDurationMinimumBaseInSecondsNumber + (floor (random mgmTfA_configgv_taxiAnywhereJanitorInitialRandomSleepDurationMinimumAdditionInSecondsNumber));
 	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf]  [TV7] INFORMATION	I will now uiSleep for _randomOneTimeOnlyDelay amount of seconds, which is randomly set to: (%1) seconds.", _randomOneTimeOnlyDelay];};
 	uiSleep _randomOneTimeOnlyDelay;
 	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf]  [TV7] INFORMATION	I have completed my uiSleep for _randomOneTimeOnlyDelay amount of seconds, which was randomly set to: (%1) seconds. Proceeding with the rest of the function now...", _randomOneTimeOnlyDelay];};
@@ -44,7 +44,7 @@ if (!isServer) then {
 	// main loop
 	while {true} do
 	{
-		uiSleep mgmTfA_configgv_clickNGoJanitorSleepDurationInSecondsNumber;
+		uiSleep mgmTfA_configgv_taxiAnywhereJanitorSleepDurationInSecondsNumber;
 
 		_iterationIDNumber = _iterationIDNumber + 1;
 		if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf]  [TV7] executing the main loop - currently at the top of the loop, in line 1. This is iteration number: (%1).", _iterationIDNumber];};
@@ -71,7 +71,7 @@ if (!isServer) then {
 				_classnameOfTheCurrentVehicle = (typeOf (vehicle player));
 
 				//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
-				if (mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
+				if (mgmTfA_configgv_taxiAnywhereTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
 					// player is in same type of vehicle that we use for clickNGo. but is it actually a TfA vehicle or just a coincidence? let's investigate further
 					private ["_check7"];
 					_check7 = ((vehicle player) getVariable "mgmTfAisclickNGoTaxi");
@@ -80,8 +80,8 @@ if (!isServer) then {
 					} else {
 						if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf]  [TV7] check7 is nil. player's vehicle does not have 'mgmTfAisclickNGoTaxi' variable attached to it, so it cannot be a clickNGoTaxi. perhaps he is unfairly being denied access to clickNGo taxis due to an abrupt workflow termination? let's investigate further!"];};
 						// since player is not in a clickNGo taxi -- is he supposed to be able to order clickNGo Taxis at this time (is he being unfairly rejected service?)
-						if ((((time) - mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber) > mgmTfA_configgv_clickNGoTaxiBookingHotkeyCooldownDurationInSecondsNumber)) then {
-							if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf]  [TV7] '(time) - mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber) > mgmTfA_configgv_clickNGoTaxiBookingHotkeyCooldownDurationInSecondsNumber)' so it has been at least a minute since players last clickNGo taxi booking and he is NOT in a clickNGo taxi at the moment. he should be able to order taxis. his current status however is: (str mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey): (%1)", (str mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey)];};
+						if ((((time) - mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber) > mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber)) then {
+							if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf]  [TV7] '(time) - mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber) > mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber)' so it has been at least a minute since players last clickNGo taxi booking and he is NOT in a clickNGo taxi at the moment. he should be able to order taxis. his current status however is: (str mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey): (%1)", (str mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey)];};
 							if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf]  [TV7] I have now set 'mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey' to true. He should be able to order from now on!"];};
 							mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey = true;
 						};
@@ -91,8 +91,8 @@ if (!isServer) then {
 					if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf]  [TV4] player's vehicle does not match the clickNGo vehicle type. will investigate further now..."];};
 					// has it been more than threshold time since his last successful use of clickNGo Taxis hotkey?
 					// since player is not in a clickNGo taxi -- is he supposed to be able to order clickNGo Taxis at this time (is he being unfairly rejected service?)
-					if ((((time) - mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber) > mgmTfA_configgv_clickNGoTaxiBookingHotkeyCooldownDurationInSecondsNumber)) then {
-						if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf]  [TV4] '(time) - mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber) > mgmTfA_configgv_clickNGoTaxiBookingHotkeyCooldownDurationInSecondsNumber)' so it has been at least a minute since players last clickNGo taxi booking and he is NOT in a clickNGo taxi at the moment. he should be able to order taxis. his current status however is: (str mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey): (%1)", (str mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey)];};
+					if ((((time) - mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber) > mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber)) then {
+						if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf]  [TV4] '(time) - mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber) > mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber)' so it has been at least a minute since players last clickNGo taxi booking and he is NOT in a clickNGo taxi at the moment. he should be able to order taxis. his current status however is: (str mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey): (%1)", (str mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey)];};
 						if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf]  [TV4] I have now set 'mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey' to true. He should be able to order from now on!"];};
 						mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey = true;
 					} else {

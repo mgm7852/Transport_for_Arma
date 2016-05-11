@@ -6,10 +6,10 @@
 //H
 //HH
 //HH ~~
-//HH	Example usage	:	_null =	[_clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd;
+//HH	Example usage	:	_null =	[_taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd;
 //HH	Parameters	:	
-//HH			_clickNGoRequestorProfileNameTextString
-//HH			_clickNGoRequestorClientIDNumber
+//HH			_taxiAnywhereRequestorProfileNameTextString
+//HH			_taxiAnywhereRequestorClientIDNumber
 //HH			_iWantToTravelThisManyMetresNumber
 //HH			_requestorPlayerObject
 //HH			_myGUSUIDNumber
@@ -32,8 +32,8 @@ scopeName "mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEndMainScope";
 
 private	[
 		"_thisFileVerbosityLevelNumber",
-		"_clickNGoRequestorProfileNameTextString",
-		"_clickNGoRequestorClientIDNumber",
+		"_taxiAnywhereRequestorProfileNameTextString",
+		"_taxiAnywhereRequestorClientIDNumber",
 		"_iWantToTravelThisManyMetresNumber",
 		"_requestorPlayerObject",
 		"_myGUSUIDNumber",
@@ -83,8 +83,8 @@ private	[
 
 //// Prep Function Arguments	&	Assign Initial Values for Local Variables
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
-_clickNGoRequestorProfileNameTextString = (_this select 0);
-_clickNGoRequestorClientIDNumber  = (_this select 1);
+_taxiAnywhereRequestorProfileNameTextString = (_this select 0);
+_taxiAnywhereRequestorClientIDNumber  = (_this select 1);
 _iWantToTravelThisManyMetresNumber = (_this select 2);
 _requestorPlayerObject = (_this select 3);
 _myGUSUIDNumber = (_this select 4);
@@ -141,9 +141,9 @@ _emergencyEscapeNeeded = false;
 
 //// BEGIN
 //On arrival to waypoint (pick up point) add the travelled distance to the global counter and then reset our local counter
-mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
-	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4] mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
-// We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber
+mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
+	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4] mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
+// We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber
 _iWantToTravelThisManyMetresNumber = 0;
 
 // NEW DESTINATION
@@ -157,7 +157,7 @@ _SUTerminationPointPosition3DArray = objNull;
 //DEVDEBUG 	// RELEASE TODO -- INCREASE THIS 		SAY  1200, 800 GOOD?
 //Redefine it now with output from random position generator function	[parameters: radius, min distance, origin]
 _SUTaxiAIVehicleObjectCurrentPositionPosition3DArray = (getPosATL _SUTaxiAIVehicleObject);
-_SUTerminationPointPosition3DArray = [mgmTfA_configgv_clickNGoTaxisTerminationDistanceRadiusInMetresNumber, mgmTfA_configgv_clickNGoTaxisTerminationDistanceRadiusMinDistanceInMetresNumber, _SUTaxiAIVehicleObjectCurrentPositionPosition3DArray] call mgmTfA_s_CO_fnc_returnNearbyRandomOnRoadPosition3DArray;
+_SUTerminationPointPosition3DArray = [mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusInMetresNumber, mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusMinDistanceInMetresNumber, _SUTaxiAIVehicleObjectCurrentPositionPosition3DArray] call mgmTfA_s_CO_fnc_returnNearbyRandomOnRoadPosition3DArray;
 // We have a new Termination Point.  
 // Inform the authorized Clients so that they can create a local marker for Termination Point
 _SUTerminationPointPositionHasBeenDeterminedBool = true;
@@ -260,8 +260,8 @@ while {_SUTaxiAIVehicleDistanceToWayPointMetersNumber>25} do {
 if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf] [TV4] EXITED LOOP: drivingToTerminationPoint25"];};//dbg
 
 //On arrival to waypoint (termination point) add the travelled distance to the global counter and then reset our local counter
-mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
-	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf] [TV4] mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
+mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
+	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf] [TV4] mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
 //Reset this SU's distance_travelled counter
 _iWantToTravelThisManyMetresNumber = 0;
 
@@ -333,7 +333,7 @@ while {(((time) - _delayedDeletionStartTimeInSecondsNumber) < mgmTfA_configgv_ma
 if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4]          EXITed TERMINATION point, _delayedDeletion SLEEP LOOP."];};//dbg
 //	let's try once more: 	spinning whilst driver is in vehicle  		//Delete the driver now - otherwise kicks him out during the spin!
 //	let's try once more: 	spinning whilst driver is in vehicle  		deleteVehicle _SUAICharacterDriverObject;
-if (mgmTfA_configgv_clickNGoTaxisSpinBeforeDeletionBool) then {
+if (mgmTfA_configgv_taxiAnywhereTaxisSpinBeforeDeletionBool) then {
 	// Spin Before Deletion -- Give a Visual Indicator to any players that might have an eye on this vehicle (this rotation is to indicate that this vehicle is being 'TfA-deleted')
 	private ["_i"];
 	_vehDir = (getDir _SUTaxiAIVehicleObject) + 45;
@@ -357,9 +357,9 @@ if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s
 // The first thing we need to do is ensure variable security during our  expected long runtime so let's go ahead and create our own copies:
 _SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs08TextString;
 // We did everything (except map marker clean up). No need to occupy a global tax driver slot any more. Let's free it up.
-if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4]          TERMINATION SEQUENCE IN PROGRESS: mgmTfA_gvdb_PV_clickNGoTaxisNumberOfCurrentlyAvailableTaxiDriversNumber is (%1) BEFORE the change.", mgmTfA_gvdb_PV_clickNGoTaxisNumberOfCurrentlyAvailableTaxiDriversNumber];};//dbg
-mgmTfA_gvdb_PV_clickNGoTaxisNumberOfCurrentlyAvailableTaxiDriversNumber=mgmTfA_gvdb_PV_clickNGoTaxisNumberOfCurrentlyAvailableTaxiDriversNumber+1;
-if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4]          TERMINATION SEQUENCE IN PROGRESS: mgmTfA_gvdb_PV_clickNGoTaxisNumberOfCurrentlyAvailableTaxiDriversNumber is (%1) AFTER the change.", mgmTfA_gvdb_PV_clickNGoTaxisNumberOfCurrentlyAvailableTaxiDriversNumber];};//dbg
+if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4]          TERMINATION SEQUENCE IN PROGRESS: mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber is (%1) BEFORE the change.", mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber];};//dbg
+mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber=mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber+1;
+if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4]          TERMINATION SEQUENCE IN PROGRESS: mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber is (%1) AFTER the change.", mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber];};//dbg
 
 // Now send the signal to all map-trackers that this marker must be deleted after the expiry threshold
 _SUMarkerShouldBeDestroyedAfterExpiryBool = true;
@@ -370,9 +370,9 @@ if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s
 // There are no map Markers on server-side anymore!
 // THIS IS NOT ENABLED		deleteMarker _spawnMarker;
 // Successfully completing a Taxi Request - increment the counter by one
-mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsReceivedNumber = mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsReceivedNumber + 1;
-publicVariable "mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsReceivedNumber";
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV3]          I have SUCCESSFULLY FULFILLED a request therefore incremented & publicVariable broadcasted (mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsReceivedNumber) by one. Current value, after the increment, is: (%1). The requestor for this successful job was: (%2).", mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsReceivedNumber, _clickNGoRequestorProfileNameTextString];};//dbg
+mgmTfA_gvdb_PV_taxiAnywhereTaxisTotalRequestsReceivedNumber = mgmTfA_gvdb_PV_taxiAnywhereTaxisTotalRequestsReceivedNumber + 1;
+publicVariable "mgmTfA_gvdb_PV_taxiAnywhereTaxisTotalRequestsReceivedNumber";
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV3]          I have SUCCESSFULLY FULFILLED a request therefore incremented & publicVariable broadcasted (mgmTfA_gvdb_PV_taxiAnywhereTaxisTotalRequestsReceivedNumber) by one. Current value, after the increment, is: (%1). The requestor for this successful job was: (%2).", mgmTfA_gvdb_PV_taxiAnywhereTaxisTotalRequestsReceivedNumber, _taxiAnywhereRequestorProfileNameTextString];};//dbg
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV3]          TERMINATION SEQUENCE COMPLED. Have a nice day."];};//dbg
 if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEndMainScope.sqf]  [TV2] <<<reached end-of-file>>>"];};//dbg
 // EOF

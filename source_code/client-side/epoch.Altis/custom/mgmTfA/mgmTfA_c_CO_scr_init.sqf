@@ -39,11 +39,11 @@ if (!isServer) then {
 	mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
 	mgmTfA_dynamicgv_lastclickNGoTaxiBookingRecordKeeperThisIsTheFirstTimeBool = true;
 	mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
-	mgmTfA_dynamicgv_clickNGoTaxiFirstGetInHasOccurred = false;
-	mgmTfA_dynamicgv_clickNGoTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber = -1;
+	mgmTfA_dynamicgv_taxiAnywhereTaxiFirstGetInHasOccurred = false;
+	mgmTfA_dynamicgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber = -1;
 	mgmTfA_PurchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool = false;
 	mgmTfA_dynamicgv_mapOpenedAtTimestampsInSecondTextStringArray = [];
-	mgmTfA_dynamicgv_clickNGoRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool = false;
+	mgmTfA_dynamicgv_taxiAnywhereRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool = false;
 
 	// Since we are just spawning now, we cannot have any fixedDestinationTaxis checked
 	mgmTfA_dynamicgv_mapOpenedAtTimestampsInSecondTextStringArray = [0,0,0];

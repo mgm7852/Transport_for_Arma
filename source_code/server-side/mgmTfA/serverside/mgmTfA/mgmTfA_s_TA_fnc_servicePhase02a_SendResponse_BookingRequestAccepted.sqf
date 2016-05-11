@@ -6,7 +6,7 @@
 //H
 //HH
 //HH ~~
-//HH	Example usage	:	_null	=	[_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted;
+//HH	Example usage	:	_null	=	[_taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorPosition3DArray, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereRequestorProfileNameTextString] spawn mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted;
 //HH	Parameters	:	see the argument parser section below
 //HH	Return Value	:	none	[this function spawns the next function in " clickNGo Destination Taxi - Service Request - Workflow"
 //HH ~~
@@ -23,24 +23,24 @@
 if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server_Init=0;}; waitUntil {mgmTfA_Server_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 
 private	[
-		"_clickNGoRequestorClientIDNumber",
-		"_clickNGoRequestorPosition3DArray",
-		"_clickNGoRequestorPlayerUIDTextString",
-		"_clickNGoRequestorProfileNameTextString",
+		"_taxiAnywhereRequestorClientIDNumber",
+		"_taxiAnywhereRequestorPosition3DArray",
+		"_taxiAnywhereRequestorPlayerUIDTextString",
+		"_taxiAnywhereRequestorProfileNameTextString",
 		"_positionToSpawnSUVehiclePosition3DArray",
-		"_clickNGoTaxiRequestedDestinationPosition3DArray"
+		"_taxiAnywhereTaxiRequestedDestinationPosition3DArray"
 		];
 //// Prep Function Arguments
-_clickNGoRequestorClientIDNumber = (_this select 0);
-_clickNGoRequestorPosition3DArray = (_this select 1);
-_clickNGoRequestorPlayerUIDTextString = (_this select 2);
-_clickNGoRequestorProfileNameTextString = (_this select 3);
-_clickNGoTaxiRequestedDestinationPosition3DArray = (_this select 4);
-if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf]  [TV4] An ACCEPTED clickNGo destination taxi request was FORWARDED to me.			This is what I have received:		_clickNGoRequestorClientIDNumber: (%1).		_clickNGoRequestorPosition3DArray: (%2).		_clickNGoRequestorPlayerUIDTextString: (%3).		_clickNGoRequestorProfileNameTextString: (%4)", _clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString];};//dbg
+_taxiAnywhereRequestorClientIDNumber = (_this select 0);
+_taxiAnywhereRequestorPosition3DArray = (_this select 1);
+_taxiAnywhereRequestorPlayerUIDTextString = (_this select 2);
+_taxiAnywhereRequestorProfileNameTextString = (_this select 3);
+_taxiAnywhereTaxiRequestedDestinationPosition3DArray = (_this select 4);
+if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf]  [TV4] An ACCEPTED clickNGo destination taxi request was FORWARDED to me.			This is what I have received:		_taxiAnywhereRequestorClientIDNumber: (%1).		_taxiAnywhereRequestorPosition3DArray: (%2).		_taxiAnywhereRequestorPlayerUIDTextString: (%3).		_taxiAnywhereRequestorProfileNameTextString: (%4)", _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorPosition3DArray, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereRequestorProfileNameTextString];};//dbg
 
 // Find random coordinates to spawn the new SU -- we will NOT spawn a vehicle here however we will pass this to the next function in workflow
 _positionToSpawnSUVehiclePosition3DArray=objNull;
-_positionToSpawnSUVehiclePosition3DArray=[mgmTfA_configgv_clickNGoTaxisSpawnDistanceRadiusInMetresNumber, mgmTfA_configgv_clickNGoTaxisSpawnDistanceRadiusMinDistanceInMetresNumber, _clickNGoRequestorPosition3DArray] call mgmTfA_s_CO_fnc_returnNearbyRandomOnRoadPosition3DArray;
+_positionToSpawnSUVehiclePosition3DArray=[mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber, mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber, _taxiAnywhereRequestorPosition3DArray] call mgmTfA_s_CO_fnc_returnNearbyRandomOnRoadPosition3DArray;
 //TODO: Add a check here:		if _ranPos encountered an issue it will return	"[-1,-1,-1]". 	Check, and if that's the case, kill the process. 	Inform the Requestor (We are having technical issues please try again later and if you encounter this issue again, notify the server admin.)
 if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf]  [TV4] _positionToSpawnSUVehiclePosition3DArray random position is randomly chosen as (%1)", _positionToSpawnSUVehiclePosition3DArray];};
 
@@ -55,8 +55,8 @@ if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s
 
 // Client Communications - Send the initial "we are processing your request - please wait" message to the Requestor
 mgmTfA_gv_pvc_pos_processingYourclickNGoTaxiRequestPleaseWaitPacketSignalOnly = ".";
-_clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_processingYourclickNGoTaxiRequestPleaseWaitPacketSignalOnly";
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf]  [TV3] <ThisIs:%1> SENT RESPONSE    (mgmTfA_gv_pvc_pos_processingYourclickNGoTaxiRequestPleaseWaitPacketSignalOnly) to Requestor:  (%2),		on computer (_clickNGoRequestorClientIDNumber)=(%3).", _myGUSUIDNumber, _clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber];};//dbg
+_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_processingYourclickNGoTaxiRequestPleaseWaitPacketSignalOnly";
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf]  [TV3] <ThisIs:%1> SENT RESPONSE    (mgmTfA_gv_pvc_pos_processingYourclickNGoTaxiRequestPleaseWaitPacketSignalOnly) to Requestor:  (%2),		on computer (_taxiAnywhereRequestorClientIDNumber)=(%3).", _myGUSUIDNumber, _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorClientIDNumber];};//dbg
 
 //// ACL work
 // TODO: we have a TEMP OVERRIDE here with 1>0 :)
@@ -73,8 +73,8 @@ if (1>0) then {
 	//_requestorAndBuddiesCombinedSUACLTextStringArray = mgmTfA_staticgv_totalOmniscienceGroupTextStringArray;
 
 	// Add requestor PUID to the end of the array
-	_requestorAndBuddiesCombinedSUACLTextStringArray pushBack _clickNGoRequestorPlayerUIDTextString;
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf]  [TV3] <ThisIs:%1> I have created a new _requestorAndBuddiesCombinedSUACLTextStringArray by adding _clickNGoRequestorPlayerUIDTextString. The contents of _requestorAndBuddiesCombinedSUACLTextStringArray is: (%2).", _myGUSUIDNumber, _requestorAndBuddiesCombinedSUACLTextStringArray];};
+	_requestorAndBuddiesCombinedSUACLTextStringArray pushBack _taxiAnywhereRequestorPlayerUIDTextString;
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf]  [TV3] <ThisIs:%1> I have created a new _requestorAndBuddiesCombinedSUACLTextStringArray by adding _taxiAnywhereRequestorPlayerUIDTextString. The contents of _requestorAndBuddiesCombinedSUACLTextStringArray is: (%2).", _myGUSUIDNumber, _requestorAndBuddiesCombinedSUACLTextStringArray];};
 
 	// setVariable it
 	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUACLTextStringArray", mgmTfA_gvdb_PV_GUSUIDNumber], _requestorAndBuddiesCombinedSUACLTextStringArray]; 
@@ -82,6 +82,6 @@ if (1>0) then {
 	// destroy the temporarily needed local variable _requestorAndBuddiesCombinedSUACLTextStringArray as we are done with it
 };
 // Proceed to next Phase:		Service Unit Creation		"mgmTfA_s_TA_fnc_servicePhase03_CreateServiceUnit"
-_null = [_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString, _clickNGoTaxiRequestedDestinationPosition3DArray, _positionToSpawnSUVehiclePosition3DArray, _myGUSUIDNumber] spawn mgmTfA_s_TA_fnc_servicePhase03_CreateServiceUnitAndGoToRequestor;
+_null = [_taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorPosition3DArray, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereTaxiRequestedDestinationPosition3DArray, _positionToSpawnSUVehiclePosition3DArray, _myGUSUIDNumber] spawn mgmTfA_s_TA_fnc_servicePhase03_CreateServiceUnitAndGoToRequestor;
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf]  [TV3] <ThisIs:%1> I have spawn'd `mgmTfA_s_TA_fnc_servicePhase03_CreateServiceUnit`. I'm quitting now.", _myGUSUIDNumber];};
 // EOF

@@ -12,7 +12,7 @@
 //HH	Return Value:	none
 //HH ~~
 //HH 	
-//HH	The shared configuration file has the following values this function rely on: mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
+//HH	The shared configuration file has the following values this function rely on: mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
 //HH	This function does not create/update any global variables.
 //HH	This function does rely on publicVariables containing the information about the Service Unit.
 //HH
@@ -65,7 +65,7 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 					"_messageTextOnlyFormat"
 					];
 			// do a check here - is the 1st Mile Fee TURNED OFF or has it been ALREADY PAID?
-			if (mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) then {
+			if (mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) then {
 				// yes 1st Mile Fee is enabled and since it does not need to be paid now, it appears this has already been paid! -- log what we learned and do 1stMileFeePayRequestor comms
 				if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV3] 	DETECTED: 	DUPLICATE PAYMENT ATTEMPT		1st Mile Fee is ENABLED but does NOT NEED TO BE PAID now.		"];};
 				// do 1stMileFeePayRequestor comms
@@ -91,7 +91,7 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 	if (_playerAuthorizedToPayBool && _TA1stMileFeeNeedToBePaidBool) then {
 		_playerCashNumber = (EPOCH_playerCrypto);
 
-		if (_playerCashNumber >= mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber) then {
+		if (_playerCashNumber >= mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber) then {
 			// YES, player can afford the 1st Mile Fee - do nothing at this deep level, just proceed.
 			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV8]          YES, player can afford the 1st Mile Fee	-- sending a request to the server to get charged.	"];};
 
@@ -101,8 +101,8 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 			// convert to global to put on the wire
 			myGUSUIDNumber = _myGUSUIDNumber;
 			// PUID was already set in RequestTaxi section but just ensuring..
-			mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString = (getPlayerUID player);
-			mgmTfA_gv_pvs_req_TAChargeMe1stMileFeePacket = [player, mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, myGUSUIDNumber];
+			mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString = (getPlayerUID player);
+			mgmTfA_gv_pvs_req_TAChargeMe1stMileFeePacket = [player, mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString, myGUSUIDNumber];
 			publicVariableServer "mgmTfA_gv_pvs_req_TAChargeMe1stMileFeePacket";
 			// report to log
 			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV8]          CHARGED		the player TaxiAnywhere 1st Mile Fee cost	"];};
@@ -115,8 +115,8 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 					"_messageTextOnlyFormat1",
 					"_messageTextOnlyFormat2"
 					];
-			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/>HAVE A NICE DAY!<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
-			_messageTextOnlyFormat1 = parsetext format ["[DRIVER]  %1 SORRY BUT YOU CANNOT AFFORD THE 1ST MILE FEE %2 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THE 1ST MILE FEE<br/><br/>%2 CRYPTO<br/><br/>HAVE A NICE DAY!<br/>", (profileName), (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+			_messageTextOnlyFormat1 = parsetext format ["[DRIVER]  %1 SORRY BUT YOU CANNOT AFFORD THE 1ST MILE FEE %2 CRYPTO", (profileName), (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 			_messageTextOnlyFormat2 = parsetext format ["[DRIVER]  HAVE A NICE DAY!"];
 			hint _msg2HintTextString;
 			systemChat (str _messageTextOnlyFormat1);

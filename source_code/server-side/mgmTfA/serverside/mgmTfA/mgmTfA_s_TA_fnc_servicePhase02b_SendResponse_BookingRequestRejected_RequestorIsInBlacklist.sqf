@@ -6,7 +6,7 @@
 //H
 //HH
 //HH ~~
-//HH	Example usage	:	_null	=	[_clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString] spawn mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist;
+//HH	Example usage	:	_null	=	[_taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorPosition3DArray, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereRequestorProfileNameTextString] spawn mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist;
 //HH	Parameters	:	see the parameter parsing section below
 //HH	NEED UPDATE			Return Value	:	none	[this function spawns the next function in "Fixed Destination Taxi - Service Request - Workflow"
 //HH ~~
@@ -23,31 +23,31 @@
 if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server_Init=0;}; waitUntil {mgmTfA_Server_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 
 private	[
-		"_clickNGoRequestorClientIDNumber",
-		"_clickNGoRequestorPosition3DArray",
-		"_clickNGoRequestorPlayerUIDTextString",
-		"_clickNGoRequestorProfileNameTextString"
+		"_taxiAnywhereRequestorClientIDNumber",
+		"_taxiAnywhereRequestorPosition3DArray",
+		"_taxiAnywhereRequestorPlayerUIDTextString",
+		"_taxiAnywhereRequestorProfileNameTextString"
 		];
 
-_clickNGoRequestorClientIDNumber = (_this select 0);
-_clickNGoRequestorPosition3DArray = (_this select 1);
-_clickNGoRequestorPlayerUIDTextString = (_this select 2);
-_clickNGoRequestorProfileNameTextString = (_this select 3);
+_taxiAnywhereRequestorClientIDNumber = (_this select 0);
+_taxiAnywhereRequestorPosition3DArray = (_this select 1);
+_taxiAnywhereRequestorPlayerUIDTextString = (_this select 2);
+_taxiAnywhereRequestorProfileNameTextString = (_this select 3);
 // this below is NOT a DEBUG msg!
-if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist.sqf]  [TV5] A REJECTED clickNGo taxi request was FORWARDED to me.			This is what I have received:		_clickNGoRequestorClientIDNumber: (%1).		_clickNGoRequestorPosition3DArray: (%2).		_clickNGoRequestorPlayerUIDTextString: (%3) / resolved to _clickNGoRequestorProfileNameTextString: (%4)", _clickNGoRequestorClientIDNumber, _clickNGoRequestorPosition3DArray, _clickNGoRequestorPlayerUIDTextString, _clickNGoRequestorProfileNameTextString];};
+if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist.sqf]  [TV5] A REJECTED clickNGo taxi request was FORWARDED to me.			This is what I have received:		_taxiAnywhereRequestorClientIDNumber: (%1).		_taxiAnywhereRequestorPosition3DArray: (%2).		_taxiAnywhereRequestorPlayerUIDTextString: (%3) / resolved to _taxiAnywhereRequestorProfileNameTextString: (%4)", _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorPosition3DArray, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereRequestorProfileNameTextString];};
 
 // Client Communications - Send the initial "we are processing your request - please wait" message to the Requestor
 mgmTfA_gv_pvc_neg_yourclickNGoTaxiRequestHasBeenRejectedAsYouAreBlacklistedPacketSignalOnly = ".";
-_clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_neg_yourclickNGoTaxiRequestHasBeenRejectedAsYouAreBlacklistedPacketSignalOnly";
+_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_neg_yourclickNGoTaxiRequestHasBeenRejectedAsYouAreBlacklistedPacketSignalOnly";
 
 // Increment the global counter
-mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsRejectedDueToBlacklistNumber = mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsRejectedDueToBlacklistNumber + 1;
+mgmTfA_gvdb_PV_taxiAnywhereTaxisTotalRequestsRejectedDueToBlacklistNumber = mgmTfA_gvdb_PV_taxiAnywhereTaxisTotalRequestsRejectedDueToBlacklistNumber + 1;
 // Broadcast the value to all computers
-publicVariable "mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsRejectedDueToBlacklistNumber";
+publicVariable "mgmTfA_gvdb_PV_taxiAnywhereTaxisTotalRequestsRejectedDueToBlacklistNumber";
 // this below is NOT a DEBUG msg!
-if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist.sqf]  [TV4] Just incremented & pV broadcasted (mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsRejectedDueToBlacklistNumber). After the increment, now it is: (%1)", (str mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsRejectedDueToBlacklistNumber)];};
+if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist.sqf]  [TV4] Just incremented & pV broadcasted (mgmTfA_gvdb_PV_taxiAnywhereTaxisTotalRequestsRejectedDueToBlacklistNumber). After the increment, now it is: (%1)", (str mgmTfA_gvdb_PV_taxiAnywhereTaxisTotalRequestsRejectedDueToBlacklistNumber)];};
 
 // this below is NOT a DEBUG msg!
 // Let the log know
-if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist.sqf]  [TV3] A Blacklisted Requestor has just been rejected!	(%1) (PUID: %2) requested a clickNGo Taxi but we've refused to serve him of course!", _clickNGoRequestorProfileNameTextString, _clickNGoRequestorPlayerUIDTextString];};
+if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist.sqf]  [TV3] A Blacklisted Requestor has just been rejected!	(%1) (PUID: %2) requested a clickNGo Taxi but we've refused to serve him of course!", _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorPlayerUIDTextString];};
 // EOF

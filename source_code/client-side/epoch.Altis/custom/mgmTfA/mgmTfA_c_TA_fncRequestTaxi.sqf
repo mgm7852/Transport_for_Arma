@@ -36,7 +36,7 @@ private	[
 		"_timeToWaitInSecondsNumber"
 		];
 if	(
-	((mgmTfA_dynamicgv_lastclickNGoTaxiBookingRecordKeeperThisIsTheFirstTimeBool) && (mgmTfA_configgv_clickNGoTaxiBookingFirstTimersCanBookWithoutWaitingBool)) 
+	((mgmTfA_dynamicgv_lastclickNGoTaxiBookingRecordKeeperThisIsTheFirstTimeBool) && (mgmTfA_configgv_taxiAnywhereTaxiBookingFirstTimersCanBookWithoutWaitingBool)) 
 	|| 
 	(mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber <= (time - mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber))
 	)	then {
@@ -65,7 +65,7 @@ if (_bookingPermitted) then {
 	// HOWTO_do_map_position_take
 	private	[
 			"_pos",
-			"_clickNGoTaxiRequestedDestinationPosition3DArray",
+			"_taxiAnywhereTaxiRequestedDestinationPosition3DArray",
 			"_msg2HintTextString",
 			"_msg2SyschatTextString"
 			];
@@ -87,7 +87,7 @@ if (_bookingPermitted) then {
 		// In order to determine whether player has enough cash, first we need to know how much would the cost of clickNGo initial journey going to be?
 		// find destination spot
 		private		[
-					//	NOTE:	this is still in memory from few lines above us => 	_clickNGoTaxiRequestedDestinationPosition3DArray
+					//	NOTE:	this is still in memory from few lines above us => 	_taxiAnywhereTaxiRequestedDestinationPosition3DArray
 					"_journeyInitialCostInCryptoNumber",
 					"_playerCanAffordRequestedJourneyCostBool",
 					"_bookingFeeInCryptoNumber",
@@ -104,15 +104,15 @@ if (_bookingPermitted) then {
 					];
 		///////// local variables of counter or configSetting nature to initialize on startup /////////
 		_playerCanAffordRequestedJourneyCostBool = false;
-		_bookingFeeInCryptoNumber = (round mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber);
-		_minimumFeeInCryptoNumber = (round mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber);
+		_bookingFeeInCryptoNumber = (round mgmTfA_configgv_taxiAnywhereTaxisNonRefundableBookingFeeCostInCryptoNumber);
+		_minimumFeeInCryptoNumber = (round mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber);
 		_journeyInitialCostInCryptoNumber = (round (_bookingFeeInCryptoNumber + _minimumFeeInCryptoNumber));
-		_journeyPrepaidInitialTimeSliceInSecondsNumber = (round mgmTfA_configgv_clickNGoTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds);
+		_journeyPrepaidInitialTimeSliceInSecondsNumber = (round mgmTfA_configgv_taxiAnywhereTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds);
 		_journeyStartTimeInSecondsNumber = (time);
 		_tickStartTimeInSecondsNumber = (time) + _journeyPrepaidInitialTimeSliceInSecondsNumber;		// 0 + 120 = 120;
-		_tickCostInCryptoNumber = (round mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber);
+		_tickCostInCryptoNumber = (round mgmTfA_configgv_taxiAnywhereTaxisTickCostInCryptoNumber);
 		_tickTimeElapsedInSecondsNumber = 0;
-		_tickTimeStepInSecondsNumber = (round mgmTfA_configgv_clickNGoTaxisTickStepTimeInSecondsNumber);
+		_tickTimeStepInSecondsNumber = (round mgmTfA_configgv_taxiAnywhereTaxisTickStepTimeInSecondsNumber);
 		// when a hint message is displayed, it will stay on the screen for this long
 		_hintExpiryTimerDurationInSecondsNumber = 2.5;
 		// set it to 24 hours, since no Arma 3 server would be runnig for that long, we're practically disabling the timer for the time being. The next time main loop code below, issues this command (_hintTimerTheLastTimeItWasReset = (time);) timer will start doing its job.
@@ -155,7 +155,7 @@ if (_bookingPermitted) then {
 			clickNGoTaxiDestinationChoser_systemReady = false;
 			
 			// Prep - get the position coordinates
-			_clickNGoTaxiRequestedDestinationPosition3DArray = getMarkerPos "clickNGoTaxiChosenPosition";
+			_taxiAnywhereTaxiRequestedDestinationPosition3DArray = getMarkerPos "clickNGoTaxiChosenPosition";
 			// Close the map
 			openMap false;
 			// Inform via hint (in Rich format)
@@ -164,21 +164,21 @@ if (_bookingPermitted) then {
 			// Inform via systemChat (in Text-Only format)
 			_msg2SyschatTextString = parsetext format ["[SYSTEM]  REQUESTING A TAXI TO CHOSEN DESTINATION..."];
 			systemChat (str _msg2SyschatTextString);
-			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fncRequestTaxi.sqf]  [TV5] REQUESTING A TAXI TO CHOSEN DESTINATION...		(str _clickNGoTaxiRequestedDestinationPosition3DArray) is: (%1).", (str _clickNGoTaxiRequestedDestinationPosition3DArray)];};
+			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fncRequestTaxi.sqf]  [TV5] REQUESTING A TAXI TO CHOSEN DESTINATION...		(str _taxiAnywhereTaxiRequestedDestinationPosition3DArray) is: (%1).", (str _taxiAnywhereTaxiRequestedDestinationPosition3DArray)];};
 			clickNGoTaxiDestinationChoser_systemReady = nil;
 
 			///////// STEP:	PREPARE CLICKNGO REQUEST DETAILS
 			// ~~
-			mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString = (getPlayerUID player);
-			mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D = (getPosATL player);
-			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf]	[TV4]    clickNGo - I HAVE THE FOLLOWING DETAILS: mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString is: (%1).		mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D is: (%2).", mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, (str mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D)];};
+			mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString = (getPlayerUID player);
+			mgmTfA_gv_pvs_taxiAnywhereRequestorPositionArray3D = (getPosATL player);
+			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf]	[TV4]    clickNGo - I HAVE THE FOLLOWING DETAILS: mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString is: (%1).		mgmTfA_gv_pvs_taxiAnywhereRequestorPositionArray3D is: (%2).", mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString, (str mgmTfA_gv_pvs_taxiAnywhereRequestorPositionArray3D)];};
 			
 			///////// STEP:	MORE FINANCIAL STUFF
 			// Charge the player for standard booking fee -- SEND REQUEST to server so that server will charge customer's wallet
-			mgmTfA_gv_pvs_req_clickNGoTaxiChargeMeInitialBookingFeePleaseConfirmPacket = [player, mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString];
-			publicVariableServer "mgmTfA_gv_pvs_req_clickNGoTaxiChargeMeInitialBookingFeePleaseConfirmPacket";
+			mgmTfA_gv_pvs_req_taxiAnywhereTaxiChargeMeInitialBookingFeePleaseConfirmPacket = [player, mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString];
+			publicVariableServer "mgmTfA_gv_pvs_req_taxiAnywhereTaxiChargeMeInitialBookingFeePleaseConfirmPacket";
 			// report to log
-			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf] [TV5]          REQUEST SENT TO SERVER TO CHARGE			the player TaxiAnywhere Initial  Booking Fee (%1)", (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];};
+			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf] [TV5]          REQUEST SENT TO SERVER TO CHARGE			the player TaxiAnywhere Initial  Booking Fee (%1)", (str mgmTfA_configgv_taxiAnywhereTaxisNonRefundableBookingFeeCostInCryptoNumber)];};
 
 
 			// Inform the player that he just paid the Standard Booking Fee
@@ -187,8 +187,8 @@ if (_bookingPermitted) then {
 					"_msg2SyschatTextString1",
 					"_msg2SyschatTextString2"
 					];
-			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>THE CLICKNGO BOOKING FEE<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
-			_msg2SyschatTextString1 = parsetext format ["[RADIO_IN]  %1 THANKS FOR PAYING THE CLICKNGO BOOKING FEE %2 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];
+			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>THE CLICKNGO BOOKING FEE<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_taxiAnywhereTaxisNonRefundableBookingFeeCostInCryptoNumber)];
+			_msg2SyschatTextString1 = parsetext format ["[RADIO_IN]  %1 THANKS FOR PAYING THE CLICKNGO BOOKING FEE %2 CRYPTO", (profileName), (str mgmTfA_configgv_taxiAnywhereTaxisNonRefundableBookingFeeCostInCryptoNumber)];
 			_msg2SyschatTextString2 = parsetext format ["[RADIO_IN]  PROCESSING, PLEASE WAIT..."];
 			hint _msg2HintTextString;
 			systemChat str _msg2SyschatTextString1;
@@ -203,8 +203,8 @@ if (_bookingPermitted) then {
 			mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey = true;
 
 			///////// STEP:	PREPARE AND SUBMIT THE CLICKNGO REQUEST
-			mgmTfA_gv_pvs_req_clickNGoTaxiToMyPositionPleaseConfirmPacket = [player, mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D, mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, _clickNGoTaxiRequestedDestinationPosition3DArray];
-			publicVariableServer "mgmTfA_gv_pvs_req_clickNGoTaxiToMyPositionPleaseConfirmPacket";
+			mgmTfA_gv_pvs_req_taxiAnywhereTaxiToMyPositionPleaseConfirmPacket = [player, mgmTfA_gv_pvs_taxiAnywhereRequestorPositionArray3D, mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereTaxiRequestedDestinationPosition3DArray];
+			publicVariableServer "mgmTfA_gv_pvs_req_taxiAnywhereTaxiToMyPositionPleaseConfirmPacket";
 			// ~~
 		} else {
 			// Player's current cash is NOT adequate to pay for the service fee		// Let the player know

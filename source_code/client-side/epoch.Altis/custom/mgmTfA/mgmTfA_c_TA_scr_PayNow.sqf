@@ -22,7 +22,7 @@ _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
 if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_PayNow.sqf]  [TV8] 		DEVDEBUG		I have been SPAWN'd.	This is what I have received:	(%1).", (str _this)];};//dbg
 
 // Now that we know the cost, let's see if player can afford it?
-if (EPOCH_playerCrypto >= mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber) then {
+if (EPOCH_playerCrypto >= mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber) then {
 	_playerCanAffordAbsoluteMinimumJourneyServiceFeeBool = true;
 } else {
 	_playerCanAffordAbsoluteMinimumJourneyServiceFeeBool = false;
@@ -31,7 +31,7 @@ if (EPOCH_playerCrypto >= mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFee
 if (_playerCanAffordAbsoluteMinimumJourneyServiceFeeBool) then {
 	// can afford
 	// Charge the player for the service fee
-	EPOCH_playerCrypto = (EPOCH_playerCrypto - mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber);
+	EPOCH_playerCrypto = (EPOCH_playerCrypto - mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber);
 	// Inform the player that he just paid the Service Fee
 	private	[
 			"_msg2HintTextString",
@@ -40,8 +40,8 @@ if (_playerCanAffordAbsoluteMinimumJourneyServiceFeeBool) then {
 			"_lePointer",
 			"_actionRemovedMessageText"
 			];
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>MINIMUM JOURNEY SERVICE FEE<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
-	_msg2SyschatTextString = parsetext format ["%1 THANKS FOR PAYING MINIMUM JOURNEY SERVICE FEE %2 CRYPTO.  PLEASE WAIT", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_taxiPaymentReceivedManyThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>THANKS FOR PAYING<br/>MINIMUM JOURNEY SERVICE FEE<br/>%2 CRYPTO<br/><br/>PLEASE WAIT<br/>", (profileName), (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+	_msg2SyschatTextString = parsetext format ["%1 THANKS FOR PAYING MINIMUM JOURNEY SERVICE FEE %2 CRYPTO.  PLEASE WAIT", (profileName), (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 	hint _msg2HintTextString;
 	systemChat str _msg2SyschatTextString;
 
@@ -73,8 +73,8 @@ if (_playerCanAffordAbsoluteMinimumJourneyServiceFeeBool) then {
 			"_msg2SyschatTextString1",
 			"_msg2SyschatTextString2"
 			];
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>THE MINIMUM SERVICE FEE<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH<br/><br/>THANK YOU<br/>", (profileName), (str (round mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber))];
-	_msg2SyschatTextString = parsetext format ["SORRY %1 YOU CANNOT AFFORD THE MINIMUM SERVICE FEE %2 CRYPTO.   PLEASE TRY AGAIN WHEN YOU HAVE ENOUGH CASH.   THANK YOU", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/><br/>YOU CANNOT AFFORD<br/>THE MINIMUM SERVICE FEE<br/>%2 CRYPTO<br/><br/>PLEASE TRY AGAIN<br/>WHEN YOU HAVE ENOUGH CASH<br/><br/>THANK YOU<br/>", (profileName), (str (round mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber))];
+	_msg2SyschatTextString = parsetext format ["SORRY %1 YOU CANNOT AFFORD THE MINIMUM SERVICE FEE %2 CRYPTO.   PLEASE TRY AGAIN WHEN YOU HAVE ENOUGH CASH.   THANK YOU", (profileName), (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 	hint _msg2HintTextString;
 	systemChat str _msg2SyschatTextString;
 };

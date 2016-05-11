@@ -107,8 +107,8 @@ if (((vehicle player) getVariable ["mgmTfAisfixedDestinationTaxi", false])) then
 			// convert to global to put on the wire
 			myGUSUIDNumber = _myGUSUIDNumber;
 			// PUID was already set in RequestTaxi section but just ensuring..
-			mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString = (getPlayerUID player);
-			mgmTfA_gv_pvs_req_FD_chargeMeServiceFeePacket = [player, mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, myGUSUIDNumber, mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber];
+			mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString = (getPlayerUID player);
+			mgmTfA_gv_pvs_req_FD_chargeMeServiceFeePacket = [player, mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString, myGUSUIDNumber, mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber];
 			publicVariableServer "mgmTfA_gv_pvs_req_FD_chargeMeServiceFeePacket";
 			// report to log
 			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_scr_chargeMeServiceFee.sqf] [TV8]          CHARGED		the player TaxiAnywhere Service Fee cost	"];};
@@ -121,8 +121,8 @@ if (((vehicle player) getVariable ["mgmTfAisfixedDestinationTaxi", false])) then
 					"_messageTextOnlyFormat1",
 					"_messageTextOnlyFormat2"
 					];
-			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THE Service Fee<br/><br/>%2 CRYPTO<br/><br/>HAVE A NICE DAY!<br/>", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
-			_messageTextOnlyFormat1 = parsetext format ["[DRIVER]  %1 SORRY BUT YOU CANNOT AFFORD THE Service Fee %2 CRYPTO", (profileName), (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+			_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THE Service Fee<br/><br/>%2 CRYPTO<br/><br/>HAVE A NICE DAY!<br/>", (profileName), (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+			_messageTextOnlyFormat1 = parsetext format ["[DRIVER]  %1 SORRY BUT YOU CANNOT AFFORD THE Service Fee %2 CRYPTO", (profileName), (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
 			_messageTextOnlyFormat2 = parsetext format ["[DRIVER]  HAVE A NICE DAY!"];
 			hint _msg2HintTextString;
 			systemChat (str _messageTextOnlyFormat1);

@@ -97,7 +97,7 @@ while {true} do {
 		if (_playerMustPayBool) then {
 			// YES, player mustPay the next PAYG tick cost
 			_playerCashNumber = (EPOCH_playerCrypto);
-			if (_playerCashNumber >=mgmTfA_configgv_clickNGoTaxisTickCostInCryptoNumber) then {
+			if (_playerCashNumber >=mgmTfA_configgv_taxiAnywhereTaxisTickCostInCryptoNumber) then {
 				// YES, player can afford the next PAYGtickCost
 				if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          YES, player can afford the next PAYGtickCost	"];};
 				// are we supposed to charge PAYG now?		-- we should not charge if PAYG is not active yet
@@ -114,8 +114,8 @@ while {true} do {
 					// CHARGE PLAYER NOW
 					if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
 					myGUSUIDNumber = _myGUSUIDNumber;
-					mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacket = [player, mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, myGUSUIDNumber];
-					publicVariableServer "mgmTfA_gv_pvs_req_clickNGoTaxiChargeMePAYGTickCostPleaseConfirmPacket";
+					mgmTfA_gv_pvs_req_taxiAnywhereTaxiChargeMePAYGTickCostPleaseConfirmPacket = [player, mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString, myGUSUIDNumber];
+					publicVariableServer "mgmTfA_gv_pvs_req_taxiAnywhereTaxiChargeMePAYGTickCostPleaseConfirmPacket";
 					// report to log
 					if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          CHARGED 		the player TaxiAnywhere PAYG tick cost as PAYG is ACTIVE and all other conditions are met.		"];};
 				} else {

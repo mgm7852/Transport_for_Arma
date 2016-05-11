@@ -69,7 +69,7 @@ while {_continueRequestingServiceFeePayment} do
 		// Get current vehicle's Classname
 		_classnameOfTheCurrentVehicle = typeOf (vehicle player);
 		// STEP2:	Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, proceed down the work flow. Otherwise do nothing.
-		if (mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
+		if (mgmTfA_configgv_taxiAnywhereTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
 			// STEP3: Is the player in this particular FixedDestination vehicle now? (he might have hopped out and got in a friend's Taxi!)
 			// NOTE that this is currently impossible to happen as doors are autolocked and requestor can never get back in anyway -- adding the checks to future proof the code
 			_currentVehiclesGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");

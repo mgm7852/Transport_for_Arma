@@ -13,7 +13,7 @@
 //H ~~
 //HH	The shared configuration file has the following values this function rely on:
 //HH		mgmTfA_configgv_clientVerbosityLevel
-//HH		mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
+//HH		mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
 //HH	This function does not create/update any global variables.
 //HH	This function does rely on one publicVariable containing the information about the Service Unit:	mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool
 //HH		For example, for Service Unit 27, the publicVariables would be:
@@ -67,13 +67,13 @@ while {_continueRequesting1stMileFeePayment} do
 		// Get current vehicle's Classname
 		_classnameOfTheCurrentVehicle = typeOf (vehicle player);
 		// STEP2:	Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, proceed down the work flow. Otherwise do nothing.
-		if (mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
+		if (mgmTfA_configgv_taxiAnywhereTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) then {
 			// STEP3: Is the player in this particular TaxiAnywhere vehicle now? (he might have hopped out and got in a friend's Taxi!)
 			// NOTE that this is currently impossible to happen as doors are autolocked and requestor can never get back in anyway -- adding the checks to future proof the code
 			_currentVehiclesGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");
 			//Compare current vehicle's GUSUID with the supplied-as-parameter GUSUID; if they match, message the player. Otherwise do nothing.
 			if (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber) then {
-				_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE 1ST MILE FEE %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _counterInfinite)];
+				_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE 1ST MILE FEE %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _counterInfinite)];
 				systemChat (str _msg2SyschatTextString);
 				if (mgmTfA_configgv_clientVerbosityLevel>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_keepRequesting1stMileFeePayment.sqf]  [TV8]          VEHICLE COMPARISON MATCHED:		the (str _originalVehiclesGUSUIDNumber) is: (%1) == (str _currentVehiclesGUSUIDNumber) is: (%2)					-- 'please pay the 1st Mile Fee' reminder sent to requestor	", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
 			} else {
