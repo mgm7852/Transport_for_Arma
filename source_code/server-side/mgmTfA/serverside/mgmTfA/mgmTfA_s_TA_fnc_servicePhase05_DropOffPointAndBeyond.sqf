@@ -167,7 +167,6 @@ _SUTaxiAIVehicleDistanceToWayPointMetersNumber = 0;
 // CODE TO AUTO EJECT ALL PASSENGERS AT DROP OFF POINT!
 ///
 					// WE ARE AT DROP OFF POIND, AUTO-EJECTING AND SHUTTING DOWN!!!
-					if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] bankrupt customer detected. ejecting all passengers and terminating."];};
 					// TODO: ENHANCEMENT:	SPLIT THIS TO A SEPARATE FUNCTION FILE (it will be repeated multiple times, by different clickNGo modules!)
 					/// begin: shutdown code \\\
 					private	[
