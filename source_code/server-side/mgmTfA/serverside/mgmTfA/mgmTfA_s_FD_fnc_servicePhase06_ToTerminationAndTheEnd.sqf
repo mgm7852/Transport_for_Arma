@@ -181,7 +181,7 @@ _SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round (_SUTaxiAIVehicleObject 
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV3] Distance to Waypoint _SUTerminationPointPosition3DArray is: (%1). Going there now.", _SUTaxiAIVehicleDistanceToWayPointMetersNumber];};//dbg
 // LOOP ON THE WAY TO PICKUP!
 _counterForLogOnlyEveryNthPINGNumber = 0;
-diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TVEV-DEBUG]           NEXT, will enter drivingToTerminationPoint25."];
+diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [DEV-DEBUG]           NEXT, will enter drivingToTerminationPoint25."];
 _SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiOnTheWayToTerminationInSecondsNumber;
 // Reset Current Task Age
 _SUCurrentTaskAgeInSecondsNumber = 0;
@@ -377,5 +377,5 @@ if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s
 // Successfully completing a Taxi Request - increment the counter by one
 mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsSuccessfulNumber = mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsSuccessfulNumber + 1;
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV3]          I have SUCCESSFULLY FULFILLED a request therefore incremented mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsSuccessfulNumber by one. Current value, after the increment, is: (%1). The requestor for this successful job was: (%2).", mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsSuccessfulNumber, _fixedDestinationRequestorProfileNameTextString];};//dbg
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV3]          TERMINATION SEQUENCE COMPLED. Have a nice day."];};//dbg
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV3]          TERMINATION SEQUENCE COMPLETED. Have a nice day."];};//dbg
 // EOF
