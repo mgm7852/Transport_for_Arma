@@ -47,9 +47,9 @@ if (_playerCanAffordAbsoluteMinimumJourneyServiceFeeBool) then {
 
 	// signal the server-side that clickNGo Taxi Service Fee has just been paid!
 	_myGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");
-	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber], true];
-	publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber];
-	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_PayNow.sqf] [TV8] 		DEVDEBUG		publicVariable (mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool) 		<== signal sent to the server (that player has paid Minimum Service Fee)."];};//dbg
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTxAnywServiceFeeHasBeenPaidBool", _myGUSUIDNumber], true];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUTxAnywServiceFeeHasBeenPaidBool", _myGUSUIDNumber];
+	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_PayNow.sqf] [TV8] 		DEVDEBUG		publicVariable (mgmTfA_gv_PV_SU%1SUTxAnywServiceFeeHasBeenPaidBool) 		<== signal sent to the server (that player has paid Minimum Service Fee)."];};//dbg
 	
 	// parse arguments
 	_VehEntered				= (_this select 0);

@@ -209,10 +209,10 @@ _SUTaxiAIVehicleObject setVariable ["mgmTfAisclickNGoTaxi", true, true];
 _SUTaxiAIVehicleObject setVariable ["GUSUIDNumber", _myGUSUIDNumber, true];
 _SUTaxiAIVehicleObject setVariable ["commandingCustomerPlayerUIDNumber", _taxiAnywhereRequestorPlayerUIDTextString, true];
 _SUTaxiAIVehicleObject setVariable ["customerCannotAffordService", false, true];
-missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber], true];
-publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber];
-missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber], false];
-publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber];
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTxAnywPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber], true];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUTxAnywPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber];
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTxAnywServiceFeeHasBeenPaidBool", _myGUSUIDNumber], false];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUTxAnywServiceFeeHasBeenPaidBool", _myGUSUIDNumber];
 // Is 1st Mile Fee enabled on the server?
 if (mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) then {
 	// yes 1st Mile Fee is enabled and thus it need to be paid -- log the detected 1st Mile Fee setting
@@ -227,8 +227,8 @@ if (mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0
 	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], false];
 	publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
 };
-missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber], false];
-publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTxAnywPAYGIsCurrentlyActiveBool", _myGUSUIDNumber], false];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUTxAnywPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
 // if *Global variants is used, the effect will be global. otherwise players continue seeing the old items in cargo		ref:	http://www.reddit.com/r/arma/comments/2rpk6e/arma_3_ammo_boxes_and_similar_reset_to_original/cniglrb
 clearMagazineCargoGlobal _SUTaxiAIVehicleObject;
 clearWeaponCargoGlobal _SUTaxiAIVehicleObject;

@@ -106,7 +106,7 @@ while {true} do {
 				_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
 
 				// is PAYG active?				if it is not active, that means (a)1st Mile Fee has not been paid yet		OR		(b) TaxiAnywhere-prePaid-Initial-Journey-time is still active
-				_SUPAYGisActiveBool = call compile format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
+				_SUPAYGisActiveBool = call compile format ["mgmTfA_gv_PV_SU%1SUTxAnywPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
 				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_SUPAYGisActiveBool) is: (%2)			", (str _myGUSUIDNumber), (str _SUPAYGisActiveBool)];};
 
 				// if PAYG is active, charge the PAYG tickCost now -- SEND REQUEST to server so that server will charge customer's wallet
