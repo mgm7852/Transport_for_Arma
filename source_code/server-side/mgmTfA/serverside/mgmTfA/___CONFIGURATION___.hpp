@@ -63,8 +63,8 @@ mgmTfA_configgv_serviceModePublicBusSystemEnabled = true;
 //mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber = 900;
 //mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber = 900;
 //RELEASETODO
-mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber = 60;
-mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber = 60;
+mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber = 10;
+mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber = 10;
 
 // --on join wait before 1st booking or not--
 // If false, a player who just joined the server will have to wait out the duration minimumWaitingTimeBetween*BookingsInSecondsNumber
