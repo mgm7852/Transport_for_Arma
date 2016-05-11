@@ -1,12 +1,12 @@
 //H
 //H ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf
 //H $PURPOSE$	:	This function manage the SU during its approach to PickUpPoint, Awaiting Requestor, Awaiting Get In, Payment phases. It will end when SU start travelling towards DropOff Point
 //H ~~
 //H
 //HH
 //HH ~~
-//HH	Example usage	:	_null =	[_fixedDestinationRequestorClientIDNumber, _fixedDestinationRequestorPosition3DArray, _fixedDestinationRequestedTaxiFixedDestinationIDNumber, _fixedDestinationRequestedDestinationNameTextString, _fixedDestinationRequestorPlayerUIDTextString, _fixedDestinationRequestorProfileNameTextString, _myGUSUIDNumber, _iWantToTravelThisManyMetresNumber, _SUTaxiAIVehicleObject, _SUDriversFirstnameTextString, _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray, _doorsLockedBool, _SUAIGroup, _SUTaxiWaypointRadiusInMetersNumber, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUAICharacterDriverObject, _SUTypeTextString, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffPositionNameTextString, _SUDropOffPositionPosition3DArray, _SUDropOffHasOccurredBool, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond;
+//HH	Example usage	:	_null =	[_fixedDestinationRequestorClientIDNumber, _fixedDestinationRequestorPosition3DArray, _fixedDestinationRequestedTaxiFixedDestinationIDNumber, _fixedDestinationRequestedDestinationNameTextString, _fixedDestinationRequestorPlayerUIDTextString, _fixedDestinationRequestorProfileNameTextString, _myGUSUIDNumber, _iWantToTravelThisManyMetresNumber, _SUTaxiAIVehicleObject, _SUDriversFirstnameTextString, _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray, _doorsLockedBool, _SUAIGroup, _SUTaxiWaypointRadiusInMetersNumber, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUAICharacterDriverObject, _SUTypeTextString, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffPositionNameTextString, _SUDropOffPositionPosition3DArray, _SUDropOffHasOccurredBool, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond;
 //HH	Parameters	:	too many to list
 //HH	Return Value	:	none	[this function spawns the next function in the workflow
 //HH ~~
@@ -14,8 +14,8 @@
 //HH		mgmTfA_configgv_serverVerbosityLevel
 //HH
 if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server_Init=0;}; waitUntil {mgmTfA_Server_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
-scopeName "mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";
-if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV4] I have been SPAWN'd. I have the following arguments in (_this)=(%1).", (str _this)];};//dbg
+scopeName "mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope";
+if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV4] I have been SPAWN'd. I have the following arguments in (_this)=(%1).", (str _this)];};//dbg
 
 private	[
 		"_fixedDestinationRequestorClientIDNumber",
@@ -126,7 +126,7 @@ _counterForLogOnlyEveryNthPINGNumber = 0;
 //// BEGIN
 //On arrival to waypoint (pick up point) add the travelled distance to the global counter and then reset our local counter
 mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
 // We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber
 _iWantToTravelThisManyMetresNumber = 0;
 
@@ -164,7 +164,7 @@ while {_requestorIsNotHere} do {
 		_SUAIVehicleObject = _SUTaxiAIVehicleObject;
 		_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
 		_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
-		_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB;
+		_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
 		_broadcastSUInformationCounter = 0;
 	};
 	///
@@ -176,7 +176,7 @@ while {_requestorIsNotHere} do {
 		_emergencyEscapeNeeded = true;
 	};
 	 // Let emergency escapees pass
-	if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";	};
+	if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope";	};
 	
 	// 	I'm here - is the requestor here too?
 	//	get a list of all nearby players within 20 metres range, save it in an array
@@ -186,26 +186,26 @@ while {_requestorIsNotHere} do {
 	 _playersAroundMeListCount = (count _playersAroundMeList);
 	if (_playersAroundMeListCount==0) then {
 		//We're at the requestorLocation but there's no one here :(
-		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV5] _playersAroundMeList is null! I'll sleep a bit and re-check..."];};//dbg
+		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV5] _playersAroundMeList is null! I'll sleep a bit and re-check..."];};//dbg
 	} else {
 		//There are people here!
-		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV5] BEGINNING traversing _playersAroundMeList array. I need to determine whether the requestor is one of the players in the 15 meter range. _playersAroundMeList has the following: (%1)", (str _playersAroundMeList)];};//dbg
+		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] BEGINNING traversing _playersAroundMeList array. I need to determine whether the requestor is one of the players in the 15 meter range. _playersAroundMeList has the following: (%1)", (str _playersAroundMeList)];};//dbg
 		private["_counter22", "_curPUID"];
 		_counter22 = 0;
 		_curPUID = objNull;
 		{
 			// traverse the array - report contents to LOG
 			_curPUID = (getPlayerUID _x);
-			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV5] TRAVERSING _playersAroundMeList array. Current array position is: (%1)   Array element content is: (%2)   _fixedDestinationRequestorPlayerUIDTextString is: (%3)   _curPUID is: (%4) <== I'll now compare these and exit if they match!", _counter22, _x, _fixedDestinationRequestorPlayerUIDTextString, _curPUID];};//dbg
+			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] TRAVERSING _playersAroundMeList array. Current array position is: (%1)   Array element content is: (%2)   _fixedDestinationRequestorPlayerUIDTextString is: (%3)   _curPUID is: (%4) <== I'll now compare these and exit if they match!", _counter22, _x, _fixedDestinationRequestorPlayerUIDTextString, _curPUID];};//dbg
 			//Requestor is here! BreakOut
 			if (_curPUID == _fixedDestinationRequestorPlayerUIDTextString) exitWith {
 				  _requestorPlayerObject = _x;
 				  _requestorIsNotHere = false;
-				if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV3] Found him! Found him! He's here! _fixedDestinationRequestorProfileNameTextString is: (%1)", _fixedDestinationRequestorProfileNameTextString];};//dbg
+				if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV3] Found him! Found him! He's here! _fixedDestinationRequestorProfileNameTextString is: (%1)", _fixedDestinationRequestorProfileNameTextString];};//dbg
 				  
 				//So we are at requestorLocation and he is here too, let's unlock the doors & let him in!	//Unlock the vehicle doors
 				_SUTaxiAIVehicleObject lockCargo false;
-				if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS now unlocked"];};//dbg
+				if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS now unlocked"];};//dbg
 
 				 //So we are at requestorLocation and he is here too, signal the requestor that his Taxi is here
 				mgmTfA_gv_pvc_pos_yourFixedDestinationTaxiHasArrivedPleaseGetInPacketSignalOnly = ".";
@@ -213,18 +213,18 @@ while {_requestorIsNotHere} do {
 
 				//Use the horn to greet the requestor
 				driver _SUTaxiAIVehicleObject forceWeaponFire [currentWeapon _SUTaxiAIVehicleObject, currentWeapon _SUTaxiAIVehicleObject];
-				if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that his Taxi is here). _fixedDestinationRequestorProfileNameTextString: (%1)   on computer (_fixedDestinationRequestorClientIDNumber): (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};//dbg
+				if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that his Taxi is here). _fixedDestinationRequestorProfileNameTextString: (%1)   on computer (_fixedDestinationRequestorClientIDNumber): (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};//dbg
 			};
 			_counter22 = _counter22 + 1;
 		} forEach _playersAroundMeList;
 		if (isNil "_playersAroundMeList") then {
 			//We couldn't find the requestor nearby
-			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV3] REQUESTOR is not at the requested location... I will wait some more... looping"];};//dbg
+			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV3] REQUESTOR is not at the requested location... I will wait some more... looping"];};//dbg
 		};
 	};
 	uiSleep 0.05;
  };
-if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV2] EXITED LOOP: IsTheRequestorAtPickUpPointChecksLoop"];};//dbg
+if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV2] EXITED LOOP: IsTheRequestorAtPickUpPointChecksLoop"];};//dbg
  
  // The code between previous while and the next one	split it to two;		emergency escape needed OR not?
  if (!_emergencyEscapeNeeded) then { 
@@ -263,7 +263,7 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 			_SUAIVehicleObject = _SUTaxiAIVehicleObject;
 			_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
 			_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
-			_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB;
+			_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
 			_broadcastSUInformationCounter = 0;
 		};
 		///
@@ -271,12 +271,12 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 		// Pit-stop checks: AutoRefuel
 		if (fuel _SUTaxiAIVehicleObject < 0.2) then {
 			_SUTaxiAIVehicleObject setFuel 1;
-			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
 		};
 		// Pit-stop checks: AutoRepair
 		if (damage _SUTaxiAIVehicleObject>0.2) then {
 			_SUTaxiAIVehicleObject setDamage 0;
-			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
 		};
 		// Calculate Current Task Age and Initiate Abnormal SU Termination (logged) if necessary
 		_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
@@ -284,11 +284,11 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 			_emergencyEscapeNeeded = true;
 		};
 		// Let emergency escapees pass
-		if(_emergencyEscapeNeeded) then { breakTo "mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";	};
+		if(_emergencyEscapeNeeded) then { breakTo "mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope";	};
 		if (_requestorPlayerObject in _SUTaxiAIVehicleObject) then {
 			_requestorOutsideVehicle = false;
 			//He is in
-			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] Requestor IS IN!		%1 is now in %2. 		Locking doors & driving!", _fixedDestinationRequestorProfileNameTextString, _SUTaxiAIVehicleObject];};//dbg
+			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] Requestor IS IN!		%1 is now in %2. 		Locking doors & driving!", _fixedDestinationRequestorProfileNameTextString, _SUTaxiAIVehicleObject];};//dbg
 			_requestorOutsideVehicle = false;
 			
 			// Signal all map-trackers that Pick Up has occurred
@@ -298,10 +298,10 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 		} else {
 			_requestorOutsideVehicle = true;
 			//He is not in - keep looping
-			//if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] WAITING for %1 to get in %2...", _requestorPlayer, _SUTaxiAIVehicleObject];};
+			//if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] WAITING for %1 to get in %2...", _requestorPlayer, _SUTaxiAIVehicleObject];};
 		};
 	};
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] EXITed loop _requestorOutsideVehicle"];};//dbg
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] EXITed loop _requestorOutsideVehicle"];};//dbg
 	uiSleep 0.05;
 	 //TAKE PAYMENT from player's cash amount
 	//Change our status to:		3 AWAITING PAYMENT			to proceed, first the requestor must pay...
@@ -323,7 +323,7 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 	// Signal the requestor that he needs to pay now
 	mgmTfA_gv_pvc_req_fixedDestinationTaxiPleasePayTheServiceFeePacketSignalOnly = ".";
 	_fixedDestinationRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_req_fixedDestinationTaxiPleasePayTheServiceFeePacketSignalOnly";
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] SIGNAL SENT to the requestor (that he needs to pay now). _fixedDestinationRequestorProfileNameTextString: (%1)  on computer (_fixedDestinationRequestorClientIDNumber): (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};//dbg
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] SIGNAL SENT to the requestor (that he needs to pay now). _fixedDestinationRequestorProfileNameTextString: (%1)  on computer (_fixedDestinationRequestorClientIDNumber): (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};//dbg
 
 	// DEVDEBUG	slowdown
 	// WHY 10??
@@ -351,19 +351,19 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 			_SUAIVehicleObject = _SUTaxiAIVehicleObject;
 			_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
 			_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
-			_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB;
+			_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
 			_broadcastSUInformationCounter = 0;
 		};
 		///
 		// Pit-stop checks: AutoRefuel
 		if (fuel _SUTaxiAIVehicleObject < 0.2) then {
 			_SUTaxiAIVehicleObject setFuel 1;
-			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
 		};
 		// Pit-stop checks: AutoRepair
 		if (damage _SUTaxiAIVehicleObject>0.2) then {
 			_SUTaxiAIVehicleObject setDamage 0;
-			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
 		};
 		// Calculate Current Task Age and Initiate Abnormal SU Termination (logged) if necessary
 		_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
@@ -371,24 +371,24 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 			// Expiry Timeout Threshold Exceeded. Initiating Abnormal Termination of SU.
 			// We are being abnormally destroyed!
 			_emergencyEscapeNeeded = true;
-			//if (_thisFileVerbosityLevelNumber>=1) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV1]          Expiry Timeout Threshold Exceeded for SU (%1). Initiating Abnormal SU Termination! _SUCurrentTaskAgeInSecondsNumber is: (%2). _SUCurrentTaskThresholdInSecondsNumber is: (%3).", _myGUSUIDNumber, _SUCurrentTaskAgeInSecondsNumber, _SUCurrentTaskThresholdInSecondsNumber];};
+			//if (_thisFileVerbosityLevelNumber>=1) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV1]          Expiry Timeout Threshold Exceeded for SU (%1). Initiating Abnormal SU Termination! _SUCurrentTaskAgeInSecondsNumber is: (%2). _SUCurrentTaskThresholdInSecondsNumber is: (%3).", _myGUSUIDNumber, _SUCurrentTaskAgeInSecondsNumber, _SUCurrentTaskThresholdInSecondsNumber];};
 		};
 		// Let emergency escapees pass
-		if(_emergencyEscapeNeeded) then { breakTo "mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";	};
+		if(_emergencyEscapeNeeded) then { breakTo "mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope";	};
 
 		// payment check code here
 		_SUFDServiceFeeNeedToBePaidBool = call compile format ["mgmTfA_gv_PV_SU%1SUFDServiceFeeNeedToBePaidBool", _myGUSUIDNumber];
 		if (_SUFDServiceFeeNeedToBePaidBool) then {
 			// Service Fee has not been paid yet -- log it
-			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] REQUESTOR STILL HASN'T PAID!	 	will keep looping till paid or phase timeout...		"];};//dbg
+			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] REQUESTOR STILL HASN'T PAID!	 	will keep looping till paid or phase timeout...		"];};//dbg
 		} else {
 			// Service Fee has been paid 	-- log it and allow break out of loop
-			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] REQUESTOR HAS PAID!	 Breaking out of loop - will begin driving to the requested FixedTaxiDestination...		"];};//dbg
+			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] REQUESTOR HAS PAID!	 Breaking out of loop - will begin driving to the requested FixedTaxiDestination...		"];};//dbg
 			_requestorHasNotPaid = false;
 		};
 		uiSleep 0.05;
 	};
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] EXITed loop _requestorHasNotPaid"];};//dbg
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] EXITed loop _requestorHasNotPaid"];};//dbg
 	// We got paid!
 	//Change our status to:		4 DRIVING-TO-DESTINATION		driving requestor to requested location
 	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentFixedDestinationTaxiActionInProgressIs04TextString;
@@ -397,20 +397,20 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 	//On the way and even before we start moving (while we do waypoint calculations etc.) doors should be locked.
 	//Lock the vehicle doors
 	_SUTaxiAIVehicleObject lockCargo true;
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] DOORS locked"];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] DOORS locked"];};
 	uiSleep 0.05;
 	//Doors Locked
 	//Inform the requestor
 	mgmTfA_gv_pvc_pos_fixedDestinationTaxiDoorsHaveBeenLockedPacketSignalOnly = ".";
 	_fixedDestinationRequestorClientIDNumber		publicVariableClient		"mgmTfA_gv_pvc_pos_fixedDestinationTaxiDoorsHaveBeenLockedPacketSignalOnly";
-	if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that doors have been locked). _fixedDestinationRequestorProfileNameTextString: (%1) on computer (_fixedDestinationRequestorClientIDNumber): (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};//dbg
+	if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that doors have been locked). _fixedDestinationRequestorProfileNameTextString: (%1) on computer (_fixedDestinationRequestorClientIDNumber): (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};//dbg
 };
 
 if (_emergencyEscapeNeeded) then {
 	// emergency escape needed = requestor did NOT pay the Fixed Destination Taxi Fee within the threshold time
 	//
 	// EJECT ALL			force eject all passengers - we are going to termination and we're not giving any free rides!
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]		[TV3]		Fixed Destination Taxi Fee was not paid within threshold time - ejecting all passengers and terminating."];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]		[TV3]		Fixed Destination Taxi Fee was not paid within threshold time - ejecting all passengers and terminating."];};
 	// TODO: ENHANCEMENT:	SPLIT THIS TO A SEPARATE FUNCTION FILE (it will be repeated multiple times, by different FixedDestinationTaxi modules!)
 	private	[
 			"_SUVehicleSpeedOfVehicleInKMHNumber",
@@ -436,7 +436,7 @@ if (_emergencyEscapeNeeded) then {
 											];
 	_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
 	};
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] 	[TV3]	TERMINATION SEQUENCE IN PROGRESS:	Stopped vehicle before ejecting all passengers."];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf] 	[TV3]	TERMINATION SEQUENCE IN PROGRESS:	Stopped vehicle before ejecting all passengers."];};
 	uiSleep 0.05;
 	// prep for forced eject -- once we eject them, we will want the passengers to stay out!
 	_SUTaxiAIVehicleObject lockCargo true;
@@ -449,7 +449,7 @@ if (_emergencyEscapeNeeded) then {
 		_x action ["Eject", _SUTaxiAIVehicleObject];
 		};
 	} forEach crew _SUTaxiAIVehicleObject;
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3] TERMINATION SEQUENCE IN PROGRESS:		eject all passengers completed."];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] TERMINATION SEQUENCE IN PROGRESS:		eject all passengers completed."];};
 	uiSleep 0.05;
 };
 
@@ -516,7 +516,7 @@ if (_emergencyEscapeNeeded) then {
 // If emergency escape is NOT needed, proceed with the next batch of workflow tasks			which is DRIVING-TO-DESTINATION
 if (!_emergencyEscapeNeeded) then {
 
-	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV8] INSIDE  if (!_emergencyEscapeNeeded) then            now..."];};
+	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV8] INSIDE  if (!_emergencyEscapeNeeded) then            now..."];};
 
 	//Change our status to:		4 DRIVING-TO-DESTINATION		driving requestor to requested location
 	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentFixedDestinationTaxiActionInProgressIs04TextString;
@@ -534,14 +534,14 @@ if (!_emergencyEscapeNeeded) then {
 	_SUTaxiAIVehicleWaypointMainArray setWaypointType "MOVE";
 	_SUTaxiAIVehicleWaypointMainArray setWaypointSpeed "FULL";
 	_SUTaxiAIVehicleWaypointMainArray setWaypointTimeout [1, 1, 1];
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3]          Waypoint Added: %2 at %1", _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray, _SUTaxiAIVehicleWaypointMainArray];};
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3]          Waypoint Added: _SUTaxiAIVehicleWaypointMainArray is: (%1). _SUTaxiAIVehicleWaypointMainArrayIndexNumber is: (%2)",_SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3]          Waypoint Added: %2 at %1", _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray, _SUTaxiAIVehicleWaypointMainArray];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3]          Waypoint Added: _SUTaxiAIVehicleWaypointMainArray is: (%1). _SUTaxiAIVehicleWaypointMainArrayIndexNumber is: (%2)",_SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber];};
 	//check distance to our Current Waypoint (_fixedDestinationRequestorPosition3DArray) and write to server RPT log
 	_SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round(_SUTaxiAIVehicleObject distance _fixedDestinationRequestedTaxiFixedDestinationPosition3DArray));
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf] [TV3]          Distance to Waypoint _fixedDestinationRequestorPosition3DArray is: (%1) metres. Going there now.", _SUTaxiAIVehicleDistanceToWayPointMetersNumber];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3]          Distance to Waypoint _fixedDestinationRequestorPosition3DArray is: (%1) metres. Going there now.", _SUTaxiAIVehicleDistanceToWayPointMetersNumber];};
 	// LOOP ON THE WAY TO PICKUP!
 	_counterForLogOnlyEveryNthPINGNumber = 0;
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] NEXT, will enter drivingToDropOffPoint250."];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] NEXT, will enter drivingToDropOffPoint250."];};
 
 	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiOnTheWayToDropOffInSecondsNumber;
 	// Reset Current Task Age
@@ -570,7 +570,7 @@ if (!_emergencyEscapeNeeded) then {
 			_SUAIVehicleObject = _SUTaxiAIVehicleObject;
 			_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
 			_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
-			_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB;
+			_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
 			_broadcastSUInformationCounter = 0;
 		};
 
@@ -588,12 +588,12 @@ if (!_emergencyEscapeNeeded) then {
 
 		// PING			log only every Nth package			(uiSleep=0.05)		(n=300)  => 	log every 15 seconds
 		// Let emergency escapees pass
-		if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";	};
+		if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope";	};
 		_counterForLogOnlyEveryNthPINGNumber = _counterForLogOnlyEveryNthPINGNumber + 1;
 		if (_counterForLogOnlyEveryNthPINGNumber==300) then {
 			if (_thisFileVerbosityLevelNumber>=1) then {
 				_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time)-_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
-				diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV2] PING from SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3) | MyAge: (%4) | Distance to WP: (%5) metres | Action In Progress: (%6)", _myGUSUIDNumber, _SUDriversFirstnameTextString, round time, _SUTaxiAIVehicleObjectAgeInSecondsNumber, _SUTaxiAIVehicleDistanceToWayPointMetersNumber, _SUCurrentActionInProgressTextString];
+				diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV2] PING from SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3) | MyAge: (%4) | Distance to WP: (%5) metres | Action In Progress: (%6)", _myGUSUIDNumber, _SUDriversFirstnameTextString, round time, _SUTaxiAIVehicleObjectAgeInSecondsNumber, _SUTaxiAIVehicleDistanceToWayPointMetersNumber, _SUCurrentActionInProgressTextString];
 			};
 			_counterForLogOnlyEveryNthPINGNumber = 0;
 		};
@@ -601,15 +601,15 @@ if (!_emergencyEscapeNeeded) then {
 		// Pit-stop checks: AutoRefuel
 		if (fuel _SUTaxiAIVehicleObject < 0.2) then {
 			_SUTaxiAIVehicleObject setFuel 1;
-			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
 		};
 		// Pit-stop checks: AutoRepair
 		if (damage _SUTaxiAIVehicleObject>0.2) then {
 			_SUTaxiAIVehicleObject setDamage 0;
-			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
 		};
 	};
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] EXITED LOOP: drivingToDropOffPoint250"];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] EXITED LOOP: drivingToDropOffPoint250"];};
 };
 
 // If emergency escape needed, do nothing.
@@ -622,13 +622,13 @@ if (!_emergencyEscapeNeeded) then {
 	_SUTaxiAIVehicleObject lockCargo false;
 	//Save the new status of vehicleDoorLock
 	 _doorsLockedBool = false;
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] DOORS unlocked"];};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] DOORS unlocked"];};
 	uiSleep 0.05;
 	//Doors Unlocked
 	//Inform the requestor if haven't done so yet
 	mgmTfA_gv_pvc_pos_fixedDestinationTaxiDoorsHaveBeenUnlockedPacketSignalOnly = ".";
 	_fixedDestinationRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_fixedDestinationTaxiDoorsHaveBeenUnlockedPacketSignalOnly";
-			if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that his Taxi is here). _fixedDestinationRequestorProfileNameTextString: (%1)   _fixedDestinationRequestorClientIDNumber: (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};
+			if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]      SIGNAL SENT to the requestor (that his Taxi is here). _fixedDestinationRequestorProfileNameTextString: (%1)   _fixedDestinationRequestorClientIDNumber: (%2)", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber];};
 
 	// THIS IS PHASE 2 - DO NOT RESET TIME HERE! 		// Reset Current Task Age
 
@@ -655,7 +655,7 @@ if (!_emergencyEscapeNeeded) then {
 			_SUAIVehicleObject = _SUTaxiAIVehicleObject;
 			_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
 			_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
-			_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB;
+			_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
 			_broadcastSUInformationCounter = 0;
 		};
 		///
@@ -671,43 +671,43 @@ if (!_emergencyEscapeNeeded) then {
 			// Expiry Timeout Threshold Exceeded. Initiating Abnormal Termination of SU.
 			// We are being abnormally destroyed!
 			_emergencyEscapeNeeded = true;
-			//if (_thisFileVerbosityLevelNumber>=1) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV1]          Expiry Timeout Threshold Exceeded for SU (%1). Initiating Abnormal SU Termination! _SUCurrentTaskAgeInSecondsNumber is: (%2). _SUCurrentTaskThresholdInSecondsNumber is: (%3).", _mgmTfA_gvdb_PV_TfAGUJIDNumber, _SUCurrentTaskAgeInSecondsNumber, _SUCurrentTaskThresholdInSecondsNumber];};
+			//if (_thisFileVerbosityLevelNumber>=1) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV1]          Expiry Timeout Threshold Exceeded for SU (%1). Initiating Abnormal SU Termination! _SUCurrentTaskAgeInSecondsNumber is: (%2). _SUCurrentTaskThresholdInSecondsNumber is: (%3).", _mgmTfA_gvdb_PV_TfAGUJIDNumber, _SUCurrentTaskAgeInSecondsNumber, _SUCurrentTaskThresholdInSecondsNumber];};
 		};
 	 	 // Let emergency escapees pass
-		if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope";	};
+		if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope";	};
 
 		// PING			log only every Nth package			(uiSleep=0.05)		(n=300)  => 	log every 15 seconds
 		_counterForLogOnlyEveryNthPINGNumber = _counterForLogOnlyEveryNthPINGNumber + 1;
 		if (_counterForLogOnlyEveryNthPINGNumber==300) then {
 			_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time)-_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
 			if (_thisFileVerbosityLevelNumber>=1) then {
-				diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf]  [TV1]          PING from vehicle GUSUID: (%1) | Driver: (%2) | ServerUpTime: (%3) | MyAge: (%4) | Distance to WP: (%5) metres | Action In Progress: (%6) (checking 25 m.)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time)), _SUTaxiAIVehicleObjectAgeInSecondsNumber, _SUTaxiAIVehicleDistanceToWayPointMetersNumber, _SUCurrentActionInProgressTextString];
+				diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV1]          PING from vehicle GUSUID: (%1) | Driver: (%2) | ServerUpTime: (%3) | MyAge: (%4) | Distance to WP: (%5) metres | Action In Progress: (%6) (checking 25 m.)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time)), _SUTaxiAIVehicleObjectAgeInSecondsNumber, _SUTaxiAIVehicleDistanceToWayPointMetersNumber, _SUCurrentActionInProgressTextString];
 			};
 			_counterForLogOnlyEveryNthPINGNumber = 0;
 		};
 		// Pit-stop checks: AutoRefuel
 		if (fuel _SUTaxiAIVehicleObject < 0.2) then {
 			_SUTaxiAIVehicleObject setFuel 1;
-			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
 		};
 		// Pit-stop checks: AutoRepair
 		if (damage _SUTaxiAIVehicleObject>0.2) then {
 			_SUTaxiAIVehicleObject setDamage 0;
-			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
 		};
 	};
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] EXITED LOOP: drivingToDropOffPoint25.		(str _emergencyEscapeNeeded) is: (%1).", (str _emergencyEscapeNeeded)];};//dbg
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf] [TV3] EXITED LOOP: drivingToDropOffPoint25.		(str _emergencyEscapeNeeded) is: (%1).", (str _emergencyEscapeNeeded)];};//dbg
 };
 
 // If emergency escape needed, skip Phase05 completely, and jump to Phase06
 // If emergency escape is NOT needed, proceed with the next batch of workflow tasks
 if (!_emergencyEscapeNeeded) then { 
 	// normal workflow in progress. add the workflow next phase below this line
-	if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] <<<reached end-of-file>>>.   no emergency. proceeding with normal next phase in the workflow.			SPAWN'ing (mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase05_DropOffPointAndBeyond)."];};//dbg
-	_null =	[_fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase05_DropOffPointAndBeyond;
+	if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] <<<reached end-of-file>>>.   no emergency. proceeding with normal next phase in the workflow.			SPAWN'ing (mgmTfA_s_FD_fnc_servicePhase05_DropOffPointAndBeyond)."];};//dbg
+	_null =	[_fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_s_FD_fnc_servicePhase05_DropOffPointAndBeyond;
  } else {
 	// we have an emergency and we need to shutdown ASAP. forget about the normal workflow next phase and go directly to termination phase!
-	if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] <<<reached end-of-file>>>.   there is an EMERGENCY therefore skipping Phase05 completely 	and SPAWN'ing Phase06 immediately now (mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase06_ToTerminationAndTheEnd)"];};//dbg
-	_null =	[_fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase06_ToTerminationAndTheEnd;
+	if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyondMainScope.sqf]  [TV2] <<<reached end-of-file>>>.   there is an EMERGENCY therefore skipping Phase05 completely 	and SPAWN'ing Phase06 immediately now (mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd)"];};//dbg
+	_null =	[_fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd;
 };
 // EOF

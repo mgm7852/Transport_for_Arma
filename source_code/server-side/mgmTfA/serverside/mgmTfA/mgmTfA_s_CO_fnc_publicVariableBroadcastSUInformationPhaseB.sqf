@@ -1,12 +1,12 @@
 //H
 //H ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB.sqf
 //H $PURPOSE$	:	This function process a Service Unit's information and then Broadcast it to all clients
 //H ~~
 //H
 //HH
 //HH ~~
-//HH	Example usage	:	_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber] call mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB;
+//HH	Example usage	:	_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
 //HH	Parameters	:	see below, (_this select n) entries.
 //HH	Return Value	:	none
 //HH ~~
@@ -59,7 +59,7 @@ _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 
 // WARNING! THIS LINE MUST* BE above the next one or _myGUSUIDNumber will throw error: "Error Undefined variable in expression: _mygusuidnumber"
 _myGUSUIDNumber = (_this select 0);
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB.sqf]  [TV3] 	<ThisIs:%1> 	I have been CALL'd.	This is what I have received:	(%2).		(str mgmTfA_gvdb_PV_GUSUIDNumber) is: (%3)", (str _myGUSUIDNumber), (str _this), (str mgmTfA_gvdb_PV_GUSUIDNumber)];};//dbg
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB.sqf]  [TV3] 	<ThisIs:%1> 	I have been CALL'd.	This is what I have received:	(%2).		(str mgmTfA_gvdb_PV_GUSUIDNumber) is: (%3)", (str _myGUSUIDNumber), (str _this), (str mgmTfA_gvdb_PV_GUSUIDNumber)];};//dbg
 _SUTypeTextString = (_this select 1);
 _SUActiveWaypointPositionPosition3DArray = (_this select 2);
 _SUCurrentActionInProgressTextString = (_this select 3);

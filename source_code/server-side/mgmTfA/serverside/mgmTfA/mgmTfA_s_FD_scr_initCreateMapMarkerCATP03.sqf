@@ -1,6 +1,6 @@
 //H
 //H ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_scr_server_initCreateMapMarkerCatp03.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_s_FD_scr_initCreateMapMarkerCATP03.sqf
 //H $PURPOSE$	:	This server side script creates a particular Map Marker on server start.
 //H ~~
 //H

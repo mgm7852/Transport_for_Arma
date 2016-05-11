@@ -1,6 +1,6 @@
 //H
 //HH ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_scr_client_init.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_CO_scr_init.sqf
 //H $PURPOSE$	:	This client-side script contains the tasks that need to be executed on player initialization.
 //HH ~~
 //H
@@ -21,18 +21,18 @@ if (!isServer) then {
 	////////////////////////////////////////
 	/// COMPILE GLOBAL FUNCTIONS
 	mgmTfA_fnc_client_returnTrueIfThereIsACatpNearby = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_returnTrueIfThereIsACatpNearby.sqf";
-	mgmTfA_fnc_client_sendBookingRequestFixedDestinationTaxi = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_sendBookingRequestFixedDestinationTaxi.sqf";
-	mgmTfA_fnc_client_doLocalMarkerWork = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_doLocalMarkerWork.sqf";
-	mgmTfA_scr_client_TA_setDestination = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_scr_client_TA_setDestination.sqf";
-	mgmTfA_fnc_client_doLocalJanitorWorkForclickNGo = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_doLocalJanitorWorkForclickNGo.sqf";
-	mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions.sqf";
-	mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf";
-	//NOT USED ANY MORE -- DELAYED DELETE THIS					mgmTfA_fnc_client_clickNGoContinuouslyRequestPayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoContinuouslyRequestPayment.sqf";
-	mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen.sqf";
+	mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi.sqf";
+	mgmTfA_c_CO_fnc_doLocalMarkerWork = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf";
+	mgmTfA_c_TA_scr_setDestination = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_TA_scr_setDestination.sqf";
+	mgmTfA_c_TA_fnc_doLocalJanitorWork = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf";
+	mgmTfA_c_TA_fncTaxiDisplayInstructions = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf";
+	mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf";
+	//NOT USED ANY MORE -- DELAYED DELETE THIS					mgmTfA_c_TA_fncContinuouslyRequestPayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_TA_fncContinuouslyRequestPayment.sqf";
+	mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle.sqf";
 	// this below MUST be under the one above or will be renamed prematurely!
-	mgmTfA_fnc_client_clickNGoRequestTaxi = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_clickNGoRequestTaxi.sqf";
-	mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment.sqf";
-	mgmTfA_fnc_client_FD_keepRequestingServiceFeePayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_FD_keepRequestingServiceFeePayment.sqf";
+	mgmTfA_c_TA_fncRequestTaxi = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_TA_fncRequestTaxi.sqf";
+	mgmTfA_c_TA_fnc_keepRequesting1stMileFeePayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_TA_fnc_keepRequesting1stMileFeePayment.sqf";
+	mgmTfA_c_FD_fnc_keepRequestingServiceFeePayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_FD_fnc_keepRequestingServiceFeePayment.sqf";
 
 	//// Reset global variables of counter nature
 	mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingRecordKeeperThisIsTheFirstTimeBool = true;
@@ -56,10 +56,10 @@ if (!isServer) then {
 	publicVariable "mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray";
 
 	// spawn the clickNGo janitor function
-	_null =	[] spawn mgmTfA_fnc_client_doLocalJanitorWorkForclickNGo;
+	_null =	[] spawn mgmTfA_c_TA_fnc_doLocalJanitorWork;
 
 	////Register Client-side Event Handlers
-	[] execVM "custom\mgmTfA\mgmTfA_scr_client_initRegisterClientEventHandlers.sqf";
+	[] execVM "custom\mgmTfA\mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf";
 	if (isNil("mgmTfA_Client_Init")) then {
 		mgmTfA_Client_Init=1;
 		diag_log format ["[mgmTfA] [mgmTfA_scr_clientInit.sqf]          VERSION INFO: Transport for Arma (%1).     [VerRevSumNum: (%2)]	mgmTfA_Client_Init is: (%3)", mgmTfA_configgv_TfAScriptVersionTextString, mgmTfA_configgv_TfAScriptVersionRevisionSumValueNumber, (str mgmTfA_Client_Init)];

@@ -1,13 +1,13 @@
 //H
 //H ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_scr_server_initCreateObjectcatp03.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_s_CO_scr_initCreateObjectcatp03.sqf
 //H $PURPOSE$	:	This server side script creates a particular Object on server start.
 //H ~~
 //H
 if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server_Init=0;}; waitUntil {mgmTfA_Server_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 
 // Spawn an AI character to act as a TaxiCorp dispatcher at a Call-a-Taxi Point
-if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initCreateObjectcatp03.sqf]  [V5]          Spawning an AI character as the TaxiCorp dispatcher at this Call-a-Taxi Point"];};
+if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initCreateObjectcatp03.sqf]  [V5]          Spawning an AI character as the TaxiCorp dispatcher at this Call-a-Taxi Point"];};
 
 private ["_mgmTfA_CATPagentUnit3", "_mgmTfA_CATPagentUnit3sGroup"];
 
@@ -40,7 +40,7 @@ if (true) then {
 	// any extras for this AI unit?
 	_mgmTfA_CATPagentUnit3 setVariable ["mgmTfA_Dispatcher",true,true];
 	// posture work
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initCreateObjectcatp03.sqf]  [V5]          uiSleep'ing 0.05 seconds before executing SetPosturePhase2"];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initCreateObjectcatp03.sqf]  [V5]          uiSleep'ing 0.05 seconds before executing SetPosturePhase2"];};
 	uiSleep 0.05;
 	_mgmTfA_CATPagentUnit3 enableSimulationGlobal true;
 	uiSleep 0.05;

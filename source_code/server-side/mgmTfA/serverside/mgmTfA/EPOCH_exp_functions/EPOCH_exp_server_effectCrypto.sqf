@@ -10,11 +10,11 @@
     Arma Public License Share Alike (APL-SA) - https://www.bistudio.com/community/licenses/arma-public-license-share-alike
 
     Github:
-    https://github.com/EpochModTeam/Epoch/tree/master/Sources/epoch_server/compile/epoch_trading/EPOCH_server_effectCrypto.sqf
+    https://github.com/EpochModTeam/Epoch/tree/master/Sources/epoch_server/compile/epoch_trading/EPOCH_exp_server_effectCrypto.sqf
 
 	Example:
-    [_player,100] call EPOCH_server_effectCrypto; // adds 100
-    [_player,-100] call EPOCH_server_effectCrypto; // removes 100
+    [_player,100] call EPOCH_exp_server_effectCrypto; // adds 100
+    [_player,-100] call EPOCH_exp_server_effectCrypto; // removes 100
 
     Parameter(s):
 		_this select 0: OBJECT - player
@@ -36,7 +36,7 @@ if (!isNull _player && isPlayer _player) then {
 	// add input number to existing variable while keeping it within min and max range.
 	_current_crypto = ((_current_crypto + _crypto) min _playerCryptoLimitMax) max _playerCryptoLimitMin;
 	// send final value back to the player
-	_current_crypto remoteExec ['EPOCH_effectCrypto',_player];
+	_current_crypto remoteExec ['EPOCH_exp_effectCrypto',_player];
 	// set final variable
 	_vars set[_cIndex, _current_crypto];
 	// save modified custom variables array

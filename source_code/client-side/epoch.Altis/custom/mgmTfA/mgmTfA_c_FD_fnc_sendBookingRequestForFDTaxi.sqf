@@ -1,12 +1,12 @@
 //H
 //H ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_client_sendBookingRequestFixedDestinationTaxi.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi.sqf
 //H $PURPOSE$	:	This function will send a variable value to the server
 //H ~~
 //H
 //HH
 //HH ~~
-//HH	Example usage	:	_null = mgmTfA_fnc_client_sendBookingRequestFixedDestinationTaxi
+//HH	Example usage	:	_null = mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi
 //HH	Parameters	:	requestorPosition		Array - format Position		e.g.: [2412.01, 6036.33, -0.839965]
 //HH	Return Value	:	none
 //HH ~~
@@ -62,7 +62,7 @@ if	(
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString1);
 	systemChat (str _msg2SyschatTextString2);
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_returnNearbyRandomOnRoadPosition3DArray.sqf] [TV3] Player attempted booking too soon. _timeToWaitInSecondsNumber is: (%1)", (str _timeToWaitInSecondsNumber)];};//dbg
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_returnNearbyRandomOnRoadPosition3DArray.sqf] [TV3] Player attempted booking too soon. _timeToWaitInSecondsNumber is: (%1)", (str _timeToWaitInSecondsNumber)];};//dbg
 };
 if (_bookingPermitted) then {
 
@@ -79,13 +79,13 @@ if (_bookingPermitted) then {
 				];
 		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img_comms\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1<br/>THERE ARE NO FIXED DESTINATION TAXI DRIVERS<br/>AVAILABLE AT THE MOMENT. PLEASE TRY AGAIN LATER.<br/>", (profileName)];
 		hint 				_msg2HintTextString;
-		if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_returnNearbyRandomOnRoadPosition3DArray.sqf] [TV3] There are no drivers available - quitting!"];};//dbg
+		if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_returnNearbyRandomOnRoadPosition3DArray.sqf] [TV3] There are no drivers available - quitting!"];};//dbg
 			
 		// Increment publicVariable counter: mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber
 		mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber = mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber + 1;
 		// Broadcast the value to all computers
 		publicVariable "mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber";
-		if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_sendBookingRequestFixedDestinationTaxi.sqf] [TV3] I have DROPPED a request due to lack of drivers therefore incremented mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber by one. Current value, after the increment, is: (%1). The requestor for this dropped job was: (%2).", mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber, (profileName)];};//dbg
+		if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi.sqf] [TV3] I have DROPPED a request due to lack of drivers therefore incremented mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber by one. Current value, after the increment, is: (%1). The requestor for this dropped job was: (%2).", mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber, (profileName)];};//dbg
 	};
 	mgmTfA_gv_pvs_requestorPositionArray3D = _this select 0;
 	mgmTfA_gv_pvs_requestedTaxiFixedDestinationID = _this select 1;
@@ -161,14 +161,14 @@ if (_bookingPermitted) then {
 		// We might also need the total journey distance to refund any 'untravelled distance'
 		mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber = _journeyTotalDistanceInMetersNumber;
 		// SEND THE BOOKING TO THE SERVER
-		if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_sendBookingRequestFixedDestinationTaxi.sqf] [TV4] (_bookingPermitted) is true. executing main function block now."];};//dbg
+		if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi.sqf] [TV4] (_bookingPermitted) is true. executing main function block now."];};//dbg
 		// Do these at this stage
 		mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingRecordKeeperThisIsTheFirstTimeBool = false;
 		mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
 		// Craft the booking request package		
 		mgmTfA_gv_pvs_req_fixedDestinationTaxiToMyPositionPleaseConfirmPacket = [player, mgmTfA_gv_pvs_requestorPositionArray3D, mgmTfA_gv_pvs_requestedTaxiFixedDestinationID, (getPlayerUID player)];
 		publicVariableServer "mgmTfA_gv_pvs_req_fixedDestinationTaxiToMyPositionPleaseConfirmPacket";
-		if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_sendBookingRequestFixedDestinationTaxi.sqf] [TV4] BOOKING REQUEST SENT. Details: mgmTfA_gv_pvs_requestorPositionArray3D: (%1)   mgmTfA_gv_pvs_requestedTaxiFixedDestinationID: (%2)", mgmTfA_gv_pvs_requestorPositionArray3D, mgmTfA_gv_pvs_requestedTaxiFixedDestinationID];};//dbg
+		if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi.sqf] [TV4] BOOKING REQUEST SENT. Details: mgmTfA_gv_pvs_requestorPositionArray3D: (%1)   mgmTfA_gv_pvs_requestedTaxiFixedDestinationID: (%2)", mgmTfA_gv_pvs_requestorPositionArray3D, mgmTfA_gv_pvs_requestedTaxiFixedDestinationID];};//dbg
 		// Let the player know
 		private	[
 				"_bookingRequestSubmittedPleaseStandByForDespatchersResponseMessageTextOnly"

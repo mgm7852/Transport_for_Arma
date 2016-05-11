@@ -1,12 +1,12 @@
 //H
 //H ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf
 //H $PURPOSE$	:	This function manage the SU during its approach to DropOffPoint, Awaiting Requestor to Get Off, ... phases. It will end when SU is about to begin travelling towards Termination Point.
 //H ~~
 //H
 //HH
 //HH ~~
-//HH	Example usage	:	_null	=	[_clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond;
+//HH	Example usage	:	_null	=	[_clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray] spawn mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond;
 //HH	Parameters	:	too many to list
 //HH	Return Value	:	none	[this function spawns the next function in the workflow
 //HH ~~
@@ -14,8 +14,8 @@
 //HH		mgmTfA_configgv_serverVerbosityLevel
 //HH
 if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server_Init=0;}; waitUntil {mgmTfA_Server_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
-scopeName "mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyondMainScope";
-if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond.sqf]  [TV4] I have been SPAWN'd. I have the following arguments in (_this)=(%1).", (str _this)];};//dbg
+scopeName "mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyondMainScope";
+if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf]  [TV4] I have been SPAWN'd. I have the following arguments in (_this)=(%1).", (str _this)];};//dbg
 
 private	[
 		"_thisFileVerbosityLevelNumber",
@@ -131,7 +131,7 @@ waitUntil {speed _SUTaxiAIVehicleObject == 0};
 // create the global variable that will be sent to the requestor's PC	// send the _myGUSUIDNumber here!
 mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket = _myGUSUIDNumber;
 _clickNGoRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket";
-if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond.sqf]      SIGNAL SENT to the Requestor (We have arrived. Thank you for your business. Have a nice day.). _clickNGoRequestorProfileNameTextString: (%1)  on computer (_clickNGoRequestorClientIDNumber)=(%2). The _myGUSUIDNumber is: (%3).", _clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber, _myGUSUIDNumber];};
+if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf]      SIGNAL SENT to the Requestor (We have arrived. Thank you for your business. Have a nice day.). _clickNGoRequestorProfileNameTextString: (%1)  on computer (_clickNGoRequestorClientIDNumber)=(%2). The _myGUSUIDNumber is: (%3).", _clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber, _myGUSUIDNumber];};
 
 // Deactivate PAYG on this vehicle
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _myGUSUIDNumber], false];
@@ -139,7 +139,7 @@ publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxPAYGIsCurrentlyActiveBool", _my
 
 //On arrival to waypoint (drop off point) add the travelled distance to the global counter and then reset our local counter
 mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond.sqf] [TV3] mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
 // We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber
 _iWantToTravelThisManyMetresNumber = 0;
 
@@ -167,7 +167,7 @@ _SUTaxiAIVehicleDistanceToWayPointMetersNumber = 0;
 // CODE TO AUTO EJECT ALL PASSENGERS AT DROP OFF POINT!
 ///
 					// WE ARE AT DROP OFF POIND, AUTO-EJECTING AND SHUTTING DOWN!!!
-					if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond.sqf] [TV3] bankrupt customer detected. ejecting all passengers and terminating."];};
+					if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] bankrupt customer detected. ejecting all passengers and terminating."];};
 					// TODO: ENHANCEMENT:	SPLIT THIS TO A SEPARATE FUNCTION FILE (it will be repeated multiple times, by different clickNGo modules!)
 					/// begin: shutdown code \\\
 					private	[
@@ -193,7 +193,7 @@ _SUTaxiAIVehicleDistanceToWayPointMetersNumber = 0;
 															];
 					_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
 					};
-					if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond.sqf] [TV3] TERMINATION SEQUENCE IN PROGRESS: Reached drop off point.	Slowing down, bringing the vehicle to a full-stop before ejecting all passengers."];};
+					if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] TERMINATION SEQUENCE IN PROGRESS: Reached drop off point.	Slowing down, bringing the vehicle to a full-stop before ejecting all passengers."];};
 					uiSleep 0.05;
 					// prep for forced eject -- once we eject them, we will want the passengers to stay out!
 					_SUTaxiAIVehicleObject lockCargo true;
@@ -206,7 +206,7 @@ _SUTaxiAIVehicleDistanceToWayPointMetersNumber = 0;
 						_x action ["Eject", _SUTaxiAIVehicleObject];
 						};
 					} forEach crew _SUTaxiAIVehicleObject;
-					if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond.sqf] [TV3] TERMINATION SEQUENCE at drop off point reached && eject all passengers completed."];};
+					if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] TERMINATION SEQUENCE at drop off point reached && eject all passengers completed."];};
 					uiSleep 0.05;
 					/// end: shutdown code \\\
 					_emergencyEscapeNeeded				= true;
@@ -221,7 +221,7 @@ _SUTaxiAIVehicleDistanceToWayPointMetersNumber = 0;
 _SUTaxiAIVehicleObject lockCargo true;
 // Not that we need ...
 _doorsLockedBool	= true;
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond.sqf] [TV3] DOORS locked"];};
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] DOORS locked"];};
 uiSleep 0.05;
 
 //Use the horn to say bye to the requestor
@@ -237,5 +237,5 @@ uiSleep 0.05;
 	};
 } forEach crew _SUTaxiAIVehicleObject;
 uiSleep 0.05;
-_null	=	[_clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _emergencyEscapeNeeded] spawn mgmTfA_fnc_server_clickNGoTaxi_ServicePhase06_ToTerminationAndTheEnd;
+_null	=	[_clickNGoRequestorProfileNameTextString, _clickNGoRequestorClientIDNumber, _iWantToTravelThisManyMetresNumber, _requestorPlayerObject, _myGUSUIDNumber, _SUAICharacterDriverObject, _SUTaxiAIVehicleObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _doorsLockedBool, _SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber, _SUTaxiWaypointRadiusInMetersNumber, _SUAIGroup, _SUAIVehicleObjectAgeInSecondsNumber, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUTaxiAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUPickUpPositionPosition3DArray, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUActiveWaypointPositionPosition3DArray, _SUTypeTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUPickUpHasOccurredBool, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _emergencyEscapeNeeded] spawn mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd;
 // EOF

@@ -1,11 +1,11 @@
 //H
 //H ~~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_client_clickNGoRequestTaxi.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_TA_fncRequestTaxi.sqf
 //H $PURPOSE$	:	This client side script contains 'request clickNGo taxi' code.
 //H ~~~
 //H
 if (isServer) exitWith {}; if (isNil("mgmTfA_Client_Init")) then {mgmTfA_Client_Init=0;}; waitUntil {mgmTfA_Client_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
-scopeName "mgmTfA_fnc_client_clickNGoRequestTaxiMainScope";
+scopeName "mgmTfA_c_TA_fncRequestTaxiMainScope";
 if (!isServer) then { waitUntil {!isnull (finddisplay 46)}; };
 // STAGE IN WORKFLOW:		if player is not on foot -- kill the request
 if ((vehicle player) != player) exitWith {
@@ -21,7 +21,7 @@ if ((vehicle player) != player) exitWith {
 	// with systemChat
 	_msg2SyschatTextString = parsetext format ["SORRY %1! YOU MAY NOT PLACE A clickNGo BOOKING REQUEST FROM INSIDE ANOTHER VEHICLE", (profileName)];
 	systemChat str _msg2SyschatTextString;
-	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf]      [TV5]  Player attempted to place a clickNGo Taxi booking request from inside another vehicle and got rejected."];};
+	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf]      [TV5]  Player attempted to place a clickNGo Taxi booking request from inside another vehicle and got rejected."];};
 };
 // STAGE IN WORKFLOW:		determine whether timeout requirements are met -- kill the request otherwise
 //
@@ -54,7 +54,7 @@ if	(
 	_msg2SyschatTextString = parsetext format ["SORRY %1! YOU MAY NOT BOOK ANOTHER TAXI THAT QUICKLY. PLEASE WAIT ANOTHER %2 SECONDS BEFORE TRYING AGAIN.", (profileName), (str _timeToWaitInSecondsNumber)];
 	hint 				_msg2HintTextString;
 	systemChat		(str _msg2SyschatTextString);
-	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf] [TV5] Player attempted booking too soon. _timeToWaitInSecondsNumber is: (%1)", (str _timeToWaitInSecondsNumber)];};//dbg
+	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf] [TV5] Player attempted booking too soon. _timeToWaitInSecondsNumber is: (%1)", (str _timeToWaitInSecondsNumber)];};//dbg
 };
 // STAGE IN WORKFLOW:		if booking is permitted, run the main request block below
 if (_bookingPermitted) then {
@@ -164,21 +164,21 @@ if (_bookingPermitted) then {
 			// Inform via systemChat (in Text-Only format)
 			_msg2SyschatTextString = parsetext format ["[SYSTEM]  REQUESTING A TAXI TO CHOSEN DESTINATION..."];
 			systemChat (str _msg2SyschatTextString);
-			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf]  [TV5] REQUESTING A TAXI TO CHOSEN DESTINATION...		(str _clickNGoTaxiRequestedDestinationPosition3DArray) is: (%1).", (str _clickNGoTaxiRequestedDestinationPosition3DArray)];};
+			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fncRequestTaxi.sqf]  [TV5] REQUESTING A TAXI TO CHOSEN DESTINATION...		(str _clickNGoTaxiRequestedDestinationPosition3DArray) is: (%1).", (str _clickNGoTaxiRequestedDestinationPosition3DArray)];};
 			clickNGoTaxiDestinationChoser_systemReady = nil;
 
 			///////// STEP:	PREPARE CLICKNGO REQUEST DETAILS
 			// ~~
 			mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString = (getPlayerUID player);
 			mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D = (getPosATL player);
-			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf]	[TV4]    clickNGo - I HAVE THE FOLLOWING DETAILS: mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString is: (%1).		mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D is: (%2).", mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, (str mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D)];};
+			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf]	[TV4]    clickNGo - I HAVE THE FOLLOWING DETAILS: mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString is: (%1).		mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D is: (%2).", mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString, (str mgmTfA_gv_pvs_clickNGoRequestorPositionArray3D)];};
 			
 			///////// STEP:	MORE FINANCIAL STUFF
 			// Charge the player for standard booking fee -- SEND REQUEST to server so that server will charge customer's wallet
 			mgmTfA_gv_pvs_req_clickNGoTaxiChargeMeInitialBookingFeePleaseConfirmPacket = [player, mgmTfA_gv_pvs_clickNGoRequestorPlayerUIDTextString];
 			publicVariableServer "mgmTfA_gv_pvs_req_clickNGoTaxiChargeMeInitialBookingFeePleaseConfirmPacket";
 			// report to log
-			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf] [TV5]          REQUEST SENT TO SERVER TO CHARGE			the player TaxiAnywhere Initial  Booking Fee (%1)", (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];};
+			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf] [TV5]          REQUEST SENT TO SERVER TO CHARGE			the player TaxiAnywhere Initial  Booking Fee (%1)", (str mgmTfA_configgv_clickNGoTaxisNonRefundableBookingFeeCostInCryptoNumber)];};
 
 
 			// Inform the player that he just paid the Standard Booking Fee
@@ -194,7 +194,7 @@ if (_bookingPermitted) then {
 			systemChat str _msg2SyschatTextString1;
 			systemChat str _msg2SyschatTextString2;
 			// SEND THE BOOKING TO THE SERVER
-			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf] [D4] (_bookingPermitted) is true. executing main function block now."];};//dbg
+			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf] [D4] (_bookingPermitted) is true. executing main function block now."];};//dbg
 
 			// Do these at this stage
 			mgmTfA_dynamicgv_lastclickNGoTaxiBookingRecordKeeperThisIsTheFirstTimeBool = false;
@@ -219,7 +219,7 @@ if (_bookingPermitted) then {
 			hint _msg2HintTextString;
 			systemChat str _msg2SyschatTextString1;
 			systemChat str _msg2SyschatTextString2;
-			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf] [D4] (_bookingPermitted) is true. executing main function block now."];};//dbg
+			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf] [D4] (_bookingPermitted) is true. executing main function block now."];};//dbg
 			
 			// re-enable players access to the hotkey. this does not mean he can successfully place another booking in the next second (as cool down timer will prevent that)
 			mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey = true;
@@ -241,5 +241,5 @@ if (_bookingPermitted) then {
 		systemChat str _msg2SyschatTextString2;
 	};
 };
-if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoRequestTaxi.sqf]   [TV5]		Reached checkpoint: End of file."];};
+if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf]   [TV5]		Reached checkpoint: End of file."];};
 // EOF

@@ -1,13 +1,13 @@
 //H
 //H
 //H ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_client_doLocalMarkerWork.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf
 //H $PURPOSE$	:	This function will be spawn'd with 2 arguments SU ID (GUSUIDNumber) and _trackerIsTotalOmniscienceGroupMember. It will track movements of a given SU until (a) SU is terminated OR (b) client is no longer authorized to map-track its movements
 //H ~~
 //H
 //HH
 //H ~~
-//HH	Syntax		:	_null = [SU_ID] mgmTfA_fnc_client_doLocalMarkerWork
+//HH	Syntax		:	_null = [SU_ID] mgmTfA_c_CO_fnc_doLocalMarkerWork
 //HH	Parameters	:	0:	GUSUIDNumber Globally Unique Service Unit ID number		Number		Examples: 1, 2, 5, 384, 384728473
 //HH	Parameters	:	1:	trackerIsTotalOmniscienceGroupMember	Bool		Examples: true,false
 //HH	Return Value	:	Nothing	[outputs to client's local map]
@@ -32,7 +32,7 @@
 //HH
 private ["_thisFileVerbosityLevelNumber"];
 _thisFileVerbosityLevelNumber = 0;
-scopeName "mgmTfA_fnc_client_doLocalMarkerWorkMainScope";
+scopeName "mgmTfA_c_CO_fnc_doLocalMarkerWorkMainScope";
 if (isServer) exitWith {};
 if (!isServer) then {
 	waitUntil {!isnull (finddisplay 46)};
@@ -161,7 +161,7 @@ _counter55 = 0;
 
 // Before we begin the loop, CREATE a PICK UP MARKER -- we will want to do this only once
 _SUPickUpPointMarkerTextLabelString = " IN PROGRESS: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " pick up point for: " + _SURequestorProfileNameTextString;
-if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV6] I have set _SUPickUpPointMarkerTextLabelString to: (%1).", _SUPickUpPointMarkerTextLabelString];};
+if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV6] I have set _SUPickUpPointMarkerTextLabelString to: (%1).", _SUPickUpPointMarkerTextLabelString];};
 _SUPickUpPointMarker = format["SU%1PickUpMarker", _myGUSUIDNumber];
 _SUPickUpPointMarkerPointer = createMarkerLocal [_SUPickUpPointMarker,[0,0]];
 _SUPickUpPointMarker setMarkerShapeLocal "ICON";
@@ -170,14 +170,14 @@ _SUPickUpPointMarker setMarkerColorLocal "ColorRed";
 _SUPickUpPointMarker setMarkerDirLocal 0;
 _SUPickUpPointMarker setMarkerPosLocal _SUPickUpPositionPosition3DArray;
 _SUPickUpPointMarker setMarkerTextLocal _SUPickUpPointMarkerTextLabelString;
-if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV6] Reached checkpoint: Pickup Marker code completed."];};
+if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV6] Reached checkpoint: Pickup Marker code completed."];};
 
 // Before we begin the loop, CREATE a DROP OFF MARKER -- we will want to do this only once
 // ONLY IF it has been determined:	Work on the DropOff Position
 if (_SUDropOffPositionHasBeenDeterminedBool) then {
 	_SUDropOffPositionPosition3DArray = call compile format ["mgmTfA_gv_PV_SU%1SUDropOffPositionPosition3DArray", _myGUSUIDNumber];
 	_SUDropOffPointMarkerTextLabelString = " IN PROGRESS: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " drop off point for: " + _SURequestorProfileNameTextString;
-	if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV6] I have set _SUDropOffPointMarkerTextLabelString to: (%1).", _SUDropOffPointMarkerTextLabelString];};
+	if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV6] I have set _SUDropOffPointMarkerTextLabelString to: (%1).", _SUDropOffPointMarkerTextLabelString];};
 	_SUDropOffPointMarker = format["SU%1DropOffMarker", _myGUSUIDNumber];
 	_SUDropOffPointMarkerPointer = createMarkerLocal [_SUDropOffPointMarker,[0,0]];
 	_SUDropOffPointMarker setMarkerShapeLocal "ICON";
@@ -185,7 +185,7 @@ if (_SUDropOffPositionHasBeenDeterminedBool) then {
 	_SUDropOffPointMarker setMarkerColorLocal "ColorRed";
 	_SUDropOffPointMarker setMarkerPosLocal _SUDropOffPositionPosition3DArray;
 	_SUDropOffPointMarker setMarkerTextLocal _SUDropOffPointMarkerTextLabelString;
-	if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV6] Reached checkpoint: DropOff Marker code completed."];};
+	if (_thisFileVerbosityLevelNumber>=6) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV6] Reached checkpoint: DropOff Marker code completed."];};
 };
 
 //// Begin looping the main loop -- we will keep looping until server-side signal shut down (it can do this by setting "mgmTfA_gv_PV_SU%1SUMarkerShouldBeDestroyedAfterExpiryBool = true").
@@ -194,7 +194,7 @@ while {_continueMapTracking} do
 	// DEBUG SLOW DOWN
 	_counter55 = _counter55 +1;
 	if (_counter55 >= 10) then {
-		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV8] Reached checkpoint: Running main loop. Now executing the very top, just above sleep."];};
+		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV8] Reached checkpoint: Running main loop. Now executing the very top, just above sleep."];};
 		_counter55 = 0;
 	};
 	
@@ -225,7 +225,7 @@ while {_continueMapTracking} do
 		//// YES, WE ARE TERMINATING!
 		// Log this -- but attempt logging only if both variables are already set
 		if ((!isNil "_SUMarkerPointer")	&&	(!isNil "_SUMarker")) then {
-			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV8] _SUMarkerShouldBeDestroyedAfterExpiryBool is true.     _SUMarkerPointer is: (%1).   _SUMarker is: (%2).", (str _SUMarkerPointer), (str _SUMarker)];};
+			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV8] _SUMarkerShouldBeDestroyedAfterExpiryBool is true.     _SUMarkerPointer is: (%1).   _SUMarker is: (%2).", (str _SUMarkerPointer), (str _SUMarker)];};
 		};
 		
 		// Termination Step 1: do the Expiry Timeout as defined in masterConfig and publicVariable broadcasted by the server:	mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber
@@ -238,42 +238,42 @@ while {_continueMapTracking} do
 		// However we can start cleaning up most map markers immediately.			// Get rid of 3 and keep only 1 behind...
 		if (!isNil "_SUMarker") then {
 			deleteMarker _SUMarker;
-			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV8] Termination Task: I have just deleted (_SUMarker)."];};
+			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV8] Termination Task: I have just deleted (_SUMarker)."];};
 		};
 		
 		if (!isNil "_SUPickUpPointMarker") then {
 			deleteMarker _SUPickUpPointMarker;
-			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV8] Termination Task: I have just deleted (_SUPickUpPointMarker)."];};
+			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV8] Termination Task: I have just deleted (_SUPickUpPointMarker)."];};
 		};
 
 		// ONLY IF it has been determined:	Work on the DropOff Marker
 		if (_SUDropOffPositionHasBeenDeterminedBool) then {
 			deleteMarker _SUDropOffPointMarker;
-			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV8] Termination Task: I have just deleted (_SUDropOffPointMarker)."];};
+			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV8] Termination Task: I have just deleted (_SUDropOffPointMarker)."];};
 		};
 
 		_counterForDelayedDeletionLoop= 0;
 		_delayedDeletionStartTimeInSecondsNumber = (time);
-		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV8] ENTERed TERMINATION SLEEP LOOP. I will sleep as much as requested in (mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber) which is (%1).", (str mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber)];};
+		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA]  [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV8] ENTERed TERMINATION SLEEP LOOP. I will sleep as much as requested in (mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber) which is (%1).", (str mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber)];};
 		while {(((time) - _delayedDeletionStartTimeInSecondsNumber) <= mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber)} do {
 			_SUTerminationPointMarker = format["SU%1TerminationMarker", _myGUSUIDNumber];
 			 uiSleep 1;
 			_SUTerminationPointMarkerTextLabelString = " completed: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " Terminated here  (served: "  + _SURequestorProfileNameTextString + ")  (Delayed Deletion in: " + (str (round (mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber - ((time) - _delayedDeletionStartTimeInSecondsNumber)))) + " s.)";
-			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf] I have set _SUTerminationPointMarkerTextLabelString to: (%1).", _SUTerminationPointMarkerTextLabelString];};
+			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf] I have set _SUTerminationPointMarkerTextLabelString to: (%1).", _SUTerminationPointMarkerTextLabelString];};
 			// Possibly we do not need to re-create it every time! just update text!
 			_SUTerminationPointMarker setMarkerTextLocal _SUTerminationPointMarkerTextLabelString;
 		};
-		if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA]  [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV7] EXITed TERMINATION SLEEP LOOP."];};
+		if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA]  [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV7] EXITed TERMINATION SLEEP LOOP."];};
 
 		// Now get rid of the last marker
 		_SUTerminationPointMarker setMarkerPosLocal [0,0];
 		_SUTerminationPointMarker setMarkerAlphaLocal 0;
 
 		// Update the log
-		diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf] I have been instructed to shut down. I have deleted the marker I have been tracking (SUID==%1).  I will now exit. Goodbye!", _myGUSUIDNumber];
+		diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf] I have been instructed to shut down. I have deleted the marker I have been tracking (SUID==%1).  I will now exit. Goodbye!", _myGUSUIDNumber];
 		_continueMapTracking = false;
 		// Exit all loops, go back to main, from where we will terminate AFTER writing to log.
-		breakTo "mgmTfA_fnc_client_doLocalMarkerWorkMainScope";
+		breakTo "mgmTfA_c_CO_fnc_doLocalMarkerWorkMainScope";
 	} else {
 		//// NO WE ARE NOT SUPPOSED TO TERMINATE. Carry on with create/update the marker and keep happily looping!
 		
@@ -282,7 +282,7 @@ while {_continueMapTracking} do
 			// Pick Up has occurred and not processed yet!
 			// Update the map now
 			_SUPickUpPointMarkerTextLabelString							= " completed: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " picked up " + _SURequestorProfileNameTextString + " here";
-			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf] Map has been updated to reflect that pick up has occurred. _SUPickUpPointMarkerTextLabelString is: (%1).", _SUPickUpPointMarkerTextLabelString];};
+			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf] Map has been updated to reflect that pick up has occurred. _SUPickUpPointMarkerTextLabelString is: (%1).", _SUPickUpPointMarkerTextLabelString];};
 			_SUPickUpPointMarker setMarkerTypeLocal "mil_dot";
 			_SUPickUpPointMarker setMarkerColorLocal "ColorBrown";
 			_SUPickUpPointMarker setMarkerTextLocal _SUPickUpPointMarkerTextLabelString;
@@ -307,25 +307,25 @@ while {_continueMapTracking} do
 				//// clean up
 				if (!isNil "_SUMarker") then {
 					deleteMarker _SUMarker;
-					if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf] Termination Task [terminating because not a member of _trackerIsTotalOmniscienceGroupMember and DropOff has occurred]: I have just deleted (_SUMarker)."];};
+					if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf] Termination Task [terminating because not a member of _trackerIsTotalOmniscienceGroupMember and DropOff has occurred]: I have just deleted (_SUMarker)."];};
 				};
 				if (!isNil "_SUPickUpPointMarker") then {
 					deleteMarker _SUPickUpPointMarker;
-					if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf] Termination Task [terminating because not a member of _trackerIsTotalOmniscienceGroupMember and DropOff has occurred]: I have just deleted (_SUPickUpPointMarker)."];};
+					if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf] Termination Task [terminating because not a member of _trackerIsTotalOmniscienceGroupMember and DropOff has occurred]: I have just deleted (_SUPickUpPointMarker)."];};
 				};
 				if (!isNil "_SUDropOffPointMarker") then {
 					deleteMarker _SUDropOffPointMarker;
-					if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf] Termination Task [terminating because not a member of _trackerIsTotalOmniscienceGroupMember and DropOff has occurred]: I have just deleted (_SUDropOffPointMarker)."];};
+					if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf] Termination Task [terminating because not a member of _trackerIsTotalOmniscienceGroupMember and DropOff has occurred]: I have just deleted (_SUDropOffPointMarker)."];};
 				};
-				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf] Termination Task [terminating because not a member of _trackerIsTotalOmniscienceGroupMember and DropOff has occurred]: Next line will breakTo mgmTfA_fnc_client_doLocalMarkerWorkMainScope"];};
-				breakTo "mgmTfA_fnc_client_doLocalMarkerWorkMainScope";
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf] Termination Task [terminating because not a member of _trackerIsTotalOmniscienceGroupMember and DropOff has occurred]: Next line will breakTo mgmTfA_c_CO_fnc_doLocalMarkerWorkMainScope"];};
+				breakTo "mgmTfA_c_CO_fnc_doLocalMarkerWorkMainScope";
 			};
 			
 			// If tracker is Total Omniscience Group Member, he will keep map-tracking but (set the color to Brown) && (change icon to smaller 'dot') && (change dropoff text wording).
 			if (_trackerIsTotalOmniscienceGroupMember) then {
 				// Update the map now
 				_SUDropOffPointMarkerTextLabelString = " completed: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + str _myGUSUIDNumber +  " was asked to drop off " + _SURequestorProfileNameTextString + " here";
-				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf] Map has been updated to reflect that Drop Off has occurred. _SUDropOffPointMarkerTextLabelString is: (%1).", _SUDropOffPointMarkerTextLabelString];};
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf] Map has been updated to reflect that Drop Off has occurred. _SUDropOffPointMarkerTextLabelString is: (%1).", _SUDropOffPointMarkerTextLabelString];};
 				_SUDropOffPointMarker setMarkerTypeLocal "mil_dot";
 				_SUDropOffPointMarker setMarkerColorLocal "ColorBrown";
 				_SUDropOffPointMarker setMarkerTextLocal _SUDropOffPointMarkerTextLabelString;
@@ -346,7 +346,7 @@ while {_continueMapTracking} do
 			_SUMarkerServingOrServedTextWordTextString = " served ";
 		};
 		_SUMarkerTextLabelString									= _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  _SUMarkerServingOrServedTextWordTextString + _SURequestorProfileNameTextString + "   Speed: " + (str _SUAIVehicleSpeedOfVehicleInKMHNumber) + " kmh   " + _SUCurrentActionInProgressTextString + "   WP: " + (str _SUDistanceToActiveWaypointInMetersNumber) + " m.   SUage: " + (str _SUAIVehicleObjectAgeInSecondsNumber) + " s.   Task Age/Max: " + (str _SUCurrentTaskAgeInSecondsNumber) + "/" + (str _SUCurrentTaskThresholdInSecondsNumber);
-		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf] I have set _SUMarkerTextLabelString to: (%1).", _SUMarkerTextLabelString];};
+		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf] I have set _SUMarkerTextLabelString to: (%1).", _SUMarkerTextLabelString];};
 
 		// STEP2:	Create (or overwrite) map MarkerLocal for this Service Unit
 		// ~~~~~~~~~~~~~~~~~~~~ Create the map marker to show Requested Pick up Point ~~~~~~~~~~~~~~~~~~~~
@@ -397,7 +397,7 @@ while {_continueMapTracking} do
 			//GOAL creating a MarkerLocal that looks like this one below
 			//								<<example not up to date>>
 			_SUTerminationPointMarkerTextLabelString = " IN PROGRESS: " + _SUDriversFirstnameTextString + "@" + _SUTypeTextString + (str _myGUSUIDNumber) +  " will Terminate here";
-			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV8]  I have set _SUTerminationPointMarkerTextLabelString to: (%1).", _SUTerminationPointMarkerTextLabelString];};
+			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV8]  I have set _SUTerminationPointMarkerTextLabelString to: (%1).", _SUTerminationPointMarkerTextLabelString];};
 			_SUTerminationPointMarker = format["SU%1TerminationMarker", _myGUSUIDNumber];
 			_SUTerminationPointMarkerPointer = createMarkerLocal [_SUTerminationPointMarker,[0,0]];
 			_SUTerminationPointMarker setMarkerShapeLocal "ICON";
@@ -405,7 +405,7 @@ while {_continueMapTracking} do
 			_SUTerminationPointMarker setMarkerColorLocal "ColorCivilian";
 			_SUTerminationPointMarker setMarkerPosLocal _SUTerminationPointPosition3DArray;
 			_SUTerminationPointMarker setMarkerTextLocal _SUTerminationPointMarkerTextLabelString;
-			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_doLocalMarkerWork.sqf]  [TV8]  Reached checkpoint: Termination Marker code completed."];};
+			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV8]  Reached checkpoint: Termination Marker code completed."];};
 		};
 	};
 };

@@ -1,6 +1,6 @@
 ﻿//H
 //H ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_scr_server_initCreateObjectHQBuilding.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_s_CO_scr_initCreateObjectHQBuilding.sqf
 //H $PURPOSE$	:	This server side script creates a particular Object on server start.
 //H ~~
 //H

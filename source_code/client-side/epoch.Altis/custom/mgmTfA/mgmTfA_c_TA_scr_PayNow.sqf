@@ -1,13 +1,13 @@
 //H
 //H
 //H ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_scr_client_clickNGoTaxiPayNow.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_TA_scr_PayNow.sqf
 //H $PURPOSE$	:	undocumented
 //H ~~
 //H
 //HH
 //H ~~
-//HH	Syntax		:	_null = [] mgmTfA_scr_client_clickNGoTaxiPayNow
+//HH	Syntax		:	_null = [] mgmTfA_c_TA_scr_PayNow
 //HH	Parameters	:	none
 //HH	Return Value	:	none
 //H ~~
@@ -19,7 +19,7 @@ private	[
 		"_playerCanAffordAbsoluteMinimumJourneyServiceFeeBool"
 		];
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
-if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_clickNGoTaxiPayNow.sqf]  [TV8] 		DEVDEBUG		I have been SPAWN'd.	This is what I have received:	(%1).", (str _this)];};//dbg
+if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_PayNow.sqf]  [TV8] 		DEVDEBUG		I have been SPAWN'd.	This is what I have received:	(%1).", (str _this)];};//dbg
 
 // Now that we know the cost, let's see if player can afford it?
 if (EPOCH_playerCrypto >= mgmTfA_configgv_clickNGoTaxisAbsoluteMinimumJourneyFeeInCryptoNumber) then {
@@ -49,14 +49,14 @@ if (_playerCanAffordAbsoluteMinimumJourneyServiceFeeBool) then {
 	_myGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");
 	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber], true];
 	publicVariable format ["mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool", _myGUSUIDNumber];
-	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_clickNGoTaxiPayNow.sqf] [TV8] 		DEVDEBUG		publicVariable (mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool) 		<== signal sent to the server (that player has paid Minimum Service Fee)."];};//dbg
+	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_PayNow.sqf] [TV8] 		DEVDEBUG		publicVariable (mgmTfA_gv_PV_SU%1SUcNGoTxServiceFeeHasBeenPaidBool) 		<== signal sent to the server (that player has paid Minimum Service Fee)."];};//dbg
 	
 	// parse arguments
 	_VehEntered				= (_this select 0);
 	_lePointer = call compile format ["mgmTfA_gv_PV_SU%SUActionIDPointer", _myGUSUIDNumber];
-	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_clickNGoTaxiPayNow.sqf] [TV8] 		DEVDEBUG		About to removeAction by issuing: (_VehEntered removeAction _lePointer).		(_lePointer) is: (%1).", _lePointer];};//dbg
+	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_PayNow.sqf] [TV8] 		DEVDEBUG		About to removeAction by issuing: (_VehEntered removeAction _lePointer).		(_lePointer) is: (%1).", _lePointer];};//dbg
 	_VehEntered removeAction _lePointer;
-	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_clickNGoTaxiPayNow.sqf] [TV8] 		DEVDEBUG		Action removed by issuing: (_VehEntered removeAction _lePointer)."];};//dbg
+	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_PayNow.sqf] [TV8] 		DEVDEBUG		Action removed by issuing: (_VehEntered removeAction _lePointer)."];};//dbg
 	
 	// Inform the player that action has been removed
 	private	[

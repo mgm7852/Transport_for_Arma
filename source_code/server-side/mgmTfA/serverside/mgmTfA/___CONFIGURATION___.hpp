@@ -1,10 +1,10 @@
 //H
 //H ~~
-//H $FILE$		:	mgmTfA/_settings.hpp
+//H $FILE$		:	mgmTfA/___CONFIGURATION___.hpp
 //H $PURPOSE$	:	This is the shared masterConfiguration file, both server & clients will be aware of, and rely on, the values herein.
 //H ~~
 //H
-#include "_mgmTfA_dat_version.hpp"
+#include "mgmTfA_s_CO_dat_TfAVersion.hpp"
 
 
 
@@ -88,7 +88,7 @@ mgmTfA_configgv_clickNGoJanitorInitialRandomSleepDurationMinimumBaseInSecondsNum
 mgmTfA_configgv_clickNGoJanitorInitialRandomSleepDurationMinimumAdditionInSecondsNumber = 24; // default: 24 seconds
 
 // --janitor sleep time--
-// This is used in mgmTfA_fnc_client_doLocalJanitorWorkForclickNGo.sqf
+// This is used in mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf
 // default: 300 seconds (5 minutes)
 mgmTfA_configgv_clickNGoJanitorSleepDurationInSecondsNumber = 300;
 
@@ -202,7 +202,7 @@ mgmTfA_configgv_catpObject="C_man_polo_1_F";
 // Settings for CATP01
 //
 // Create Callpoint?			(i.e.: create the Taxi Dispatcher Agent in 3D game world: true or false)
-// 		Referred by mgmTfA_scr_server_initCreateObjectCatp01.sqf
+// 		Referred by mgmTfA_s_CO_scr_initCreateObjectCatp01.sqf
 mgmTfA_configgv_createObjectCatp01Bool=true;
 // CATP01 Location
 // 		Referred by mgmTfA_scr_serverInitCreateObjectHQBuilding.sqf when creating the Taxi Dispatcher agent

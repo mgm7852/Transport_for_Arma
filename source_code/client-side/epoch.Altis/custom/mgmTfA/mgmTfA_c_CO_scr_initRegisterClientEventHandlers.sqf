@@ -1,6 +1,6 @@
 //H
 //HH ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_scr_client_initRegisterClientEventHandlers.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf
 //H $PURPOSE$	:	This server side script registers Event Handlers on server startup.
 //HH ~~
 //H
@@ -212,8 +212,8 @@
 	_classnameOfTheCurrentVehicle = typeOf (vehicle player);
 	_originalVehiclesGUSUIDNumber = (_this select 1);
 	_currentVehiclesGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");
-	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourFixedDestinationTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. _this is: (%1).", (str _this)];};
-	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourFixedDestinationTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. the (str _originalVehiclesGUSUIDNumber) is: (%1)	(str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourFixedDestinationTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. _this is: (%1).", (str _this)];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourFixedDestinationTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. the (str _originalVehiclesGUSUIDNumber) is: (%1)	(str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
 	
 	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
 	if ((mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) && (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber)) then {
@@ -248,8 +248,8 @@
 	_classnameOfTheCurrentVehicle = typeOf (vehicle player);
 	_originalVehiclesGUSUIDNumber = (_this select 1);
 	_currentVehiclesGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");
-	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. _this is: (%1).", (str _this)];};
-	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. the (str _originalVehiclesGUSUIDNumber) is: (%1)	(str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. _this is: (%1).", (str _this)];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. the (str _originalVehiclesGUSUIDNumber) is: (%1)	(str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
 	
 	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
 	if ((mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) && (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber)) then {
@@ -312,13 +312,13 @@
 	// IF BYPASS IS REQUESTED in masterConfig file, let's do it!		mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool		// if this is enabled, respond to every single request with "a member of Total Omniscience found!"
 	if (mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool) then {
 		_totalOmniscienceGroupMatchFound = true;
-		if (mgmTfA_configgv_clientVerbosityLevel>=2) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf] [TV2] A _totalOmniscienceGroupMatchFound has been found due to mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool. Launching mgmTfA_fnc_client_doLocalMarkerWork.sqf as totalOmniscienceGroup member to continuously map-track the new SU until Termination Stage!"];};
-		[mgmTfA_gvdb_PV_GUSUIDNumber, true] spawn mgmTfA_fnc_client_doLocalMarkerWork;
+		if (mgmTfA_configgv_clientVerbosityLevel>=2) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf] [TV2] A _totalOmniscienceGroupMatchFound has been found due to mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool. Launching mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf as totalOmniscienceGroup member to continuously map-track the new SU until Termination Stage!"];};
+		[mgmTfA_gvdb_PV_GUSUIDNumber, true] spawn mgmTfA_c_CO_fnc_doLocalMarkerWork;
 		// Now let's send this client to map-tracker with the information that he is a TO member
 	};
 	// FIRST TRAVERSE TOTAL OMNISCIENCE GROUP.	=> 	IF A MATCH IS FOUND, call map-tracker script with the information that we are sending a Total Omniscience group  member so that it will not revoke authorization right after  Drop Off.
 	// Prep work for Total Omniscience traversing
-	if (mgmTfA_configgv_clientVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf] [TV3] Will start traversing Total Omniscience group in the next line."];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf] [TV3] Will start traversing Total Omniscience group in the next line."];};
 	{
 		if(_quickEscapeNow) then {	breakTo "mgmTfA_gvdb_PV_GUSUIDNumberMainScope";	};
 		scopeName "totalOmniscienceGroupTraverseScope";
@@ -327,7 +327,7 @@
 		//	if current entry does match, issue "_yesIShouldTrackThisSU = true"; 	and breakTo mgmTfA_gvdb_PV_GUSUIDNumberMainScope
 		//	if no entries match, end routine, as there is nothing to be done
 		if (_uid == _x) then {
-			if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf] [TV4] totalOmniscienceGroup match found - local computer is to track!"];};//dbg
+			if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf] [TV4] totalOmniscienceGroup match found - local computer is to track!"];};//dbg
 			_totalOmniscienceGroupMatchFound = true;
 			breakOut "totalOmniscienceGroupTraverseScope";
 		} else {
@@ -336,9 +336,9 @@
 	// So how did it go?
 	if (_totalOmniscienceGroupMatchFound) then {
 		if(_quickEscapeNow) then {	breakTo "mgmTfA_gvdb_PV_GUSUIDNumberMainScope";	};
-									if (mgmTfA_configgv_clientVerbosityLevel>=1) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]          About to execVM mgmTfA_fnc_client_doLocalMarkerWork. I will pass the following mgmTfA_gvdb_PV_GUSUIDNumber: (%1)", mgmTfA_gvdb_PV_GUSUIDNumber];};//dbg
+									if (mgmTfA_configgv_clientVerbosityLevel>=1) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]          About to execVM mgmTfA_c_CO_fnc_doLocalMarkerWork. I will pass the following mgmTfA_gvdb_PV_GUSUIDNumber: (%1)", mgmTfA_gvdb_PV_GUSUIDNumber];};//dbg
 		//THIS SHOULD CALL A FUNCTION - NOT A SCRIPT!
-		[mgmTfA_gvdb_PV_GUSUIDNumber, true] spawn mgmTfA_fnc_client_doLocalMarkerWork;
+		[mgmTfA_gvdb_PV_GUSUIDNumber, true] spawn mgmTfA_c_CO_fnc_doLocalMarkerWork;
 		// Now let's send this client to map-tracker with the information that he is a TO member
 		} else {
 			if(_quickEscapeNow) then {	breakTo "mgmTfA_gvdb_PV_GUSUIDNumberMainScope";	};
@@ -364,7 +364,7 @@
 	// So how did it go?
 	if (_aclMatchFound) then {
 		if(_quickEscapeNow) then {	breakTo "mgmTfA_gvdb_PV_GUSUIDNumberMainScope";	};
-		[mgmTfA_gvdb_PV_GUSUIDNumber, false] spawn mgmTfA_fnc_client_doLocalMarkerWork;
+		[mgmTfA_gvdb_PV_GUSUIDNumber, false] spawn mgmTfA_c_CO_fnc_doLocalMarkerWork;
 	};
 };
 "mgmTfA_gv_pvc_req_fixedDestinationTaxiPleasePayTheServiceFeePacketSignalOnly" addPublicVariableEventHandler {
@@ -382,7 +382,7 @@
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 	systemChat (str _msg2SyschatTextString);
-	[mgmTfA_gvdb_PV_GUSUIDNumber] spawn mgmTfA_fnc_client_FD_keepRequestingServiceFeePayment;
+	[mgmTfA_gvdb_PV_GUSUIDNumber] spawn mgmTfA_c_FD_fnc_keepRequestingServiceFeePayment;
 };
 "mgmTfA_gv_pvc_pos_thanksForFixedDestinationTaxiPaymentWeAreLeavingNowPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
@@ -475,7 +475,7 @@
 	*/
 };
 "mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly" addPublicVariableEventHandler {
-	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly package. _this is: (%1).", (str _this)];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_req_TAPleasePay1stMileFeePacketSignalOnly package. _this is: (%1).", (str _this)];};
 	// initialize local variables
 	private [
 			"_msg2HintTextString",
@@ -490,7 +490,7 @@
 	//			b. it is not paid within phase-timeout-value-seconds and now phase timed out therefore a payment is no longer possible!
 	//
 	// spawn a script with a while loop to keep reminding
-	[mgmTfA_gvdb_PV_GUSUIDNumber] spawn mgmTfA_fnc_client_TA_keepRequesting1stMileFeePayment;
+	[mgmTfA_gvdb_PV_GUSUIDNumber] spawn mgmTfA_c_TA_fnc_keepRequesting1stMileFeePayment;
 };
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- "mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly" addPublicVariableEventHandler {
 																					//THIS IS NOW COMMENTED OUT - DELAYED DELETE THIS -- 	// initialize local variables
@@ -567,14 +567,14 @@
 	// The requested action is relevant only if player is still in the mentioned clickNGo Taxi vehicle	i.e.: if player ejected/got out, let's NOT send him this message!	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
 	_classnameOfTheCurrentVehicle = typeOf (vehicle player);
 	_GUSUIDNumberOfTheCurrentVehicle									= ((vehicle player) getVariable "GUSUIDNumber");
-	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [V4]          I have received mgmTfA_gv_pvc_req_pleaseBeginPurchasingPowerCheckAndPAYGChargeForTimeTicksSignalOnly package. _this is: (%1).		(str _GUSUIDNumberOfTheCurrentVehicle) is: (%2).", (str _this), (str _GUSUIDNumberOfTheCurrentVehicle)];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [V4]          I have received mgmTfA_gv_pvc_req_pleaseBeginPurchasingPowerCheckAndPAYGChargeForTimeTicksSignalOnly package. _this is: (%1).		(str _GUSUIDNumberOfTheCurrentVehicle) is: (%2).", (str _this), (str _GUSUIDNumberOfTheCurrentVehicle)];};
 	if (_classnameOfTheCurrentVehicle == mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString) then {
-		// yes, player is still in a clickNGo vehicle -- quite possibly the same one!	launch the function [_GUSUIDNumberReceivedFromServer] mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks;
-		if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [V4]          I have determined that player is in the matching vehicle. I will now SPAWN (mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks)."];};
-		_null = [_GUSUIDNumberOfTheCurrentVehicle] spawn mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks;
+		// yes, player is still in a clickNGo vehicle -- quite possibly the same one!	launch the function [_GUSUIDNumberReceivedFromServer] mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks;
+		if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [V4]          I have determined that player is in the matching vehicle. I will now SPAWN (mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks)."];};
+		_null = [_GUSUIDNumberOfTheCurrentVehicle] spawn mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks;
 	} else {
 		// no, player is no longer in the mentioned vehicle -- do nothing
-		if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_scr_client_initRegisterClientEventHandlers.sqf]  [V4]          I have determined that player is NOT in the matching vehicle. I will NOT spawn (mgmTfA_fnc_client_purchasingPowerCheckAndPAYGChargeForTimeTicks)."];};
+		if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [V4]          I have determined that player is NOT in the matching vehicle. I will NOT spawn (mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks)."];};
 	};	
 };
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ code - begin ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -589,11 +589,11 @@
 //DIK_INSERT 	[Ins] 	0xD2 	210 	[Insert] on arrow keypad 
 // https://resources.bisimulations.com/wiki/DIK_KeyCodes
 private ["_execmgmTfA_null_client_clickNGoRequestTaxi"];
-mgmTfA_EHInsertKeyDown = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == mgmTfA_configgv_clickNGoCallATaxiHotkeyDIKCodeNumber) then	{_execmgmTfA_null_client_clickNGoRequestTaxi	= [] spawn mgmTfA_fnc_client_clickNGoRequestTaxi;}"];
+mgmTfA_EHInsertKeyDown = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == mgmTfA_configgv_clickNGoCallATaxiHotkeyDIKCodeNumber) then	{_execmgmTfA_null_client_clickNGoRequestTaxi	= [] spawn mgmTfA_c_TA_fncRequestTaxi;}"];
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ code - end ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // TaxiAnywhere Set Destination Key and EH
 private ["_execmgmTfA_null_client_TA_setDestination"];
-mgmTfA_EHNumPadMultiplyKeyDown = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == mgmTfA_configgv_TA_setDestinationHotkeyDIKCodeNumber) then	{_execmgmTfA_null_client_TA_setDestination	= [] spawn mgmTfA_scr_client_TA_setDestination;}"];
+mgmTfA_EHNumPadMultiplyKeyDown = (findDisplay 46) displayAddEventHandler ["KeyDown", "if (_this select 1 == mgmTfA_configgv_TA_setDestinationHotkeyDIKCodeNumber) then	{_execmgmTfA_null_client_TA_setDestination	= [] spawn mgmTfA_c_TA_scr_setDestination;}"];
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF FILE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-if (mgmTfA_configgv_clientVerbosityLevel>=2) then {diag_log format ["[mgmTfA][mgmTfA_scr_client_initRegisterClientEventHandlers.sqf] END reading file."];};//dbg
+if (mgmTfA_configgv_clientVerbosityLevel>=2) then {diag_log format ["[mgmTfA][mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf] END reading file."];};//dbg
 // EOF

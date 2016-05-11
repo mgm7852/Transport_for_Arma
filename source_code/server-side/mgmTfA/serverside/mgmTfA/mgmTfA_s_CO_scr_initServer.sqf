@@ -1,43 +1,43 @@
 //H
 //H ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_scr_server_initServer.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_s_CO_scr_initServer.sqf
 //H $PURPOSE$	:	This is the server side initialization script.
 //H ~~
 //H
-#include "\x\addons\custom\serverside\mgmTfA\_settings.hpp"
+#include "\x\addons\custom\serverside\mgmTfA\___CONFIGURATION___.hpp"
 
 // We are still initializing...
 mgmTfA_Server_Init=0;
 publicVariable "mgmTfA_Server_Init";
 
-if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf] [D2] BEGIN reading file."];};
-if (!isServer) exitWith {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf] ATTEMPTED executing server file but not a server! Quitting!"];};
+if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf] [D2] BEGIN reading file."];};
+if (!isServer) exitWith {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf] ATTEMPTED executing server file but not a server! Quitting!"];};
 if (isServer) then {
 	publicVariable	"mgmTfA_configgv_serverVerbosityLevel";
 	/// COMPILE GLOBAL FUNCTIONS
-	mgmTfA_fnc_server_returnNearbyRandomOnRoadPosition3DArray = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_returnNearbyRandomOnRoadPosition3DArray.sqf";
-	mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase02a_SendResponse_BookingRequestAccepted = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase02a_SendResponse_BookingRequestAccepted.sqf";
-	mgmTfA_fnc_server_clickNGoTaxi_ServicePhase02a_SendResponse_BookingRequestAccepted = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_clickNGoTaxi_ServicePhase02a_SendResponse_BookingRequestAccepted.sqf";
-	mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist.sqf";
-	mgmTfA_fnc_server_clickNGoTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_clickNGoTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist.sqf";
-	mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf";
-	mgmTfA_fnc_server_clickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_clickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf";
-	mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase04_PickUpPointAndBeyond.sqf";
-	mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04_PickUpPointAndBeyond.sqf";
-	mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase05_DropOffPointAndBeyond = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase05_DropOffPointAndBeyond.sqf";
-	mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_clickNGoTaxi_ServicePhase05_DropOffPointAndBeyond.sqf";
-	mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase06_ToTerminationAndTheEnd = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase06_ToTerminationAndTheEnd.sqf";
-	mgmTfA_fnc_server_clickNGoTaxi_ServicePhase06_ToTerminationAndTheEnd = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_clickNGoTaxi_ServicePhase06_ToTerminationAndTheEnd.sqf";
+	mgmTfA_s_CO_fnc_returnNearbyRandomOnRoadPosition3DArray = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_CO_fnc_returnNearbyRandomOnRoadPosition3DArray.sqf";
+	mgmTfA_s_FD_fnc_servicePhase02a_SendResponse_BookingRequestAccepted = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_FD_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf";
+	mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf";
+	mgmTfA_s_FD_fnc_servicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_FD_fnc_servicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist.sqf";
+	mgmTfA_s_TA_fnc_servicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_TA_fnc_servicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist.sqf";
+	mgmTfA_s_FD_fnc_servicePhase03_CreateServiceUnitAndGoToRequestor = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_FD_fnc_servicePhase03_CreateServiceUnitAndGoToRequestor.sqf";
+	mgmTfA_s_TA_fnc_servicePhase03_CreateServiceUnitAndGoToRequestor = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_TA_fnc_servicePhase03_CreateServiceUnitAndGoToRequestor.sqf";
+	mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf";
+	mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf";
+	mgmTfA_s_FD_fnc_servicePhase05_DropOffPointAndBeyond = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_FD_fnc_servicePhase05_DropOffPointAndBeyond.sqf";
+	mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf";
+	mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf";
+	mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf";
 	//mgmTfA_fnc_server_publicVariableBroadcastSUInformation = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_publicVariableBroadcastSUInformation.sqf";
-	mgmTfA_fnc_server_PublicVariableBroadcastSUInformationInitialBroadcast = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_PublicVariableBroadcastSUInformationInitialBroadcast.sqf";
-	mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_PublicVariableBroadcastSUInformationPhaseB.sqf";
-	mgmTfA_fnc_server_returnARandomFirstnameTextString = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_returnARandomFirstnameTextString.sqf";
-	mgmTfA_fnc_server_pubBus_doBusProvision = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_pubBus_doBusProvision.sqf";
-	mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04a_SendResponse_Charge1stMileFeeRequestActioned = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04a_SendResponse_Charge1stMileFeeRequestActioned.sqf";
-	mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_fnc_server_clickNGoTaxi_ServicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned.sqf";
+	mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationInitialBroadcast = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationInitialBroadcast.sqf";
+	mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB.sqf";
+	mgmTfA_s_CO_fnc_returnARandomFirstnameTextString = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_CO_fnc_returnARandomFirstnameTextString.sqf";
+	mgmTfA_s_BU_fnc_doBusProvision = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_BU_fnc_doBusProvision.sqf";
+	mgmTfA_s_TA_fnc_servicePhase04a_SendResponse_Charge1stMileFeeRequestActioned = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_TA_fnc_servicePhase04a_SendResponse_Charge1stMileFeeRequestActioned.sqf";
+	mgmTfA_s_TA_fnc_servicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_TA_fnc_servicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned.sqf";
 	// 3rd Party Functions
-	EPOCH_effectCrypto = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\fnc__3rd_party\EPOCH_effectCrypto.sqf";
-	EPOCH_server_effectCrypto = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\fnc__3rd_party\EPOCH_server_effectCrypto.sqf";
+	EPOCH_exp_effectCrypto = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\EPOCH_exp_functions\EPOCH_exp_effectCrypto.sqf";
+	EPOCH_exp_server_effectCrypto = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\EPOCH_exp_functions\EPOCH_exp_server_effectCrypto.sqf";
 
 	/// INITIAL VALUES  FOR GLOBAL VARIABLES - begin
 	////Initialize Global Variables of Counter Nature////
@@ -45,36 +45,36 @@ if (isServer) then {
 	mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsReceivedNumber = 0;
 	// Broadcast the value to all computers
 	publicVariable "mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsReceivedNumber";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV SET mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsReceivedNumber is: (%1)", mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsReceivedNumber];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsReceivedNumber is: (%1)", mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsReceivedNumber];};
 	//When a clickNGo Taxi request ENTER the workflow at Phase02, the value below will get incremented.		It is used when reporting to RPT LOG & also on, in-game map embedded Status Report.
 	mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsReceivedNumber = 0;
 	// Broadcast the value to all computers
 	publicVariable "mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsReceivedNumber";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV SET mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsReceivedNumber is: (%1)", mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsReceivedNumber];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsReceivedNumber is: (%1)", mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsReceivedNumber];};
 	//If we cannot fulfil a Fixed Destination Taxi request due to lack of available drivers, the value below will get incremented. It is used when reporting to RPT LOG & also on, in-game map embedded Status Report.
 	mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber = 0;
 	// Broadcast the value to all computers
 	publicVariable "mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV SET mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber is: (%1)", mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber is: (%1)", mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsDroppedNumber];};
 	//If we cannot serve a Fixed Destination Taxi request due to Requestor being in Blacklist, the value below will get incremented. It is used when reporting to RPT LOG & also on, in-game map embedded Status Report.
 	mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsRejectedDueToBlacklistNumber = 0;
 	// Broadcast the value to all computers
 	publicVariable "mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsRejectedDueToBlacklistNumber";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV SET mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsRejectedDueToBlacklistNumber is: (%1)", mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsRejectedDueToBlacklistNumber];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsRejectedDueToBlacklistNumber is: (%1)", mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsRejectedDueToBlacklistNumber];};
 	//If we cannot serve a clickNGo Taxi request due to Requestor being in Blacklist, the value below will get incremented. It is used when reporting to RPT LOG & also on, in-game map embedded Status Report.
 	mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsRejectedDueToBlacklistNumber = 0;
 	// Broadcast the value to all computers
 	publicVariable "mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsRejectedDueToBlacklistNumber";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV SET mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsRejectedDueToBlacklistNumber is: (%1)", mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsRejectedDueToBlacklistNumber];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsRejectedDueToBlacklistNumber is: (%1)", mgmTfA_gvdb_PV_clickNGoTaxisTotalRequestsRejectedDueToBlacklistNumber];};
 	//If we successfully fulfil a Fixed Destination Taxi request, the value below will get incremented. It is used when reporting to RPT LOG & also on, in-game map embedded Status Report.
 	mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsSuccessfulNumber=0;
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV SET mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsSuccessfulNumber is: (%1)", mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsSuccessfulNumber];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsSuccessfulNumber is: (%1)", mgmTfA_gvdb_PV_fixedDestinationTaxisTotalRequestsSuccessfulNumber];};
 	//Each driver tracks his mileage and these are combined in this pool. It is used when reporting to RPT LOG & also on, in-game map embedded Status Report. Marketing Manager might use this for advertisement campaigns.
 	mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber = 0;
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber is: (%1)", mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber is: (%1)", mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber];};
 	//Each driver tracks his mileage and these are combined in this pool. It is used when reporting to RPT LOG & also on, in-game map embedded Status Report. Marketing Manager might use this for advertisement campaigns.
 	mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber = 0;
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber is: (%1)", mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber is: (%1)", mgmTfA_dynamicgv_clickNGoTaxisTotalDistanceTravelledByTaxisNumber];};
 
 	//READ-ON-INIT-SERVER Values
 	//Settings below are configured in masterConfig file (just like pretty much anything). However all these values below are read only once during server start up. Subsequent scripts that parse masterConfig simply ignore those.
@@ -95,70 +95,70 @@ if (isServer) then {
 	mgmTfA_gvdb_PV_GUSUIDNumber = 0;
 	// Broadcast the value to all computers
 	publicVariable "mgmTfA_gvdb_PV_GUSUIDNumber";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          globalVariableDBPV SET mgmTfA_gvdb_PV_GUSUIDNumber is: (%1)", mgmTfA_gvdb_PV_GUSUIDNumber];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          globalVariableDBPV SET mgmTfA_gvdb_PV_GUSUIDNumber is: (%1)", mgmTfA_gvdb_PV_GUSUIDNumber];};
 
 	// Total Number of Abnormally Shutdown Service Units (due to Timeout Threshold being Exceeded) -- we start with zero, each abnormal termination will increment this by one
 	mgmTfA_gvdb_taxiTotalNumberOfAbnormallyShutdownSUsNumber  = 0;
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          globalVariableDBPV SET mgmTfA_gvdb_taxiTotalNumberOfAbnormallyShutdownSUsNumber is: (%1)", mgmTfA_gvdb_taxiTotalNumberOfAbnormallyShutdownSUsNumber];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          globalVariableDBPV SET mgmTfA_gvdb_taxiTotalNumberOfAbnormallyShutdownSUsNumber is: (%1)", mgmTfA_gvdb_taxiTotalNumberOfAbnormallyShutdownSUsNumber];};
 										
 	//PUIDs and Playernames Array Database:		a single dimensional array containing PUID, followed by playername. Example: 	[["76561198124251001","mgm"],["76999999999999999","John"]]
 	//									Each requestor, simply read this and then pushBack their own array of ["PUID","playername"].
 	mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray  = [];
 	publicVariable "mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          EMPTY DATABASE CREATED: (mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray) has been created without any content."];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          EMPTY DATABASE CREATED: (mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray) has been created without any content."];};
 	
 	// TotalOmniscience Group PUIDs Database:	a single dimensional array containing PUIDs. See masterConfig for details.
 	// (contents come from masterConfig - we just publicVariable broadcast it so that clients can access to it & compare their PUID values after Drop Off point)
 	publicVariable "mgmTfA_configgv_totalOmniscienceGroupTextStringArray";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          PublicVariable BROADCASTED:  mgmTfA_configgv_totalOmniscienceGroupTextStringArray is: (%1)", (str mgmTfA_configgv_totalOmniscienceGroupTextStringArray)];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          PublicVariable BROADCASTED:  mgmTfA_configgv_totalOmniscienceGroupTextStringArray is: (%1)", (str mgmTfA_configgv_totalOmniscienceGroupTextStringArray)];};
 
 	// Vehicle type mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString. See masterConfig for details.
 	// (contents come from masterConfig - we just publicVariable broadcast it so that clients can tell whether they are in a Fixed Destination Taxi or not and in turn display the doors locked message only if player is in one of these vehicles)
 	publicVariable "mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          PublicVariable BROADCASTED:  mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString is: (%1)", mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          PublicVariable BROADCASTED:  mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString is: (%1)", mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString];};
 	// Vehicle type mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString. See masterConfig for details.
 	// (contents come from masterConfig - we just publicVariable broadcast it so that clients can tell whether they are in a Fixed Destination Taxi or not and in turn display the doors locked message only if player is in one of these vehicles)
 	publicVariable "mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          PublicVariable BROADCASTED:  mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString is: (%1)", mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          PublicVariable BROADCASTED:  mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString is: (%1)", mgmTfA_configgv_clickNGoTaxisTaxiVehicleClassnameTextString];};
 
 	// Expiry Timeout for map-markers
 	// (value come from masterConfig - we just publicVariable broadcast it so that clients can tell how long to countdown before deleting local markers)
 	publicVariable "mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          PublicVariable BROADCASTED:	 mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber is: (%1).", (str mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber)];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          PublicVariable BROADCASTED:	 mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber is: (%1).", (str mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber)];};
 
 	// (value come from masterConfig - we only broadcast it -- see masterConfig for details)
 	publicVariable "mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          PublicVariable BROADCASTED:	mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber is: (%1).", (str mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber)];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          PublicVariable BROADCASTED:	mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber is: (%1).", (str mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber)];};
 
 	// prepare the initial STATUS REPORT one-line message
 	mgmTfA_dynamicgv_statusReportMessageTextString = 	"[mgmTfA] [STATUS REPORT]          Please wait - initialization sequence in progress...";
 	publicVariable "mgmTfA_dynamicgv_statusReportMessageTextString";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          PublicVariable BROADCASTED:	mgmTfA_dynamicgv_statusReportMessageTextString is: (%1).", mgmTfA_dynamicgv_statusReportMessageTextString];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          PublicVariable BROADCASTED:	mgmTfA_dynamicgv_statusReportMessageTextString is: (%1).", mgmTfA_dynamicgv_statusReportMessageTextString];};
 
 	// (value come from masterConfig - we only broadcast it -- see masterConfig for details)
 	publicVariable "mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          PublicVariable BROADCASTED:	mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool is: (%1).", mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          PublicVariable BROADCASTED:	mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool is: (%1).", mgmTfA_configgv_makeAllMarkersPublicIWantZeroPrivacyAndSecurityBool];};
 
 	//The Last Served Playername -- just to report in STATUS REPORT
 	mgmTfA_dynamicgv_fixedDestinationTaxisTheLastServedPlayerNameTextString= "NOONE";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_fixedDestinationTaxisTheLastServedPlayerNameTextString is: (%1)", mgmTfA_dynamicgv_fixedDestinationTaxisTheLastServedPlayerNameTextString];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_fixedDestinationTaxisTheLastServedPlayerNameTextString is: (%1)", mgmTfA_dynamicgv_fixedDestinationTaxisTheLastServedPlayerNameTextString];};
 
 	//The Last Served Playername -- just to report in STATUS REPORT
 	mgmTfA_dynamicgv_clickNGoTaxisTheLastServedPlayerNameTextString= "NOONE";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_clickNGoTaxisTheLastServedPlayerNameTextString is: (%1)", mgmTfA_dynamicgv_clickNGoTaxisTheLastServedPlayerNameTextString];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_clickNGoTaxisTheLastServedPlayerNameTextString is: (%1)", mgmTfA_dynamicgv_clickNGoTaxisTheLastServedPlayerNameTextString];};
 	//If we successfully fulfil a request, the value below will get incremented. It is used when reporting to RPT LOG & also on, in-game map embedded Status Report.
 	mgmTfA_dynamicgv_taxiCorpTaxiModuleTotalRequestsSuccessfulNumber=0;
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_taxiCorpTaxiModuleTotalRequestsSuccessfulNumber is: (%1)", mgmTfA_dynamicgv_taxiCorpTaxiModuleTotalRequestsSuccessfulNumber];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_taxiCorpTaxiModuleTotalRequestsSuccessfulNumber is: (%1)", mgmTfA_dynamicgv_taxiCorpTaxiModuleTotalRequestsSuccessfulNumber];};
 
 
 	/// clickNGo specific stuff Here
 	//If we cannot fulfil a clickNGo Taxi request due to lack of driver, the value below will get incremented. It is used when reporting to RPT LOG & also on, in-game map embedded Status Report.
 	mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTotalRequestsDroppedNumber = 0;
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV COUNTER SET mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTotalRequestsDroppedNumber is: (%1)", mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTotalRequestsDroppedNumber];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV COUNTER SET mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTotalRequestsDroppedNumber is: (%1)", mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTotalRequestsDroppedNumber];};
 	
 	//The Last Served Playername -- just to report in STATUS REPORT
 	mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTheLastServedPlayerNameTextString = "NOONE";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTheLastServedPlayerNameTextString is: (%1)", mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTheLastServedPlayerNameTextString];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTheLastServedPlayerNameTextString is: (%1)", mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTheLastServedPlayerNameTextString];};
 	/// clickNGo specific stuff Here
 
 	
@@ -185,15 +185,15 @@ if (isServer) then {
 	// broadcast whether Public Bus System is enabled on this server
 	mgmTfA_PV_serviceModePublicBusSystemEnabled  = mgmTfA_configgv_serviceModePublicBusSystemEnabled;
 	publicVariable "mgmTfA_PV_serviceModePublicBusSystemEnabled";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          Public Bus SERVICE MODE Setting broadcasted.		mgmTfA_PV_serviceModePublicBusSystemEnabled is: (%1)", (str mgmTfA_PV_serviceModePublicBusSystemEnabled)];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          Public Bus SERVICE MODE Setting broadcasted.		mgmTfA_PV_serviceModePublicBusSystemEnabled is: (%1)", (str mgmTfA_PV_serviceModePublicBusSystemEnabled)];};
 	// broadcast other settings only if Public Bus System is enabled on this server
 	if (mgmTfA_configgv_serviceModePublicBusSystemEnabled) then {
 		mgmTfA_PV_publicBusSystemAnnouncementIDNumber  = mgmTfA_dynamicgv_publicBusSystemAnnouncementIDNumber;
 		publicVariable "mgmTfA_PV_publicBusSystemAnnouncementIDNumber";
-		if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          Public Bus ROUTE ANNOUNCEMENT ID  broadcasted.			mgmTfA_PV_publicBusSystemAnnouncementIDNumber is: (%1)", (str mgmTfA_PV_publicBusSystemAnnouncementIDNumber)];};
+		if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          Public Bus ROUTE ANNOUNCEMENT ID  broadcasted.			mgmTfA_PV_publicBusSystemAnnouncementIDNumber is: (%1)", (str mgmTfA_PV_publicBusSystemAnnouncementIDNumber)];};
 		mgmTfA_PV_routeAllRoutesSettingsTextStringArray  = mgmTfA_dynamicgv_routeAllRoutesSettingsTextStringArray;
 		publicVariable "mgmTfA_PV_routeAllRoutesSettingsTextStringArray";
-		if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          Public Bus ROUTE SETTINGS broadcasted.			mgmTfA_PV_routeAllRoutesSettingsTextStringArray is: (%1)", (str mgmTfA_PV_routeAllRoutesSettingsTextStringArray)];};
+		if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          Public Bus ROUTE SETTINGS broadcasted.			mgmTfA_PV_routeAllRoutesSettingsTextStringArray is: (%1)", (str mgmTfA_PV_routeAllRoutesSettingsTextStringArray)];};
 	};
 	/// Route specific stuff Here
 	/// begin:		INITIAL VALUES  FOR GLOBAL VARIABLES
@@ -282,11 +282,11 @@ if (isServer) then {
 	/// end:		INITIAL VALUES  FOR GLOBAL VARIABLES
 
 	/// SEND SIGNAL: SERVER-SIDE INITIALIZATION COMPLETE /// 
-	diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]          VERSION INFO: Transport for Arma %1     [VerRevSumNum: (%2)]", mgmTfA_configgv_TfAScriptVersionTextString, mgmTfA_configgv_TfAScriptVersionRevisionSumValueNumber];
+	diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          VERSION INFO: Transport for Arma %1     [VerRevSumNum: (%2)]", mgmTfA_configgv_TfAScriptVersionTextString, mgmTfA_configgv_TfAScriptVersionRevisionSumValueNumber];
 	// We have completed the initialization...
 	mgmTfA_Server_Init=1;
 	publicVariable "mgmTfA_Server_Init";
-	if (mgmTfA_configgv_serverVerbosityLevel>=2) then {diag_log format ["[mgmTfA] [mgmTfA_scr_server_initServer.sqf]  [TV2]          Reached checkpoint: Finished processing script. Exiting now."];};
+	if (mgmTfA_configgv_serverVerbosityLevel>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]  [TV2]          Reached checkpoint: Finished processing script. Exiting now."];};
 };
-if (mgmTfA_configgv_serverVerbosityLevel>=2) then {diag_log format ["[mgmTfA][mgmTfA_scr_server_initServer.sqf] END reading file."];};
+if (mgmTfA_configgv_serverVerbosityLevel>=2) then {diag_log format ["[mgmTfA][mgmTfA_s_CO_scr_initServer.sqf] END reading file."];};
 // EOF

@@ -1,12 +1,12 @@
 //H
 // ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf
 //H $PURPOSE$	:	undocumented
 // ~~
 //H
 //HH
 //HH	~~
-//HH	Syntax		:	_null = [] mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions;
+//HH	Syntax		:	_null = [] mgmTfA_c_TA_fncTaxiDisplayInstructions;
 //HH	Parameters	:	none
 //HH	Return Value	:	none.		if conditions are met, this script will display on screen instructions.
 //HH	~~
@@ -37,8 +37,8 @@ _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
 //	thus a global variable (mgmTfA_dynamicgv_clickNGoTaxiLastTimePlayerGotInInOneOfOurVehicles) keeps track of last getIn to clickNGoTaxi and if 
 //	mgmTfA_dynamicgv_clickNGoTaxiReDisplayInstructionsOnGetInTimeThresholdInSecondsNumber seconds have not passed since last getIn, the message will not be displayed
 if (!((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) exitWith {
-	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		result of (str (((vehicle player) getVariable [''mgmTfAisclickNGoTaxi'', false]))) is: (%1).	note that the actual check reverses this with a ! sign", (str (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])))];};//dbg
-	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Just determined player currently IS NOT in a clickNGoTaxi!"];};//dbg
+	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		result of (str (((vehicle player) getVariable [''mgmTfAisclickNGoTaxi'', false]))) is: (%1).	note that the actual check reverses this with a ! sign", (str (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])))];};//dbg
+	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Just determined player currently IS NOT in a clickNGoTaxi!"];};//dbg
 };
 // if we hit this line, player must be in a clickNGo Taxi
 private	[
@@ -65,19 +65,19 @@ if (mgmTfA_dynamicgv_clickNGoTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInS
 		_reminderShouldBeDisplayedNow = true;
 		// update the global variable so that it can be evaluated in any future iterations
 		mgmTfA_dynamicgv_clickNGoTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber = (time);
-		if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Just determined more than threshold seconds HAVE passed. we SHOULD display Instructions. Time Elapsed since last display is calculated as: (%1).", (str _timeElapsedInSecondsNumber)];};//dbg
+		if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Just determined more than threshold seconds HAVE passed. we SHOULD display Instructions. Time Elapsed since last display is calculated as: (%1).", (str _timeElapsedInSecondsNumber)];};//dbg
 	} else {
 		// more than threshold seconds have NOT passed. we should not display a hint  reminder at this time
 		_reminderShouldBeDisplayedNow = false;
-		if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Just determined more than threshold seconds HAVEN'T passed. we should NOT display Instructions. Time Elapsed since last display is calculated as: (%1).", (str _timeElapsedInSecondsNumber)];};//dbg
+		if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Just determined more than threshold seconds HAVEN'T passed. we should NOT display Instructions. Time Elapsed since last display is calculated as: (%1).", (str _timeElapsedInSecondsNumber)];};//dbg
 	};
 };
 // if there's nothing to do, exitWith
 if ((!_thisIsTheFirstDisplay) && (!_reminderShouldBeDisplayedNow)) exitWith {
-	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Terminating now as we have =>		(!_thisIsTheFirstDisplay) && (!_reminderShouldBeDisplayedNow)."];};//dbg
+	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Terminating now as we have =>		(!_thisIsTheFirstDisplay) && (!_reminderShouldBeDisplayedNow)."];};//dbg
 };
 // if we hit this line, there must be something that we will need to do.
-if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Current situation:	(str _thisIsTheFirstDisplay) is: (%1).		(str _reminderShouldBeDisplayedNow) is: (%2).", (str _thisIsTheFirstDisplay), (str _reminderShouldBeDisplayedNow)];};//dbg
+if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Current situation:	(str _thisIsTheFirstDisplay) is: (%1).		(str _reminderShouldBeDisplayedNow) is: (%2).", (str _thisIsTheFirstDisplay), (str _reminderShouldBeDisplayedNow)];};//dbg
 
 // Prepare systemChat messages
 private	[
@@ -105,7 +105,7 @@ DisplayAsPopup = {
 	systemChat (str _systemChatMessageTextLine4);
 
 	// Display the popup hintC message
-	[] execVM "custom\mgmTfA\mgmTfA_scr_client_displayAsPopup.sqf"							;
+	[] execVM "custom\mgmTfA\mgmTfA_c_TA_scr_displayInstructionsAsPopup.sqf"							;
 };
 // ~~
 
@@ -159,5 +159,5 @@ if (_functionToExecuteNow == 1) then { _null = [] call DisplayAsPopup;	};
 if (_functionToExecuteNow == 2) then { _null = [] call DisplayAsHint;	};
 
 // log & exit
-if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_clickNGoTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Executing the last line and exiting now. (str _functionToExecuteNow) is: (%1).", (str _functionToExecuteNow)];};//dbg
+if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Executing the last line and exiting now. (str _functionToExecuteNow) is: (%1).", (str _functionToExecuteNow)];};//dbg
 // EOF

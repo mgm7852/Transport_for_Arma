@@ -1,12 +1,12 @@
 //H
 //H ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_server_PublicVariableBroadcastSUInformationInitialBroadcast.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationInitialBroadcast.sqf
 //H $PURPOSE$	:	This function process a Service Unit's information and then Broadcast it to all clients
 //H ~~
 //H
 //HH
 //HH ~~
-//HH	Example usage	:	_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_fnc_server_PublicVariableBroadcastSUInformationInitialBroadcast;
+//HH	Example usage	:	_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationInitialBroadcast;
 //HH	Parameters	:	see below, (_this select n) entries.
 //HH	Return Value	:	none
 //HH ~~
@@ -84,7 +84,7 @@ _SUAIVehicleSpeedOfVehicleInKMHNumber = (_this select 25);
 _SUDistanceToActiveWaypointInMetersNumber = (_this select 26);
 
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_PublicVariableBroadcastSUInformationInitialBroadcast.sqf]  [TV3] <ThisIs:%1> I have been CALL'd.	This is what I have received:	(%2).		(str mgmTfA_gvdb_PV_GUSUIDNumber) is: (%3)", (str _myGUSUIDNumber), (str _this), (str mgmTfA_gvdb_PV_GUSUIDNumber)];};//dbg
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationInitialBroadcast.sqf]  [TV3] <ThisIs:%1> I have been CALL'd.	This is what I have received:	(%2).		(str mgmTfA_gvdb_PV_GUSUIDNumber) is: (%3)", (str _myGUSUIDNumber), (str _this), (str mgmTfA_gvdb_PV_GUSUIDNumber)];};//dbg
 
 //// Step 2:		SET values
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUActiveWaypointPositionPosition3DArray", _myGUSUIDNumber], _SUActiveWaypointPositionPosition3DArray];
@@ -168,11 +168,11 @@ publicVariable format ["mgmTfA_gv_PV_SU%1SUTerminationPointPositionHasBeenDeterm
 publicVariable format ["mgmTfA_gv_PV_SU%1SUTerminationPointPosition3DArray", _myGUSUIDNumber];
 //	TODO:	[] call PublicVariableBroadcastTerminationMarkerStatus;
 
-// During First Run only, we should pV broadcast the ACL		Note:	This was 'set' previously, in file: "mgmTfA_fnc_server_fixedDestinationTaxi_ServicePhase02a_SendResponse_BookingRequestAccepted.sqf"
+// During First Run only, we should pV broadcast the ACL		Note:	This was 'set' previously, in file: "mgmTfA_s_FD_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf"
 //														Here, we are only broadcasting the value.
 publicVariable					format ["mgmTfA_gv_PV_SU%1SUACLTextStringArray", _myGUSUIDNumber];
 
-// Let all clients know that there is a new SU in action so that they can start doing "mgmTfA_fnc_client_doLocalMarkerWork"
+// Let all clients know that there is a new SU in action so that they can start doing "mgmTfA_c_CO_fnc_doLocalMarkerWork"
 publicVariable					"mgmTfA_gvdb_PV_GUSUIDNumber";
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_PublicVariableBroadcastSUInformationInitialBroadcast.sqf]  [TV3] <ThisIs:%1> I have just publicVariable'd mgmTfA_gvdb_PV_GUSUIDNumber. It contains: (%2).", (str _myGUSUIDNumber), (str mgmTfA_gvdb_PV_GUSUIDNumber)];};//dbg
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationInitialBroadcast.sqf]  [TV3] <ThisIs:%1> I have just publicVariable'd mgmTfA_gvdb_PV_GUSUIDNumber. It contains: (%2).", (str _myGUSUIDNumber), (str mgmTfA_gvdb_PV_GUSUIDNumber)];};//dbg
 // EOF

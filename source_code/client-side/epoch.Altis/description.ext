@@ -2,6 +2,6 @@
 #include "epoch_config\sandbox_config.hpp"
 
 // BEGIN:	mgmTfA Required description.ext additions
-#include "mgmtfa_defines.hpp"
-#include "mgmtfa_dialogs.hpp"
+#include "mgmTfA_c_CO_defines.hpp"
+#include "mgmTfA_c_CO_dialogs.hpp"
 // END:	mgmTfA Required description.ext additions

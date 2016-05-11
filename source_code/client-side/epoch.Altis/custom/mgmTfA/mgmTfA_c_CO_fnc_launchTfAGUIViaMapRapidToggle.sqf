@@ -1,14 +1,14 @@
 //H
 // ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle.sqf
 //H $PURPOSE$	:	This client side script monitors the 'opening' of in-game map; if it is opened rapidly more than a threshold value in a given amount of time, it will bring up the mgmTfA GUI
 // ~~
 //H
 private ["_thisFileVerbosityLevelNumber"];
 _thisFileVerbosityLevelNumber = 0;
-scopeName "mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpenMainScope";
+scopeName "mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggleMainScope";
 if (isServer) exitWith {};
-if (!mgmTfA_configgv_GUIOpenMapCommandMonitoringEnabledBool) exitWith {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen.sqf] mgmTfA_configgv_GUIOpenMapCommandMonitoringEnabledBool is not true! Quitting!"];};
+if (!mgmTfA_configgv_GUIOpenMapCommandMonitoringEnabledBool) exitWith {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle.sqf] mgmTfA_configgv_GUIOpenMapCommandMonitoringEnabledBool is not true! Quitting!"];};
 if (!isServer) then {
 	if (isNil("mgmTfA_Client_Init")) then {
 		mgmTfA_Client_Init=0;
@@ -16,7 +16,7 @@ if (!isServer) then {
 	waitUntil {mgmTfA_Client_Init==1};
 };
 
-if (mgmTfA_dynamicgv_clickNGoRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool) exitWith {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen.sqf] ATTEMPTED executing another instance of mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen however mgmTfA_dynamicgv_clickNGoRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool is true! Quitting!"];};
+if (mgmTfA_dynamicgv_clickNGoRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool) exitWith {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle.sqf] ATTEMPTED executing another instance of mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle however mgmTfA_dynamicgv_clickNGoRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool is true! Quitting!"];};
 mgmTfA_dynamicgv_clickNGoRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool = true;
 
 private	[
@@ -49,7 +49,7 @@ while {alive player} do {
 	_arraySizeCountNumber = (count (mgmTfA_dynamicgv_mapOpenedAtTimestampsInSecondTextStringArray));
 	if (_arraySizeCountNumber >= _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber) then {
 		// YES, the map has been opened at least n times since last spawn, meaning  there is a chance that the map has been opened 3 times in the last 8 seconds // let's dig deeper but first log what we got
-		//if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen.sqf] [TV4] Uptime is now (%1) seconds.		It's a YES (_arraySizeCountNumber IS >=_xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber (%2)).		Since last player spawn, this function has iterated this many times:	_iterationID=(%3).		I have detected that the map has been opened _arraySizeCountNumber=(%4) times since since client init.", (str _curTimeSecondsNumber), (str _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber), (str _iterationID), (str _arraySizeCountNumber)];};//dbg
+		//if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle.sqf] [TV4] Uptime is now (%1) seconds.		It's a YES (_arraySizeCountNumber IS >=_xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber (%2)).		Since last player spawn, this function has iterated this many times:	_iterationID=(%3).		I have detected that the map has been opened _arraySizeCountNumber=(%4) times since since client init.", (str _curTimeSecondsNumber), (str _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber), (str _iterationID), (str _arraySizeCountNumber)];};//dbg
 		// is the 3rd most recent mapOpen timestamp dated 8 seconds ago or sooner?
 		// get the 3rd timestamp
 		_thirdMostRecentTimestampsIndexPositionFromLeftNumber = (_arraySizeCountNumber - _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber);
@@ -59,13 +59,13 @@ while {alive player} do {
 			mgmTfA_dynamicgv_mapOpenedAtTimestampsInSecondTextStringArray = _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalTurnThePage;
 			// launch function.	note that, clickNGoRequestTaxi function has the following code which will make it wait for the main display:		if (!isServer) then {waitUntil {!isnull (finddisplay 46) blah blah 
 			_null = CreateDialog "MGMTFA_DIALOG"
-			//_null = [] spawn mgmTfA_fnc_client_clickNGoRequestTaxi;
+			//_null = [] spawn mgmTfA_c_TA_fncRequestTaxi;
 		} else {
 			// NO, the map has NOT been opened more than 3 times in the last 8 seconds. nothing to be done at this time
 		};
 	} else {
 		// NO, since last spawn, map has not even been opened 3 times yet, there's no way player requested a clickNGo Taxi.	// do nothing.
-		//if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_launchTfAGUIViaRapidMapOpen.sqf]  [TV4] Uptime is now (%1) seconds.		It's a NO (_arraySizeCountNumber is NOT >= _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber (%2)).		Since last player spawn, this function has iterated this many times:	_iterationID=(%3).		I have detected that the map has been opened _arraySizeCountNumber=(%4) times since since client init.", (str _curTimeSecondsNumber), (str _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber), (str _iterationID), (str _arraySizeCountNumber)];};//dbg
+		//if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle.sqf]  [TV4] Uptime is now (%1) seconds.		It's a NO (_arraySizeCountNumber is NOT >= _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber (%2)).		Since last player spawn, this function has iterated this many times:	_iterationID=(%3).		I have detected that the map has been opened _arraySizeCountNumber=(%4) times since since client init.", (str _curTimeSecondsNumber), (str _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber), (str _iterationID), (str _arraySizeCountNumber)];};//dbg
 	};
 	// we're done here. let's wait for the map to be closed.
 	// proceed when map is no longer visible
