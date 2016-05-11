@@ -1,7 +1,7 @@
 //H
 //H ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_s_CO_scr_initServer.sqf
-//H $PURPOSE$	:	This is the server side initialization script.
+//H $PURPOSE$	:	This is the server-side initialization script.
 //H ~~
 //H
 #include "\x\addons\custom\serverside\mgmTfA\___CONFIGURATION___.hpp"

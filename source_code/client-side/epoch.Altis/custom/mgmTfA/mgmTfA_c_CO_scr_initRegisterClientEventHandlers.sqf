@@ -1,7 +1,7 @@
 //H
 //HH ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf
-//H $PURPOSE$	:	This server side script registers Event Handlers on server startup.
+//H $PURPOSE$	:	This server-side script registers Event Handlers on server startup.
 //HH ~~
 //H
 "mgmTfA_gv_pvc_pos_processingYourFixedDestinationTaxiRequestPleaseWaitPacketSignalOnly" addPublicVariableEventHandler {
