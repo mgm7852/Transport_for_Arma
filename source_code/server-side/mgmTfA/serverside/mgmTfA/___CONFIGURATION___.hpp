@@ -27,7 +27,7 @@
 				//-----
 
 //-----
-// --master debug level server&client side logging verbosity--			-- should be 0 for production systems and greater for debugging.
+// --master debug level server&client-side logging verbosity--			-- should be 0 for production systems and greater for debugging.
 // WARNING: MASSIVE LOG OUTPUT! If you leave this on, on your production system it WILL impact performance
 mgmTfA_configgv_serverAndClientDebugVerbosityLevel = 10;
 

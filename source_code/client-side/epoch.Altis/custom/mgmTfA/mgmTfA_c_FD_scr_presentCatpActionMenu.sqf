@@ -1,7 +1,7 @@
 //H
 //H ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_FD_scr_presentCatpActionMenu.sqf
-//H $PURPOSE$	:	This client side script presents the menu options.
+//H $PURPOSE$	:	This client-side script presents the menu options.
 //H ~~
 //HH
 //HH	The server-side master configuration file contain the following variables [which should be publicVariable published by server-side init]:

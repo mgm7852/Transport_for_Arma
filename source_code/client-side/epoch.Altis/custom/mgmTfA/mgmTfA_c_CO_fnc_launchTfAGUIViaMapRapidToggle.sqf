@@ -1,7 +1,7 @@
 //H
 // ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle.sqf
-//H $PURPOSE$	:	This client side script monitors the 'opening' of in-game map; if it is opened rapidly more than a threshold value in a given amount of time, it will bring up the mgmTfA GUI
+//H $PURPOSE$	:	This client-side script monitors the 'opening' of in-game map; if it is opened rapidly more than a threshold value in a given amount of time, it will bring up the mgmTfA GUI
 // ~~
 //H
 private ["_thisFileVerbosityLevelNumber"];

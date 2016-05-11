@@ -1,7 +1,7 @@
 //H
 // ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_TA_scr_setDestination.sqf
-//H $PURPOSE$	:	This client side script contains the code to set the destination of a clickNGo taxi.
+//H $PURPOSE$	:	This client-side script contains the code to set the destination of a clickNGo taxi.
 // ~~
 //H
 private ["_thisFileVerbosityLevelNumber"];

@@ -180,7 +180,7 @@ if (isServer) then {
 	// during the next regular check, on each client computer, mgmTfA_fnc_client_routeJanitor function will detect the service status change, and action depending on configuration values:
 	// e.g.: possibly mark the line with RED color and at the service status box on the very top left corner of the map put service status text as THIS ROUTE IS CURRENTLY DISABLED.
 	//
-	// TODO: a client side function will take care of periodic refreshing of all routes on the map -> mgmTfA_fnc_client_routeJanitor.sqf
+	// TODO: a client-side function will take care of periodic refreshing of all routes on the map -> mgmTfA_fnc_client_routeJanitor.sqf
 	//
 	// broadcast whether Public Bus System is enabled on this server
 	mgmTfA_PV_serviceModePublicBusSystemEnabled  = mgmTfA_configgv_serviceModePublicBusSystemEnabled;

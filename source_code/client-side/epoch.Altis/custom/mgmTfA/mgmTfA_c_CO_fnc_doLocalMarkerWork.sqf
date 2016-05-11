@@ -120,7 +120,7 @@ _SUCurrentTaskAgeInSecondsNumber = call compile format ["mgmTfA_gv_PV_SU%1SUCurr
 _SUDistanceToActiveWaypointInMetersNumber = call compile format ["mgmTfA_gv_PV_SU%1SUDistanceToActiveWaypointInMetersNumber", _myGUSUIDNumber];
 _SUAIVehicleSpeedOfVehicleInKMHNumber = call compile format ["mgmTfA_gv_PV_SU%1SUAIVehicleSpeedOfVehicleInKMHNumber", _myGUSUIDNumber];
 _SUAIVehicleVehicleDirectionInDegreesNumber = call compile format ["mgmTfA_gv_PV_SU%1SUAIVehicleVehicleDirectionInDegreesNumber", _myGUSUIDNumber];
-// this below, another dirty hack - to be cleaned up one day: ensure server-client sides both use same name
+// this below, another dirty hack - to be cleaned up one day: ensure server-client-sides both use same name
 _SUAIVehicleObjectAgeInSecondsNumber = call compile format ["mgmTfA_gv_PV_SU%1SUAIVehicleObjectAgeInSecondsNumber", _myGUSUIDNumber];
 _SUActiveWaypointPositionPosition3DArray = call compile format ["mgmTfA_gv_PV_SU%1SUActiveWaypointPositionPosition3DArray", _myGUSUIDNumber];
 _SUCurrentActionInProgressTextString = call compile format ["mgmTfA_gv_PV_SU%1SUCurrentActionInProgressTextString", _myGUSUIDNumber];

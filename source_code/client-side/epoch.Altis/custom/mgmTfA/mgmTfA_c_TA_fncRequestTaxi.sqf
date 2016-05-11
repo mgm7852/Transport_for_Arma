@@ -1,7 +1,7 @@
 //H
 //H ~~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_TA_fncRequestTaxi.sqf
-//H $PURPOSE$	:	This client side script contains 'request clickNGo taxi' code.
+//H $PURPOSE$	:	This client-side script contains 'request clickNGo taxi' code.
 //H ~~~
 //H
 if (isServer) exitWith {}; if (isNil("mgmTfA_Client_Init")) then {mgmTfA_Client_Init=0;}; waitUntil {mgmTfA_Client_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
