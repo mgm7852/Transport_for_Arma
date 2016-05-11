@@ -202,15 +202,15 @@ mgmTfA_configgv_catpObject="C_man_polo_1_F";
 // Settings for CATP01
 //
 // Create Callpoint?			(i.e.: create the Taxi Dispatcher Agent in 3D game world: true or false)
-// 		Referred by mgmTfA_s_CO_scr_initCreateObjectCatp01.sqf
-mgmTfA_configgv_createObjectCatp01Bool=true;
+// 		Referred by mgmTfA_s_CO_scr_initCreateObjectCATP01.sqf
+mgmTfA_configgv_createObjectCATP01Bool=true;
 // CATP01 Location
 // 		Referred by mgmTfA_scr_serverInitCreateObjectHQBuilding.sqf when creating the Taxi Dispatcher agent
 mgmTfA_configgv_catp01LocationPositionArray=[13287.2,14572.1,0];
 // CATP01	Agent Facing direction? 0=north, 90=east, 180=south, 270=west
 mgmTfA_configgv_catp01DirectionDegreesNumber=131;
 // CATP01	Create marker?
-mgmTfA_configgv_createCatp01LocationMapMarkerBool=true;
+mgmTfA_configgv_createCATP01LocationMapMarkerBool=true;
 // CATP01	Map Marker Type
 mgmTfA_configgv_catp01LocationMapMarkerTypeTextString="mil_dot";
 // CATP01	Map Marker Shape
@@ -223,10 +223,10 @@ mgmTfA_configgv_catp01LocationMapMarkerTextString="Central Taxis";
 
 //=====
 // Settings for CATP02
-mgmTfA_configgv_createObjectCatp02Bool=true;
+mgmTfA_configgv_createObjectCATP02Bool=true;
 mgmTfA_configgv_catp02LocationPositionArray=[6141.08,16787.6,0];
 mgmTfA_configgv_catp02DirectionDegreesNumber=0;
-mgmTfA_configgv_createCatp02LocationMapMarkerBool=true;
+mgmTfA_configgv_createCATP02LocationMapMarkerBool=true;
 mgmTfA_configgv_catp02LocationMapMarkerTypeTextString="mil_dot";
 mgmTfA_configgv_catp02LocationMapMarkerShapeTextString="ICON";
 mgmTfA_configgv_catp02LocationMapMarkerColorTextString="ColorOrange";
@@ -235,10 +235,10 @@ mgmTfA_configgv_catp02LocationMapMarkerTextString="West Taxis";
 
 //=====
 // Settings for CATP03
-mgmTfA_configgv_createObjectCatp03Bool=true;
+mgmTfA_configgv_createObjectCATP03Bool=true;
 mgmTfA_configgv_catp03LocationPositionArray=[18396.9,14253.7,0];
 mgmTfA_configgv_catp03DirectionDegreesNumber=0;
-mgmTfA_configgv_createCatp03LocationMapMarkerBool=true;
+mgmTfA_configgv_createCATP03LocationMapMarkerBool=true;
 mgmTfA_configgv_catp03LocationMapMarkerTypeTextString="mil_dot";
 mgmTfA_configgv_catp03LocationMapMarkerShapeTextString="ICON";
 mgmTfA_configgv_catp03LocationMapMarkerColorTextString="ColorOrange";
@@ -568,7 +568,7 @@ mgmTfA_configgv_taxiAnywhereTaxisDriverWillKeepRemindingThatTheInitialFeeMustBeP
 						//Fixed Destination Settings
 						//List of available destinations for the Taxi service
 						//
-						//Note: Each destination must also be added to "mgmTfA_scr_clientPresentCatpActionMenu.sqf" to present the actionMenu option - otherwise players can't choose a valid but not-presented destination!
+						//Note: Each destination must also be added to "mgmTfA_scr_clientPresentCATPActionMenu.sqf" to present the actionMenu option - otherwise players can't choose a valid but not-presented destination!
 						//Note: Use only upper case for Text Strings (in accordance with current Transport for Arma user interface standard - all client communications must be in UPPERCASE)
 
 									// CHEAT SHEET

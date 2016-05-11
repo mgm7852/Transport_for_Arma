@@ -20,7 +20,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	// Number - ID of the client where the request originates		this is the clientComputerID
 	_fixedDestinationRequestorClientIDNumber = (owner	(_this select 1 select 0));
 	_fixedDestinationRequestorPosition3DArray = (_this select 1 select 1);
-	// Shared configuration file has a list of "Available Taxi Destinations" && this list is presented to the player in mgmTfA_scr_clientPresentCatpActionMenu.sqf
+	// Shared configuration file has a list of "Available Taxi Destinations" && this list is presented to the player in mgmTfA_scr_clientPresentCATPActionMenu.sqf
 	_fixedDestinationRequestedTaxiFixedDestinationIDNumber = (_this select 1 select 2);
 	//Prepare the name of the  requested destination in Text
 	switch _fixedDestinationRequestedTaxiFixedDestinationIDNumber do {
