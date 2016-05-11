@@ -140,6 +140,58 @@ if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s
 // We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber
 _iWantToTravelThisManyMetresNumber = 0;
 
+// ADD FORCE EJECT CODE HERE
+///
+// CODE TO AUTO EJECT ALL PASSENGERS AT DROP OFF POINT!
+///
+					// WE ARE AT DROP OFF POIND, AUTO-EJECTING AND SHUTTING DOWN!!!
+					// TODO: ENHANCEMENT:	SPLIT THIS TO A SEPARATE FUNCTION FILE (it will be repeated multiple times, by different clickNGo modules!)
+					/// begin: shutdown code \\\
+					private	[
+							"_SUVehicleSpeedOfVehicleInKMHNumber",
+							"_vel",
+							"_dir",
+							"_speedStep"									
+							];
+					//Use the horn to signal upcoming forced eject action
+					driver _SUTaxiAIVehicleObject forceWeaponFire [currentWeapon _SUTaxiAIVehicleObject, currentWeapon _SUTaxiAIVehicleObject];
+					// First, let's bring the vehicle to a full stop, in 5 kmh steps, a new step every 0.25 seconds, until its speed is 0
+					_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
+					while {_SUVehicleSpeedOfVehicleInKMHNumber > 0} do {
+						uiSleep 0.05;
+						// Slow down by 5 kmh
+						_vel = (velocity	_SUTaxiAIVehicleObject);
+						_dir = (direction	_SUTaxiAIVehicleObject);
+						_speedStep			= -5;
+						_SUTaxiAIVehicleObject	setVelocity	[
+															(_vel select 0) + (sin _dir * _speedStep),
+															(_vel select 1) + (cos _dir * _speedStep),
+															(_vel select 2)
+															];
+					_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
+					};
+					if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] TERMINATION SEQUENCE IN PROGRESS: Reached drop off point.	Slowing down, bringing the vehicle to a full-stop before ejecting all passengers."];};
+					uiSleep 0.05;
+					// prep for forced eject -- once we eject them, we will want the passengers to stay out!
+					_SUTaxiAIVehicleObject lockCargo true;
+					_doorsLockedBool = true;
+					uiSleep 0.05;
+					// Now we can Eject All Passengers (keep the driver in!) and Delete the Vehicle	//Traverse all crew with forEach
+					{
+						//If the crewMember is NOT our dear _SUAICharacterDriverObject, then eject them!
+						if (_x != _SUAICharacterDriverObject) then {
+						_x action ["Eject", _SUTaxiAIVehicleObject];
+						};
+					} forEach crew _SUTaxiAIVehicleObject;
+					if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] TERMINATION SEQUENCE at drop off point reached && eject all passengers completed."];};
+					uiSleep 0.05;
+					/// end: shutdown code \\\
+					_emergencyEscapeNeeded				= true;
+					// Signal map-trackers that Drop Off has occurred
+					_SUDropOffHasOccurredBool = true;
+					missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUDropOffHasOccurredBool", _myGUSUIDNumber], _SUDropOffHasOccurredBool];
+					publicVariable format ["mgmTfA_gv_PV_SU%1SUDropOffHasOccurredBool", _myGUSUIDNumber];
+
 //Initial evaluation
 if (_requestorPlayerObject in _SUTaxiAIVehicleObject) then {
 	//He's in!
