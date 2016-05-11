@@ -1,12 +1,12 @@
 //H
 //H ~~
-//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_fnc_client_returnTrueIfThereIsACatpNearby.sqf
+//H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_FD_fnc_returnTrueIfThereIsACATPNearby.sqf
 //H $PURPOSE$	:	This function will return "true" if player is near a Catp object.
 //H ~~
 //H
 //HH
 //H ~~
-//HH	Syntax		:	Bool = mgmTfA_fnc_client_returnTrueIfThereIsACatpNearby
+//HH	Syntax		:	Bool = mgmTfA_c_FD_fnc_returnTrueIfThereIsACATPNearby
 //HH	Parameters	:	none
 //HH	Return Value	:	Bool
 //HH	Example usage	:
@@ -23,7 +23,7 @@ private	[
 		"_numberOfCatpObjectsNearMe"
 		];
 
-scopeName "mgmTfA_fnc_client_returnTrueIfThereIsACatpNearbyMainScope";
+scopeName "mgmTfA_c_FD_fnc_returnTrueIfThereIsACATPNearbyMainScope";
 
 // No Catp nearby unless otherwise proven
 _returnValue = false;
@@ -39,12 +39,12 @@ if (_numberOfCatpObjectsNearMe>0) then {
 		if (_x	getVariable ["mgmTfA_Dispatcher",false]) then {
 			// we found a mgmTfA_Dispatcher here
 			_returnValue=true;
-			breakTo "mgmTfA_fnc_client_returnTrueIfThereIsACatpNearbyMainScope";
+			breakTo "mgmTfA_c_FD_fnc_returnTrueIfThereIsACATPNearbyMainScope";
 		};
 	} forEach _CatpObjectsNearMeArray;
 } else {
 	_returnValue=false;
 };
-if (_thisFileVerbosityLevelNumber>=10) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_client_returnTrueIfThereIsACatpNearby.sqf] [TV10] END reading file. The next line will return _returnValue and quit function. _returnValue is: (%1)", str _returnValue];};//dbg
+if (_thisFileVerbosityLevelNumber>=10) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_fnc_returnTrueIfThereIsACATPNearby.sqf] [TV10] END reading file. The next line will return _returnValue and quit function. _returnValue is: (%1)", str _returnValue];};//dbg
 _returnValue;
 // EOF

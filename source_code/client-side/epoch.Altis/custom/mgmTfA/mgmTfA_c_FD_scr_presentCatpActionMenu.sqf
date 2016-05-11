@@ -60,7 +60,7 @@ while {true} do {
 	waitUntil {sleep 1; ((vehicle player) == player) };
 
 	//Let's check if we have a Catp nearby
-	_nearbyCatpCheckResult = call mgmTfA_fnc_client_returnTrueIfThereIsACatpNearby;
+	_nearbyCatpCheckResult = call mgmTfA_c_FD_fnc_returnTrueIfThereIsACATPNearby;
 	if (_nearbyCatpCheckResult) then {
 		//
 		// Yay! we have a Catp nearby!

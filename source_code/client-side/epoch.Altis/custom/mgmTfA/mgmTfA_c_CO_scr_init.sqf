@@ -20,7 +20,7 @@ if (!isServer) then {
 
 	////////////////////////////////////////
 	/// COMPILE GLOBAL FUNCTIONS
-	mgmTfA_fnc_client_returnTrueIfThereIsACatpNearby = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_fnc_client_returnTrueIfThereIsACatpNearby.sqf";
+	mgmTfA_c_FD_fnc_returnTrueIfThereIsACATPNearby = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_FD_fnc_returnTrueIfThereIsACATPNearby.sqf";
 	mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi.sqf";
 	mgmTfA_c_CO_fnc_doLocalMarkerWork = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf";
 	mgmTfA_c_TA_scr_setDestination = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_TA_scr_setDestination.sqf";
