@@ -37,8 +37,8 @@ _taxiAnywhereRequestorProfileNameTextString = (_this select 3);
 if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase02b_SendResponse_BookingRequestRejected_RequestorIsInBlacklist.sqf]  [TV5] A REJECTED clickNGo taxi request was FORWARDED to me.			This is what I have received:		_taxiAnywhereRequestorClientIDNumber: (%1).		_taxiAnywhereRequestorPosition3DArray: (%2).		_taxiAnywhereRequestorPlayerUIDTextString: (%3) / resolved to _taxiAnywhereRequestorProfileNameTextString: (%4)", _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorPosition3DArray, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereRequestorProfileNameTextString];};
 
 // Client Communications - Send the initial "we are processing your request - please wait" message to the Requestor
-mgmTfA_gv_pvc_neg_yourclickNGoTaxiRequestHasBeenRejectedAsYouAreBlacklistedPacketSignalOnly = ".";
-_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_neg_yourclickNGoTaxiRequestHasBeenRejectedAsYouAreBlacklistedPacketSignalOnly";
+mgmTfA_gv_pvc_neg_yourTATaxiRequestHasBeenRejectedAsYouAreBlacklistedPacketSignalOnly = ".";
+_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_neg_yourTATaxiRequestHasBeenRejectedAsYouAreBlacklistedPacketSignalOnly";
 
 // Increment the global counter
 mgmTfA_gvdb_PV_taxiAnywhereTaxisTotalRequestsRejectedDueToBlacklistNumber = mgmTfA_gvdb_PV_taxiAnywhereTaxisTotalRequestsRejectedDueToBlacklistNumber + 1;

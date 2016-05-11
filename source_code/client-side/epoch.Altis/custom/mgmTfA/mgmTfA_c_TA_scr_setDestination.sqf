@@ -15,15 +15,15 @@ if (!isServer) then {
 	};
 	waitUntil {mgmTfA_Client_Init==1};
 };
-if (!(isNil "clickNGoTaxiDestinationChoser_systemReady")) exitWith {hint "SYSTEM CURRENTLY NOT AVAILABLE"};
+if (!(isNil "TATaxiDestinationChoser_systemReady")) exitWith {hint "SYSTEM CURRENTLY NOT AVAILABLE"};
 private	[
 		"_msg2HintTextString",
 		"_msg2SyschatTextString",
 		"_posOld"
 		];
-_posOld = getMarkerPos "clickNGoTaxiChosenPosition";
-diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_setDestination.sqf]      clickNGoTaxiChosenPosition INITIAL SPOT is: (%1)", (str _posOld)];
-deleteMarker "clickNGoTaxiChosenPosition";
+_posOld = getMarkerPos "TATaxiChosenPosition";
+diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_setDestination.sqf]      TATaxiChosenPosition INITIAL SPOT is: (%1)", (str _posOld)];
+deleteMarker "TATaxiChosenPosition";
 // Open the map
 openMap true;
 // Inform via hint (in Rich format)
@@ -34,17 +34,17 @@ _msg2SyschatTextString = parsetext format ["[SYSTEM]  AWAITING INPUT. SINGLE LEF
 systemChat (str _msg2SyschatTextString);
 // Insert the actual code to handle the mouse-left-click-on-map
 onMapSingleClick "
-	clickNGoTaxiChosenDestinationMarker			= createMarkerLocal		[""clickNGoTaxiChosenPosition"",_pos];
-	clickNGoTaxiChosenDestinationMarker			setMarkerTypeLocal		""hd_dot"";
-	clickNGoTaxiChosenDestinationMarker			setMarkerColorLocal		""ColorBlue"";
-	clickNGoTaxiChosenDestinationMarker			setMarkerTextLocal		""clickNGo Taxi Destination"";
-	diag_log format [""[mgmTfA] [mgmTfA_c_TA_scr_setDestination.sqf]      clickNGoTaxiChosenPosition NEW SPOT is: (%1)"", (str _pos)];
-	clickNGoTaxiDestinationChoser_mapClicked								= true;
+	TATaxiChosenDestinationMarker			= createMarkerLocal		[""TATaxiChosenPosition"",_pos];
+	TATaxiChosenDestinationMarker			setMarkerTypeLocal		""hd_dot"";
+	TATaxiChosenDestinationMarker			setMarkerColorLocal		""ColorBlue"";
+	TATaxiChosenDestinationMarker			setMarkerTextLocal		""clickNGo Taxi Destination"";
+	diag_log format [""[mgmTfA] [mgmTfA_c_TA_scr_setDestination.sqf]      TATaxiChosenPosition NEW SPOT is: (%1)"", (str _pos)];
+	TATaxiDestinationChoser_mapClicked								= true;
 	onMapSingleClick {};
 	hint """";
 ";
-waitUntil { !(isNil "clickNGoTaxiDestinationChoser_mapClicked") };
-clickNGoTaxiDestinationChoser_mapClicked									= nil;
+waitUntil { !(isNil "TATaxiDestinationChoser_mapClicked") };
+TATaxiDestinationChoser_mapClicked									= nil;
 // Close the map
 openMap false;
 // EOF

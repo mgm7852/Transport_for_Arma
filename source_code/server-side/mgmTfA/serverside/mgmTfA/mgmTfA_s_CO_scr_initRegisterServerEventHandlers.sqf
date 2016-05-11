@@ -149,7 +149,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	// Is the Requestor Blacklisted Check
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]           Will start traversing (mgmTfA_dynamicgv_taxiAnywhereTaxisBlacklistedPlayerPUIDsTextStringArray) in the next line."];};//dbg
 	{
-		scopeName "clickNGoTaxisBlacklistTraverseScope";
+		scopeName "TATaxisBlacklistTraverseScope";
 		
 		// compare player's PUID with the current Blacklisted PUID in array.
 		//	if current entry does not match, proceed with the next one
@@ -158,7 +158,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 		if (_taxiAnywhereRequestorPlayerUIDTextString == _x) then {
 			if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV4]           Player is in _taxiAnywhereRequestorIsInBlacklist! He is blacklisted! He cannot use the clickNGo Taxi service!"];};
 			_taxiAnywhereRequestorIsInBlacklist = true;
-			breakOut "clickNGoTaxisBlacklistTraverseScope";
+			breakOut "TATaxisBlacklistTraverseScope";
 		} else {
 			if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV4]           Requestor's PUID did not match the current blacklisted PUID entry in this iteration. Proceeding to the next iteration (if there are any entries left in blacklist array)."];};
 		};

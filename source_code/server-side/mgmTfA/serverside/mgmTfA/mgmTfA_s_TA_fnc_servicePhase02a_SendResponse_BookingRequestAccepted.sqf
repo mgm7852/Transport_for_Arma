@@ -54,9 +54,9 @@ if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s
 
 
 // Client Communications - Send the initial "we are processing your request - please wait" message to the Requestor
-mgmTfA_gv_pvc_pos_processingYourclickNGoTaxiRequestPleaseWaitPacketSignalOnly = ".";
-_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_processingYourclickNGoTaxiRequestPleaseWaitPacketSignalOnly";
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf]  [TV3] <ThisIs:%1> SENT RESPONSE    (mgmTfA_gv_pvc_pos_processingYourclickNGoTaxiRequestPleaseWaitPacketSignalOnly) to Requestor:  (%2),		on computer (_taxiAnywhereRequestorClientIDNumber)=(%3).", _myGUSUIDNumber, _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorClientIDNumber];};//dbg
+mgmTfA_gv_pvc_pos_processingYourTATaxiRequestPleaseWaitPacketSignalOnly = ".";
+_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_processingYourTATaxiRequestPleaseWaitPacketSignalOnly";
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf]  [TV3] <ThisIs:%1> SENT RESPONSE    (mgmTfA_gv_pvc_pos_processingYourTATaxiRequestPleaseWaitPacketSignalOnly) to Requestor:  (%2),		on computer (_taxiAnywhereRequestorClientIDNumber)=(%3).", _myGUSUIDNumber, _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorClientIDNumber];};//dbg
 
 //// ACL work
 // TODO: we have a TEMP OVERRIDE here with 1>0 :)

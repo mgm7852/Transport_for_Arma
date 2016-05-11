@@ -74,12 +74,12 @@ private	[
 		"_SUAIVehicleObject",
 		"_SUAIVehicleObjectBirthTimeInSecondsNumber",
 		"_SUDistanceToActiveWaypointInMetersNumber",
-		"_SUclickNGoTaxiTickStepTimeInSecondsNumber",
-		"_SUclickNGoTaxiTickCostInCryptoNumber",
-		"_SUclickNGoTaxisDisplayTickChargeHintMessageBool",
-		"_SUclickNGoTaxisDisplayTickChargeSystemChatMessageBool",
-		"_SUclickNGoTaxiPrepaidPaymentTransactionTimeInSecondsNumber",
-		"_SUclickNGoTaxiPrepaidAbsoluteMinimumJourneyTimeInSeconds",
+		"_SUTATaxiTickStepTimeInSecondsNumber",
+		"_SUTATaxiTickCostInCryptoNumber",
+		"_SUTATaxisDisplayTickChargeHintMessageBool",
+		"_SUTATaxisDisplayTickChargeSystemChatMessageBool",
+		"_SUTATaxiPrepaidPaymentTransactionTimeInSecondsNumber",
+		"_SUTATaxiPrepaidAbsoluteMinimumJourneyTimeInSeconds",
 		"_SUPrepaidCreditsStillCoveringBool",
 		"_SUPAYGisActiveBool",
 		"_paygIsItTimeYetCheckCounterNumber",
@@ -143,20 +143,20 @@ _iWantToTravelThisManyMetresNumber = 0;
 
 // We have arrived at PickUpPoint!					
 //Change our status to:		2 AWAITING GET IN 								to proceed, first the requestor must get in...
-_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs02TextString;
+_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentTATaxiActionInProgressIs02TextString;
 // Load new threshold
-_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiRequestorIsNotHereInSecondsNumber;
+_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdTATaxiRequestorIsNotHereInSecondsNumber;
 // Reset Current Task Age
 _SUCurrentTaskAgeInSecondsNumber = 0;
 //Start the Current Task Age Timer
 _SUCurrentTaskBirthTimeInSecondsNumber = (time);
-_SUclickNGoTaxiTickStepTimeInSecondsNumber = mgmTfA_configgv_taxiAnywhereTaxisTickStepTimeInSecondsNumber;
-_SUclickNGoTaxiTickCostInCryptoNumber = mgmTfA_configgv_taxiAnywhereTaxisTickCostInCryptoNumber;
-_SUclickNGoTaxisDisplayTickChargeHintMessageBool = mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeHintMessageBool;
-_SUclickNGoTaxisDisplayTickChargeSystemChatMessageBool = mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeSystemChatMessageBool;
-_SUclickNGoTaxiPrepaidPaymentTransactionTimeInSecondsNumber = -1;
+_SUTATaxiTickStepTimeInSecondsNumber = mgmTfA_configgv_taxiAnywhereTaxisTickStepTimeInSecondsNumber;
+_SUTATaxiTickCostInCryptoNumber = mgmTfA_configgv_taxiAnywhereTaxisTickCostInCryptoNumber;
+_SUTATaxisDisplayTickChargeHintMessageBool = mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeHintMessageBool;
+_SUTATaxisDisplayTickChargeSystemChatMessageBool = mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeSystemChatMessageBool;
+_SUTATaxiPrepaidPaymentTransactionTimeInSecondsNumber = -1;
 _SUPrepaidCreditsStillCoveringBool = false;
-_SUclickNGoTaxiPrepaidAbsoluteMinimumJourneyTimeInSeconds = mgmTfA_configgv_taxiAnywhereTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds;
+_SUTATaxiPrepaidAbsoluteMinimumJourneyTimeInSeconds = mgmTfA_configgv_taxiAnywhereTaxisPrepaidAbsoluteMinimumJourneyTimeInSeconds;
 _SUPAYGisActiveBool = false;
 _paygIsItTimeYetCheckCounterNumber = 0;
 _paygCustomerCanAffordTheNextPaymentBool = false;
@@ -239,8 +239,8 @@ while {_requestorIsNotHere} do {
 					if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS now unlocked"];};
 
 					 //So we are at requestorLocation and he is here too, signal the requestor that his Taxi is here
-					mgmTfA_gv_pvc_pos_yourclickNGoTaxiHasArrivedPleaseGetInPacketSignalOnly	= ".";
-					_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_yourclickNGoTaxiHasArrivedPleaseGetInPacketSignalOnly";
+					mgmTfA_gv_pvc_pos_yourTATaxiHasArrivedPleaseGetInPacketSignalOnly	= ".";
+					_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_yourTATaxiHasArrivedPleaseGetInPacketSignalOnly";
 
 					//Use the horn to greet the requestor
 					driver _SUTaxiAIVehicleObject forceWeaponFire [currentWeapon _SUTaxiAIVehicleObject, currentWeapon _SUTaxiAIVehicleObject];
@@ -268,7 +268,7 @@ if (!_emergencyEscapeNeeded) then {
 	} else {
 		_requestorOutsideVehicle = true;
 	};
-	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiRequestorOutsideVehicleInSecondsNumber;
+	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdTATaxiRequestorOutsideVehicleInSecondsNumber;
 	// Reset Current Task Age
 	_SUCurrentTaskAgeInSecondsNumber = 0;
 	//Start the Current Task Age Timer
@@ -420,8 +420,8 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV5] This is _myGUSUIDNumber: (%1)	Entered 		if (_TA1stMileFeeNeedToBePaidBool) then			", (str _myGUSUIDNumber)];};
 
 	// Change our status to:		3 AWAITING PAYMENT			to proceed, first the requestor must pay...
-	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs03TextString;
-	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiRequestorHasNotPaidInSecondsNumber;
+	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentTATaxiActionInProgressIs03TextString;
+	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdTATaxiRequestorHasNotPaidInSecondsNumber;
 	// Reset Current Task Age
 	_SUCurrentTaskAgeInSecondsNumber = 0;
 	// Start the Current Task Age Timer
@@ -549,16 +549,16 @@ if (!_emergencyEscapeNeeded) then {
 	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV8] INSIDE  if (!_emergencyEscapeNeeded) then            now..."];};
 
 	//Change our status to:		4 DRIVING-TO-DESTINATION		driving requestor to requested location
-	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs04TextString;
+	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentTATaxiActionInProgressIs04TextString;
 	//Customer has paid and we are about to start driving to our destination. 
 	//On the way and even before we start moving (while we do waypoint calculations etc.) doors should be locked.
 
 	// if execution hit this point, it must be because 1st Mile Fee has been paid. Let's start the '1st Mile Fee covered time period' now:
 	_currentTimeInSecondsNumber = (time);
-	_SUclickNGoTaxiPrepaidPaymentTransactionTimeInSecondsNumber = _currentTimeInSecondsNumber;
+	_SUTATaxiPrepaidPaymentTransactionTimeInSecondsNumber = _currentTimeInSecondsNumber;
 
 	// initial check to eliminate any extremely low values (e.g.: 2 second PrepaidAbsoluteMinimum setting in config file)
-	if (_currentTimeInSecondsNumber - (_SUclickNGoTaxiPrepaidPaymentTransactionTimeInSecondsNumber+_SUclickNGoTaxiPrepaidAbsoluteMinimumJourneyTimeInSeconds)>=0) then {
+	if (_currentTimeInSecondsNumber - (_SUTATaxiPrepaidPaymentTransactionTimeInSecondsNumber+_SUTATaxiPrepaidAbsoluteMinimumJourneyTimeInSeconds)>=0) then {
 		_SUPrepaidCreditsStillCoveringBool = true;
 	};
 
@@ -581,7 +581,7 @@ if (!_emergencyEscapeNeeded) then {
 	// LOOP ON THE WAY TO PICKUP!
 	_counterForLogOnlyEveryNthPINGNumber = 0;
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] NEXT, will enter drivingToDropOffPoint250."];};
-	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiOnTheWayToDropOffInSecondsNumber;
+	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdTATaxiOnTheWayToDropOffInSecondsNumber;
 	// Reset Current Task Age
 	_SUCurrentTaskAgeInSecondsNumber = 0;
 	//Start the Current Task Age Timer
@@ -589,7 +589,7 @@ if (!_emergencyEscapeNeeded) then {
 	// We are on the way to Drop Off point
 	// This while loop checks whether we are at 250 metres distance to DropOffPoint
 	// When it detects that we are closer than 250 metres to distance, it quits the loop [next code bit will unlocks the doors & inform the passanger]
-	// Expiry Timeout Threshold: mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiOnTheWayToDropOffInSecondsNumber
+	// Expiry Timeout Threshold: mgmTfA_configgv_expiryTimeOutThresholdTATaxiOnTheWayToDropOffInSecondsNumber
 	_broadcastSUInformationCounter = 0;
 	_paygLastCheckCounterNumber = 0;
 	while {_SUTaxiAIVehicleDistanceToWayPointMetersNumber>250} do {
@@ -733,7 +733,7 @@ if (!_emergencyEscapeNeeded) then {
 				if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV4] _SUPAYGisActiveBool is not true.		PAYG payment model is not yet active, I will check:		Is it time to activate PAYG model?"];};//dbg
 				private ["_currentTimeInSecondsNumber"];
 				_currentTimeInSecondsNumber = (time);
-				if (_currentTimeInSecondsNumber - (_SUclickNGoTaxiPrepaidPaymentTransactionTimeInSecondsNumber+_SUclickNGoTaxiPrepaidAbsoluteMinimumJourneyTimeInSeconds)>=0) then {
+				if (_currentTimeInSecondsNumber - (_SUTATaxiPrepaidPaymentTransactionTimeInSecondsNumber+_SUTATaxiPrepaidAbsoluteMinimumJourneyTimeInSeconds)>=0) then {
 					// Yes it is time to activate PAYG now!
 					if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV4] Yes it is time to activate PAYG now!"];};//dbg
 					missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTxAnywPAYGIsCurrentlyActiveBool", _myGUSUIDNumber], true];

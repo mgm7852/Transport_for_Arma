@@ -34,11 +34,11 @@ _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
 //		NO:	display hint only (without disrupting the player as this won't require player to  click 'CONTINUE')
 //
 //	We do not want to message spam the player for quick hop off & hop back ons; 
-//	thus a global variable (mgmTfA_dynamicgv_taxiAnywhereTaxiLastTimePlayerGotInInOneOfOurVehicles) keeps track of last getIn to clickNGoTaxi and if 
+//	thus a global variable (mgmTfA_dynamicgv_taxiAnywhereTaxiLastTimePlayerGotInInOneOfOurVehicles) keeps track of last getIn to TATaxi and if 
 //	mgmTfA_dynamicgv_taxiAnywhereTaxiReDisplayInstructionsOnGetInTimeThresholdInSecondsNumber seconds have not passed since last getIn, the message will not be displayed
-if (!((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) exitWith {
-	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		result of (str (((vehicle player) getVariable [''mgmTfAisclickNGoTaxi'', false]))) is: (%1).	note that the actual check reverses this with a ! sign", (str (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])))];};//dbg
-	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Just determined player currently IS NOT in a clickNGoTaxi!"];};//dbg
+if (!((vehicle player) getVariable ["mgmTfAisTATaxi", false])) exitWith {
+	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		result of (str (((vehicle player) getVariable [''mgmTfAisTATaxi'', false]))) is: (%1).	note that the actual check reverses this with a ! sign", (str (((vehicle player) getVariable ["mgmTfAisTATaxi", false])))];};//dbg
+	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Just determined player currently IS NOT in a TATaxi!"];};//dbg
 };
 // if we hit this line, player must be in a clickNGo Taxi
 private	[

@@ -90,7 +90,7 @@ private	[
 		];
 
 // Set the Expiry Timeout Threshold
-_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiOnTheWayToPickingUpRequestorInSecondsNumber;
+_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdTATaxiOnTheWayToPickingUpRequestorInSecondsNumber;
 // Reset Current Task Age
 _SUCurrentTaskAgeInSecondsNumber = 0;
 //Start the Current Task Age Timer
@@ -185,7 +185,7 @@ _SUDropOffPositionPosition3DArray	set [1,((_SUDropOffPositionPosition3DArray sel
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV3]           Waypoint Added: %2 at %1", _taxiAnywhereRequestorPosition3DArray, _SUTaxiAIVehicleWaypointMainArray];};//dbg
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV3]           Waypoints Added: The current Waypoint Array is: (%1). _SUTaxiAIVehicleWaypointMainArrayIndexNumber is: (%2)",_SUTaxiAIVehicleWaypointMainArray, _SUTaxiAIVehicleWaypointMainArrayIndexNumber];};//dbg
 
-// Reduce number of available clickNGoTaxis TaxiDrivers by one
+// Reduce number of available TATaxis TaxiDrivers by one
 mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber = mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber - 1;
 
 //Create the vehicle for AI-Service-Unit
@@ -205,7 +205,7 @@ _SUTaxiAIVehicleObject setFuel 1;
 _SUTaxiAIVehicleObject allowDammage false;
 _SUTaxiAIVehicleObject addEventHandler ["HandleDamage", {false}];	
 _SUTaxiAIVehicleObject setVariable ["isMemberOfTaxiCorpFleet", _SUAIGroup, true];
-_SUTaxiAIVehicleObject setVariable ["mgmTfAisclickNGoTaxi", true, true];
+_SUTaxiAIVehicleObject setVariable ["mgmTfAisTATaxi", true, true];
 _SUTaxiAIVehicleObject setVariable ["GUSUIDNumber", _myGUSUIDNumber, true];
 _SUTaxiAIVehicleObject setVariable ["commandingCustomerPlayerUIDNumber", _taxiAnywhereRequestorPlayerUIDTextString, true];
 _SUTaxiAIVehicleObject setVariable ["customerCannotAffordService", false, true];
@@ -303,7 +303,7 @@ _doorsLockedBool=true;
 _SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round (_SUTaxiAIVehicleObject distance _taxiAnywhereRequestorPosition3DArray));
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV4] Distance to Waypoint _taxiAnywhereRequestorPosition3DArray is: (%1). Locked the doors & going there now.", _SUTaxiAIVehicleDistanceToWayPointMetersNumber];};//dbg
 //Change our status to:		1 DRIVING-TO-REQUESTOR		to _taxiAnywhereRequestorPosition3DArray
-_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs01TextString;
+_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentTATaxiActionInProgressIs01TextString;
 
 // LOOP ON THE WAY TO PICKUP!
 _counterForLogOnlyEveryNthPINGNumber = 0;
@@ -327,9 +327,9 @@ _null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3D
 ///
 
 // Client Communications - Send the initial "we are processing your request - please wait" message to the Requestor
-mgmTfA_gv_pvc_pos_yourclickNGoTaxiRequestApprovedDriverEnRoutePacketSignalOnly = ".";
-_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_yourclickNGoTaxiRequestApprovedDriverEnRoutePacketSignalOnly";
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV3] SENT RESPONSE    (mgmTfA_gv_pvc_pos_yourclickNGoTaxiRequestApprovedDriverEnRoutePacketSignalOnly) to Requestor:  (%1)		on computer (_taxiAnywhereRequestorClientIDNumber)=(%2).", _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorClientIDNumber];};//dbg
+mgmTfA_gv_pvc_pos_yourTATaxiRequestApprovedDriverEnRoutePacketSignalOnly = ".";
+_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_yourTATaxiRequestApprovedDriverEnRoutePacketSignalOnly";
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV3] SENT RESPONSE    (mgmTfA_gv_pvc_pos_yourTATaxiRequestApprovedDriverEnRoutePacketSignalOnly) to Requestor:  (%1)		on computer (_taxiAnywhereRequestorClientIDNumber)=(%2).", _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorClientIDNumber];};//dbg
 
 //We are on the way to requestorPosition to pick up the requestor... We will loop till we are very close to the requestorPosition
 _broadcastSUInformationCounter = 0;

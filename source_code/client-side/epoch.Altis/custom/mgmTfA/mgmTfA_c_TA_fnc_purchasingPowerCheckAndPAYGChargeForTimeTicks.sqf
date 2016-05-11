@@ -75,13 +75,13 @@ while {true} do {
 		breakTo "mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicksMainScope";
 	};
 	
-	// CHECK: is the player in a mgmTfAisclickNGoTaxi at the moment?
-	if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
-		// YES, the player is in a mgmTfAisclickNGoTaxi at the moment
+	// CHECK: is the player in a mgmTfAisTATaxi at the moment?
+	if (((vehicle player) getVariable ["mgmTfAisTATaxi", false])) then {
+		// YES, the player is in a mgmTfAisTATaxi at the moment
 		_checkedAndPlayerWasNotInAclickNGoVehicleCountNumber = 0;
 		// player IS in a TfA clickNGo vehicle at the moment
-		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          I have determined player is currently in a clickNGoTaxi."];};
-		// obtain vehicle's CommandingCustomer PUID -- do this only if player is in a clickNGoTaxi
+		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          I have determined player is currently in a TATaxi."];};
+		// obtain vehicle's CommandingCustomer PUID -- do this only if player is in a TATaxi
 		_myVehiclesCommandingCustomerPlayerUIDNumber								= (vehicle player) getVariable "commandingCustomerPlayerUIDNumber";
 		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          I have just obtained (_myVehiclesCommandingCustomerPlayerUIDNumber) as: (%1).		My PUID is: (%2).", (str _myVehiclesCommandingCustomerPlayerUIDNumber), (str _myPUID)];};
 		// is the local player supposed to pay the next tick?	NOTE: currently, we are running this function for all players on board even if they are not the requestor. in the future, on-the-fly "payingCustomer" switching will be supported, meaning requestor running out of money, from inside the vehicle, one of the other players can take over "PAYG payment" duty. this below is the prep.
@@ -146,12 +146,12 @@ while {true} do {
 			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          NO, player does not have to pay the next PAYG tick cost"];};
 		};
 	} else {
-		// NO, the player is NOT in a mgmTfAisclickNGoTaxi at the moment			// no reason to keep running a PAYG payment agent here. log the state && set global variable on clientPC pleaseDoPurchasingPowerCheckAndPAYGChargeForTimeTicksBool=false && shutdown the function
+		// NO, the player is NOT in a mgmTfAisTATaxi at the moment			// no reason to keep running a PAYG payment agent here. log the state && set global variable on clientPC pleaseDoPurchasingPowerCheckAndPAYGChargeForTimeTicksBool=false && shutdown the function
 		_checkedAndPlayerWasNotInAclickNGoVehicleCountNumber = _checkedAndPlayerWasNotInAclickNGoVehicleCountNumber + 1;
 
 		//	temp debug delete this line and the one under me ***	delete this line and the one under me ***delete this line and the one under me ***delete this line and the one under me ***delete this line and the one under me ***delete this line and the one under me ***delete this line and the one under me ***
-		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5]		DEVDEBUG		Just determined player currently IS NOT in a clickNGoTaxi!		The result of (str (((vehicle player) getVariable ['mgmTfAisclickNGoTaxi', false]))) is: (%1).", (str (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])))];};//dbg
-		//	THIS HAS 		_checkVehicle		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV3]		DEVDEBUG		Just determined player currently IS NOT in a clickNGoTaxi!		'mgmTfAisclickNGoTaxi' variable value is: (%1).		Terminating this function immediately.", (str _checkVehicle)];};//dbg
+		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5]		DEVDEBUG		Just determined player currently IS NOT in a TATaxi!		The result of (str (((vehicle player) getVariable ['mgmTfAisTATaxi', false]))) is: (%1).", (str (((vehicle player) getVariable ["mgmTfAisTATaxi", false])))];};//dbg
+		//	THIS HAS 		_checkVehicle		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV3]		DEVDEBUG		Just determined player currently IS NOT in a TATaxi!		'mgmTfAisTATaxi' variable value is: (%1).		Terminating this function immediately.", (str _checkVehicle)];};//dbg
 	};
 };
 if (_tooManyFailedPAYGTransactionsObservedBool) then {	if (mgmTfA_configgv_clientVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5]          This is the bottom of the function. I noticed (_tooManyFailedPAYGTransactionsObservedBool) is  true!	This is the last line."];};		};

@@ -123,14 +123,14 @@ _counterForLogOnlyEveryNthPINGNumber = 0;
 //// BEGIN
 // We've arrived Drop Off Point!
 // Change our status to:		5 AWAITING GET OFF			requestor must get off the vehicle so that we can go self destruct in peace
-_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs05TextString;
+_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentTATaxiActionInProgressIs05TextString;
 
 // Send a message to the Requestor's computer -- note that, the target computer will display this ONLY IF the Requestor is still in the original vehicle.	To do this, we will need to send the _myGUSUIDNumber so that client computer can compare it with its local player's current vehicle GUSUID and display the message only if they match (i.e.: if Requestor is still in the original vehicle).
 //However do NOT message if we are still moving - that's how accidents happen!
 waitUntil {speed _SUTaxiAIVehicleObject == 0};
 // create the global variable that will be sent to the requestor's PC	// send the _myGUSUIDNumber here!
-mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket = _myGUSUIDNumber;
-_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket";
+mgmTfA_gv_pvc_pos_yourTATaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket = _myGUSUIDNumber;
+_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_yourTATaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket";
 if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf]      SIGNAL SENT to the Requestor (We have arrived. Thank you for your business. Have a nice day.). _taxiAnywhereRequestorProfileNameTextString: (%1)  on computer (_taxiAnywhereRequestorClientIDNumber)=(%2). The _myGUSUIDNumber is: (%3).", _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorClientIDNumber, _myGUSUIDNumber];};
 
 // Deactivate PAYG on this vehicle
@@ -152,7 +152,7 @@ if (_requestorPlayerObject in _SUTaxiAIVehicleObject) then {
 	_requestorInsideVehicle=false;
 };
 
-_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiRequestorInsideVehicleInSecondsNumber;
+_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdTATaxiRequestorInsideVehicleInSecondsNumber;
 // Reset Current Task Age
 _SUCurrentTaskAgeInSecondsNumber = 0;
 //Start the Current Task Age Timer

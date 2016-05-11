@@ -153,12 +153,12 @@ if (isServer) then {
 
 	/// clickNGo specific stuff Here
 	//If we cannot fulfil a clickNGo Taxi request due to lack of driver, the value below will get incremented. It is used when reporting to RPT LOG & also on, in-game map embedded Status Report.
-	mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTotalRequestsDroppedNumber = 0;
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV COUNTER SET mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTotalRequestsDroppedNumber is: (%1)", mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTotalRequestsDroppedNumber];};
+	mgmTfA_dynamicgv_taxiCorpTATaxiModuleTotalRequestsDroppedNumber = 0;
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV COUNTER SET mgmTfA_dynamicgv_taxiCorpTATaxiModuleTotalRequestsDroppedNumber is: (%1)", mgmTfA_dynamicgv_taxiCorpTATaxiModuleTotalRequestsDroppedNumber];};
 	
 	//The Last Served Playername -- just to report in STATUS REPORT
-	mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTheLastServedPlayerNameTextString = "NOONE";
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTheLastServedPlayerNameTextString is: (%1)", mgmTfA_dynamicgv_taxiCorpclickNGoTaxiModuleTheLastServedPlayerNameTextString];};
+	mgmTfA_dynamicgv_taxiCorpTATaxiModuleTheLastServedPlayerNameTextString = "NOONE";
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initServer.sqf]          dynamicGV SET mgmTfA_dynamicgv_taxiCorpTATaxiModuleTheLastServedPlayerNameTextString is: (%1)", mgmTfA_dynamicgv_taxiCorpTATaxiModuleTheLastServedPlayerNameTextString];};
 	/// clickNGo specific stuff Here
 
 	
@@ -214,7 +214,7 @@ if (isServer) then {
 	//DUPLICATE! already published above. todo: clean this up.
 	//publicVariable "mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber";
 	publicVariable "mgmTfA_configgv_FixedDestinationTaxiBookingFirstTimersCanBookWithoutWaitingBool";
-	publicVariable "mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber";
+	publicVariable "mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber";
 	publicVariable "mgmTfA_configgv_taxiAnywhereTaxiBookingFirstTimersCanBookWithoutWaitingBool";
 	publicVariable "mgmTfA_configgv_taxiFixedDestination01LocationNameTextString";
 	publicVariable "mgmTfA_configgv_taxiFixedDestination02LocationNameTextString";

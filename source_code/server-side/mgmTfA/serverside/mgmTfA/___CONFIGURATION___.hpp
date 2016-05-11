@@ -47,7 +47,7 @@ mgmTfA_configgv_clientVerbosityLevel = 10;
 //
 // NOT IMPLEMENTED, WHOLE SECTION WILL BE IGNORED
 mgmTfA_configgv_serviceModeFixedDestinationTaxisEnabled = true;
-mgmTfA_configgv_serviceModeclickNGoTaxisEnabled = true;
+mgmTfA_configgv_serviceModeTATaxisEnabled = true;
 mgmTfA_configgv_serviceModePublicBusSystemEnabled = true;
 //-----
 
@@ -61,10 +61,10 @@ mgmTfA_configgv_serviceModePublicBusSystemEnabled = true;
 // --min wait time between bookings--
 // default: 900
 //mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber = 900;
-//mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber = 900;
+//mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber = 900;
 //RELEASETODO
 mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber = 10;
-mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber = 10;
+mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber = 10;
 
 // --on join wait before 1st booking or not--
 // If false, a player who just joined the server will have to wait out the duration minimumWaitingTimeBetween*BookingsInSecondsNumber
@@ -327,15 +327,15 @@ mgmTfA_configgv_currentFixedDestinationTaxiActionInProgressIs07TextString = "At 
 mgmTfA_configgv_currentFixedDestinationTaxiActionInProgressIs08TextString = "Terminated (Map Marker In Deletion Queue)";
 //
 // Current Action In Progress for: TaxiAnywhere Taxis
-mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs00TextString = "Awaiting Init Clearance";
-mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs01TextString = "Driving to Requestor";
-mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs02TextString = "Awaiting Get In";
-mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs03TextString = "Awaiting Payment";
-mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs04TextString = "Driving to Requested Destination";
-mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs05TextString = "Awaiting Get Off";
-mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs06TextString = "Driving to Termination";
-mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs07TextString = "At Termination";
-mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs08TextString = "Terminated (Map Marker In Deletion Queue)";
+mgmTfA_configgv_currentTATaxiActionInProgressIs00TextString = "Awaiting Init Clearance";
+mgmTfA_configgv_currentTATaxiActionInProgressIs01TextString = "Driving to Requestor";
+mgmTfA_configgv_currentTATaxiActionInProgressIs02TextString = "Awaiting Get In";
+mgmTfA_configgv_currentTATaxiActionInProgressIs03TextString = "Awaiting Payment";
+mgmTfA_configgv_currentTATaxiActionInProgressIs04TextString = "Driving to Requested Destination";
+mgmTfA_configgv_currentTATaxiActionInProgressIs05TextString = "Awaiting Get Off";
+mgmTfA_configgv_currentTATaxiActionInProgressIs06TextString = "Driving to Termination";
+mgmTfA_configgv_currentTATaxiActionInProgressIs07TextString = "At Termination";
+mgmTfA_configgv_currentTATaxiActionInProgressIs08TextString = "Terminated (Map Marker In Deletion Queue)";
 //-----
 
 //-----
@@ -362,25 +362,25 @@ mgmTfA_configgv_taxiAnywhereTaxisTaxiVehicleActiveColorSchemeTextString = mgmTfA
 //-----
 // EXPIRY TIMEOUT THRESHOLDS
 mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiOnTheWayToPickingUpRequestorInSecondsNumber = 180;
-mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiOnTheWayToPickingUpRequestorInSecondsNumber = 180;
+mgmTfA_configgv_expiryTimeOutThresholdTATaxiOnTheWayToPickingUpRequestorInSecondsNumber = 180;
 //
 mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiRequestorIsNotHereInSecondsNumber = 90;
-mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiRequestorIsNotHereInSecondsNumber = 90;
+mgmTfA_configgv_expiryTimeOutThresholdTATaxiRequestorIsNotHereInSecondsNumber = 90;
 //
 mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiRequestorOutsideVehicleInSecondsNumber = 90;
-mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiRequestorOutsideVehicleInSecondsNumber = 90;
+mgmTfA_configgv_expiryTimeOutThresholdTATaxiRequestorOutsideVehicleInSecondsNumber = 90;
 //
 mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiRequestorHasNotPaidInSecondsNumber = 90;
-mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiRequestorHasNotPaidInSecondsNumber = 90;
+mgmTfA_configgv_expiryTimeOutThresholdTATaxiRequestorHasNotPaidInSecondsNumber = 90;
 //
 mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiOnTheWayToDropOffInSecondsNumber = 900;
-mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiOnTheWayToDropOffInSecondsNumber = 900;
+mgmTfA_configgv_expiryTimeOutThresholdTATaxiOnTheWayToDropOffInSecondsNumber = 900;
 //
 mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiRequestorInsideVehicleInSecondsNumber = 90;
-mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiRequestorInsideVehicleInSecondsNumber = 90;
+mgmTfA_configgv_expiryTimeOutThresholdTATaxiRequestorInsideVehicleInSecondsNumber = 90;
 //
 mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiOnTheWayToTerminationInSecondsNumber = 240;
-mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiOnTheWayToTerminationInSecondsNumber = 240;
+mgmTfA_configgv_expiryTimeOutThresholdTATaxiOnTheWayToTerminationInSecondsNumber = 240;
 //
 mgmTfA_configgv_expiryTimeOutThresholdpubBusSUSpawnPhaseInSecondsNumber = 90;
 //

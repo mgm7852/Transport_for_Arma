@@ -37,8 +37,8 @@ if (!isServer) then {
 	//// Reset global variables of counter nature
 	mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingRecordKeeperThisIsTheFirstTimeBool = true;
 	mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
-	mgmTfA_dynamicgv_lastclickNGoTaxiBookingRecordKeeperThisIsTheFirstTimeBool = true;
-	mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
+	mgmTfA_dynamicgv_lastTATaxiBookingRecordKeeperThisIsTheFirstTimeBool = true;
+	mgmTfA_dynamicgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber = (time);
 	mgmTfA_dynamicgv_taxiAnywhereTaxiFirstGetInHasOccurred = false;
 	mgmTfA_dynamicgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber = -1;
 	mgmTfA_PurchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool = false;

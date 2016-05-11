@@ -18,10 +18,10 @@
 //HH
 if (isServer) exitWith {}; if (isNil("mgmTfA_Client_Init")) then {mgmTfA_Client_Init=0;}; waitUntil {mgmTfA_Client_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
 
-// CHECK: Player has requested to be charged 1st Mile Fee amount... Is the player even in a mgmTfAisclickNGoTaxi at the moment?
-if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
-	// YES, the player is in a mgmTfAisclickNGoTaxi at the moment
-	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV8]     DETECTED     Player is currently in a clickNGoTaxi."];};
+// CHECK: Player has requested to be charged 1st Mile Fee amount... Is the player even in a mgmTfAisTATaxi at the moment?
+if (((vehicle player) getVariable ["mgmTfAisTATaxi", false])) then {
+	// YES, the player is in a mgmTfAisTATaxi at the moment
+	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV8]     DETECTED     Player is currently in a TATaxi."];};
 
 	private		[
 				"_myVehiclesCommandingCustomerPlayerUIDNumber",
@@ -133,8 +133,8 @@ if (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])) then {
 		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV8]          NO, player does not have to pay the 1st Mile Fee"];};
 	};
 } else {
-	// NO, the player is NOT in a mgmTfAisclickNGoTaxi at the moment		-- log it, inform player & quit
-	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV5]		DETECTED		Player currently IS NOT in a clickNGoTaxi!		The result of (str (((vehicle player) getVariable ['mgmTfAisclickNGoTaxi', false]))) is: (%1).", (str (((vehicle player) getVariable ["mgmTfAisclickNGoTaxi", false])))];};//dbg
+	// NO, the player is NOT in a mgmTfAisTATaxi at the moment		-- log it, inform player & quit
+	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV5]		DETECTED		Player currently IS NOT in a TATaxi!		The result of (str (((vehicle player) getVariable ['mgmTfAisTATaxi', false]))) is: (%1).", (str (((vehicle player) getVariable ["mgmTfAisTATaxi", false])))];};//dbg
 	// let the player know via hint && systemChat
 	private	[
 			"_msg2HintTextString",

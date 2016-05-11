@@ -16,7 +16,7 @@
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
-"mgmTfA_gv_pvc_pos_processingYourclickNGoTaxiRequestPleaseWaitPacketSignalOnly" addPublicVariableEventHandler {
+"mgmTfA_gv_pvc_pos_processingYourTATaxiRequestPleaseWaitPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
 	private [
 			"_msg2HintTextString",
@@ -42,7 +42,7 @@
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
-"mgmTfA_gv_pvc_pos_yourclickNGoTaxiHasArrivedPleaseGetInPacketSignalOnly" addPublicVariableEventHandler {
+"mgmTfA_gv_pvc_pos_yourTATaxiHasArrivedPleaseGetInPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
 	private [
 			"_msg2HintTextString",
@@ -182,7 +182,7 @@
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
-"mgmTfA_gv_pvc_pos_yourclickNGoTaxiRequestApprovedDriverEnRoutePacketSignalOnly" addPublicVariableEventHandler {
+"mgmTfA_gv_pvc_pos_yourTATaxiRequestApprovedDriverEnRoutePacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
 	private [
 			"_msg2HintTextString",
@@ -229,7 +229,7 @@
 		//Do not display anything about Taxi's doors being locked/unlocked
 	};
 };
-"mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket" addPublicVariableEventHandler {
+"mgmTfA_gv_pvc_pos_yourTATaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket" addPublicVariableEventHandler {
 	// initialize local variables
 	private [
 			"_classnameOfTheCurrentVehicle",
@@ -248,8 +248,8 @@
 	_classnameOfTheCurrentVehicle = typeOf (vehicle player);
 	_originalVehiclesGUSUIDNumber = (_this select 1);
 	_currentVehiclesGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");
-	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. _this is: (%1).", (str _this)];};
-	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourclickNGoTaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. the (str _originalVehiclesGUSUIDNumber) is: (%1)	(str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourTATaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. _this is: (%1).", (str _this)];};
+	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [TV3]          I have received mgmTfA_gv_pvc_pos_yourTATaxiHaveArrivedThankYouForYourBusinessHaveANiceDayPacket package. the (str _originalVehiclesGUSUIDNumber) is: (%1)	(str _currentVehiclesGUSUIDNumber) is: (%2).", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
 	
 	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
 	if ((mgmTfA_configgv_taxiAnywhereTaxisTaxiVehicleClassnameTextString == _classnameOfTheCurrentVehicle) && (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber)) then {
@@ -264,10 +264,10 @@
 		//Player is not in a Taxi vehicle at the moment
 		//Do not display anything about Taxi's doors being locked/unlocked
 	};
-	// delete the clickNGoTaxi Chosen Position Marker
-	deleteMarker "clickNGoTaxiChosenPosition";
+	// delete the TATaxi Chosen Position Marker
+	deleteMarker "TATaxiChosenPosition";
 	// once player exits clickNGo taxi, allow player to use clickNGoHotKey again
-	mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey = true;
+	mgmTfA_dynamicgv_thisPlayerCanOrderTATaxiViaHotkey = true;
 };
 "mgmTfA_gv_pvc_neg_yourFixedDestinationTaxiRequestHasBeenRejectedAsYouAreBlacklistedPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
@@ -282,7 +282,7 @@
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
-"mgmTfA_gv_pvc_neg_yourclickNGoTaxiRequestHasBeenRejectedAsYouAreBlacklistedPacketSignalOnly" addPublicVariableEventHandler {
+"mgmTfA_gv_pvc_neg_yourTATaxiRequestHasBeenRejectedAsYouAreBlacklistedPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
 	private [
 			"_msg2HintTextString",

@@ -26,7 +26,7 @@ if ((vehicle player) != player) exitWith {
 // STAGE IN WORKFLOW:		determine whether timeout requirements are met -- kill the request otherwise
 //
 // BEFORE WE send a booking request, let's first check - did this request arrive too soon?
-// configuration value provided by the server => mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber
+// configuration value provided by the server => mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber
 // Before doing a time calculation, let's clarify a few things: is this the first ever Booking Request?
 // And if so, does the player still need to wait or can he go ahead? (masterConfig configuration value determines this behaviour)
 // he can book if he meets either of the options (FirstTimers can immediately book && this guy is a FirstTimer) OR (Cooldown time threshold has been honoured)
@@ -36,9 +36,9 @@ private	[
 		"_timeToWaitInSecondsNumber"
 		];
 if	(
-	((mgmTfA_dynamicgv_lastclickNGoTaxiBookingRecordKeeperThisIsTheFirstTimeBool) && (mgmTfA_configgv_taxiAnywhereTaxiBookingFirstTimersCanBookWithoutWaitingBool)) 
+	((mgmTfA_dynamicgv_lastTATaxiBookingRecordKeeperThisIsTheFirstTimeBool) && (mgmTfA_configgv_taxiAnywhereTaxiBookingFirstTimersCanBookWithoutWaitingBool)) 
 	|| 
-	(mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber <= (time - mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber))
+	(mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber <= (time - mgmTfA_dynamicgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber))
 	)	then {
 	// he is a first timer & first timers can book immediately
 	// OR
@@ -47,7 +47,7 @@ if	(
 } else {
 	// Player may not book at this time - it is too soon since the last Booking that was placed!
 	_bookingPermitted 															= false;
-	_timeToWaitInSecondsNumber = (round (mgmTfA_configgv_minimumWaitingTimeBetweenclickNGoTaxiBookingsInSecondsNumber - ((time) - mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber)));
+	_timeToWaitInSecondsNumber = (round (mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber - ((time) - mgmTfA_dynamicgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber)));
 	// Note that anything below 1 second and above 0 second (e.g.: 0.374s) will cause the message "PLEASE WAIT 0 SECONDS" to be displayed, so artificially increment by 1 if it is zero.
 	if (_timeToWaitInSecondsNumber == 0) then { _timeToWaitInSecondsNumber = _timeToWaitInSecondsNumber + 1 };
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_warningStopSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>YOU MAY NOT BOOK<br/>ANOTHER TAXI<br/>THAT QUICKLY.<br/>PLEASE WAIT ANOTHER<br/>%2 SECONDS<br/>BEFORE TRYING AGAIN.", (profileName), (str _timeToWaitInSecondsNumber)];
@@ -70,14 +70,14 @@ if (_bookingPermitted) then {
 			"_msg2SyschatTextString"
 			];
 	// DESTINATION PICKER CODE
-	// Kill the workflow if there is another instance active		("clickNGoTaxiDestinationChoser_systemReady" global variable should be nil if not nil, there must be another instance currently running...)
-	if (!(isNil "clickNGoTaxiDestinationChoser_systemReady")) exitWith {hint "SYSTEM CURRENTLY NOT AVAILABLE"};
+	// Kill the workflow if there is another instance active		("TATaxiDestinationChoser_systemReady" global variable should be nil if not nil, there must be another instance currently running...)
+	if (!(isNil "TATaxiDestinationChoser_systemReady")) exitWith {hint "SYSTEM CURRENTLY NOT AVAILABLE"};
 	
-	if (mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey) then {
+	if (mgmTfA_dynamicgv_thisPlayerCanOrderTATaxiViaHotkey) then {
 		
 		// disable players access to the hotkey. this is to prevent keyspam when there is actually zero use case for it.
-		mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey = false;
-		// we mustn't do this here as currently booking is in progress but has not been placed. we will do it further down only when we actually contact the server.		mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
+		mgmTfA_dynamicgv_thisPlayerCanOrderTATaxiViaHotkey = false;
+		// we mustn't do this here as currently booking is in progress but has not been placed. we will do it further down only when we actually contact the server.		mgmTfA_dynamicgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber = (time);
 
 		///////// STEP:	FINANCIAL CHECKS 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Okay we've checked booking times and it appears this player CAN place a booking at this time.
@@ -128,7 +128,7 @@ if (_bookingPermitted) then {
 
 		if (_playerCanAffordRequestedJourneyCostBool) then {
 			// Player's current cash amount IS adequate to pay for the full journey cost
-			deleteMarker "clickNGoTaxiChosenPosition";
+			deleteMarker "TATaxiChosenPosition";
 
 			// Open the map
 			openMap true;
@@ -140,22 +140,22 @@ if (_bookingPermitted) then {
 			systemChat 								(str _msg2SyschatTextString);
 			// Insert the actual code to handle the mouse-left-click-on-map
 			onMapSingleClick "
-			    clickNGoTaxiChosenDestinationMarker = createMarkerLocal [""clickNGoTaxiChosenPosition"",_pos];
-			    clickNGoTaxiChosenDestinationMarker setMarkerTypeLocal ""hd_dot"";
-			    clickNGoTaxiChosenDestinationMarker setMarkerColorLocal ""ColorBlue"";
-			    clickNGoTaxiChosenDestinationMarker setMarkerTextLocal ""clickNGo Taxi Destination"";
-			    clickNGoTaxiDestinationChoser_mapClicked = true;
+			    TATaxiChosenDestinationMarker = createMarkerLocal [""TATaxiChosenPosition"",_pos];
+			    TATaxiChosenDestinationMarker setMarkerTypeLocal ""hd_dot"";
+			    TATaxiChosenDestinationMarker setMarkerColorLocal ""ColorBlue"";
+			    TATaxiChosenDestinationMarker setMarkerTextLocal ""clickNGo Taxi Destination"";
+			    TATaxiDestinationChoser_mapClicked = true;
 			    onMapSingleClick {};
 			    hint """";
 			";
 			// We now wait for the click
-			waitUntil { !(isNil "clickNGoTaxiDestinationChoser_mapClicked") };
-			clickNGoTaxiDestinationChoser_mapClicked = nil;
+			waitUntil { !(isNil "TATaxiDestinationChoser_mapClicked") };
+			TATaxiDestinationChoser_mapClicked = nil;
 			// System is now busy processing the request - we can not take any further clicks until we finish processing this one
-			clickNGoTaxiDestinationChoser_systemReady = false;
+			TATaxiDestinationChoser_systemReady = false;
 			
 			// Prep - get the position coordinates
-			_taxiAnywhereTaxiRequestedDestinationPosition3DArray = getMarkerPos "clickNGoTaxiChosenPosition";
+			_taxiAnywhereTaxiRequestedDestinationPosition3DArray = getMarkerPos "TATaxiChosenPosition";
 			// Close the map
 			openMap false;
 			// Inform via hint (in Rich format)
@@ -165,7 +165,7 @@ if (_bookingPermitted) then {
 			_msg2SyschatTextString = parsetext format ["[SYSTEM]  REQUESTING A TAXI TO CHOSEN DESTINATION..."];
 			systemChat (str _msg2SyschatTextString);
 			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fncRequestTaxi.sqf]  [TV5] REQUESTING A TAXI TO CHOSEN DESTINATION...		(str _taxiAnywhereTaxiRequestedDestinationPosition3DArray) is: (%1).", (str _taxiAnywhereTaxiRequestedDestinationPosition3DArray)];};
-			clickNGoTaxiDestinationChoser_systemReady = nil;
+			TATaxiDestinationChoser_systemReady = nil;
 
 			///////// STEP:	PREPARE CLICKNGO REQUEST DETAILS
 			// ~~
@@ -197,10 +197,10 @@ if (_bookingPermitted) then {
 			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf] [D4] (_bookingPermitted) is true. executing main function block now."];};//dbg
 
 			// Do these at this stage
-			mgmTfA_dynamicgv_lastclickNGoTaxiBookingRecordKeeperThisIsTheFirstTimeBool = false;
-			mgmTfA_dynamicgv_lastclickNGoTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
+			mgmTfA_dynamicgv_lastTATaxiBookingRecordKeeperThisIsTheFirstTimeBool = false;
+			mgmTfA_dynamicgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber = (time);
 			// re-enable players access to the hotkey. this does not mean he can successfully place another booking in the next second (as cool down timer will prevent that)
-			mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey = true;
+			mgmTfA_dynamicgv_thisPlayerCanOrderTATaxiViaHotkey = true;
 
 			///////// STEP:	PREPARE AND SUBMIT THE CLICKNGO REQUEST
 			mgmTfA_gv_pvs_req_taxiAnywhereTaxiToMyPositionPleaseConfirmPacket = [player, mgmTfA_gv_pvs_taxiAnywhereRequestorPositionArray3D, mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereTaxiRequestedDestinationPosition3DArray];
@@ -222,7 +222,7 @@ if (_bookingPermitted) then {
 			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf] [D4] (_bookingPermitted) is true. executing main function block now."];};//dbg
 			
 			// re-enable players access to the hotkey. this does not mean he can successfully place another booking in the next second (as cool down timer will prevent that)
-			mgmTfA_dynamicgv_thisPlayerCanOrderclickNGoTaxiViaHotkey = true;
+			mgmTfA_dynamicgv_thisPlayerCanOrderTATaxiViaHotkey = true;
 		};
 	} else {
 		private	[

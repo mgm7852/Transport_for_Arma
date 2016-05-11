@@ -148,7 +148,7 @@ _iWantToTravelThisManyMetresNumber = 0;
 
 // NEW DESTINATION
 //Change our status to:		6 DRIVING-TO-TERMINATION		driving requestor to requested location
-_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs06TextString;
+_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentTATaxiActionInProgressIs06TextString;
 //First, we need to know WHERE to self-terminate. Run the random spot chooser and get us a cosy AI suicide point
 //Parameters should be minimum 700 metres away, maximum 1500 metres away, from our current position
 //Run gen here
@@ -187,7 +187,7 @@ if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s
 // LOOP ON THE WAY TO PICKUP!
 _counterForLogOnlyEveryNthPINGNumber = 0;
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [DEV-DEBUG]           NEXT, will enter drivingToTerminationPoint25."];};//dbg
-_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdclickNGoTaxiOnTheWayToTerminationInSecondsNumber;
+_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdTATaxiOnTheWayToTerminationInSecondsNumber;
 // Reset Current Task Age
 _SUCurrentTaskAgeInSecondsNumber = 0;
 // Start the Current Task Age Timer
@@ -269,7 +269,7 @@ _iWantToTravelThisManyMetresNumber = 0;
 // TERMINATION SEQUENCE
 ///
 //Change our status to:		7 AT-TERMINATION				we are doing bits and bobs before we self-destruct	[e.g. update HQ etc]
-_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs07TextString;
+_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentTATaxiActionInProgressIs07TextString;
 _SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time) - _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
 	//Inform the LOG that we have arrived self-termination point
 	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4]          I have arrived at SELF-TERMINATION POINT."];};//dbg
@@ -355,7 +355,7 @@ deleteVehicle _SUAICharacterDriverObject;
 deleteVehicle _SUTaxiAIVehicleObject;
 if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4] <ThisIs:%1> TERMINATION SEQUENCE IN PROGRESS: Deleted driver & vehicle.", _myGUSUIDNumber];};//dbg
 // The first thing we need to do is ensure variable security during our  expected long runtime so let's go ahead and create our own copies:
-_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentclickNGoTaxiActionInProgressIs08TextString;
+_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentTATaxiActionInProgressIs08TextString;
 // We did everything (except map marker clean up). No need to occupy a global tax driver slot any more. Let's free it up.
 if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4]          TERMINATION SEQUENCE IN PROGRESS: mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber is (%1) BEFORE the change.", mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber];};//dbg
 mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber=mgmTfA_gvdb_PV_taxiAnywhereTaxisNumberOfCurrentlyAvailableTaxiDriversNumber+1;
