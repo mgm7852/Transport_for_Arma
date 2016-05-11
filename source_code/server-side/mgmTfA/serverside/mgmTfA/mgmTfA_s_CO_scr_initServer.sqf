@@ -199,9 +199,9 @@ if (isServer) then {
 	/// begin:		INITIAL VALUES  FOR GLOBAL VARIABLES
 	//// CATP Configuration
 	// Publish detection range to activate "NEAR CATP" status
-	publicVariable "mgmTfA_configgv_catpObjectDetectionRangeInMeters";
+	publicVariable "mgmTfA_configgv_CATPObjectDetectionRangeInMeters";
 	// Publish detection object that activates "NEAR A CATP" status
-	publicVariable "mgmTfA_configgv_catpObject";
+	publicVariable "mgmTfA_configgv_CATPObject";
 	// Publish TfA version info
 	publicVariable "mgmTfA_configgv_TfAScriptVersionTextString";
 	publicVariable "mgmTfA_configgv_TfAScriptVersionRevisionSumValueNumber";
@@ -210,7 +210,7 @@ if (isServer) then {
 	publicVariable "mgmTfA_configgv_taxiFixedDestination01ActionMenuTextString";
 	publicVariable "mgmTfA_configgv_taxiFixedDestination02ActionMenuTextString";
 	publicVariable "mgmTfA_configgv_taxiFixedDestination03ActionMenuTextString";
-	publicVariable "mgmTfA_configgv_catpCheckFrequencySecondsNumber";
+	publicVariable "mgmTfA_configgv_CATPCheckFrequencySecondsNumber";
 	//DUPLICATE! already published above. todo: clean this up.
 	//publicVariable "mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber";
 	publicVariable "mgmTfA_configgv_FixedDestinationTaxiBookingFirstTimersCanBookWithoutWaitingBool";
@@ -256,8 +256,8 @@ if (isServer) then {
 	publicVariable "mgmTfA_dynamicgv_taxiAnywhereTaxiDisplayInstructionsOnGetInEnabledBool";
 	publicVariable "mgmTfA_dynamicgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber";
 	publicVariable "mgmTfA_dynamicgv_taxiAnywhereTaxiReDisplayInstructionsOnGetInTimeThresholdInSecondsNumber";
-	publicVariable "mgmTfA_configgv_catpObject";
-	publicVariable "mgmTfA_configgv_catp01DirectionDegreesNumber";
+	publicVariable "mgmTfA_configgv_CATPObject";
+	publicVariable "mgmTfA_configgv_CATP01DirectionDegreesNumber";
 	publicVariable "mgmTfA_configgv_thresholdNumberOfFailedPAYGTransactionsToPermitBeforeInitiatingPAYGserviceAbruptTerminationNumber";
 	publicVariable "mgmTfA_configgv_monitoringAgentMissedPurchasingPowerCheckAndPAYGTickChargesAgentSleepTime";
 	publicVariable "mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeHintMessageBool";

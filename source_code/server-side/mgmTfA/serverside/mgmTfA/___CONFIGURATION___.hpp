@@ -187,14 +187,14 @@ mgmTfA_configgv_taxiCorpHqLocationMapMarkerShapeTextString = "ICON";
 // --CATP presence check time--
 //How often should the clients check whether a CATP is nearby?
 //uiSleep will be used to wait for the next one.
-mgmTfA_configgv_catpCheckFrequencySecondsNumber = 2;
+mgmTfA_configgv_CATPCheckFrequencySecondsNumber = 2;
 
 // These are referred by createMapMarker scripts
 // detection range to activate "NEAR CATP" status
-mgmTfA_configgv_catpObjectDetectionRangeInMeters=10;
+mgmTfA_configgv_CATPObjectDetectionRangeInMeters=10;
 
 // detection object that activates "NEAR A CATP" status
-mgmTfA_configgv_catpObject="C_man_polo_1_F";
+mgmTfA_configgv_CATPObject="C_man_polo_1_F";
 //=====
 
 
@@ -206,43 +206,43 @@ mgmTfA_configgv_catpObject="C_man_polo_1_F";
 mgmTfA_configgv_createObjectCATP01Bool=true;
 // CATP01 Location
 // 		Referred by mgmTfA_scr_serverInitCreateObjectHQBuilding.sqf when creating the Taxi Dispatcher agent
-mgmTfA_configgv_catp01LocationPositionArray=[13287.2,14572.1,0];
+mgmTfA_configgv_CATP01LocationPositionArray=[13287.2,14572.1,0];
 // CATP01	Agent Facing direction? 0=north, 90=east, 180=south, 270=west
-mgmTfA_configgv_catp01DirectionDegreesNumber=131;
+mgmTfA_configgv_CATP01DirectionDegreesNumber=131;
 // CATP01	Create marker?
 mgmTfA_configgv_createCATP01LocationMapMarkerBool=true;
 // CATP01	Map Marker Type
-mgmTfA_configgv_catp01LocationMapMarkerTypeTextString="mil_dot";
+mgmTfA_configgv_CATP01LocationMapMarkerTypeTextString="mil_dot";
 // CATP01	Map Marker Shape
-mgmTfA_configgv_catp01LocationMapMarkerShapeTextString="ICON";
+mgmTfA_configgv_CATP01LocationMapMarkerShapeTextString="ICON";
 // CATP01	Map Marker Color
-mgmTfA_configgv_catp01LocationMapMarkerColorTextString="ColorOrange";
+mgmTfA_configgv_CATP01LocationMapMarkerColorTextString="ColorOrange";
 // CATP01	Map Marker Text
-mgmTfA_configgv_catp01LocationMapMarkerTextString="Central Taxis";
+mgmTfA_configgv_CATP01LocationMapMarkerTextString="Central Taxis";
 //=====
 
 //=====
 // Settings for CATP02
 mgmTfA_configgv_createObjectCATP02Bool=true;
-mgmTfA_configgv_catp02LocationPositionArray=[6141.08,16787.6,0];
-mgmTfA_configgv_catp02DirectionDegreesNumber=0;
+mgmTfA_configgv_CATP02LocationPositionArray=[6141.08,16787.6,0];
+mgmTfA_configgv_CATP02DirectionDegreesNumber=0;
 mgmTfA_configgv_createCATP02LocationMapMarkerBool=true;
-mgmTfA_configgv_catp02LocationMapMarkerTypeTextString="mil_dot";
-mgmTfA_configgv_catp02LocationMapMarkerShapeTextString="ICON";
-mgmTfA_configgv_catp02LocationMapMarkerColorTextString="ColorOrange";
-mgmTfA_configgv_catp02LocationMapMarkerTextString="West Taxis";
+mgmTfA_configgv_CATP02LocationMapMarkerTypeTextString="mil_dot";
+mgmTfA_configgv_CATP02LocationMapMarkerShapeTextString="ICON";
+mgmTfA_configgv_CATP02LocationMapMarkerColorTextString="ColorOrange";
+mgmTfA_configgv_CATP02LocationMapMarkerTextString="West Taxis";
 //=====
 
 //=====
 // Settings for CATP03
 mgmTfA_configgv_createObjectCATP03Bool=true;
-mgmTfA_configgv_catp03LocationPositionArray=[18396.9,14253.7,0];
-mgmTfA_configgv_catp03DirectionDegreesNumber=0;
+mgmTfA_configgv_CATP03LocationPositionArray=[18396.9,14253.7,0];
+mgmTfA_configgv_CATP03DirectionDegreesNumber=0;
 mgmTfA_configgv_createCATP03LocationMapMarkerBool=true;
-mgmTfA_configgv_catp03LocationMapMarkerTypeTextString="mil_dot";
-mgmTfA_configgv_catp03LocationMapMarkerShapeTextString="ICON";
-mgmTfA_configgv_catp03LocationMapMarkerColorTextString="ColorOrange";
-mgmTfA_configgv_catp03LocationMapMarkerTextString="East Taxis";
+mgmTfA_configgv_CATP03LocationMapMarkerTypeTextString="mil_dot";
+mgmTfA_configgv_CATP03LocationMapMarkerShapeTextString="ICON";
+mgmTfA_configgv_CATP03LocationMapMarkerColorTextString="ColorOrange";
+mgmTfA_configgv_CATP03LocationMapMarkerTextString="East Taxis";
 //=====
 //-----
 

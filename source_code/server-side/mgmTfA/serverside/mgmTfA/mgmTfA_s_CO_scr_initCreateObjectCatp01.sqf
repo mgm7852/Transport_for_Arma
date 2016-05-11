@@ -17,11 +17,11 @@ _mgmTfA_CATPagentUnit1sGroup = objNull;
 if (true) then {
 	_mgmTfA_CATPagentUnit1sGroup = createGroup RESISTANCE;
 	uiSleep 0.05;
-	mgmTfA_configgv_catpObject createUnit [mgmTfA_configgv_catp01LocationPositionArray, _mgmTfA_CATPagentUnit1sGroup, "_mgmTfA_CATPagentUnit1=this; this setDir 0; this allowDammage false; this enableSimulation true; this enableSimulationGlobal true; this disableAI 'FSM'; this disableAI 'MOVE'; this disableAI 'ANIM'; this disableAI 'AUTOTARGET'; this disableAI 'TARGET'; this forceSpeed 0; this setVariable [""mgmTfA_Dispatcher"",true,true];",0.6,"Private"];
+	mgmTfA_configgv_CATPObject createUnit [mgmTfA_configgv_CATP01LocationPositionArray, _mgmTfA_CATPagentUnit1sGroup, "_mgmTfA_CATPagentUnit1=this; this setDir 0; this allowDammage false; this enableSimulation true; this enableSimulationGlobal true; this disableAI 'FSM'; this disableAI 'MOVE'; this disableAI 'ANIM'; this disableAI 'AUTOTARGET'; this disableAI 'TARGET'; this forceSpeed 0; this setVariable [""mgmTfA_Dispatcher"",true,true];",0.6,"Private"];
 	uiSleep 0.05;
 	_mgmTfA_CATPagentUnit1 setVariable ["BIS_fnc_animalBehaviour_disable", true];
 	uiSleep 0.05;
-	_mgmTfA_CATPagentUnit1 setDir mgmTfA_configgv_catp01DirectionDegreesNumber;
+	_mgmTfA_CATPagentUnit1 setDir mgmTfA_configgv_CATP01DirectionDegreesNumber;
 	uiSleep 0.05;
 	_mgmTfA_CATPagentUnit1 forceSpeed 0;
 	uiSleep 0.05;
@@ -52,7 +52,7 @@ if (true) then {
 	uiSleep 0.05;
 	_mgmTfA_CATPagentUnit1 disableAI "ANIM";
 	uiSleep 0.05;
-	_mgmTfA_CATPagentUnit1 setPosATL mgmTfA_configgv_catp01LocationPositionArray;
+	_mgmTfA_CATPagentUnit1 setPosATL mgmTfA_configgv_CATP01LocationPositionArray;
 	uiSleep 0.05;
 	_mgmTfA_CATPagentUnit1 switchMove "AidlPercSnonWnonDnon_talk1";
 	uiSleep 0.05;
