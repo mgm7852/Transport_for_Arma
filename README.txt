@@ -8,6 +8,7 @@ Official forum thread	:	http://epochmod.com/forum/topic/33927-taxi-bus-transport
 
 INTRODUCTION
 Transport for Arma (TfA) is server-side mod (with some client-side extensions) which aim improving transport aspect of the game by providing Taxi and Public Bus services.
+It is by default set up to work with Epoch Mod for Arma 3 however base Arma 3 or any other mod should be easy to configure after a few tweaks.
 *Server-side module contain	:		the service units (vehicles+AI characters to control them), management logic, logging and reporting facilities.
 *Client-side module contain	:		client interaction and client<>server communication code.
 
