@@ -1,4 +1,5 @@
 // Transport for Arma Defines
+
 // Control types
 #define CT_STATIC           0
 #define CT_BUTTON           1
@@ -92,11 +93,9 @@
 #define MB_BUTTON_CANCEL  2
 #define MB_BUTTON_USER    4
 
-
 ////////////////
 //Base Classes//
 ////////////////
-
 class RscPicture
 {
     access = 0;
@@ -192,7 +191,6 @@ class MGMTFA_PICBUTTON
 		bottom = 0.005;
 	};
 
-
 	textureNoShortcut = "";
 	animTextureDefault = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\normal_ca.paa";
 	animTextureNormal = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\normal_ca.paa";
@@ -209,7 +207,7 @@ class MGMTFA_PICBUTTON
 	soundPush[] = {"",0.0,0};
 	soundClick[] = {"",0.07,1};
 	soundEscape[] = {"",0.09,1};
-	// default = no action
+	// default = no action && no toolTip
 	action = "";
 	toolTip = "";
 	access = 0;
@@ -243,6 +241,7 @@ class MGMTFA_PICBUTTON
 		shadow = "true";
 	};
 };
+
 // background image for the buttons
 class MGMTFA_TEMPLATEBUTTONPIC
 {
@@ -299,12 +298,10 @@ class MGMTFA_TEMPLATEACTUALBUTTON: MGMTFA_TEMPLATEBUTTONPIC
 	// dynamic bit -- these below should be customized for each individual button
 	tooltip = "PAY NOW";
 	text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnPayNow.jpg";
-	//action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\script_paynow.sqf""";
 	action = "CloseDialog 0;";
 	x = 0.634062 * safezoneW + safezoneX;
 	y = 0.555009 * safezoneH + safezoneY;
 	w = 0.0567187 * safezoneW;
 	h = 0.0770126 * safezoneH;
 };
-
 // EOF
