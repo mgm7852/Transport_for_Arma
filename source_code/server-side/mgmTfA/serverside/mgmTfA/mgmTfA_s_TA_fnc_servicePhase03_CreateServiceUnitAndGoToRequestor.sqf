@@ -209,6 +209,7 @@ _SUTaxiAIVehicleObject setVariable ["mgmTfAisTATaxi", true, true];
 _SUTaxiAIVehicleObject setVariable ["GUSUIDNumber", _myGUSUIDNumber, true];
 _SUTaxiAIVehicleObject setVariable ["commandingCustomerPlayerUIDNumber", _taxiAnywhereRequestorPlayerUIDTextString, true];
 _SUTaxiAIVehicleObject setVariable ["customerCannotAffordService", false, true];
+_SUTaxiAIVehicleObject setVariable ["exitRequestedAndAuthorized", false, true];
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTxAnywPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber], true];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUTxAnywPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber];
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTxAnywServiceFeeHasBeenPaidBool", _myGUSUIDNumber], false];
