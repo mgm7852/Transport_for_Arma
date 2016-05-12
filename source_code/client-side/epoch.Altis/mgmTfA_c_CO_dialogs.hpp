@@ -71,7 +71,7 @@ class MGMTFA_DIALOG
 	{
 		idc = 13040;
 
-		text = "custom\mgmTfA\img\0a_topleft_logo_mgmtfa.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guiLogoTfA.jpg";
 		x = 0.221562 * safezoneW + safezoneX;
 		y = 0.158944 * safezoneH + safezoneY;
 		w = 0.195937 * safezoneW;
@@ -81,7 +81,7 @@ class MGMTFA_DIALOG
 	class RscPicture_1201: RscPicture
 	{
 		idc = 13050;
-		text = "custom\mgmTfA\img\0b_topright_logo_arma.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guiLogoArma.jpg";
 		x = 0.5825 * safezoneW + safezoneX;
 		y = 0.158944 * safezoneH + safezoneY;
 		w = 0.180469 * safezoneW;
@@ -92,7 +92,7 @@ class MGMTFA_DIALOG
 	{
 		idc = 1202;
 
-		text = "custom\mgmTfA\img\1a_header_taxianywhere.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnHeaderTA.jpg";
 		x = 0.257656 * safezoneW + safezoneX;
 		y = 0.345975 * safezoneH + safezoneY;
 		w = 0.0928125 * safezoneW;
@@ -103,7 +103,7 @@ class MGMTFA_DIALOG
 	{
 		idc = 13060;
 
-		text = "custom\mgmTfA\img\2a_header_bus.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnHeaderBU.jpg";
 		x = 0.448438 * safezoneW + safezoneX;
 		y = 0.345975 * safezoneH + safezoneY;
 		w = 0.0876563 * safezoneW;
@@ -113,7 +113,7 @@ class MGMTFA_DIALOG
 	class RscPicture_1204: RscPicture
 	{
 		idc = 13070;
-		text = "custom\mgmTfA\img\3a_header_fixeddestination.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnHeaderFD.jpg";
 		x = 0.62375 * safezoneW + safezoneX;
 		y = 0.345975 * safezoneH + safezoneY;
 		w = 0.0928125 * safezoneW;
@@ -130,7 +130,7 @@ class MGMTFA_DIALOG
 	class MGMTFA_BUTTONPICTAXIANYWHEREHEYTAXI: MGMTFA_TEMPLATEBUTTONPIC
 	{
 		idc = -1;
-		text = "custom\mgmTfA\img\1b_btn_heytaxi.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnHeyTaxi.jpg";
 		x = 0.283437 * safezoneW + safezoneX;
 		y = 0.5 * safezoneH + safezoneY;
 		w = 0.04125 * safezoneW;
@@ -140,7 +140,7 @@ class MGMTFA_DIALOG
 	{
 		idc = -1;
 		tooltip = "CALL A TAXI";
-		text = "custom\mgmTfA\img\1b_btn_heytaxi.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnHeyTaxi.jpg";
 		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_TA_scr_heyTaxi.sqf""";
 		x = 0.283437 * safezoneW + safezoneX;
 		y = 0.5 * safezoneH + safezoneY;
@@ -153,7 +153,7 @@ class MGMTFA_DIALOG
 	class MGMTFA_BUTTONPICTAXIANYWHERE1STMILEPAYNOW: MGMTFA_TEMPLATEBUTTONPIC
 	{
 		idc = -1;
-		text = "custom\mgmTfA\img\1c_btn_1stmilepaynow.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnPay1stMile.jpg";
 		x = 0.283437 * safezoneW + safezoneX;
 		y = 0.577013 * safezoneH + safezoneY;
 		w = 0.04125 * safezoneW;
@@ -163,7 +163,7 @@ class MGMTFA_DIALOG
 	{
 		idc = -1;
 		tooltip = "PAY 1ST MILE FEE";
-		text = "custom\mgmTfA\img\1c_btn_1stmilepaynow.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnPay1stMile.jpg";
 		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf""";
 		x = 0.283437 * safezoneW + safezoneX;
 		y = 0.577013 * safezoneH + safezoneY;
@@ -176,7 +176,7 @@ class MGMTFA_DIALOG
 	class MGMTFA_BUTTONPICTAXIANYWHERESETDESTINATION: MGMTFA_TEMPLATEBUTTONPIC
 	{
 		idc = -1;
-		text = "custom\mgmTfA\img\1d_btn_setdestination.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnSetDestination.jpg";
 		x = 0.283437 * safezoneW + safezoneX;
 		y = 0.665027 * safezoneH + safezoneY;
 		w = 0.04125 * safezoneW;
@@ -187,7 +187,7 @@ class MGMTFA_DIALOG
 		idc = -1;
 		//tooltip = "SET DESTINATION";
 		tooltip = "NOT IMPLEMENTED: SET DESTINATION";
-		text = "custom\mgmTfA\img\1d_btn_setdestination.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnSetDestination.jpg";
 		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_TA_scr_setDestination.sqf""";
 		x = 0.283437 * safezoneW + safezoneX;
 		y = 0.665027 * safezoneH + safezoneY;
@@ -199,7 +199,7 @@ class MGMTFA_DIALOG
 	class MGMTFA_BUTTONPICTAXIANYWHEREEXITVEHICLE: MGMTFA_TEMPLATEBUTTONPIC
 	{
 		idc = -1;
-		text = "custom\mgmTfA\img\9a_shared_btn_exit.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnExit.jpg";
 		x = 0.283437 * safezoneW + safezoneX;
 		y = 0.786047 * safezoneH + safezoneY;
 		w = 0.0360937 * safezoneW;
@@ -209,7 +209,7 @@ class MGMTFA_DIALOG
 	{
 		idc = -1;
 		tooltip = "EXIT VEHICLE";
-		text = "custom\mgmTfA\img\9a_shared_btn_exit.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnExit.jpg";
 		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_TA_scr_pleaseStopVehicle.sqf""";
 		x = 0.283437 * safezoneW + safezoneX;
 		y = 0.786047 * safezoneH + safezoneY;
@@ -223,7 +223,7 @@ class MGMTFA_DIALOG
 	class MGMTFA_BUTTONPICPUBLICBUSSTOPTHEBUS: MGMTFA_TEMPLATEBUTTONPIC
 	{
 		idc = -1;
-		text = "custom\mgmTfA\img\2b_btn_stopbus.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnStopBU.jpg";
 		x = 0.45875 * safezoneW + safezoneX;
 		y = 0.544007 * safezoneH + safezoneY;
 		w = 0.0567187 * safezoneW;
@@ -233,7 +233,7 @@ class MGMTFA_DIALOG
 	{
 		idc = -1;
 		tooltip = "STOP THE BUS";
-		text = "custom\mgmTfA\img\2b_btn_stopbus.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnStopBU.jpg";
 		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_BU_scr_pleaseStopVehicle.sqf""";
 		x = 0.45875 * safezoneW + safezoneX;
 		y = 0.544007 * safezoneH + safezoneY;
@@ -245,7 +245,7 @@ class MGMTFA_DIALOG
 	class MGMTFA_BUTTONPICPUBLICBUSEXITVEHICLE: MGMTFA_TEMPLATEBUTTONPIC
 	{
 		idc = -1;
-		text = "custom\mgmTfA\img\9a_shared_btn_exit.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnExit.jpg";
 		x = 0.463906 * safezoneW + safezoneX;
 		y = 0.786047 * safezoneH + safezoneY;
 		w = 0.0360937 * safezoneW;
@@ -255,7 +255,7 @@ class MGMTFA_DIALOG
 	{
 		idc = -1;
 		tooltip = "EXIT VEHICLE";
-		text = "custom\mgmTfA\img\9a_shared_btn_exit.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnExit.jpg";
 		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_BU_scr_exitVehicle.sqf""";
 		x = 0.463906 * safezoneW + safezoneX;
 		y = 0.786047 * safezoneH + safezoneY;
@@ -269,7 +269,7 @@ class MGMTFA_DIALOG
 	class MGMTFA_BUTTONPICFIXEDDESTINATIONTAXIPAYSERVICEFEE: MGMTFA_TEMPLATEBUTTONPIC
 	{
 		idc = -1;
-		text = "custom\mgmTfA\img\3b_btn_paynow.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnPayNow.jpg";
 		x = 0.634062 * safezoneW + safezoneX;
 		y = 0.555009 * safezoneH + safezoneY;
 		w = 0.0567187 * safezoneW;
@@ -279,7 +279,7 @@ class MGMTFA_DIALOG
 	{
 		idc = -1;
 		tooltip = "PAY NOW";
-		text = "custom\mgmTfA\img\3b_btn_paynow.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnPayNow.jpg";
 		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_FD_scr_chargeMeServiceFee.sqf""";
 		x = 0.634062 * safezoneW + safezoneX;
 		y = 0.555009 * safezoneH + safezoneY;
@@ -291,7 +291,7 @@ class MGMTFA_DIALOG
 	class MGMTFA_BUTTONPICFIXEDDESTINATIONTAXIEXITVEHICLE: MGMTFA_TEMPLATEBUTTONPIC
 	{
 		idc = -1;
-		text = "custom\mgmTfA\img\9a_shared_btn_exit.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnExit.jpg";
 		//x = 0.659844 * safezoneW + safezoneX;
 		x = 0.646062 * safezoneW + safezoneX;
 		//x = 0.634062 * safezoneW + safezoneX;
@@ -303,7 +303,7 @@ class MGMTFA_DIALOG
 	{
 		idc = -1;
 		tooltip = "EXIT VEHICLE";
-		text = "custom\mgmTfA\img\9a_shared_btn_exit.jpg";
+		text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnExit.jpg";
 		action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_FD_scr_pleaseStopVehicle.sqf""";
 		/*
 		x = 0.646062 * safezoneW + safezoneX;

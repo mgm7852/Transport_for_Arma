@@ -131,7 +131,7 @@ while {true} do {
 						"_msg2HintTextString",
 						"_messageTextOnlyFormat"
 						];
-				_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_img_client_taxiCannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THIS SERVICE ANY MORE!<br/><br/>HAVE A NICE DAY!<br/>", (profileName)];
+				_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_c_CO_img_cannotAfford.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>SORRY BUT YOU<br/>CANNOT AFFORD<br/>THIS SERVICE ANY MORE!<br/><br/>HAVE A NICE DAY!<br/>", (profileName)];
 				_messageTextOnlyFormat = parsetext format ["%1 SORRY BUT YOU CANNOT AFFORD THIS SERVICE ANY MORE! HAVE A NICE DAY!", (profileName)];
 				hint _msg2HintTextString;
 				systemChat (str _messageTextOnlyFormat);
