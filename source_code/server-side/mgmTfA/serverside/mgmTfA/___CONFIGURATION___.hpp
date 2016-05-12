@@ -131,12 +131,14 @@ mgmTfA_configgv_taxiAnywhereTaxisSpinBeforeDeletionBool = true;
 //	parameter  0:		RADIUS 			The radius where to randomly place the Service Unit - number
 //	parameter  1:		MIN. DISTANCE		The randomly chosen spot MUST not be closer than this value to origin	- number
 //
-//production values
-//mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 5|0;//__builder___UNCOMMENT_THIS
-mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 50;//__builder___DELETE_THIS
-mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;//release_builder.delete_this_line
-mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber = 50;//release_builder.delete_this_line
-mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;//release_builder.delete_this_line
+//mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 250;//__builder___UNCOMMENT_THIS_LINE
+mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 50;////__builder___DELETE_THIS_LINE
+//mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 150;//__builder___UNCOMMENT_THIS_LINE
+mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;////__builder___DELETE_THIS_LINE
+//mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber = 50;//__builder___UNCOMMENT_THIS_LINE
+mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber = 50;////__builder___DELETE_THIS_LINE
+//mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;//__builder___UNCOMMENT_THIS_LINE
+mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;////__builder___DELETE_THIS_LINE
 
 // Random 'Termination Point' Settings
 mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusInMetresNumber = 350;
