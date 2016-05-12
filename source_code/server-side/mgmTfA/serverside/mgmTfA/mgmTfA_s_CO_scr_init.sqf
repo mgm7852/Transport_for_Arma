@@ -17,6 +17,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 
 ////CATP Stuff
 //Create CATP(Call-a-Taxi Point) Objects
+[] execVM "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_CO_scr_initCreateObjectCATP01Building.sqf";
 [] execVM "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_CO_scr_initCreateObjectCATP01.sqf";
 [] execVM "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_CO_scr_initCreateObjectCATP02.sqf";
 [] execVM "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_CO_scr_initCreateObjectCATP03.sqf";

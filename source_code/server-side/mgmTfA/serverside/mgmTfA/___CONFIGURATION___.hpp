@@ -221,6 +221,10 @@ mgmTfA_configgv_CATP01LocationMapMarkerShapeTextString="ICON";
 mgmTfA_configgv_CATP01LocationMapMarkerColorTextString="ColorOrange";
 // CATP01	Map Marker Text
 mgmTfA_configgv_CATP01LocationMapMarkerTextString="Central Taxis";
+//---
+mgmTfA_configgv_CATP01BuildingObjectClassIDTextString = "Land_u_Addon_01_V1_F";
+mgmTfA_configgv_CATP01BuildingLocationPositionArray = [13281, 14572.566, 0];
+mgmTfA_configgv_CATP01BuildingDirectionDegreesNumber = 318;
 //=====
 
 //=====
