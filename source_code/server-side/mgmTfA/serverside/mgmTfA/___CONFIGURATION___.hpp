@@ -439,15 +439,13 @@ mgmTfA_configgv_fixedDestinationTaxisClientSideScannerScanRadiusInMetresNumber =
 mgmTfA_configgv_taxiAnywhereTaxisClientSideScannerSleepDurationBetweenScansInSecondsNumber = 5;
 mgmTfA_configgv_taxiAnywhereTaxisClientSideScannerScanRadiusInMetresNumber = 250;
 // Are players allowed to click Exit button (at the bottom of the GUI) and request a vehicle stop and safely exit the vehicle?
-// Options:
-//		0 = no player is allowed to request 'stopVehicle'
-//		1 = only commandingPlayer is allowed to request 'stopVehicle'
-//		2 = any passenger player is allowed to request 'stopVehicle'
-//
+// Options: 0 = nobody is allowed to request 'stopVehicle'
+//			1 = only commandingPlayer is allowed to request 'stopVehicle'
+//			2 = any passenger player is allowed to request 'stopVehicle'
+mgmTfA_configgv_taxiAnywherePlayersCanRequestAVehicleStopNumber = 1;
 // A note on the "commandingPlayer" concept:
 //		In the current implementation, commandingPlayer is the original requestor of vehicle and it can never change.
 //		In future releases, I am planning to make it an actionMenu option, thus using mousewheel the commandingPlayer can transfer control to another passenger.
-mgmTfA_configgv_taxiAnywherePlayersCanRequestAVehicleStopNumber = 1;
 //-----
 
 

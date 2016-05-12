@@ -197,7 +197,7 @@ class MGMTFA_DIALOG
 			idc = -1;
 			tooltip = "EXIT VEHICLE";
 			text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnExit.jpg";
-			action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_TA_scr_pleaseStopVehicle.sqf""";
+			action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_TA_fnc_pleaseStopVehicle.sqf""";
 			x = 0.283437 * safezoneW + safezoneX;
 			y = 0.786047 * safezoneH + safezoneY;
 			w = 0.0360937 * safezoneW;

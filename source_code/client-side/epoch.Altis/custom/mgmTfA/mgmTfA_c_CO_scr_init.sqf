@@ -33,7 +33,8 @@ if (!isServer) then {
 	mgmTfA_c_TA_fncRequestTaxi = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_TA_fncRequestTaxi.sqf";
 	mgmTfA_c_TA_fnc_keepRequesting1stMileFeePayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_TA_fnc_keepRequesting1stMileFeePayment.sqf";
 	mgmTfA_c_FD_fnc_keepRequestingServiceFeePayment = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_FD_fnc_keepRequestingServiceFeePayment.sqf";
-
+	mgmTfA_c_TA_fnc_pleaseStopVehicle = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_TA_fnc_pleaseStopVehicle.sqf";
+	
 	//// Reset global variables of counter nature
 	mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingRecordKeeperThisIsTheFirstTimeBool = true;
 	mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber = (time);

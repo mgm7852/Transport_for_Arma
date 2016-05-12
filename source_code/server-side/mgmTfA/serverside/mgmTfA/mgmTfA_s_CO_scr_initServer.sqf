@@ -279,6 +279,7 @@ if (isServer) then {
 	publicVariable "mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusMinDistanceInMetresNumber";
  	publicVariable "mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusInMetresNumber";
 	publicVariable "mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusMinDistanceInMetresNumber";
+	publicVariable "mgmTfA_configgv_taxiAnywherePlayersCanRequestAVehicleStopNumber";
 	/// end:		INITIAL VALUES  FOR GLOBAL VARIABLES
 
 	/// SEND SIGNAL: SERVER-SIDE INITIALIZATION COMPLETE /// 
