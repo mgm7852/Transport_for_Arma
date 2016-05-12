@@ -208,10 +208,9 @@ mgmTfA_configgv_CATPObject="C_man_polo_1_F";
 mgmTfA_configgv_createObjectCATP01Bool=true;
 // CATP01 Location
 // 		Referred by mgmTfA_scr_serverInitCreateObjectHQBuilding.sqf when creating the Taxi Dispatcher agent
-mgmTfA_configgv_CATP01LocationPositionArray=[13287.2,14572.1,0];
-//17:35:46 "Player's current position is: [13281.5,14573.3,0.00143909] - dir is: 116.444"
+mgmTfA_configgv_CATP01LocationPositionArray=[13281.5,14573.3,0.00143909];
 // CATP01	Agent Facing direction? 0=north, 90=east, 180=south, 270=west
-mgmTfA_configgv_CATP01DirectionDegreesNumber=131;
+mgmTfA_configgv_CATP01DirectionDegreesNumber=116.444;
 // CATP01	Create marker?
 mgmTfA_configgv_createCATP01LocationMapMarkerBool=true;
 // CATP01	Map Marker Type
