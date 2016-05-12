@@ -164,7 +164,7 @@ if (_bookingPermitted) then {
 			// Inform via systemChat (in Text-Only format)
 			_msg2SyschatTextString = parsetext format ["[SYSTEM]  REQUESTING A TAXI TO CHOSEN DESTINATION..."];
 			systemChat (str _msg2SyschatTextString);
-			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fncRequestTaxi.sqf]  [TV5] REQUESTING A TAXI TO CHOSEN DESTINATION...		(str _taxiAnywhereTaxiRequestedDestinationPosition3DArray) is: (%1).", (str _taxiAnywhereTaxiRequestedDestinationPosition3DArray)];};
+			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf]  [TV5] REQUESTING A TAXI TO CHOSEN DESTINATION...		(str _taxiAnywhereTaxiRequestedDestinationPosition3DArray) is: (%1).", (str _taxiAnywhereTaxiRequestedDestinationPosition3DArray)];};
 			TATaxiDestinationChoser_systemReady = nil;
 
 			///////// STEP:	PREPARE CLICKNGO REQUEST DETAILS

@@ -33,10 +33,10 @@ if (((vehicle player) getVariable ["mgmTfAisTATaxi", false])) then {
 				];
 
 	_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
-	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV8] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
+	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV8] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
 	// check vehicle payment await status here
 	_TA1stMileFeeNeedToBePaidBool = call compile format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
-	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV4] This is _myGUSUIDNumber: (%1)		TOP OF FUNCTION EVALUATION 		(_TA1stMileFeeNeedToBePaidBool) is DETECTED: (%2)			", (str _myGUSUIDNumber), (str _TA1stMileFeeNeedToBePaidBool)];};
+	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV4] This is _myGUSUIDNumber: (%1)		TOP OF FUNCTION EVALUATION 		(_TA1stMileFeeNeedToBePaidBool) is DETECTED: (%2)			", (str _myGUSUIDNumber), (str _TA1stMileFeeNeedToBePaidBool)];};
 	// obtain vehicle's CommandingCustomer PUID		-- only CommandingCustomer can pay!
 	_myVehiclesCommandingCustomerPlayerUIDNumber = (vehicle player) getVariable "commandingCustomerPlayerUIDNumber";
 	_myPUID = (getPlayerUID player);
@@ -97,7 +97,7 @@ if (((vehicle player) getVariable ["mgmTfAisTATaxi", false])) then {
 
 			// player will be charged the 1st Mile Fee amount now -- SEND REQUEST to server so that server will charge customer's wallet
 			_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
-			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV8] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
+			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_scr_chargeMe1stMileFee.sqf] [TV8] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
 			// convert to global to put on the wire
 			myGUSUIDNumber = _myGUSUIDNumber;
 			// PUID was already set in RequestTaxi section but just ensuring..

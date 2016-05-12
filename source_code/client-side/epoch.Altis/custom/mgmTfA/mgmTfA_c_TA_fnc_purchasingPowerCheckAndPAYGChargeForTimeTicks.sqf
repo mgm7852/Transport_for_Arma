@@ -107,12 +107,12 @@ while {true} do {
 
 				// is PAYG active?				if it is not active, that means (a)1st Mile Fee has not been paid yet		OR		(b) TaxiAnywhere-prePaid-Initial-Journey-time is still active
 				_SUPAYGisActiveBool = call compile format ["mgmTfA_gv_PV_SU%1SUTxAnywPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
-				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_SUPAYGisActiveBool) is: (%2)			", (str _myGUSUIDNumber), (str _SUPAYGisActiveBool)];};
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_SUPAYGisActiveBool) is: (%2)			", (str _myGUSUIDNumber), (str _SUPAYGisActiveBool)];};
 
 				// if PAYG is active, charge the PAYG tickCost now -- SEND REQUEST to server so that server will charge customer's wallet
 				if (_SUPAYGisActiveBool) then {
 					// CHARGE PLAYER NOW
-					if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA]  [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
+					if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
 					myGUSUIDNumber = _myGUSUIDNumber;
 					mgmTfA_gv_pvs_req_taxiAnywhereTaxiChargeMePAYGTickCostPleaseConfirmPacket = [player, mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString, myGUSUIDNumber];
 					publicVariableServer "mgmTfA_gv_pvs_req_taxiAnywhereTaxiChargeMePAYGTickCostPleaseConfirmPacket";

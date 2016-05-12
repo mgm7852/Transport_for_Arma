@@ -254,7 +254,7 @@ while {_continueMapTracking} do
 
 		_counterForDelayedDeletionLoop= 0;
 		_delayedDeletionStartTimeInSecondsNumber = (time);
-		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA]  [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV8] ENTERed TERMINATION SLEEP LOOP. I will sleep as much as requested in (mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber) which is (%1).", (str mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber)];};
+		if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV8] ENTERed TERMINATION SLEEP LOOP. I will sleep as much as requested in (mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber) which is (%1).", (str mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber)];};
 		while {(((time) - _delayedDeletionStartTimeInSecondsNumber) <= mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber)} do {
 			_SUTerminationPointMarker = format["SU%1TerminationMarker", _myGUSUIDNumber];
 			 uiSleep 1;
@@ -263,7 +263,7 @@ while {_continueMapTracking} do
 			// Possibly we do not need to re-create it every time! just update text!
 			_SUTerminationPointMarker setMarkerTextLocal _SUTerminationPointMarkerTextLabelString;
 		};
-		if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA]  [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV7] EXITed TERMINATION SLEEP LOOP."];};
+		if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf]  [TV7] EXITed TERMINATION SLEEP LOOP."];};
 
 		// Now get rid of the last marker
 		_SUTerminationPointMarker setMarkerPosLocal [0,0];

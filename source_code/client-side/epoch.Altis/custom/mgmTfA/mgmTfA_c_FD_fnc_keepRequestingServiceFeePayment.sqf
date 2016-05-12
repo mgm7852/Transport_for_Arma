@@ -64,7 +64,7 @@ while {_continueRequestingServiceFeePayment} do
 	// log the result
 	if(_continueRequestingServiceFeePayment) then {
 		// YES continue requesting payment
-		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_c_FD_fnc_keepRequestingServiceFeePayment.sqf] [TV5] This is _originalVehiclesGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequestingServiceFeePayment) is: (%2)		I WILL CONTINUE LOOPING	", (str _originalVehiclesGUSUIDNumber), (str _continueRequestingServiceFeePayment)];};
+		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_fnc_keepRequestingServiceFeePayment.sqf] [TV5] This is _originalVehiclesGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequestingServiceFeePayment) is: (%2)		I WILL CONTINUE LOOPING	", (str _originalVehiclesGUSUIDNumber), (str _continueRequestingServiceFeePayment)];};
 		// REQUEST PAYMENT ONLY if customer currently in a Fixed Destination Taxi
 		// Get current vehicle's Classname
 		_classnameOfTheCurrentVehicle = typeOf (vehicle player);
@@ -88,10 +88,10 @@ while {_continueRequestingServiceFeePayment} do
 		};
 	} else {
 		// NO DO NOT request payment any more - we are terminating!
-		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA]  [mgmTfA_c_FD_fnc_keepRequestingServiceFeePayment.sqf] [TV5] This is _originalVehiclesGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequestingServiceFeePayment) is: (%2)		I WILL TERMINATE NOW	", (str _originalVehiclesGUSUIDNumber), (str _continueRequestingServiceFeePayment)];};
+		if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_fnc_keepRequestingServiceFeePayment.sqf] [TV5] This is _originalVehiclesGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_continueRequestingServiceFeePayment) is: (%2)		I WILL TERMINATE NOW	", (str _originalVehiclesGUSUIDNumber), (str _continueRequestingServiceFeePayment)];};
 		// Exit the loops, go back to main, from where we will terminate AFTER writing to log.
 		breakTo "mgmTfA_c_FD_fnc_keepRequestingServiceFeePaymentMainScope";
 	};
 };
-if (_thisFileVerbosityLevelNumber>=9) then {diag_log format ["[mgmTfA]  [mgmTfA_c_FD_fnc_keepRequestingServiceFeePayment.sqf] [TV9] This is _originalVehiclesGUSUIDNumber: (%1)		THIS IS THE LAST LINE. TERMINATING.", (str _originalVehiclesGUSUIDNumber)];};
+if (_thisFileVerbosityLevelNumber>=9) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_fnc_keepRequestingServiceFeePayment.sqf] [TV9] This is _originalVehiclesGUSUIDNumber: (%1)		THIS IS THE LAST LINE. TERMINATING.", (str _originalVehiclesGUSUIDNumber)];};
 // EOF
