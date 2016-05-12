@@ -52,7 +52,7 @@ while {true} do {
 	//	STEP 3: return to top of the loop & start over
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	uiSleep mgmTfA_configgv_CATPCheckFrequencySecondsNumber;
-	if (_thisFileVerbosityLevelNumber>=9) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_scr_presentCATPActionMenu.sqf] [TV9] BEGIN reading file. Before calling the function _nearbyCATPCheckResult is: %1 (should be 'false' now)", _nearbyCATPCheckResult];};//dbg
+	if (_thisFileVerbosityLevelNumber>=10) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_scr_presentCATPActionMenu.sqf] [TV9] BEGIN reading file. Before calling the function _nearbyCATPCheckResult is: %1 (should be 'false' now)", _nearbyCATPCheckResult];};//dbg
 
 	// if we do not have the main display 46 let's wait for it to appear -- to eliminate unnecessary checks while player not in game (e.g.: while connecting)
 	waitUntil {!isnull (finddisplay 46)};
