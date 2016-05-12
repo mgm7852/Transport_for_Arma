@@ -31,6 +31,7 @@
 //HH			NOTE:  EXACT LIST MAY CHANGE, THE ABOVE IS JUST AN EXAMPLE. FOR DEFINITIVE UP-TO-DATE LIST, SEE mgmTfA_fnc_server_publicVariableBroadcastSUInformation.sqf
 //HH
 private ["_thisFileVerbosityLevelNumber"];
+// DEV NOTE: _thisFileVerbosityLevelNumber set to zero
 _thisFileVerbosityLevelNumber = 0;
 scopeName "mgmTfA_c_CO_fnc_doLocalMarkerWorkMainScope";
 if (isServer) exitWith {};
