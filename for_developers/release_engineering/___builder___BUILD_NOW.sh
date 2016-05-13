@@ -1,4 +1,17 @@
 #!/bin/bash
+
+
+#======================================##======================================#
+#
+#	TODO LIST
+#
+#	Create a new config option:	list of protected files.
+#	Before parsing source_code directory move protected files out.
+#	After parsing source_code directory move protected files back in so that 
+#	they won't be changed.
+#
+#======================================##======================================#
+
 #======================================##======================================#
 # *** BUILDER SCRIPT BREAK DOWN ***		i.e.: How does this work?
 #======================================##======================================#
