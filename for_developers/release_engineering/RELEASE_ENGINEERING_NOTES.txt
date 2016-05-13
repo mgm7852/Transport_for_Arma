@@ -1,0 +1,86 @@
+RELEASE ENGINEERING - HOW TO PROGRAMMATICALLY PREPARE CODE FOR RELEASE
+
+================================================================================
+INTRO
+For official releases and release candidates, we will want to take our "non-production-ready" project code and make it "production-ready".
+To do this, there are things we need to do, every single time, and ideally we want to these to be done very quickly with minimal effort.
+
+Currently these changes are done simply by executing a batch script which is named "___builder___BUILD_now.bat".
+
+The list below documents each programmatic modification  the BUILDER script will do to the project code.
+
+Note that, to make this work, the code has to be written with BUILDER script on mind.
+
+BUILDER script has configuration values contained inside the script but it takes no run time parameters.
+Once launched, it will process 'source_code' directory and all its subdirectories and it will behave as detailed below.
+
+The files that will be modified by the BUILDER script are not backed up by BUILDER script itself. This is done with git right after executing builder.
+================================================================================
+
+
+================================================================================
+PROGRAMMATIC MODIFICATION #1
+summary:	DELETE ALL LINES that contain development-stage-only code.
+			These development-stage-only code lines could be for example, instructions to print extra debug info in logs, or give unlimited fuel/ammo to all players and so on.
+rule1:		LINE MUST CONTAIN ANYWHERE in the line (but usually at the end of line) the following string:		//__builder___DELETE_THIS_LINE
+action:		builder script, for matching lines, will delete the whole line.
+			e.g.:						
+				these lines	->		//DEV NOTE:	This extra line bypasses the phase age check code, thus never ends the run.		//__builder___DELETE_THIS_LINE
+							->		//phase_age=0;		//__builder___DELETE_THIS_LINE
+				
+				will become	->		(nothing!)
+================================================================================
+
+
+================================================================================
+PROGRAMMATIC MODIFICATION #2
+summary:	UNCOMMENT ALL LINES that contain production-stage-only code.
+			These production-stage-only code lines, for example, could be instructions to give limited fuel/ammo to all players for dev testing purposes and so on.
+rule1:		LINE MUST CONTAIN ANYWHERE in the line (but usually at the end of line) the following string:		//__builder___UNCOMMENT_THIS_LINE
+rule2:		LINE MUST CONTAIN double // as the first two characters of the line (as the first 2 characters will be stripped).
+action:	builder script, for matching lines, will
+			1. delete the first (most left) 2 characters.
+			2. delete the builder instruction (//__builder___UNCOMMENT_THIS_LINE) that exist anywhere in the line (usually at the end).
+			e.g.:
+				this line 	->		//unlimited_ammo=false;//__builder___UNCOMMENT_THIS_LINE
+				will become	->		unlimited_ammo=false;
+================================================================================
+
+	
+================================================================================
+HOW TO DO THIS
+-we will use the linux 'sed' utility (free software) on our Windows dev box.
+-To have linux inside our Windows dev box, we will use the Cygwin package (free software).
+-we will initiate the process by executing a Windows batch script:	 	"___builder___BUILD_NOW.bat".
+-Windows batch script will then call a (linux) bash script to actually do the job:		"___builder___BUILD_NOW.sh".
+-Batch script is slim and contain only the path of the bash script & the execution call to it.
+-Bash script is the real deal and it contain the following:
+	-project configuration details. 
+		-such as main project path to modify anything underneth e.g.: "/cygdrive/c/projects/projectA/source_code" which is in Windows form something like "C:\cygdrive\c\projects\projectA\source_code".
+		-whether to log the execution and where to log.
+		-whether to automatically trigger a new git commit with an automated comment with "Built by $person-name, at $build-date-and-time".
+	-sed instruction list that make up the modify rules.
+	-this might also contain the WHAT-TO-IGNORE list.	If there are any file/directories to ignore and not to modify as per modification rules we define them here.
+	-this might also contain the HOW-TO-IGNORE code.	Anything listed above, will be temporarily moved outside the project path (to a temporary location) before the modifications begin.
+														After the last modification is completed, temporarily moved out data will be moved back to original path.
+================================================================================
+
+
+================================================================================
+TODO:
+* design & document a programmatic way of "Prepare CONFIGURATION file for release" <-- ideally prep should take 1 second (i.e.: double click on a BAT file)
+	how to do this?
+	use cygwin:
+		1. rename the file
+			FROM 	source_code\server-side\mgmTfA\serverside\mgmTfA\___BUILDID___.hpp
+			TO	source_code\server-side\mgmTfA\serverside\mgmTfA\___BUILDID___.hpp.tmp
+		* open the temp file, read the number value therein
+		* increment by one, write to original file
+		* delete temp file
+		* continue with del & repack process
+* design & document a programmatic way of "delete all debug lines" <-- ideally prep should take 1 second (i.e.: double click on a BAT file)
+* design & document a programmatic way of "bump the build number" <-- ideally prep should take 1 second (i.e.: double click on a BAT file)
+================================================================================
+
+
+// EOF
