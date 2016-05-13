@@ -51,6 +51,13 @@
 #
 #======================================##======================================#
 # *** CONFIGURATION SECTION ***
+#
+# NOTE ABOUT CLONE: 
+# Script know source_code directory.
+# It will create source_codeCLONE directory, run sed commands to modify CLONE's content.
+# Script PBO binary will be generated from the CLONE.
+# Clone will be destroyed at the end of the run.
+#
 # WORKDIR: We will be operating from within this directory (not that it matters, in this version of the script)
 WORKDIR='/c/tmp'
 STAGINGDIR='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/__STAGING__'
@@ -59,29 +66,32 @@ STAGINGDIR='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/__ST
 DOCUMENTATION_ROOT='/c/git_repos.public/pub__Transport_for_Arma/documentation'
 #
 # Full path to top level source-code directory   (inside DEVELOPMENT_DIR)
-SOURCE_CODE_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_code'
+SOURCE_CODECLONE_TOP_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE'
+SOURCE_CODE_TOP_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_code'
 #
-# Full path to top level source-code directory   (inside DEVELOPMENT_DIR)
+# Configuration file full filename (include extension)
 CONFIGURATION_FILE_FNAME='___CONFIGURATION___.hpp'
 #
-# Full path to SERVER-side code directory   (inside DEVELOPMENT_DIR) (contains init)
+# Full path to SERVER-side code CLONE directory   (inside DEVELOPMENT_DIR) (contains init)
+SERVER_CODECLONE_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/server-side/mgmTfA'
 SERVER_CODE_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA'
 #
-# Full path to CLIENT-side code directory   (inside DEVELOPMENT_DIR)
+# Full path to CLIENT-side code CLONE directory   (inside DEVELOPMENT_DIR)
+CLIENT_CODECLONE_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/client-side/epoch.Altis'
 CLIENT_CODE_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_code/client-side/epoch.Altis'
 #
 # cpbo application full path to pack directories in a PBO file
-PBO_BINARY='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/cpbo/cpbo.exe'
+CPBO_BINARY='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/cpbo/cpbo.exe'
 #
 # Full path to save resulting SERVER-side code PBO file to   (under _GOLD_)
-SERVER_CODE_PBO='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/__STAGING__/mgmTfA.pbo'
+SERVER_SIDE_PBO_OUTPUT='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/__STAGING__/mgmTfA.pbo'
 #
 # Full path to save resulting CLIENT-side code PBO file to   (under _GOLD_)
-CLIENT_CODE_PBO='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/__STAGING__/epoch.Altis.pbo'
+CLIENT_SIDE_PBO_OUTPUT='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/__STAGING__/epoch.Altis.pbo'
 #
 # MODIFYPATH 1 & 2: We will modify matching files contained in these directories (won't recurse)
-MODIFYPATH1='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA/serverside/mgmTfA'
-MODIFYPATH2='/c/git_repos.public/pub__Transport_for_Arma/source_code/client-side/epoch.Altis/custom/mgmTfA'
+MODIFYPATH1='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/server-side/mgmTfA/serverside/mgmTfA'
+MODIFYPATH2='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/client-side/epoch.Altis/custom/mgmTfA'
 #======================================##======================================#
 #
 #
@@ -97,14 +107,11 @@ MODIFYPATH2='/c/git_repos.public/pub__Transport_for_Arma/source_code/client-side
 # STEP:	Find all files under modification_dir which contain the string:			//__builder___DELETE_THIS
 cd $WORKDIR
 #
-#clean up staging directory
+# clean up staging directory
 rm -rf $STAGINGDIR/*
 #
-# STEP:	Move __CONFIGURATION__ file out to keep it safe from minification
-mv $MODIFYPATH1/$CONFIGURATION_FILE_FNAME $STAGINGDIR/
-#
-#
-#
+# create clone
+cp -r $SOURCE_CODE_TOP_ROOT $SOURCE_CODECLONE_TOP_ROOT
 #
 #
 #
@@ -144,35 +151,39 @@ grep --no-messages --files-with-matches --null " " $MODIFYPATH1/* $MODIFYPATH2/*
 #
 #
 #======================================##======================================#
-# STEP:	Move __CONFIGURATION__ file (human-readable) back to normal location after minimification && before PBOization
-echo $STAGINGDIR/$CONFIGURATION_FILE_FNAME $MODIFYPATH1/ > a.txt
-mv $STAGINGDIR/$CONFIGURATION_FILE_FNAME $MODIFYPATH1/
+# STEP:	Bring in a clean/human-readable/not-minified version of __CONFIGURATION__ file
+cp $SERVER_CODE_ROOT/$CONFIGURATION_FILE_FNAME $MODIFYPATH1/
+#
+#
+#
 #======================================##======================================#
 # STEP:	Create the server-side PBO
-$PBO_BINARY -y -p $SERVER_CODE_ROOT $SERVER_CODE_PBO
+$CPBO_BINARY -y -p $SERVER_CODECLONE_ROOT $SERVER_SIDE_PBO_OUTPUT
 #======================================##======================================#
 # STEP:	Create the client-side PBO
-$PBO_BINARY -y -p $CLIENT_CODE_ROOT $CLIENT_CODE_PBO
+$CPBO_BINARY -y -p $CLIENT_CODECLONE_ROOT $CLIENT_SIDE_PBO_OUTPUT
 #======================================##======================================#
 # STEP:	move server-side PBO into a clearly marked directory
 mkdir -p $STAGINGDIR/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/0__Epoch_AutoStart_PBO__[server-side]'
-mv $SERVER_CODE_PBO $STAGINGDIR/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/0__Epoch_AutoStart_PBO__[server-side]'
+mv $SERVER_SIDE_PBO_OUTPUT $STAGINGDIR/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/0__Epoch_AutoStart_PBO__[server-side]'
 #======================================##======================================#
 # STEP:	move client-side PBO into a clearly marked directory
 mkdir -p $STAGINGDIR/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/1__Epoch_Altis_Mission_PBO___[client-side]'
-mv $CLIENT_CODE_PBO $STAGINGDIR/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/1__Epoch_Altis_Mission_PBO___[client-side]'
+mv $CLIENT_SIDE_PBO_OUTPUT $STAGINGDIR/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/1__Epoch_Altis_Mission_PBO___[client-side]'
 #======================================##======================================#
 # STEP:	Copy documentation
 cp -r $DOCUMENTATION_ROOT $STAGINGDIR/
 #======================================##======================================#
 # STEP:	Copy human-readable source code
-cp -r $SOURCE_CODE_ROOT $STAGINGDIR/
+cp -r $SOURCE_CODE_TOP_ROOT $STAGINGDIR/
 #======================================##======================================#
 # STEP:	Copy __CONFIGURATION__ file (human-readable) into documentation for easy reference for users 
 cp $MODIFYPATH1/$CONFIGURATION_FILE_FNAME $STAGINGDIR/documentation/___CONFIGURATION___\(DEFAULT\).hpp
 #
 #
 #
+# clean up clone directory
+#rm -rf $SOURCE_CODECLONE_TOP_ROOT
 #
 #
 #
