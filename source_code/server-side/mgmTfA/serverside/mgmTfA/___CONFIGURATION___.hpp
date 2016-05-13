@@ -126,16 +126,16 @@ mgmTfA_configgv_taxiAnywhereTaxisSpinBeforeDeletionBool = true;
 //	parameter  0:		RADIUS 			The radius where to randomly place the Service Unit - number
 //	parameter  1:		MIN. DISTANCE		The randomly chosen spot MUST not be closer than this value to origin	- number
 //
-mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 250;
-mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 150;
-mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber = 50;
-mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;
+mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 300;
+mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 250;
+mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber = 300;
+mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 250;
 
 // Random 'Termination Point' Settings
-mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusInMetresNumber = 350;
-mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusMinDistanceInMetresNumber = 200;
-mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusInMetresNumber = 350;
-mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusMinDistanceInMetresNumber = 200;
+mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusInMetresNumber = 300;
+mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusMinDistanceInMetresNumber = 250;
+mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusInMetresNumber = 300;
+mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusMinDistanceInMetresNumber = 250;
 
 
 // --Establish Headquarters-- (i.e.: create the building in 3D game world yes/no)
