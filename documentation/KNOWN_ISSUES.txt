@@ -1,10 +1,13 @@
 TRANSPORT FOR ARMA - KNOWN ISSUES
 
--There is no BattlEye filters documentation (yet). it's a TODO item...
--Public Bus Module is not implemented yet
+-There is no BattlEye filters documentation (yet).	// TODO
+-Public Bus Module is not implemented yet.		// TODO
 -Elements in the GUI not working:
-	-bus module 'stop the bus (let me in)' button
-	-all 'exit vehicle' buttons
-	-TaxiAnywhere 'change destination' button
-	-Fixed Destination Taxi 'pay service fee' button
--Hotkey is not working:		players will be able to press a masterConfig file configurable hotkey to bring up the GUI. currently Epoch AntiHack is blocking it.
+	-bus module 'stop the bus (let me in)' button	// TODO
+	-all 'exit vehicle' buttons			// TODO
+	-TaxiAnywhere 'change destination' button	// TODO
+-Hotkey is not working					// TODO
+
+
+-When a passenger leave a TfA vehicle, driver might leave in a way that might overrun the passenger harming/killing him // WON'T FIX
+	COMMENT: Passengers should just step away from the vehicle towards left/right/back of vehicle. You will be harmed only if you stand still or get in front of vehicle - simply don't do it!
