@@ -44,9 +44,6 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s
 
 // Find random coordinates to spawn the new SU -- we will NOT spawn a vehicle here however we will pass this to the next function in workflow
 _positionToSpawnSUVehiclePosition3DArray=objNull;
-//RELEASE TODO
-//_positionToSpawnSUVehiclePosition3DArray=[700,500, _fixedDestinationRequestorPosition3DArray] call mgmTfA_s_CO_fnc_returnNearbyRandomOnRoadPosition3DArray;
-//_positionToSpawnSUVehiclePosition3DArray=[120,80, _fixedDestinationRequestorPosition3DArray] call mgmTfA_s_CO_fnc_returnNearbyRandomOnRoadPosition3DArray;
 _positionToSpawnSUVehiclePosition3DArray=[mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber,mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber, _fixedDestinationRequestorPosition3DArray] call mgmTfA_s_CO_fnc_returnNearbyRandomOnRoadPosition3DArray;
 //TODO: Add a check here:		if _ranPos encountered an issue it will return	"[-1,-1,-1]". 	Check, and if that's the case, kill the process. 	Inform the Requestor (We are having technical issues please try again later and if you encounter this issue again, notify the server admin.)
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase02a_SendResponse_BookingRequestAccepted.sqf]  [TV3] _positionToSpawnSUVehiclePosition3DArray random position is randomly chosen as (%1)", _positionToSpawnSUVehiclePosition3DArray];};

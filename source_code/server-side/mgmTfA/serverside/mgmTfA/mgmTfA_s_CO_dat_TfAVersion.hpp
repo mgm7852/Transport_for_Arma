@@ -1,8 +1,8 @@
 //VERSION INFORMATION
 mgmTfA_configgv_TfAScriptVersionMajorNumber = 0;
-mgmTfA_configgv_TfAScriptVersionMinorNumber = 5;
-mgmTfA_configgv_TfAScriptVersionRevisionNumber = 0;
-mgmTfA_configgv_TfAScriptVersionTextString = "0.5.0";
+mgmTfA_configgv_TfAScriptVersionMinorNumber = 4;
+mgmTfA_configgv_TfAScriptVersionRevisionNumber = 8;
+mgmTfA_configgv_TfAScriptVersionTextString = "0.4.8";
 mgmTfA_configgv_TfAScriptVersionMajorMultipliedNumber = (mgmTfA_configgv_TfAScriptVersionMajorNumber * 100);
 mgmTfA_configgv_TfAScriptVersionMinorMultipliedNumber = (mgmTfA_configgv_TfAScriptVersionMinorNumber * 10);
 mgmTfA_configgv_TfAScriptVersionRevisionSumValueNumber = mgmTfA_configgv_TfAScriptVersionMajorMultipliedNumber + mgmTfA_configgv_TfAScriptVersionMinorMultipliedNumber + mgmTfA_configgv_TfAScriptVersionRevisionNumber;
