@@ -70,7 +70,7 @@ SOURCE_CODECLONE_TOP_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_co
 SOURCE_CODE_TOP_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_code'
 #
 # Configuration file full filename (include extension)
-CONFIGURATION_FILE_FNAME='___CONFIGURATION___.hpp'
+CLEAN_CONFIGURATION_FILE_FULLPATH='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA/serverside/mgmTfA/___CONFIGURATION___.hpp'
 #
 # Full path to SERVER-side code CLONE directory   (inside DEVELOPMENT_DIR) (contains init)
 SERVER_CODECLONE_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/server-side/mgmTfA'
@@ -152,7 +152,7 @@ grep --no-messages --files-with-matches --null " " $MODIFYPATH1/* $MODIFYPATH2/*
 #
 #======================================##======================================#
 # STEP:	Bring in a clean/human-readable/not-minified version of __CONFIGURATION__ file
-cp $SERVER_CODE_ROOT/$CONFIGURATION_FILE_FNAME $MODIFYPATH1/
+cp $CLEAN_CONFIGURATION_FILE_FULLPATH $MODIFYPATH1/
 #
 #
 #
@@ -179,6 +179,7 @@ cp -r $SOURCE_CODE_TOP_ROOT $STAGINGDIR/
 #======================================##======================================#
 # STEP:	Copy __CONFIGURATION__ file (human-readable) into documentation for easy reference for users 
 cp $MODIFYPATH1/$CONFIGURATION_FILE_FNAME $STAGINGDIR/documentation/___CONFIGURATION___\(DEFAULT\).hpp
+cp $CLEAN_CONFIGURATION_FILE_FULLPATH $STAGINGDIR/documentation/___CONFIGURATION___DEFAULT.hpp
 #
 #
 #
@@ -189,5 +190,5 @@ cp $MODIFYPATH1/$CONFIGURATION_FILE_FNAME $STAGINGDIR/documentation/___CONFIGURA
 #
 #======================================#
 # *** ALLOW THE DEV SEE OUTPUT ***
-read -p "Press ENTER to exit..."
+#read -p "Press ENTER to exit..."
 #EOF
