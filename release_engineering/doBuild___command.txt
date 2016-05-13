@@ -1,0 +1,2 @@
+cd release_engineering
+./___builder___BUILD_NOW.sh
