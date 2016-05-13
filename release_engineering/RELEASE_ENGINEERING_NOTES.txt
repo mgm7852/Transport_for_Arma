@@ -64,4 +64,21 @@ HOW TO DO THIS
 	-this might also contain the HOW-TO-IGNORE code.	Anything listed above, will be temporarily moved outside the project path (to a temporary location) before the modifications begin.
 														After the last modification is completed, temporarily moved out data will be moved back to original path.
 ================================================================================
+
+
+================================================================================
+THINGS TO DO FOR A SUCCESSFUL RELEASE ENGINEERING APPROACH
+
+*	BUILDER bash script will delete all lines that contain double slash anywhere in the line. 
+	Examples:
+		// this line will be removed
+		age=40;//this line will be removed
+	Therefore, comments should go over code not to the right of code.
+	
+*	BUILDER bash script will replace all 'tab' characters with 'whitespace' character and this is usually okay but in some cases may not be desirable.
+	We currently have no solution for this.
+
+*	.
+================================================================================
+
 // EOF
