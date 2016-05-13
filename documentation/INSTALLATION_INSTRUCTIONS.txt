@@ -1,0 +1,32 @@
+TRANSPORT FOR ARMA - INSTALLATION INSTRUCTIONS for EPOCH MOD
+
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+Transport for Arma by mgm
+Official project repo	:	https://gitlab.com/themgm/Transport_for_Arma
+Official forum thread	:	http://epochmod.com/forum/topic/33927-taxi-bus-transport-for-arma/
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+
+1. Download latest release package. It should be in 7zip archive format with a file extension ".7z".
+	NOTE: You can find the link in the forum 1st post.
+
+2. Extract the archive package with 7zip sofware.	NOTE: You can obtain the free 7zip software from: www.7-zip.org
+
+3. Verify you have the correct files. When you extract the release package, contents should look like this:
+	INSTALL_ON_SERVER\
+	INSTALL_ON_SERVER\server-side\mgmTfA.pbo       	<-- server-side autostart addon for Epoch mod
+	INSTALL_ON_SERVER\client-side\epoch.Altis.pbo	<-- client-side multiplayer mission file
+	documentation\README.txt
+	documentation\LICENSE.txt
+	documentation\<many files>
+	documentation\<many files>
+	documentation\<many files>
+
+4. Copy the "INSTALL_ON_SERVER\server-side\mgmTfA.pbo" file into your server's "<..>\arma3server\@Epochhive\" directory.
+
+5. Copy the "INSTALL_ON_SERVER\client-side\epoch.Altis.pbo" file into your server's "arma3server\MPmissions\" directory.
+
+6. Start your Arma 3 Epoch Multiplayer server and ensure you load the correct MPmission file (epoch.Altis.pbo).
+
+7. When you join the game, to test Transport for Arma, quickly open and close your in-game map 3 times - you should see TfA GUI.
