@@ -60,11 +60,8 @@ mgmTfA_configgv_serviceModePublicBusSystemEnabled = true;
 //
 // --min wait time between bookings--
 // default: 900
-//mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber = 900;
-//mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber = 900;
-//RELEASETODO
-mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber = 10;
-mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber = 10;
+mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber = 900;
+mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber = 900;
 
 // --on join wait before 1st booking or not--
 // If false, a player who just joined the server will have to wait out the duration minimumWaitingTimeBetween*BookingsInSecondsNumber
@@ -77,9 +74,7 @@ mgmTfA_configgv_taxiAnywhereTaxiBookingFirstTimersCanBookWithoutWaitingBool = tr
 // as this would prevent other players from booking one of the limited number of TaxiAnywhere Taxis (practically a DoS!).
 // To prevent, when a player activate the TaxiAnywhereHotkey, a Cooldown Period will kick in and player will have to wait out before being able to use TaxiAnywhereHotkey again
 // default: 900 seconds (15 minutes)
-//mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber = 900;
-//RELEASETODO
-mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber = 60;
+mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber = 900;
 
 // --janitor initial sleep time--
 // When a player join the game, Janitor process will sleep a random amount of seconds before it starts it duty.
@@ -131,14 +126,10 @@ mgmTfA_configgv_taxiAnywhereTaxisSpinBeforeDeletionBool = true;
 //	parameter  0:		RADIUS 			The radius where to randomly place the Service Unit - number
 //	parameter  1:		MIN. DISTANCE		The randomly chosen spot MUST not be closer than this value to origin	- number
 //
-//mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 250;//__builder___UNCOMMENT_THIS_LINE
-mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 50;////__builder___DELETE_THIS_LINE
-//mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 150;//__builder___UNCOMMENT_THIS_LINE
-mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;////__builder___DELETE_THIS_LINE
-//mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber = 50;//__builder___UNCOMMENT_THIS_LINE
-mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber = 50;////__builder___DELETE_THIS_LINE
-//mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;//__builder___UNCOMMENT_THIS_LINE
-mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;////__builder___DELETE_THIS_LINE
+mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 250;
+mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 150;
+mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber = 50;
+mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;
 
 // Random 'Termination Point' Settings
 mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusInMetresNumber = 350;
@@ -541,8 +532,6 @@ mgmTfA_configgv_taxiAnywhereTaxisTickCostInCryptoNumber = 20;
 					////////////////
 
 // if enabled:	every time a 'tick charge' goes through, we will display a hint message and let the player know that he has been charged				(default: false)
-//mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeHintMessageBool = false;
-//RELEASETODO
 mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeHintMessageBool = true;
 
 // if enabled:	every time a 'tick charge' goes through, we will display a systemChat message and let the player know that he has been charged		(default: true)
@@ -701,59 +690,120 @@ mgmTfA_configgv_mapMarkerExpiryTimeForTerminatedServiceUnitsInSecondsNumber=60;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //-----
 // STUFF BELOW - MOSTLY NOT IMPLEMENTED
 //-----
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //-----
-// PUBLIC BUS SYSTEM SETTINGS
-//
+// STUFF BELOW - MOSTLY NOT IMPLEMENTED
 //-----
-// Read rest of the Public Bus System settings only this service is  enabled in the previous line
-if (mgmTfA_configgv_serviceModePublicBusSystemEnabled) then {
-	// This is the initial state of things which might change in the future in which case clients will re-draw their maps with the updated information
-	mgmTfA_dynamicgv_publicBusSystemAnnouncementIDNumber			= 1;
-	mgmTfA_dynamicgv_routeAllRoutesSettingsTextStringArray			=[];
-	mgmTfA_dynamicgv_publicBusSystemTotalNumberOfCurrentlyActiveRoutesNumberDONOTMODIFY =0;
+															//-----
+															// PUBLIC BUS SYSTEM SETTINGS
+															//
+															//-----
+															// Read rest of the Public Bus System settings only this service is  enabled in the previous line
+															if (mgmTfA_configgv_serviceModePublicBusSystemEnabled) then {
+																// This is the initial state of things which might change in the future in which case clients will re-draw their maps with the updated information
+																mgmTfA_dynamicgv_publicBusSystemAnnouncementIDNumber			= 1;
+																mgmTfA_dynamicgv_routeAllRoutesSettingsTextStringArray			=[];
+																mgmTfA_dynamicgv_publicBusSystemTotalNumberOfCurrentlyActiveRoutesNumberDONOTMODIFY =0;
 
 
-	// === BEGIN: COMBINED ROUTE CONFIG for a new route =========================================================================================//
-	//
-	//
-	//
-	//----------BEGIN:	Configurable Settings for a particular Public Bus Route
-	// Is this route enabled?
-	mgmTfA_dynamicgv_routeCurrentRouteIsEnabledBool				= true;
-	// Read rest of the settings on this route only if the route is enabled
-	if (mgmTfA_dynamicgv_routeCurrentRouteIsEnabledBool) then {
-		// Config name is only for administrative purposes - players won't see this
-		mgmTfA_dynamicgv_routeCurrentRouteConfigNameTextString		= "AltisCoastalBusLine";
-		// Globally Unique Route ID Number
-		mgmTfA_dynamicgv_publicBusSystemTotalNumberOfCurrentlyActiveRoutesNumberDONOTMODIFY = mgmTfA_dynamicgv_publicBusSystemTotalNumberOfCurrentlyActiveRoutesNumberDONOTMODIFY + 1;
-		mgmTfA_dynamicgv_routeCurrentRouteGUROIDNumber			= mgmTfA_dynamicgv_publicBusSystemTotalNumberOfCurrentlyActiveRoutesNumberDONOTMODIFY;
-		// Configuration file values below are the 'initial state' of this route's settings thus its AnnouncementID is always 1. During runtime, should we make any changes (e.g.: disable a particular route), we will need to 1. change values, 2. arrayify the new values, 3. publicVariable broadcast the new settings array, 4. finally increment the AnnouncementID so that clients can know that there has been a change.
-		mgmTfA_dynamicgv_routeCurrentRouteAnnouncementIDNumber		= 1;
-		// Public Name is what players will see on the map (and in any User Communication text)
-		mgmTfA_dynamicgv_routeCurrentRoutePublicNameTextString		= "The Coastal Bus Line";
-		// Available route line colour options:			"ColorBlack", "ColorRed", "ColorGreen", "ColorBlue", "ColorYellow", "ColorWhite" 
-		mgmTfA_dynamicgv_routeCurrentRouteLineColorTextString		= "ColorGreen";
-		mgmTfA_dynamicgv_routeCurrentRoutePointsPositionArray		= [[4081.41,13743.5,0],[4155.77,13844,0],[4227.25,13896.4,0],[4504.66,14044.1,0],[4621.39,14145.1,0],[4757.8,14265.1,0],[4849.61,14376.7,0],[4948.73,14416.3,0],[5054.04,14466.7,0],[5173.1,14482.7,0],[5274.75,14493.3,0],[5352.49,14515.6,0],[5401.08,14550.2,0],[5454.34,14595.2,0],[5501.13,14639.1,0],[5560.16,14694.6,0],[5630.89,14731.3,0],[5712.59,14761.9,0],[5806.53,14796.9,0],[5901.9,14814.1,0],[5946.27,14839.6,0],[6008.5,14893.2,0],[6103.66,14981.5,0],[6190.14,15056.6,0],[6263.35,15110.6,0],[6321.33,15149.6,0],[6377.17,15188,0],[6441.42,15230.4,0],[6530.13,15282.9,0],[6622.03,15337,0],[6709.28,15385.3,0],[6770.8,15422.9,0],[6781.35,15443.6,0],[6782.57,15472.8,0],[6781.76,15520.3,0],[6775.85,15698.6,0],[6783.24,15820.7,0],[6797.29,15934.6,0],[6816.79,15964.5,0],[6775.95,15975.6,0],[6701.52,15929.6,0],[6707.43,15963.6,0],[6724.83,15994.7,0],[6752.64,16026.2,0],[6787.92,16052.2,0],[6828.94,16076,0],[6800.14,16112.5,0],[6772.39,16159.5,0],[6763.61,16191.8,0],[6763.61,16228.4,0],[6726.3,16222.3,0],[6697.22,16213.2,0],[6650.09,16186,0],[6585.45,16164.8,0],[6563.72,16157.4,0],[6549.71,16155.5,0],[6534.82,16158.5,0],[6503.81,16177.1,0],[6485.07,16194.5,0],[6433.52,16205.8,0],[6408.23,16203.4,0],[6374.65,16196.3,0],[6348.78,16191.4,0],[6317.37,16188.2,0],[6267,16184.7,0],[6214.46,16181.9,0],[6174.96,16181.7,0],[6134.46,16182.3,0],[6103.45,16179.1,0],[6074.22,16175.6,0],[6046.76,16174,0],[6012.59,16176,0],[5983.75,16179.9,0],[5953.14,16182.1,0],[5940.61,16183.7,0],[5928.17,16180.1,0],[5908.2,16169.3,0],[5879.82,16153,0],[5872.63,16150.2,0],[5852.14,16146.1,0],[5824.46,16144.7,0],[5806.41,16149.7,0],[5788.19,16154,0],[5755.61,16145.6,0],[5726.53,16158.4,0],[5702.88,16161.6,0],[5678,16159.8,0],[5654.52,16153.5,0],[5616.68,16138.6,0],[5608.45,16130.4,0],[5601.27,16110.1,0],[5590.4,16100.1,0],[5572.01,16093.8,0],[5543.1,16094.6,0],[5522.08,16108.1,0],[5481.96,16149.7,0],[5463.39,16161.4,0],[5443.6,16168.4,0],[5421.35,16171.2,0],[5398.4,16171.2,0],[5370.54,16169.3,0],[5342.69,16162.6,0],[5313.74,16145.5,0],[5280.11,16134.4,0],[5242.92,16123.7,0],[5209.74,16108.3,0],[5197.93,16110.3,0],[5109.52,16152,0],[5050.5,16151.5,0],[5021.75,16137.1,0],[4999.25,16128.7,0],[4981.23,16128,0],[4937.72,16138.5,0],[4897.95,16144.2,0],[4874.64,16145.9,0],[4846.67,16145.5,0],[4813.89,16146.2,0],[4759.66,16157.4,0],[4739.15,16156.2,0],[4697.2,16135.8,0],[4673.65,16135.6,0],[4646.45,16132.5,0],[4616.47,16126.4,0],[4591.61,16117.7,0],[4564.41,16106.1,0],[4537.38,16092.2,0],[4516.56,16084,0],[4492.47,16082.4,0],[4456.43,16079,0],[4434.49,16074,0],[4420.8,16068.8,0],[4405.88,16057.7,0],[4390.36,16027.8,0],[4382.74,15999.3,0],[4372.47,15975.6,0],[4359.5,15950.1,0],[4351.56,15945.9,0],[4320.03,15943,0],[4295.82,15931.8,0],[4277.86,15913.1,0],[4270.28,15899.3,0],[4266,15883.2,0],[4264.54,15856.4,0],[4261.85,15831,0],[4253.54,15810.3,0],[4232.64,15778.6,0],[4214.16,15766.8,0],[4192.61,15755.7,0],[4178.59,15748.7,0],[4160.37,15727.2,0],[4143.91,15707,0],[4134.62,15693,0],[4123.93,15666.7,0],[4121.83,15641,0],[4122.18,15624.5,0],[4118.15,15600.3,0],[4114.65,15580.7,0],[4105.37,15543.9,0],[4087.67,15528.1,0],[4073.31,15518.1,0],[4060.17,15500.9,0],[4050.88,15481,0],[4043.52,15456.8,0],[4034.94,15425.4,0],[4021.45,15408.1,0],[3991.32,15396,0],[3963.81,15386.3,0],[3938.55,15370.7,0],[3919.59,15351.7,0],[3904.78,15329.2,0],[3899.84,15316,0],[3904.38,15295.8,0],[3917.22,15272.7,0],[3937.37,15252.7,0],[3962.65,15232.2,0],[3999.98,15211.8,0],[4026.16,15197.9,0],[4040.58,15195.2,0],[4050.96,15199,0],[4063.64,15212.5,0],[4080.12,15227.2,0],[4092.37,15230.7,0],[4109.28,15222.4,0],[4110.58,15210.3,0],[4111.01,15198.1,0],[4116.87,15183.8,0],[4129.23,15163.9,0],[4142.13,15145.3,0],[4153.94,15127.4,0],[4152.41,15109.4,0],[4179.29,15108.2,0],[4212.16,15107.3,0],[4240.6,15105.5,0],[4256.05,15096.3,0],[4285.75,15073.8,0],[4304.33,15053.9,0],[4319,15025.8,0],[4327.31,14999.6,0],[4337.21,14976,0],[4353.83,14947.9,0],[4373.14,14936.6,0],[4402.22,14925.3,0],[4417.65,14914.1,0],[4434.19,14899.8,0],[4452.52,14885.3,0],[4469.88,14876.3,0],[4476.91,14868.3,0],[4481.05,14848.2,0],[4486.28,14830,0],[4494.83,14819.5,0],[4507.78,14809.6,0],[4527.35,14800.2,0],[4549.12,14785.3,0],[4569.8,14772.9,0],[4582.61,14766.2,0],[4596.94,14754.5,0],[4609.28,14744.9,0],[4621.14,14736.8,0],[4645.09,14726.1,0],[4665.26,14717.8,0],[4693.53,14715.5,0],[4719.82,14712.6,0],[4747.57,14701.4,0],[4776.3,14688.2,0],[4808.82,14676.9,0],[4818.22,14655.4,0],[4825.68,14643.6,0],[4840.44,14629.4,0],[4857.06,14617,0],[4878.19,14605.5,0],[4893.58,14586.2,0],[4904.45,14562.3,0],[4911.91,14544.6,0],[4914.71,14519.1,0],[4914.71,14493.6,0],[4909.27,14470.6,0],[4897.93,14453.3,0],[4899.33,14437.9,0],[4917.82,14405.5,0]];
-		//mgmTfA_dynamicgv_routeCurrentRoutePointsPositionArray		= [[13089.9,14906.1,0], [13107.4,14886.2,0], [13128.7,14858.5,0], [13151.1,14832.9,0], [13177.6,14804,0], [13207.3,14768.3,0], [13230.3,14740,0], [13247.4,14711.1,0], [13260.5,14681.5,0], [13267.5,14660.3,0], [13274.6,14639.1,0], [13276.5,14620.2,0], [13286.7,14601.7,0], [13294,14583.9,0], [13304.7,14572,0]];
-	//----------END:	Configurable Settings for a particular Public Bus Route
-														//----------BEGIN:	DO NOT TOUCH SECTION for a particular Public Bus Route
-														mgmTfA_dynamicgv_routeCurrentRouteSettingsArray = [];
-														{
-															mgmTfA_dynamicgv_routeCurrentRouteSettingsArray set [(count mgmTfA_dynamicgv_routeCurrentRouteSettingsArray), _x];
-														} forEach [mgmTfA_dynamicgv_routeCurrentRouteGUROIDNumber, mgmTfA_dynamicgv_routeCurrentRouteAnnouncementIDNumber, mgmTfA_dynamicgv_routeCurrentRoutePublicNameTextString, mgmTfA_dynamicgv_routeCurrentRouteLineColorTextString, mgmTfA_dynamicgv_routeCurrentRoutePointsPositionArray];
-														//publicVariable "mgmTfA_dynamicgv_route1RouteSettingsArray";
-														//
-														mgmTfA_dynamicgv_routeAllRoutesSettingsTextStringArray set [(count mgmTfA_dynamicgv_routeAllRoutesSettingsTextStringArray), mgmTfA_dynamicgv_routeCurrentRouteSettingsArray];
-														//----------END:	DO NOT TOUCH SECTION for a particular Public Bus Route
-	};
-	// === END: COMBINED ROUTE CONFIG for a new route ==========================================================================================//
+																// === BEGIN: COMBINED ROUTE CONFIG for a new route =========================================================================================//
+																//
+																//
+																//
+																//----------BEGIN:	Configurable Settings for a particular Public Bus Route
+																// Is this route enabled?
+																mgmTfA_dynamicgv_routeCurrentRouteIsEnabledBool				= true;
+																// Read rest of the settings on this route only if the route is enabled
+																if (mgmTfA_dynamicgv_routeCurrentRouteIsEnabledBool) then {
+																	// Config name is only for administrative purposes - players won't see this
+																	mgmTfA_dynamicgv_routeCurrentRouteConfigNameTextString		= "AltisCoastalBusLine";
+																	// Globally Unique Route ID Number
+																	mgmTfA_dynamicgv_publicBusSystemTotalNumberOfCurrentlyActiveRoutesNumberDONOTMODIFY = mgmTfA_dynamicgv_publicBusSystemTotalNumberOfCurrentlyActiveRoutesNumberDONOTMODIFY + 1;
+																	mgmTfA_dynamicgv_routeCurrentRouteGUROIDNumber			= mgmTfA_dynamicgv_publicBusSystemTotalNumberOfCurrentlyActiveRoutesNumberDONOTMODIFY;
+																	// Configuration file values below are the 'initial state' of this route's settings thus its AnnouncementID is always 1. During runtime, should we make any changes (e.g.: disable a particular route), we will need to 1. change values, 2. arrayify the new values, 3. publicVariable broadcast the new settings array, 4. finally increment the AnnouncementID so that clients can know that there has been a change.
+																	mgmTfA_dynamicgv_routeCurrentRouteAnnouncementIDNumber		= 1;
+																	// Public Name is what players will see on the map (and in any User Communication text)
+																	mgmTfA_dynamicgv_routeCurrentRoutePublicNameTextString		= "The Coastal Bus Line";
+																	// Available route line colour options:			"ColorBlack", "ColorRed", "ColorGreen", "ColorBlue", "ColorYellow", "ColorWhite" 
+																	mgmTfA_dynamicgv_routeCurrentRouteLineColorTextString		= "ColorGreen";
+																	mgmTfA_dynamicgv_routeCurrentRoutePointsPositionArray		= [[4081.41,13743.5,0],[4155.77,13844,0],[4227.25,13896.4,0],[4504.66,14044.1,0],[4621.39,14145.1,0],[4757.8,14265.1,0],[4849.61,14376.7,0],[4948.73,14416.3,0],[5054.04,14466.7,0],[5173.1,14482.7,0],[5274.75,14493.3,0],[5352.49,14515.6,0],[5401.08,14550.2,0],[5454.34,14595.2,0],[5501.13,14639.1,0],[5560.16,14694.6,0],[5630.89,14731.3,0],[5712.59,14761.9,0],[5806.53,14796.9,0],[5901.9,14814.1,0],[5946.27,14839.6,0],[6008.5,14893.2,0],[6103.66,14981.5,0],[6190.14,15056.6,0],[6263.35,15110.6,0],[6321.33,15149.6,0],[6377.17,15188,0],[6441.42,15230.4,0],[6530.13,15282.9,0],[6622.03,15337,0],[6709.28,15385.3,0],[6770.8,15422.9,0],[6781.35,15443.6,0],[6782.57,15472.8,0],[6781.76,15520.3,0],[6775.85,15698.6,0],[6783.24,15820.7,0],[6797.29,15934.6,0],[6816.79,15964.5,0],[6775.95,15975.6,0],[6701.52,15929.6,0],[6707.43,15963.6,0],[6724.83,15994.7,0],[6752.64,16026.2,0],[6787.92,16052.2,0],[6828.94,16076,0],[6800.14,16112.5,0],[6772.39,16159.5,0],[6763.61,16191.8,0],[6763.61,16228.4,0],[6726.3,16222.3,0],[6697.22,16213.2,0],[6650.09,16186,0],[6585.45,16164.8,0],[6563.72,16157.4,0],[6549.71,16155.5,0],[6534.82,16158.5,0],[6503.81,16177.1,0],[6485.07,16194.5,0],[6433.52,16205.8,0],[6408.23,16203.4,0],[6374.65,16196.3,0],[6348.78,16191.4,0],[6317.37,16188.2,0],[6267,16184.7,0],[6214.46,16181.9,0],[6174.96,16181.7,0],[6134.46,16182.3,0],[6103.45,16179.1,0],[6074.22,16175.6,0],[6046.76,16174,0],[6012.59,16176,0],[5983.75,16179.9,0],[5953.14,16182.1,0],[5940.61,16183.7,0],[5928.17,16180.1,0],[5908.2,16169.3,0],[5879.82,16153,0],[5872.63,16150.2,0],[5852.14,16146.1,0],[5824.46,16144.7,0],[5806.41,16149.7,0],[5788.19,16154,0],[5755.61,16145.6,0],[5726.53,16158.4,0],[5702.88,16161.6,0],[5678,16159.8,0],[5654.52,16153.5,0],[5616.68,16138.6,0],[5608.45,16130.4,0],[5601.27,16110.1,0],[5590.4,16100.1,0],[5572.01,16093.8,0],[5543.1,16094.6,0],[5522.08,16108.1,0],[5481.96,16149.7,0],[5463.39,16161.4,0],[5443.6,16168.4,0],[5421.35,16171.2,0],[5398.4,16171.2,0],[5370.54,16169.3,0],[5342.69,16162.6,0],[5313.74,16145.5,0],[5280.11,16134.4,0],[5242.92,16123.7,0],[5209.74,16108.3,0],[5197.93,16110.3,0],[5109.52,16152,0],[5050.5,16151.5,0],[5021.75,16137.1,0],[4999.25,16128.7,0],[4981.23,16128,0],[4937.72,16138.5,0],[4897.95,16144.2,0],[4874.64,16145.9,0],[4846.67,16145.5,0],[4813.89,16146.2,0],[4759.66,16157.4,0],[4739.15,16156.2,0],[4697.2,16135.8,0],[4673.65,16135.6,0],[4646.45,16132.5,0],[4616.47,16126.4,0],[4591.61,16117.7,0],[4564.41,16106.1,0],[4537.38,16092.2,0],[4516.56,16084,0],[4492.47,16082.4,0],[4456.43,16079,0],[4434.49,16074,0],[4420.8,16068.8,0],[4405.88,16057.7,0],[4390.36,16027.8,0],[4382.74,15999.3,0],[4372.47,15975.6,0],[4359.5,15950.1,0],[4351.56,15945.9,0],[4320.03,15943,0],[4295.82,15931.8,0],[4277.86,15913.1,0],[4270.28,15899.3,0],[4266,15883.2,0],[4264.54,15856.4,0],[4261.85,15831,0],[4253.54,15810.3,0],[4232.64,15778.6,0],[4214.16,15766.8,0],[4192.61,15755.7,0],[4178.59,15748.7,0],[4160.37,15727.2,0],[4143.91,15707,0],[4134.62,15693,0],[4123.93,15666.7,0],[4121.83,15641,0],[4122.18,15624.5,0],[4118.15,15600.3,0],[4114.65,15580.7,0],[4105.37,15543.9,0],[4087.67,15528.1,0],[4073.31,15518.1,0],[4060.17,15500.9,0],[4050.88,15481,0],[4043.52,15456.8,0],[4034.94,15425.4,0],[4021.45,15408.1,0],[3991.32,15396,0],[3963.81,15386.3,0],[3938.55,15370.7,0],[3919.59,15351.7,0],[3904.78,15329.2,0],[3899.84,15316,0],[3904.38,15295.8,0],[3917.22,15272.7,0],[3937.37,15252.7,0],[3962.65,15232.2,0],[3999.98,15211.8,0],[4026.16,15197.9,0],[4040.58,15195.2,0],[4050.96,15199,0],[4063.64,15212.5,0],[4080.12,15227.2,0],[4092.37,15230.7,0],[4109.28,15222.4,0],[4110.58,15210.3,0],[4111.01,15198.1,0],[4116.87,15183.8,0],[4129.23,15163.9,0],[4142.13,15145.3,0],[4153.94,15127.4,0],[4152.41,15109.4,0],[4179.29,15108.2,0],[4212.16,15107.3,0],[4240.6,15105.5,0],[4256.05,15096.3,0],[4285.75,15073.8,0],[4304.33,15053.9,0],[4319,15025.8,0],[4327.31,14999.6,0],[4337.21,14976,0],[4353.83,14947.9,0],[4373.14,14936.6,0],[4402.22,14925.3,0],[4417.65,14914.1,0],[4434.19,14899.8,0],[4452.52,14885.3,0],[4469.88,14876.3,0],[4476.91,14868.3,0],[4481.05,14848.2,0],[4486.28,14830,0],[4494.83,14819.5,0],[4507.78,14809.6,0],[4527.35,14800.2,0],[4549.12,14785.3,0],[4569.8,14772.9,0],[4582.61,14766.2,0],[4596.94,14754.5,0],[4609.28,14744.9,0],[4621.14,14736.8,0],[4645.09,14726.1,0],[4665.26,14717.8,0],[4693.53,14715.5,0],[4719.82,14712.6,0],[4747.57,14701.4,0],[4776.3,14688.2,0],[4808.82,14676.9,0],[4818.22,14655.4,0],[4825.68,14643.6,0],[4840.44,14629.4,0],[4857.06,14617,0],[4878.19,14605.5,0],[4893.58,14586.2,0],[4904.45,14562.3,0],[4911.91,14544.6,0],[4914.71,14519.1,0],[4914.71,14493.6,0],[4909.27,14470.6,0],[4897.93,14453.3,0],[4899.33,14437.9,0],[4917.82,14405.5,0]];
+																	//mgmTfA_dynamicgv_routeCurrentRoutePointsPositionArray		= [[13089.9,14906.1,0], [13107.4,14886.2,0], [13128.7,14858.5,0], [13151.1,14832.9,0], [13177.6,14804,0], [13207.3,14768.3,0], [13230.3,14740,0], [13247.4,14711.1,0], [13260.5,14681.5,0], [13267.5,14660.3,0], [13274.6,14639.1,0], [13276.5,14620.2,0], [13286.7,14601.7,0], [13294,14583.9,0], [13304.7,14572,0]];
+																//----------END:	Configurable Settings for a particular Public Bus Route
+																													//----------BEGIN:	DO NOT TOUCH SECTION for a particular Public Bus Route
+																													mgmTfA_dynamicgv_routeCurrentRouteSettingsArray = [];
+																													{
+																														mgmTfA_dynamicgv_routeCurrentRouteSettingsArray set [(count mgmTfA_dynamicgv_routeCurrentRouteSettingsArray), _x];
+																													} forEach [mgmTfA_dynamicgv_routeCurrentRouteGUROIDNumber, mgmTfA_dynamicgv_routeCurrentRouteAnnouncementIDNumber, mgmTfA_dynamicgv_routeCurrentRoutePublicNameTextString, mgmTfA_dynamicgv_routeCurrentRouteLineColorTextString, mgmTfA_dynamicgv_routeCurrentRoutePointsPositionArray];
+																													//publicVariable "mgmTfA_dynamicgv_route1RouteSettingsArray";
+																													//
+																													mgmTfA_dynamicgv_routeAllRoutesSettingsTextStringArray set [(count mgmTfA_dynamicgv_routeAllRoutesSettingsTextStringArray), mgmTfA_dynamicgv_routeCurrentRouteSettingsArray];
+																													//----------END:	DO NOT TOUCH SECTION for a particular Public Bus Route
+																};
+																// === END: COMBINED ROUTE CONFIG for a new route ==========================================================================================//
 
 
-};
-//-----
+															};
+															//-----
 // EOF
