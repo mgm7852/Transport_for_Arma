@@ -25,10 +25,10 @@ summary:	DELETE ALL LINES that contain development-stage-only code.
 rule1:		LINE MUST CONTAIN ANYWHERE in the line (but usually at the end of line) the following string:		//__builder___DELETE_THIS_LINE
 action:		builder script, for matching lines, will delete the whole line.
 			e.g.:						
-				these lines	->		//DEV NOTE:	This extra line bypasses the phase age check code, thus never ends the run.		//__builder___DELETE_THIS_LINE
-							->		//phase_age=0;		//__builder___DELETE_THIS_LINE
+				these lines	->	//DEV NOTE:	This extra line bypasses the phase age check code, thus never ends the run.		//__builder___DELETE_THIS_LINE
+						->	//phase_age=0;		//__builder___DELETE_THIS_LINE
 				
-				will become	->		(nothing!)
+				will become	->	(nothing!)
 ================================================================================
 
 
@@ -42,8 +42,8 @@ action:	builder script, for matching lines, will
 			1. delete the first (most left) 2 characters.
 			2. delete the builder instruction (//__builder___UNCOMMENT_THIS_LINE) that exist anywhere in the line (usually at the end).
 			e.g.:
-				this line 	->		//unlimited_ammo=false;//__builder___UNCOMMENT_THIS_LINE
-				will become	->		unlimited_ammo=false;
+				this line 	->	//unlimited_ammo=false;//__builder___UNCOMMENT_THIS_LINE
+				will become	->	unlimited_ammo=false;
 ================================================================================
 
 	
@@ -80,13 +80,6 @@ TODO:
 		n. continue with del & repack process
 n. design & document a programmatic way of "delete all debug lines" <-- ideally prep should take 1 second (i.e.: double click on a BAT file)
 1. design & document a programmatic way of "bump the build number" <-- ideally prep should take 1 second (i.e.: double click on a BAT file)
-================================================================================
-
-
-
-================================================================================
-OLD STUFF - ignore anything below
-
 ================================================================================
 
 
