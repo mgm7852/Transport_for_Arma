@@ -33,7 +33,7 @@ IF EXIST %PBOFILE_FULLPATH_FOR_CLIENT_SIDE% (
 
 :::::::::::::::::::: Repack the SERVER code in DEVELOPMENT_DIR 			and place the resulting PBO file under Epoch's @epochhive\addons directory
 ::cd /D "L:\Software\arma_stuff\cPBO_[PBO_pack_unpack_tool]"
-%PBOCOMMAND%	-y -p %CODE__SERVER_SIDE_FULLPATH%			%PBOFILE_FULLPATH_FOR_SERVER_SIDE%
+%PBOCOMMAND% -y -p %CODE__SERVER_SIDE_FULLPATH% %PBOFILE_FULLPATH_FOR_SERVER_SIDE%
 ECHO Server-side file packed as:				%PBOFILE_FULLPATH_FOR_SERVER_SIDE%
 ::TIMEOUT 1
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -41,16 +41,10 @@ ECHO Server-side file packed as:				%PBOFILE_FULLPATH_FOR_SERVER_SIDE%
 
 
 :::::::::::::::::::: Repack the CLIENT code in DEVELOPMENT_DIR 			and place the resulting PBO file under Epoch's MPmissions directory
-%PBOCOMMAND%	-y -p %CODE__CLIENT_SIDE_FULLPATH%		%PBOFILE_FULLPATH_FOR_CLIENT_SIDE%
-ECHO Client-side MPmission file packed as:			%PBOFILE_FULLPATH_FOR_CLIENT_SIDE%
+%PBOCOMMAND% -y -p %CODE__CLIENT_SIDE_FULLPATH% %PBOFILE_FULLPATH_FOR_CLIENT_SIDE%
+ECHO Client-side MPmission file packed as: %PBOFILE_FULLPATH_FOR_CLIENT_SIDE%
 ::TIMEOUT 1
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:: we are done here. return to the caller
-GOTO CONTINUE_MAIN_WORKFLOW_FROM___SUB__DELETE_EXISTING_PBOS__REPACK_CODE_AS_PBO__COPY_PBOS_TO_PATHS
-:::::::::::::::::::: SUBROUTINE: END ::::::::::::::::::::
-
-
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: END:	SUBROUTINE DEFINITIONS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 TIMEOUT 15
 EXIT
