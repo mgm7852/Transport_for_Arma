@@ -212,8 +212,8 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 			};
 		}  forEach mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray;
 	};
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME TICK COST]    RECEIVED chargeMeTickCost REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME TICK COST]    RECEIVED chargeMeTickCost REQUEST    _taxiAnywhereRequestorClientIDNumber: (%1).	_taxiAnywhereRequestorProfileNameTextString: (%2).		_taxiAnywhereRequestorPlayerUIDTextString: (%3).", _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorPlayerUIDTextString];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV9]    [PAYG CHARGE ME TICK COST]    RECEIVED chargeMeTickCost REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV9]    [PAYG CHARGE ME TICK COST]    RECEIVED chargeMeTickCost REQUEST    _taxiAnywhereRequestorClientIDNumber: (%1).	_taxiAnywhereRequestorProfileNameTextString: (%2).		_taxiAnywhereRequestorPlayerUIDTextString: (%3).", _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorPlayerUIDTextString];};//dbg
 	// STAGE IN WORKFLOW:		Action the request = Charge the player
 	_null = [_requestorPlayerObject, mgmTfA_configgv_taxiAnywhereTaxisTickCostInCryptoNegativeNumber] call EPOCH_exp_server_effectCrypto;
 	// Report to log
