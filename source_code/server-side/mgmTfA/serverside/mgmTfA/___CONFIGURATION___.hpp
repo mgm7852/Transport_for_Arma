@@ -29,15 +29,15 @@
 //-----
 // --master debug level server & client-side logging verbosity--			-- should be 0 for production systems and greater for debugging.
 // WARNING: MASSIVE LOG OUTPUT! If you leave this on, on your production system it WILL impact performance
-mgmTfA_configgv_serverAndClientDebugVerbosityLevel = 10;
+mgmTfA_configgv_serverAndClientDebugVerbosityLevel = 0;
 
 // --server-side RPT logging verbosity--					-- should be 0 for production systems and greater for debugging.
 // default: 0
-mgmTfA_configgv_serverVerbosityLevel = 10;
+mgmTfA_configgv_serverVerbosityLevel = 0;
 
 // --client-side RPT logging verbosity--					-- should be 0 for production systems and greater for debugging.
 // default: 0
-mgmTfA_configgv_clientVerbosityLevel = 10;
+mgmTfA_configgv_clientVerbosityLevel = 0;
 //-----
 
 
