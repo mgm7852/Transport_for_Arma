@@ -258,14 +258,6 @@ class MGMTFA_TEMPLATEBUTTONPIC
 	colorText[] = {1,1,1,1};
 	font = "PuristaMedium"; 
 	sizeEx = .1;
-	/*
-	// TODO CLEAN ME UP
-	// filename, volume, pitch
-	soundEnter[] = {"\A3\ui_f\data\sound\RscCombo\soundExpand",0.09,1};
-	soundPush[] = {"\A3\ui_f\data\sound\CfgNotifications\taskCreated",0.0,0};
-	soundClick[] = {"\A3\ui_f\data\sound\RscButton\soundClick",0.07,1};
-	soundEscape[] = {"\A3\ui_f\data\sound\ReadOut\ReadoutHideClick1",0.09,1};
-	*/
 	// filename, volume, pitch
 	soundEnter[] = {"\A3\ui_f\data\sound\RscCombo\soundExpand",1,1};
 	soundPush[] = {"\A3\ui_f\data\sound\CfgNotifications\taskCreated",1,1};
