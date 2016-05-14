@@ -21,9 +21,8 @@ respawn = "BASE";
 respawnDelay = 600;
 respawnDialog = 0;
 respawnButton = 0;
-//RELEASE TODO
-//respawnOnStart = -1;
-respawnOnStart = 0;
+//respawnOnStart = -1;//__builder___UNCOMMENT_THIS_LINE
+respawnOnStart = 0;//__builder___DELETE_THIS_LINE
 onPauseScript = "epoch_code\gui\scripts\Epoch_onPause.sqf";
 onLoadMission= "Epoch";
 OnLoadIntro = "Welcome to Epoch Mod";
@@ -37,9 +36,8 @@ disableChannels[]={0,1,2,6};
 enableItemsDropping = 0;
 briefing = 0;
 debriefing = 0;
-//RELEASE TODO
-//enableDebugConsole = 0;
-enableDebugConsole = 2;
+//enableDebugConsole = 0;//__builder___UNCOMMENT_THIS_LINE
+enableDebugConsole = 2;//__builder___DELETE_THIS_LINE
 joinUnassigned = 0;
 forceRotorLibSimulation = 1;
 saving = 0;

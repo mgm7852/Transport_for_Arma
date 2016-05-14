@@ -60,11 +60,10 @@ mgmTfA_configgv_serviceModePublicBusSystemEnabled = true;
 //
 // --min wait time between bookings--
 // default: 900
-//mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber = 900;
-//mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber = 900;
-//RELEASETODO
-mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber = 10;
-mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber = 10;
+//mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber = 900;//__builder___UNCOMMENT_THIS_LINE
+//mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber = 900;//__builder___UNCOMMENT_THIS_LINE
+mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber = 10;//__builder___DELETE_THIS_LINE
+mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber = 10;//__builder___DELETE_THIS_LINE
 
 // --on join wait before 1st booking or not--
 // If false, a player who just joined the server will have to wait out the duration minimumWaitingTimeBetween*BookingsInSecondsNumber
@@ -77,9 +76,8 @@ mgmTfA_configgv_taxiAnywhereTaxiBookingFirstTimersCanBookWithoutWaitingBool = tr
 // as this would prevent other players from booking one of the limited number of TaxiAnywhere Taxis (practically a DoS!).
 // To prevent, when a player activate the TaxiAnywhereHotkey, a Cooldown Period will kick in and player will have to wait out before being able to use TaxiAnywhereHotkey again
 // default: 900 seconds (15 minutes)
-//mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber = 900;
-//RELEASETODO
-mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber = 60;
+//mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber = 900;//__builder___UNCOMMENT_THIS_LINE
+mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber = 60;//__builder___DELETE_THIS_LINE
 
 // --janitor initial sleep time--
 // When a player join the game, Janitor process will sleep a random amount of seconds before it starts it duty.
@@ -541,8 +539,6 @@ mgmTfA_configgv_taxiAnywhereTaxisTickCostInCryptoNumber = 20;
 					////////////////
 
 // if enabled:	every time a 'tick charge' goes through, we will display a hint message and let the player know that he has been charged				(default: false)
-//mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeHintMessageBool = false;
-//RELEASETODO
 mgmTfA_configgv_taxiAnywhereTaxisDisplayTickChargeHintMessageBool = true;
 
 // if enabled:	every time a 'tick charge' goes through, we will display a systemChat message and let the player know that he has been charged		(default: true)

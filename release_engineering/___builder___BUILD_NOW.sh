@@ -107,7 +107,7 @@ LIGHT_MODIFYFILE1='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/
 #======================================##======================================#
 # *** MAIN ***
 #
-# STEP:	Find all files under modification_dir which contain the string:			//__builder___DELETE_THIS
+# STEP:	Find all files under modification_dir which contain the string:			//__builder___DELETE_THIS_LINE
 cd $WORKDIR
 #
 # clean up staging directory
@@ -122,16 +122,16 @@ cp -r $SOURCE_CODE_TOP_ROOT $SOURCE_CODECLONE_TOP_ROOT
 #
 #
 #======================================#
-# STEP:	Find all files under modification_dir which contain the string:			//__builder___DELETE_THIS
+# STEP:	Find all files under modification_dir which contain the string:			//__builder___DELETE_THIS_LINE
 #		then modify these matching files in place with the in-line sed expression
 #			modification #1:	delete the whole line
-grep --no-messages --files-with-matches --null "//__builder___DELETE_THIS" $MODIFYPATH1/* $MODIFYPATH2/* | xargs -0 sed --in-place -e '/\/\/__builder___DELETE_THIS/d'
+grep --no-messages --files-with-matches --null "//__builder___DELETE_THIS_LINE" $MODIFYPATH1/* $MODIFYPATH2/* | xargs -0 sed --in-place -e '/\/\/__builder___DELETE_THIS_LINE/d'
 #======================================#
-# STEP:	Find all files under modification_dir which contain the string:			//__builder___UNCOMMENT_THIS
+# STEP:	Find all files under modification_dir which contain the string:			//__builder___UNCOMMENT_THIS_LINE
 #		then modify these matching files in place with the in-line sed expression
 #			modification #1:	delete the very first (most-left) two characters on each line
-#			modification #2:	remove the string //__builder___UNCOMMENT_THIS
-grep --no-messages --files-with-matches --null "//__builder___UNCOMMENT_THIS" $MODIFYPATH1/* $MODIFYPATH2/* | xargs -0 sed --in-place -e '/__builder___UNCOMMENT_THIS/{s/#//g;s/\/\/__builder___UNCOMMENT_THIS//g;s/\/\///g;}'
+#			modification #2:	remove the string //__builder___UNCOMMENT_THIS_LINE
+grep --no-messages --files-with-matches --null "//__builder___UNCOMMENT_THIS_LINE" $MODIFYPATH1/* $MODIFYPATH2/* | xargs -0 sed --in-place -e '/__builder___UNCOMMENT_THIS_LINE/{s/#//g;s/\/\/__builder___UNCOMMENT_THIS_LINE//g;s/\/\///g;}'
 #======================================##======================================#
 # STEP:	Find all files under modification_dir which contain the string:			//
 #		then modify these matching files in place with the in-line sed expression
@@ -162,17 +162,17 @@ cp $CLEAN_CONFIGURATION_FILE_FULLPATH $MODIFYPATH1/
 #
 #
 # ### Now partially process the clean config file -- do the preprocessing work but do not do any minification
-# STEP:	Find all files under modification_dir which contain the string:			//__builder___DELETE_THIS
+# STEP:	Find all files under modification_dir which contain the string:			//__builder___DELETE_THIS_LINE
 #		then modify these matching files in place with the in-line sed expression
 #			modification #1:	delete the whole line
 #CLONE_CONFIGURATION_FILE_FULLPATH
-sed --in-place -e '/\/\/__builder___DELETE_THIS/d' $CLONE_CONFIGURATION_FILE_FULLPATH $LIGHT_MODIFYFILE1
+sed --in-place -e '/\/\/__builder___DELETE_THIS_LINE/d' $CLONE_CONFIGURATION_FILE_FULLPATH $LIGHT_MODIFYFILE1
 #======================================#
-# STEP:	Find all files under modification_dir which contain the string:			//__builder___UNCOMMENT_THIS
+# STEP:	Find all files under modification_dir which contain the string:			//__builder___UNCOMMENT_THIS_LINE
 #		then modify these matching files in place with the in-line sed expression
 #			modification #1:	delete the very first (most-left) two characters on each line
-#			modification #2:	remove the string //__builder___UNCOMMENT_THIS
-sed --in-place -e '/__builder___UNCOMMENT_THIS/{s/#//g;s/\/\/__builder___UNCOMMENT_THIS//g;s/\/\///g;}' $CLONE_CONFIGURATION_FILE_FULLPATH $LIGHT_MODIFYFILE1
+#			modification #2:	remove the string //__builder___UNCOMMENT_THIS_LINE
+sed --in-place -e '/__builder___UNCOMMENT_THIS_LINE/{s/#//g;s/\/\/__builder___UNCOMMENT_THIS_LINE//g;s/\/\///g;}' $CLONE_CONFIGURATION_FILE_FULLPATH $LIGHT_MODIFYFILE1
 #
 #
 #
