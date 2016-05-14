@@ -89,7 +89,7 @@ private	[
 		"_currentTimeInSecondsNumber",
 		"_exitRequestedAndAuthorizedBool",
 		"_shouldKeepWaitingToAllowRequestedAndAuthorizedExitBool",
-		"_shouldKeepWaitingToAllowRequestedAndAuthorizedExitTillSecondsNumber",
+		"_shouldKeepWaitingToAllowRequestedAndAuthorizedExitTillSecondsNumber"
 		];
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 _taxiAnywhereRequestorClientIDNumber = (_this select 0);
