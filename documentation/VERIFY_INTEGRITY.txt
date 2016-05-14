@@ -1,0 +1,28 @@
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+Transport for Arma by mgm
+Official project repo	:	https://gitlab.com/themgm/Transport_for_Arma
+Official forum thread	:	http://epochmod.com/forum/topic/33927-taxi-bus-transport-for-arma/
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+
+TRANSPORT FOR ARMA - RELEASE INTEGRITY VERIFICATION INSTRUCTIONS
+
+Q: How Can I Check The Integrity Of A Release?
+A: An easy solution is provided: MD5 and SHA checksums provide a simple, means of verifying the integrity of a download.
+   You can simply create a checksum (in the same way as the release manager) after download, and compare the result to the checksum downloaded from the main TfA Git repo.
+   Obviously, this process does not provide for authentication and non-repudiation.
+
+	Simply download 3 files listed below, place them in the same directory with .7z and double click on BAT script and observe the output. 
+	You should either see integrity check:	"OK" or "FAILED".
+
+	Files you will need:
+	
+		(1) GNPPG utility sha256sum.exe download it here:
+		https://gitlab.com/themgm/Transport_for_Arma/blob/master/release_engineering/gnupg_checksummers/sha256sum.exe
+
+		(2) Double Click to Verify Batch Script - download it here:
+		https://gitlab.com/themgm/Transport_for_Arma/blob/master/release_engineering/verify_integrity_batch_script/_DOUBLE_CLICK_TO_VERIFY_INTEGRITY.BAT
+		
+		(3) Matching SHA256 signature for the archive you downloaded. 
+		You can possibly find a link to this file in forum 1st post, in addition you find all builds and signatures here:
+		https://gitlab.com/themgm/Transport_for_Arma/tree/master/release_packages
