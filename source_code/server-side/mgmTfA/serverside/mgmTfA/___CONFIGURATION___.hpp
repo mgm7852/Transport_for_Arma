@@ -82,8 +82,10 @@ mgmTfA_configgv_taxiAnywhereTaxiBookingHotkeyCooldownDurationInSecondsNumber = 6
 // --janitor initial sleep time--
 // When a player join the game, Janitor process will sleep a random amount of seconds before it starts it duty.
 // With the settings below, the random duration will be Min=24 seconds & Max=48 seconds.
-mgmTfA_configgv_taxiAnywhereJanitorInitialRandomSleepDurationMinimumBaseInSecondsNumber = 24; // default: 24 seconds
-mgmTfA_configgv_taxiAnywhereJanitorInitialRandomSleepDurationMinimumAdditionInSecondsNumber = 24; // default: 24 seconds
+// default: 24 seconds
+mgmTfA_configgv_taxiAnywhereJanitorInitialRandomSleepDurationMinimumBaseInSecondsNumber = 24;
+// default: 24 seconds
+mgmTfA_configgv_taxiAnywhereJanitorInitialRandomSleepDurationMinimumAdditionInSecondsNumber = 24;
 
 // --janitor sleep time--
 // This is used in mgmTfA_c_TA_fnc_doLocalJanitorWork.sqf
