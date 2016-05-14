@@ -86,7 +86,10 @@ private	[
 		"_paygCustomerCanAffordTheNextPaymentBool",
 		"_paygLastCheckCounterNumber",
 		"_TA1stMileFeeNeedToBePaidBool",
-		"_currentTimeInSecondsNumber"
+		"_currentTimeInSecondsNumber",
+		"_exitRequestedAndAuthorizedBool",
+		"_shouldKeepWaitingToAllowRequestedAndAuthorizedExitBool",
+		"_shouldKeepWaitingToAllowRequestedAndAuthorizedExitTillSecondsNumber",
 		];
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 _taxiAnywhereRequestorClientIDNumber = (_this select 0);
@@ -162,6 +165,8 @@ _paygIsItTimeYetCheckCounterNumber = 0;
 _paygCustomerCanAffordTheNextPaymentBool = false;
 _TA1stMileFeeNeedToBePaidBool = true;
 // do NOT set it yet:	_currentTimeInSecondsNumber
+_exitRequestedAndAuthorizedBool = false;
+_shouldKeepWaitingToAllowRequestedAndAuthorizedExitBool = false;
 
 //We are at the requestorPosition
 _broadcastSUInformationCounter = 0;
@@ -462,6 +467,81 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 			[_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
 		};
 		///
+
+		// exit requested and authorized?
+		if (_SUTaxiAIVehicleObject getVariable ["exitRequestedAndAuthorized", false]) then {
+
+			// exit requested & authorized - let's allow it
+			_shouldKeepWaitingToAllowRequestedAndAuthorizedExitBool = true;
+			_shouldKeepWaitingToAllowRequestedAndAuthorizedExitTillSecondsNumber = (time) + 10;
+			
+
+			// ACTION IT -- basically stop vehicle, unlock the doors, and wait for 10 seconds in a loop, don't go anywhere, don't do anything else.
+			// First, let's bring the vehicle to a full stop, in 5 kmh steps, a new step every 0.25 seconds, until its speed is 0
+			_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
+			while {_SUVehicleSpeedOfVehicleInKMHNumber > 0} do {
+				uiSleep 0.05;
+				// Slow down by 5 kmh
+				_vel = (velocity	_SUTaxiAIVehicleObject);
+				_dir = (direction	_SUTaxiAIVehicleObject);
+				_speedStep			= -5;
+				_SUTaxiAIVehicleObject	setVelocity	[
+													(_vel select 0) + (sin _dir * _speedStep),
+													(_vel select 1) + (cos _dir * _speedStep),
+													(_vel select 2)
+													];
+			_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
+			};
+			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] VEHICLE STOPPED to allow REQUESTED & AUTHORIZED EXIT"];};
+			// UNLOCK doors
+			_SUTaxiAIVehicleObject lockCargo false;
+			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS now unlocked to allow REQUESTED & AUTHORIZED EXIT"];};
+
+			// first the requested & authorized vehicle exit
+			// TODO clear this duplicate
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV2] ALLOWING REQUESTED & AUTHORIZED EXIT		SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+		};
+		while {_shouldKeepWaitingToAllowRequestedAndAuthorizedExitBool} do {
+			// we will keep waiting till the 10 second expire but while we wait, must keep updating the Service Unit information on the map - thus the loop & broadcast SU info bit below
+
+			// TODO:	make the 10 second time frame a configuration option
+			// TODO:	add a new status here so the 10 second time window is clearly visible on the map
+			// TODO:	for the above TODO, add a new status code to config
+
+			///
+			// Broadcast ServiceUnit Information
+			///
+			// Only if it has been at least 1 second!	currently uiSleep`ing 0.05 seconds, meaning at least 1 second = 1.00 / 0.05 = 20th package.
+			_broadcastSUInformationCounter = _broadcastSUInformationCounter + 1;
+			if (_broadcastSUInformationCounter >= 20) then {
+				// Need to calculate these now as we will publish it in the next line!
+				_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
+				_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time) -_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
+				_SUAIVehicleObjectAgeInSecondsNumber = _SUTaxiAIVehicleObjectAgeInSecondsNumber;
+				_SUAIVehicleObjectCurrentPositionPosition3DArray = (getPosATL _SUTaxiAIVehicleObject);
+				_SUTaxiAIVehicleVehicleDirectionInDegreesNumber = (getDir _SUTaxiAIVehicleObject) + 45;
+				_SUAIVehicleVehicleDirectionInDegreesNumber = _SUTaxiAIVehicleVehicleDirectionInDegreesNumber;
+				_SUAIVehicleSpeedOfVehicleInKMHNumber = (round (speed _SUTaxiAIVehicleObject));
+				_SUPickUpPositionPosition3DArray = _taxiAnywhereRequestorPosition3DArray;
+				_SUAIVehicleObject = _SUTaxiAIVehicleObject;
+				_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
+				_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
+				_null	= [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
+				_broadcastSUInformationCounter = 0;
+
+				// time to quit waiting yet?
+				if (time > _shouldKeepWaitingToAllowRequestedAndAuthorizedExitTillSecondsNumber) then {
+					// time to stop waiting
+					_shouldKeepWaitingToAllowRequestedAndAuthorizedExitBool = false;
+				}
+			};
+			uiSleep 0.25;
+		};
+
+		// after 10 seconds, lock the doors, and carry on as per normal
+		// LOCK doors
+		_SUTaxiAIVehicleObject lockCargo true;
+
 		// Pit-stop checks: AutoRefuel
 		if (fuel _SUTaxiAIVehicleObject < 0.2) then {
 			_SUTaxiAIVehicleObject setFuel 1;

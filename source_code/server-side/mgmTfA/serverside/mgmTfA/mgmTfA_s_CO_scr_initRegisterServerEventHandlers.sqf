@@ -367,5 +367,51 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3] SPAWN'ing function to inform customer: mgmTfA_s_TA_fnc_servicePhase02aa_SendResponse_ChargePAYGInitialBookingFeeRequestActioned"];};//dbg
 	_null = [_taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereRequestorProfileNameTextString] spawn mgmTfA_s_TA_fnc_servicePhase02aa_SendResponse_ChargePAYGInitialBookingFeeRequestActioned;
 };
+"mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPleaseConfirmPacket" addPublicVariableEventHandler {
+	scopeName "mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPleaseConfirmPacketMainScope";
+	private	[
+			"_taxiAnywhereExitRequestorClientIDNumber",
+			"_taxiAnywhereExitRequestorPlayerUIDTextString",
+			"_taxiAnywhereExitRequestorProfileNameTextString",
+			"_taxiAnywhereExitRequestorPlayerObject"
+			];
+	// STAGE IN WORKFLOW:		Parse Arguments & Prepare Local Variables
+	_taxiAnywhereExitRequestorClientIDNumber = (owner (_this select 1 select 0));
+	_taxiAnywhereExitRequestorPlayerObject = (_this select 1 select 0);
+	_taxiAnywhereExitRequestorPlayerUIDTextString = (_this select 1 select 1);
+	// STAGE IN WORKFLOW:		Determine Requestor's profileName
+	// NOTE: Clients, in client-side init stage, pushBack their PUID & profileNames to a PV =>	mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray	<= we will use this array to find matching profileName
+	private	["_PUIDsAndPlayernamesTextStringArrayCountNumber"];
+	_PUIDsAndPlayernamesTextStringArrayCountNumber = count	(mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray);
+	if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6] _PUIDsAndPlayernamesTextStringArrayCountNumber is: (%1).", _PUIDsAndPlayernamesTextStringArrayCountNumber];};//dbg
+	// Now that we know the size, if there's anything at all in the array, let's traverse it
+	if (_PUIDsAndPlayernamesTextStringArrayCountNumber >0) then {
+	scopeName "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
+		// We will traverse each array element
+		// We will compare the 0th element [playerUID] with the playerUID we have been provided
+		// If PUID  matches, we will return the profileName
+		{
+			if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6]          Traversing the mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray. Current index is: (%1)     Content PUID/name is: (%2)/(%3)", _forEachIndex, (_x select 0), (_x select 1)];};//dbg
+			if (_taxiAnywhereExitRequestorPlayerUIDTextString == (_x select 6)) then {
+				if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6]          We got a match! Player with PUID (%1) has the following profileName: (%2).", (_x select 0), (_x select 1)];};//dbg
+				_taxiAnywhereExitRequestorProfileNameTextString = (_x select 1);
+				// This below is just to report in STATUS REPORT...
+				mgmTfA_dynamicgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _taxiAnywhereExitRequestorProfileNameTextString;
+				if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6]          _taxiAnywhereExitRequestorProfileNameTextString is now set to: (%1). issuing (breakTo _PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope) now.", (_x select 1)];};//dbg
+				breakTo "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
+			};
+		}  forEach mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray;
+	};
+	if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6]      [AN AUTHORIZED TA PLEASE ALLOW EXIT REQUEST RECEIVED]    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6]      [AN AUTHORIZED TA PLEASE ALLOW EXIT REQUEST RECEIVED]    _taxiAnywhereExitRequestorClientIDNumber: (%1).	_taxiAnywhereExitRequestorProfileNameTextString: (%2).		_taxiAnywhereExitRequestorPlayerUIDTextString: (%3).", _taxiAnywhereExitRequestorClientIDNumber, _taxiAnywhereExitRequestorProfileNameTextString, _taxiAnywhereExitRequestorPlayerUIDTextString];};//dbg
+
+	// ACTION the request
+	_exitRequestedAndAuthorized
+	_SUTaxiAIVehicleObject setVariable ["exitRequestedAndAuthorized", true, true];
+
+	// Report to log
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV5]		I have set exitRequestedAndAuthorized to true"];};//dbg
+};
+//_SUTaxiAIVehicleObject setVariable ["exitRequestedAndAuthorized", false, true];
 if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV4] END reading file."];};//dbg
 // EOF
