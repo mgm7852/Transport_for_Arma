@@ -29,15 +29,15 @@
 //-----
 // --master debug level server & client-side logging verbosity--			-- should be 0 for production systems and greater for debugging.
 // WARNING: MASSIVE LOG OUTPUT! If you leave this on, on your production system it WILL impact performance
-mgmTfA_configgv_serverAndClientDebugVerbosityLevel = 0;
-
 // --server-side RPT logging verbosity--					-- should be 0 for production systems and greater for debugging.
 // default: 0
-mgmTfA_configgv_serverVerbosityLevel = 0;
+//mgmTfA_configgv_serverVerbosityLevel = 0;//__builder___UNCOMMENT_THIS_LINE
+mgmTfA_configgv_serverVerbosityLevel = 8;//__builder___DELETE_THIS_LINE
 
 // --client-side RPT logging verbosity--					-- should be 0 for production systems and greater for debugging.
 // default: 0
-mgmTfA_configgv_clientVerbosityLevel = 0;
+//mgmTfA_configgv_clientVerbosityLevel = 0;//__builder___UNCOMMENT_THIS_LINE
+mgmTfA_configgv_clientVerbosityLevel = 8;//__builder___DELETE_THIS_LINE
 //-----
 
 
@@ -132,19 +132,19 @@ mgmTfA_configgv_taxiAnywhereTaxisSpinBeforeDeletionBool = true;
 //	parameter  1:		MIN. DISTANCE		The randomly chosen spot MUST not be closer than this value to origin	- number
 //
 //mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 250;//__builder___UNCOMMENT_THIS_LINE
-mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 50;////__builder___DELETE_THIS_LINE
+mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber = 50;//__builder___DELETE_THIS_LINE
 //mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 150;//__builder___UNCOMMENT_THIS_LINE
-mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;////__builder___DELETE_THIS_LINE
+mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;//__builder___DELETE_THIS_LINE
 //mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber = 50;//__builder___UNCOMMENT_THIS_LINE
-mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber = 50;////__builder___DELETE_THIS_LINE
+mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusInMetresNumber = 50;//__builder___DELETE_THIS_LINE
 //mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;//__builder___UNCOMMENT_THIS_LINE
-mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;////__builder___DELETE_THIS_LINE
+mgmTfA_configgv_taxiAnywhereTaxisSpawnDistanceRadiusMinDistanceInMetresNumber = 30;//__builder___DELETE_THIS_LINE
 
 // Random 'Termination Point' Settings
 mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusInMetresNumber = 350;
-mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusMinDistanceInMetresNumber = 200;
+mgmTfA_configgv_fixedDestinationTaxisTerminationDistanceRadiusMinDistanceInMetresNumber = 250;
 mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusInMetresNumber = 350;
-mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusMinDistanceInMetresNumber = 200;
+mgmTfA_configgv_taxiAnywhereTaxisTerminationDistanceRadiusMinDistanceInMetresNumber = 250;
 
 
 // --Establish Headquarters-- (i.e.: create the building in 3D game world yes/no)
@@ -180,9 +180,7 @@ mgmTfA_configgv_taxiCorpHqLocationMapMarkerShapeTextString = "ICON";
 
 
 
-//-----
 // --CATP (CALL A TAXI POINT) SETTINGS--
-
 //=====
 // --CATP Shared Settings (applies to all CATPs)--
 
@@ -250,7 +248,6 @@ mgmTfA_configgv_CATP03LocationMapMarkerShapeTextString="ICON";
 mgmTfA_configgv_CATP03LocationMapMarkerColorTextString="ColorOrange";
 mgmTfA_configgv_CATP03LocationMapMarkerTextString="East Taxis";
 //=====
-//-----
 
 
 
@@ -297,7 +294,7 @@ mgmTfA_dynamicgv_READ_DURING_SERVER_INIT_taxiAnywhereTaxisBlacklistedPlayerPUIDs
 // playerUIDs in this array will know everything that can be known: every single service unit, why it is there [serving which player], which direction it is facing, what it is doing [waiting/moving], how fast travelling, where is it going and so on
 // The reason this is split from the admin list is that in some cases an admin might wish to retain his capacity to control the system without actually receiving many notifications/map markers.
 mgmTfA_configgv_totalOmniscienceGroupTextStringArray	=	[
-								"76561198070011111",
+								"76561198124251001",
 								"76561198070022222",
 								"76561198070033333",
 								"76561198070044444",
@@ -442,7 +439,8 @@ mgmTfA_configgv_taxiAnywhereTaxisClientSideScannerScanRadiusInMetresNumber = 250
 // Options: 0 = nobody is allowed to request 'stopVehicle'
 //			1 = only commandingPlayer is allowed to request 'stopVehicle'
 //			2 = any passenger player is allowed to request 'stopVehicle'
-mgmTfA_configgv_taxiAnywherePlayersCanRequestAVehicleStopNumber = 1;
+//mgmTfA_configgv_taxiAnywherePlayersCanRequestAVehicleStopNumber = 1;
+mgmTfA_configgv_taxiAnywherePlayersCanRequestAVehicleStopNumber = 0;
 // A note on the "commandingPlayer" concept:
 //		In the current implementation, commandingPlayer is the original requestor of vehicle and it can never change.
 //		In future releases, I am planning to make it an actionMenu option, thus using mousewheel the commandingPlayer can transfer control to another passenger.
