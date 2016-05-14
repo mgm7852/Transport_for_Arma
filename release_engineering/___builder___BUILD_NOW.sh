@@ -58,8 +58,6 @@
 # Script PBO binary will be generated from the CLONE.
 # Clone will be destroyed at the end of the run.
 #
-# WORKDIR: We will be operating from within this directory (not that it matters, in this version of the script)
-WORKDIR='/c/tmp'
 STAGINGDIR='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/__STAGING__'
 #
 # Full path to documentation directory   (inside DEVELOPMENT_DIR)
@@ -108,7 +106,7 @@ LIGHT_MODIFYFILE1='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/
 # *** MAIN ***
 #
 # STEP:	Find all files under modification_dir which contain the string:			//__builder___DELETE_THIS_LINE
-cd $WORKDIR
+cd $STAGINGDIR
 #
 # clean up staging directory
 rm -rf $STAGINGDIR/*
@@ -203,7 +201,7 @@ cp $CLEAN_CONFIGURATION_FILE_FULLPATH $STAGINGDIR/documentation/___CONFIGURATION
 #
 #
 # clean up clone directory
-#rm -rf $SOURCE_CODECLONE_TOP_ROOT
+rm -rf $SOURCE_CODECLONE_TOP_ROOT
 #
 #
 #
