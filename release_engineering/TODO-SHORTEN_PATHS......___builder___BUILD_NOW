@@ -72,11 +72,12 @@ CLEAN_CONFIGURATION_FILE_FULLPATH='/c/git_repos.public/pub__Transport_for_Arma/s
 CLONE_CONFIGURATION_FILE_FULLPATH='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/server-side/mgmTfA/serverside/mgmTfA/___CONFIGURATION___.hpp'
 #
 # Full path to SERVER-side code CLONE directory   (inside DEVELOPMENT_DIR) (contains init)
-SERVER_CODECLONE_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/server-side/mgmTfA'
+SERVER_CODECLONE_ROOT='/c/tmp/sc/server-side/mgmTfA'
 SERVER_CODE_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA'
 #
 # Full path to CLIENT-side code CLONE directory   (inside DEVELOPMENT_DIR)
 CLIENT_CODECLONE_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/client-side/epoch.Altis'
+SERVER_CODECLONE_ROOT='/c/tmp/sc/client-side/mgmTfA'
 CLIENT_CODE_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_code/client-side/epoch.Altis'
 #
 # cpbo application full path to pack directories in a PBO file
@@ -116,7 +117,6 @@ rm -rf $SOURCE_CODECLONE_TOP_ROOT
 #
 # create clone
 cp -r $SOURCE_CODE_TOP_ROOT $SOURCE_CODECLONE_TOP_ROOT
-#
 #
 #
 #======================================#
@@ -200,8 +200,9 @@ cp $CLEAN_CONFIGURATION_FILE_FULLPATH $STAGINGDIR/documentation/___CONFIGURATION
 #
 #
 #
-# clean up clone directory
+# clean up clone directories
 rm -rf $SOURCE_CODECLONE_TOP_ROOT
+rm -rf $SERVER_CODECLONE_ROOT_SHORTTEMP
 #
 #
 #
