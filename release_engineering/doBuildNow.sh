@@ -142,6 +142,7 @@ SEVENZ_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineer
 #CHECKSUMSHA1_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/gnupg_checksummers/sha1sum.exe'
 # GNUPG md5sum.exe full path
 CHECKSUMSHA256_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/gnupg_checksummers/sha256sum.exe'
+CHECKSUMSHA256_BINARY_FILENAME='sha256sum.exe'
 # VERIFY_INTEGRITY batch script
 VERIFY_INTEGRITY_FULLPATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/verify_integrity_batch_script/sha256sum.__RUN_TO_VERIFY_INTEGRITY__.bat'
 #
@@ -390,18 +391,20 @@ mv $TMP_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME $STAGING_PATH/
 # GNUPG md5sum.exe full path
 #$CHECKSUMSHA1_BINARY_PATH $STAGING_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME > $STAGING_PATH/sha1sum.txt
 # GNUPG md5sum.exe full path
-$CHECKSUMSHA256_BINARY_PATH $STAGING_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME > $STAGING_PATH/sha256sum.txt
+cd $STAGING_PATH
+cp $CHECKSUMSHA256_BINARY_PATH $STAGING_PATH/
+cp $VERIFY_INTEGRITY_FULLPATH $STAGING_PATH
+$CHECKSUMSHA256_BINARY_FILENAME $SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME > sha256sum.txt
 #
 ############
 # all done
 ############
 #
+#
 # clean up tmp_path
 rm -rf $TMP_PATH/*
 #
 #
-cp $CHECKSUMSHA256_BINARY_PATH $STAGING_PATH/
-cp $VERIFY_INTEGRITY_FULLPATH $STAGING_PATH
 #======================================#
 # *** ALLOW THE DEV SEE OUTPUT ***
 #read -p "Press ENTER to exit..."
