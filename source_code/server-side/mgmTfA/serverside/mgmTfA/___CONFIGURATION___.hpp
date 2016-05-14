@@ -440,7 +440,7 @@ mgmTfA_configgv_taxiAnywhereTaxisClientSideScannerScanRadiusInMetresNumber = 250
 //			1 = only commandingPlayer is allowed to request 'stopVehicle'
 //			2 = any passenger player is allowed to request 'stopVehicle'
 //mgmTfA_configgv_taxiAnywherePlayersCanRequestAVehicleStopNumber = 1;
-mgmTfA_configgv_taxiAnywherePlayersCanRequestAVehicleStopNumber = 0;
+mgmTfA_configgv_taxiAnywherePlayersCanRequestAVehicleStopNumber = 1;
 // A note on the "commandingPlayer" concept:
 //		In the current implementation, commandingPlayer is the original requestor of vehicle and it can never change.
 //		In future releases, I am planning to make it an actionMenu option, thus using mousewheel the commandingPlayer can transfer control to another passenger.
