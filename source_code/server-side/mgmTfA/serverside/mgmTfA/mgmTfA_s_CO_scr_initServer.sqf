@@ -268,7 +268,6 @@ if (isServer) then {
 	publicVariable "mgmTfA_configgv_taxiAnywhereOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber";
 	publicVariable "mgmTfA_configgv_taxiAnywhereOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesInSecsNumber";
 	publicVariable "mgmTfA_configgv_taxiAnywhereOpenMapCommandMonitoringThisMustBeTheSignalTurnThePage";
-	publicVariable "mgmTfA_configgv_serverAndClientDebugVerbosityLevel";
 	// TODO: why the one below needs to be PV'd? check and remove if unnecessarily PV'd!
 	publicVariable "mgmTfA_configgv_expiryTimeOutThresholdpubBusSUSpawnPhaseInSecondsNumber";
 	publicVariable "mgmTfA_configgv_fixedDestinationTaxisSpawnDistanceRadiusInMetresNumber";
