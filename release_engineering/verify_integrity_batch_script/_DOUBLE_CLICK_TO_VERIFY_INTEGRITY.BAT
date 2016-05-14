@@ -1,0 +1,13 @@
+@ECHO OFF
+ECHO.
+ECHO.
+ECHO.
+ECHO.
+ECHO.
+sha256sum.exe -c sha256sum.txt
+ECHO.
+ECHO.
+ECHO.
+ECHO.
+ECHO.
+PAUSE
