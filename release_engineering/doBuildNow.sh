@@ -73,10 +73,11 @@ STAGING_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/__
 DOCUMENTATION_DIRNAME='documentation'
 DOCUMENTATION_PATH='/c/git_repos.public/pub__Transport_for_Arma/documentation'
 #
-#
-#
 # Full path to CLEAN source code top level directory		-- under PROJECT_PATH & contains "server-side" & "client-side"
+SOURCE_CODE_DIRNAME='source_code'
 SOURCE_CODE_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_code'
+SOURCE_CODE_PACKEDARCHIVEFILENAME='source_code.7z'
+#
 #
 #
 # Full path to SERVER-side CLEAN source code directory		-- under ROOT_PATH & contains init
@@ -121,9 +122,16 @@ CLIENT_SIDE_PBO_OUT_FULLPATH='/c/git_repos.public/pub__Transport_for_Arma/releas
 # LIGHT_MODIFYFILE(s): We will modify these files also (comments/deleteMes) but will not minify
 LIGHT_MODIFYCLONEFILE_FULLPATH='/c/tmp/x9/scc/client-side/epoch.Altis/epoch_config/sandbox_config.hpp'
 #
+# 
+# DO_NOT_MODIFY_FILE: We will NOT modify these files in any way
+DO_NOT_MODIFY_FILE1_CLEAN_FULLPATH='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA/serverside/mgmTfA/EPOCH_exp_functions/EPOCH_exp_server_effectCrypto.sqf'
+DO_NOT_MODIFY_FILE1_CLONE_FULLPATH='/c/tmp/x9/scc/server-side/mgmTfA/serverside/mgmTfA/EPOCH_exp_functions/EPOCH_exp_server_effectCrypto.sqf'
 #
-# cPBO the Windows application to pack directories into ".PBO" format -- provide the full path
+#
+# cPBO Windows application to pack directories into ".PBO" format -- provide the full path
 CPBO_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/cpbo/cpbo.exe'
+# 7zip Windows application to pack source code into a single archive file in ".7z" format -- provide the full path
+SEVENZ_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/7z/7z.exe'
 #======================================##======================================#
 #
 #
@@ -161,33 +169,33 @@ cp -r $SOURCE_CODE_ROOT/* $TMP_SOURCE_CODECLONE_PATH
 #
 #
 #======================================#
-# STEP:	Find all files under modification_dir which contain the string:			//__builder___DELETE_THIS_LINE
+# Find all files under modification_dir which contain the string:			//__builder___DELETE_THIS_LINE
 #		then modify these matching files in place with the in-line sed expression
 #			modification #1:	delete the whole line
 grep --no-messages --files-with-matches --null "//__builder___DELETE_THIS_LINE" $MODIFYPATH1/* $MODIFYPATH2/* | xargs -0 sed --in-place -e '/\/\/__builder___DELETE_THIS_LINE/d'
 #======================================#
-# STEP:	Find all files under modification_dir which contain the string:			//__builder___UNCOMMENT_THIS_LINE
+# Find all files under modification_dir which contain the string:			//__builder___UNCOMMENT_THIS_LINE
 #		then modify these matching files in place with the in-line sed expression
 #			modification #1:	delete the very first (most-left) two characters on each matching line
 #			modification #2:	remove the string //__builder___UNCOMMENT_THIS_LINE
 grep --no-messages --files-with-matches --null "//__builder___UNCOMMENT_THIS_LINE" $MODIFYPATH1/* $MODIFYPATH2/* | xargs -0 sed --in-place -e '/__builder___UNCOMMENT_THIS_LINE/{s/#//g;s/\/\/__builder___UNCOMMENT_THIS_LINE//g;s/\/\///g;}'
 #======================================##======================================#
-# STEP:	Find all files under modification_dir which contain the string:			//
+# Find all files under modification_dir which contain the string:			//
 #		then modify these matching files in place with the in-line sed expression
 #			modification #1:	delete every matching line which contain //
 grep --no-messages --files-with-matches --null "//" $MODIFYPATH1/* $MODIFYPATH2/* | xargs -0 sed --in-place -e '/\/\//d'
 #======================================##======================================#
-# STEP:	Find all files under modification_dir which contain the character:			TAB_CHARACTER
+# Find all files under modification_dir which contain the character:			TAB_CHARACTER
 #		then modify these matching files in place with the in-line sed expression
 #			modification #1:	replace all instances of 'tab' character with 'whitespace' character
 grep --no-messages --files-with-matches --null --perl-regexp "\t" $MODIFYPATH1/* $MODIFYPATH2/* | xargs -0 sed --in-place -e 's/\t/ /g'
 #======================================##======================================#
-# STEP:	Find all files under modification_dir which contain the whitespace character:			WHITESPACE_CHARACTER
+# Find all files under modification_dir which contain the whitespace character:			WHITESPACE_CHARACTER
 #		then modify these matching files in place with the in-line sed expression
 #			modification #1:	replace all instances of 'multiple whitespace character' with a single 'whitespace character'
 grep --no-messages --files-with-matches --null " " $MODIFYPATH1/* $MODIFYPATH2/* | xargs -0 sed --in-place -e 's/  */ /g'
 #======================================##======================================#
-# STEP:	Find all files under modification_dir which contain the 'newline' character:			NEWLINE_CHARACTER
+# Find all files under modification_dir which contain the 'newline' character:			NEWLINE_CHARACTER
 #		then modify these matching files in place with the in-line sed expression
 #			modification #1:	remove all 'newline' characters but the last one
 grep --no-messages --files-with-matches --null " " $MODIFYPATH1/* $MODIFYPATH2/* | xargs -0 sed --in-place -e ':a;N;$!ba;s/\n/ /g'
@@ -196,17 +204,17 @@ grep --no-messages --files-with-matches --null " " $MODIFYPATH1/* $MODIFYPATH2/*
 #
 #
 #======================================##======================================#
-# STEP:	Bring in a clean/human-readable/not-minified version of __CONFIGURATION__ file in to the TMP_PATH
+# Bring in a clean/human-readable/not-minified version of __CONFIGURATION__ file in to the TMP_PATH
 cp $CONFIGURATION_FILECLEAN_FULLPATH $CONFIGURATION_FILECLONE_FULLPATH
 #
 #
 # Now partially process the config clone file -- do the preprocessing work but do not do any minification
-# STEP:	Process the config clone file, find the string:			//__builder___DELETE_THIS_LINE
+# Process the config clone file, find the string:			//__builder___DELETE_THIS_LINE
 #		then modify the file in place with the in-line sed expression
 #			modification #1:	delete the whole line
 grep --no-messages --files-with-matches --null "//__builder___DELETE_THIS_LINE" $CONFIGURATION_FILECLONE_FULLPATH | xargs -0 sed --in-place -e '/\/\/__builder___DELETE_THIS_LINE/d'
 #
-# STEP:	Process the config clone file, find the string:			//__builder___UNCOMMENT_THIS_LINE
+# Process the config clone file, find the string:			//__builder___UNCOMMENT_THIS_LINE
 #		then modify the file in place with the in-line sed expression
 #			modification #1:	delete the very first (most-left) two characters on each matching line
 #			modification #2:	remove the string //__builder___UNCOMMENT_THIS_LINE
@@ -217,35 +225,45 @@ grep --no-messages --files-with-matches --null "//__builder___DELETE_THIS_LINE" 
 grep --no-messages --files-with-matches --null "//__builder___UNCOMMENT_THIS_LINE" $LIGHT_MODIFYCLONEFILE_FULLPATH | xargs -0 sed --in-place -e '/__builder___UNCOMMENT_THIS_LINE/{s/#//g;s/\/\/__builder___UNCOMMENT_THIS_LINE//g;s/\/\///g;}'
 #
 #
+# Bring in any DO_NOT_MODIFY files
+cp $DO_NOT_MODIFY_FILE1_CLEAN_FULLPATH $DO_NOT_MODIFY_FILE1_CLONE_FULLPATH
 #
-# STEP:	Create the server-side PBO
+#
+# Create the server-side PBO
 $CPBO_BINARY_PATH -y -p $SERVER_CODECLONE_ROOT $SERVER_SIDE_PBO_OUT_FULLPATH
-# STEP:	Create the client-side PBO
+# Create the client-side PBO
 $CPBO_BINARY_PATH -y -p $CLIENT_MPMISSION_DIR $CLIENT_SIDE_PBO_OUT_FULLPATH
 #
 #
-# STEP:	move server-side PBO into a clearly marked directory
-mkdir -p $STAGINGDIR/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/0__Epoch_AutoStart_PBO__[server-side]'
-mv $SERVER_SIDE_PBO_OUTPUT $STAGINGDIR/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/0__Epoch_AutoStart_PBO__[server-side]'
+# move server-side PBO into a clearly marked directory
+mkdir -p $STAGING_PATH/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/0__Epoch_AutoStart_PBO__[server-side]'
+mv $SERVER_SIDE_PBO_OUT_FULLPATH $STAGING_PATH/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/0__Epoch_AutoStart_PBO__[server-side]'
 #======================================##======================================#
-# STEP:	move client-side PBO into a clearly marked directory
-mkdir -p $STAGINGDIR/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/1__Epoch_Altis_Mission_PBO___[client-side]'
-mv $CLIENT_SIDE_PBO_OUTPUT $STAGINGDIR/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/1__Epoch_Altis_Mission_PBO___[client-side]'
+# move client-side PBO into a clearly marked directory
+mkdir -p $STAGING_PATH/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/1__Epoch_Altis_Mission_PBO___[client-side]'
+mv $CLIENT_SIDE_PBO_OUT_FULLPATH $STAGING_PATH/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/1__Epoch_Altis_Mission_PBO___[client-side]'
 #======================================##======================================#
-# STEP:	Copy documentation
-cp -r $DOCUMENTATION_ROOT $STAGINGDIR/
+# Copy documentation
+cp -r $DOCUMENTATION_PATH $STAGING_PATH/
 #======================================##======================================#
-# STEP:	Copy human-readable source code
-cp -r $SOURCE_CODE_TOP_ROOT $STAGINGDIR/
+# Copy human-readable source code
+cp -r $SOURCE_CODE_ROOT $STAGING_PATH/
 #======================================##======================================#
-# STEP:	Copy __CONFIGURATION__ file (human-readable) into documentation for easy reference for users 
-cp $CLEAN_CONFIGURATION_FILE_FULLPATH $STAGINGDIR/documentation/___CONFIGURATION___DEFAULT.hpp
+# Copy __CONFIGURATION__ file (human-readable) into documentation for easy reference for users 
+cp $CLEAN_CONFIGURATION_FILE_FULLPATH $STAGING_PATH/documentation/___CONFIGURATION___DEFAULT.hpp
+
+# Now pack the cloned source code in staging directory into a single ultra compressed 7zip archive file
+$SEVENZ_BINARY_PATH a -bd -bb0 -t7z $SOURCE_CODE_PACKEDARCHIVEFILENAME $STAGING_PATH/$SOURCE_CODE_DIRNAME/*
+# delete everything from STAGING source code clone directory
+rm -rf $STAGING_PATH/$SOURCE_CODE_DIRNAME/*
+# move the source_code archive package into its own directory
+mv $STAGING_PATH/$SOURCE_CODE_PACKEDARCHIVEFILENAME $STAGING_PATH/$SOURCE_CODE_DIRNAME/$SOURCE_CODE_PACKEDARCHIVEFILENAME
 #
 #
 #
-# clean up clone directories
-rm -rf $SOURCE_CODECLONE_TOP_ROOT
-rm -rf $SERVER_CODECLONE_ROOT_SHORTTEMP
+# all done - clean up clone source_code directory
+rm -rf $TMP_SOURCE_CODECLONE_PATH
+#
 #
 #
 #
