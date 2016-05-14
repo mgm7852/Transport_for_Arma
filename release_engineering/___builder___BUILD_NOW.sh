@@ -90,9 +90,11 @@ SERVER_SIDE_PBO_OUTPUT='/c/git_repos.public/pub__Transport_for_Arma/release_engi
 # Full path to save resulting CLIENT-side code PBO file to   (under _GOLD_)
 CLIENT_SIDE_PBO_OUTPUT='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/__STAGING__/epoch.Altis.pbo'
 #
-# MODIFYPATH 1 & 2: We will modify matching files contained in these directories (won't recurse)
+# MODIFYPATH 1, 2, ...: We will modify matching files contained in these directories (won't recurse)
 MODIFYPATH1='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/server-side/mgmTfA/serverside/mgmTfA'
 MODIFYPATH2='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/client-side/epoch.Altis/custom/mgmTfA'
+# LIGHT_MODIFYFILE(s): We will modify these files also (comments/deleteMes) but will not minify
+LIGHT_MODIFYFILE1='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/client-side/epoch.Altis/epoch_config/sandbox_config.hpp'
 #======================================##======================================#
 #
 #
@@ -164,13 +166,13 @@ cp $CLEAN_CONFIGURATION_FILE_FULLPATH $MODIFYPATH1/
 #		then modify these matching files in place with the in-line sed expression
 #			modification #1:	delete the whole line
 #CLONE_CONFIGURATION_FILE_FULLPATH
-sed --in-place -e '/\/\/__builder___DELETE_THIS/d' $CLONE_CONFIGURATION_FILE_FULLPATH
+sed --in-place -e '/\/\/__builder___DELETE_THIS/d' $CLONE_CONFIGURATION_FILE_FULLPATH $LIGHT_MODIFYFILE1
 #======================================#
 # STEP:	Find all files under modification_dir which contain the string:			//__builder___UNCOMMENT_THIS
 #		then modify these matching files in place with the in-line sed expression
 #			modification #1:	delete the very first (most-left) two characters on each line
 #			modification #2:	remove the string //__builder___UNCOMMENT_THIS
-sed --in-place -e '/__builder___UNCOMMENT_THIS/{s/#//g;s/\/\/__builder___UNCOMMENT_THIS//g;s/\/\///g;}' $CLONE_CONFIGURATION_FILE_FULLPATH
+sed --in-place -e '/__builder___UNCOMMENT_THIS/{s/#//g;s/\/\/__builder___UNCOMMENT_THIS//g;s/\/\///g;}' $CLONE_CONFIGURATION_FILE_FULLPATH $LIGHT_MODIFYFILE1
 #
 #
 #
