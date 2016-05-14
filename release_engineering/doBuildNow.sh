@@ -137,13 +137,13 @@ CPBO_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineerin
 SEVENZ_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/7z/7z.exe'
 #
 # GNUPG md5sum.exe full path
-CHECKSUMMD5_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/gnupg_checksummers/md5sum.exe'
+#CHECKSUMMD5_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/gnupg_checksummers/md5sum.exe'
 # GNUPG md5sum.exe full path
-CHECKSUMSHA1_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/gnupg_checksummers/sha1sum.exe'
+#CHECKSUMSHA1_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/gnupg_checksummers/sha1sum.exe'
 # GNUPG md5sum.exe full path
 CHECKSUMSHA256_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/gnupg_checksummers/sha256sum.exe'
 # VERIFY_INTEGRITY batch script
-VERIFY_INTEGRITY_FULLPATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/verify_integrity_batch_script/_DOUBLE_CLICK_TO_VERIFY_INTEGRITY.BAT'
+VERIFY_INTEGRITY_FULLPATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/verify_integrity_batch_script/sha256sum.__RUN_TO_VERIFY_INTEGRITY__.bat'
 #
 # bc application to do maths in command line -- provide the full path
 BC_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/bc/bc.exe'
@@ -386,9 +386,9 @@ rm -rf $STAGING_PATH/*
 mv $TMP_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME $STAGING_PATH/
 # create checksums for the single compressed 7zip archive file
 # GNUPG md5sum.exe full path
-$CHECKSUMMD5_BINARY_PATH $STAGING_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME > $STAGING_PATH/md5sum.txt
+#$CHECKSUMMD5_BINARY_PATH $STAGING_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME > $STAGING_PATH/md5sum.txt
 # GNUPG md5sum.exe full path
-$CHECKSUMSHA1_BINARY_PATH $STAGING_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME > $STAGING_PATH/sha1sum.txt
+#$CHECKSUMSHA1_BINARY_PATH $STAGING_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME > $STAGING_PATH/sha1sum.txt
 # GNUPG md5sum.exe full path
 $CHECKSUMSHA256_BINARY_PATH $STAGING_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME > $STAGING_PATH/sha256sum.txt
 #
