@@ -28,7 +28,8 @@ private	[
 		"_doorsLockedBool",
 		"_playerIsInMatchingVehicleBool",
 		"_msg2HintTextString",
-		"_msg2SyschatTextString1"
+		"_msg2SyschatTextString1",
+		"_myGUSUIDNumber"
 		];
 
 // by default, player is not authorized to request vehicle stop
@@ -42,18 +43,19 @@ _playerIsInMatchingVehicleBool=false;
 
 // OBTAIN INFO
 _vehSpeed = (velocity vehicle player select 2);
-_doorsLockedBool = call compile format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 // player has requested this "TaxiAnywhereTaxi" to be (immediately stopped & doors unlocked). let's check is the player even in a TaxiAnywhereTaxi vehicle at the moment?
 if (((vehicle player) getVariable ["mgmTfAisTATaxi", false])) then {
 	// YES, the player is in a TaxiAnywhereTaxi at the moment		-- log it
 	if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_pleaseStopVehicle.sqf] [TV8]     DETECTED     Player is currently in a TaxiAnywhereTaxi."];};
 	_playerIsInMatchingVehicleBool=true;
+	_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
+	// check if doors locked
+	_doorsLockedBool = call compile format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 } else {
 	// NO, the player is NOT in a TaxiAnywhereTaxi at the moment		-- log it, inform player & quit
 	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_pleaseStopVehicle.sqf] [TV5]		DETECTED		Player currently IS NOT in a TaxiAnywhereTaxi!		The result of (str (((vehicle player) getVariable ['mgmTfAisTATaxi', false]))) is: (%1).", (str (((vehicle player) getVariable ["mgmTfAisTATaxi", false])))];};//dbg
 	_playerIsInMatchingVehicleBool=false;
 };
-
 //// conditional action & player comms  ////
 // CHECK: are we in bypass state?	If vehicle is at full stop && doors are not locked then yes
 if ((_vehSpeed == 0) && (!_doorsLockedBool)) then {
@@ -61,7 +63,6 @@ if ((_vehSpeed == 0) && (!_doorsLockedBool)) then {
 	_msg2HintTextString = parsetext format["<img size='6' image='custom\mgmTfA\img\mgmTfA_c_CO_img_doorsUnlocked.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU MAY EXIT<br/>THE VEHICLE<br/><br/></t>", (profileName)];
 	_msg2SyschatTextString1 = parsetext format ["[DRIVER]  %1 YOU MAY EXIT THE VEHICLE", (profileName)];
 	systemChat (str _msg2SyschatTextString1);
-	};
 } else {
 	// NO we are not in bypass state
 
@@ -88,8 +89,8 @@ if ((_vehSpeed == 0) && (!_doorsLockedBool)) then {
 
 				// obtain local player _myPUIDNumber & vehicle's commandingCustomerPlayerUIDNumber
 				private	[
-						"_myPUIDNumber"
-						"_myVehiclesCommandingCustomerPlayerUIDNumber",
+						"_myPUIDNumber",
+						"_myVehiclesCommandingCustomerPlayerUIDNumber"
 						];
 				_myPUIDNumber = (getPlayerUID player);
 				_myVehiclesCommandingCustomerPlayerUIDNumber = (vehicle player) getVariable "commandingCustomerPlayerUIDNumber";
