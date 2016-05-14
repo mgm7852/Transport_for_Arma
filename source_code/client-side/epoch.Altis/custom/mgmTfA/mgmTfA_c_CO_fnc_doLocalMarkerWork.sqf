@@ -2,7 +2,8 @@
 //H
 //H ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_c_CO_fnc_doLocalMarkerWork.sqf
-//H $PURPOSE$	:	This function will be spawn'd with 2 arguments SU ID (GUSUIDNumber) and _trackerIsTotalOmniscienceGroupMember. It will track movements of a given SU until (a) SU is terminated OR (b) client is no longer authorized to map-track its movements
+//H $PURPOSE$	:	This function will be spawn'd with 2 arguments SU ID (GUSUIDNumber) and _trackerIsTotalOmniscienceGroupMember.
+//H					It will track movements of a given SU until (a) SU is terminated OR (b) client is no longer authorized to map-track its movements
 //H ~~
 //H
 //HH
