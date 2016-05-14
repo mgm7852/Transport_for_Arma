@@ -84,7 +84,7 @@ _SUAIVehicleSpeedOfVehicleInKMHNumber = (_this select 25);
 _SUDistanceToActiveWaypointInMetersNumber = (_this select 26);
 
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationInitialBroadcast.sqf]  [TV3] <ThisIs:%1> I have been CALL'd.	This is what I have received:	(%2).		(str mgmTfA_gvdb_PV_GUSUIDNumber) is: (%3)", (str _myGUSUIDNumber), (str _this), (str mgmTfA_gvdb_PV_GUSUIDNumber)];};//dbg
+if (_thisFileVerbosityLevelNumber>=10) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationInitialBroadcast.sqf]  [TV10] <ThisIs:%1> I have been CALL'd.	This is what I have received:	(%2).		(str mgmTfA_gvdb_PV_GUSUIDNumber) is: (%3)", (str _myGUSUIDNumber), (str _this), (str mgmTfA_gvdb_PV_GUSUIDNumber)];};//dbg
 
 //// Step 2:		SET values
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUActiveWaypointPositionPosition3DArray", _myGUSUIDNumber], _SUActiveWaypointPositionPosition3DArray];
@@ -174,5 +174,5 @@ publicVariable					format ["mgmTfA_gv_PV_SU%1SUACLTextStringArray", _myGUSUIDNum
 
 // Let all clients know that there is a new SU in action so that they can start doing "mgmTfA_c_CO_fnc_doLocalMarkerWork"
 publicVariable					"mgmTfA_gvdb_PV_GUSUIDNumber";
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationInitialBroadcast.sqf]  [TV3] <ThisIs:%1> I have just publicVariable'd mgmTfA_gvdb_PV_GUSUIDNumber. It contains: (%2).", (str _myGUSUIDNumber), (str mgmTfA_gvdb_PV_GUSUIDNumber)];};//dbg
+if (_thisFileVerbosityLevelNumber>=10) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationInitialBroadcast.sqf]  [TV10] <ThisIs:%1> I have just publicVariable'd mgmTfA_gvdb_PV_GUSUIDNumber. It contains: (%2).", (str _myGUSUIDNumber), (str mgmTfA_gvdb_PV_GUSUIDNumber)];};//dbg
 // EOF
