@@ -26,26 +26,3 @@ source_code\source_code.7z
 6. Start your Arma 3 Epoch Multiplayer server and ensure you load the correct MPmission file (epoch.Altis.pbo).
 
 7. When you join the game, to test Transport for Arma, quickly open and close your in-game map 3 times - you should see TfA GUI.
-
-
-
-
-. An easy solution is provided:
-	simply download 3 files listed below, place them in the same directory with .7z and double click on BAT script.
-	Files you will need:
-	
-		(1) GNPPG utility sha256sum.exe download it here:
-		https://gitlab.com/themgm/Transport_for_Arma/blob/master/release_engineering/gnupg_checksummers/sha256sum.exe
-
-		(2) Double Click to Verify Batch Script - download it here:
-		https://gitlab.com/themgm/Transport_for_Arma/blob/master/release_engineering/verify_integrity_batch_script/_DOUBLE_CLICK_TO_VERIFY_INTEGRITY.BAT
-		
-		(3) Matching SHA256 signature for the archive you downloaded. You can find a link to this file in forum 1st post.
-		Also all 
-		
-
-Q: How Can I Check The Integrity Of A Release?
-A: MD5 and SHA checksums provide a simple, means of verifying the integrity of a download. 
-   You can simply create a checksum (in the same way as the release manager) after download, and compare the result to the checksum downloaded from the main Apache site. 
-   Obviously, this process does not provide for authentication and non-repudiation as anybody can create the same checksum.
-
