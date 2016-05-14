@@ -14,9 +14,6 @@
 #	The latest version on website as of today (20160513) version: 7.1.3
 #	With it, you will have Git bash version GNU bash, version 4.3.42(4)-release.
 #
-#	* Add note-line-2 here
-#
-#	* Add note-line-2 here
 #======================================##======================================#
 #
 #
@@ -37,11 +34,6 @@
 #	After parsing modification_dir move protected files back in so that 
 #	they won't be changed.
 #
-#	* Add new TODO item here
-#
-#	* Add new TODO item here
-#
-#	* Add new TODO item here
 #======================================##======================================#
 #
 #
