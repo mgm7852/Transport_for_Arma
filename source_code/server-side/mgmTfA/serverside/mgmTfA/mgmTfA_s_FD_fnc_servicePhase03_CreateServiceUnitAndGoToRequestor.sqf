@@ -207,6 +207,8 @@ _SUTaxiAIVehicleObject setVariable ["GUSUIDNumber", _myGUSUIDNumber, true];
 _SUTaxiAIVehicleObject setVariable ["commandingCustomerPlayerUIDNumber", _fixedDestinationRequestorPlayerUIDTextString, true];
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUFDServiceFeeNeedToBePaidBool", _myGUSUIDNumber], true];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUFDServiceFeeNeedToBePaidBool", _myGUSUIDNumber];
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber], _doorsLockedBool];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUfdTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber], true];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUfdTxPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber];
 // NOTE: a FDT will never require "1st Mile Fee" however if we do not set this, when a requestor get out of TA and jump into a FDT it will break the code. To prevent, simply pass a FALSE here.
@@ -284,6 +286,8 @@ _SUTaxiAIVehicleObject lockDriver true;
 _SUTaxiAIVehicleObject lockCargo true;
 //Save the new status of vehicleDoorLock
 _doorsLockedBool=true;
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber], _doorsLockedBool];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 //check distance to our Current Waypoint (_fixedDestinationRequestorPosition3DArray) and write to server RPT log
 _SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round (_SUTaxiAIVehicleObject distance _fixedDestinationRequestorPosition3DArray));
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV4] Distance to Waypoint _fixedDestinationRequestorPosition3DArray is: (%1). Locked the doors & going there now.", _SUTaxiAIVehicleDistanceToWayPointMetersNumber];};//dbg

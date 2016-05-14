@@ -531,6 +531,8 @@ if (_emergencyEscapeNeeded) then {
 	// prep for forced eject -- once we eject them, we will want the passengers to stay out!
 	_SUTaxiAIVehicleObject lockCargo true;
 	_doorsLockedBool = true;
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber], _doorsLockedBool];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 	uiSleep 0.05;
 	// Now we can Eject All Passengers (keep the driver in!) and Delete the Vehicle	//Traverse all crew with forEach
 	{
@@ -670,7 +672,7 @@ if (!_emergencyEscapeNeeded) then {
 
 			if (_SUPAYGisActiveBool) then {
 				// PAYG is active
-				if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV7]	PAYG payment model is active on this vehicle"];};//dbg
+				if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV8]	PAYG payment model is active on this vehicle"];};//dbg
 				// TfA client-side handles the (purchasing power checks) and (PAYG charging).	if it determines that player is unable to pay the next tick, it sets the following variable to true.		let's check & action accordingly.
 				if (_SUTaxiAIVehicleObject getVariable ["customerCannotAffordService", false]) then {
 					// requestor and his friends in vehicle CANNOT AFFORD the service -- we will not serve them any more!
@@ -706,6 +708,8 @@ if (!_emergencyEscapeNeeded) then {
 					// prep for forced eject -- once we eject them, we will want the passengers to stay out!
 					_SUTaxiAIVehicleObject lockCargo true;
 					_doorsLockedBool = true;
+					missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber], _doorsLockedBool];
+					publicVariable format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 					uiSleep 0.05;
 					// Now we can Eject All Passengers (keep the driver in!) and Delete the Vehicle	//Traverse all crew with forEach
 					{
@@ -765,6 +769,8 @@ if (!_emergencyEscapeNeeded) then {
 	_SUTaxiAIVehicleObject lockCargo false;
 	//Save the new status of vehicleDoorLock
 	 _doorsLockedBool = false;
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber], _doorsLockedBool];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS unlocked"];};
 	uiSleep 0.05;
 	//Doors Unlocked

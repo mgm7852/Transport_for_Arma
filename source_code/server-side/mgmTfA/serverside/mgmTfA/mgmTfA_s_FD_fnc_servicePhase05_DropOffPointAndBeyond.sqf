@@ -175,6 +175,8 @@ _iWantToTravelThisManyMetresNumber = 0;
 					// prep for forced eject -- once we eject them, we will want the passengers to stay out!
 					_SUTaxiAIVehicleObject lockCargo true;
 					_doorsLockedBool = true;
+					missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber], _doorsLockedBool];
+					publicVariable format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 					uiSleep 0.05;
 					// Now we can Eject All Passengers (keep the driver in!) and Delete the Vehicle	//Traverse all crew with forEach
 					{
@@ -288,6 +290,8 @@ uiSleep 0.05;
 _SUTaxiAIVehicleObject lockCargo true;
 // Not that we need ...
 _doorsLockedBool = true;
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber], _doorsLockedBool];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] DOORS locked"];};
 uiSleep 0.05;
 

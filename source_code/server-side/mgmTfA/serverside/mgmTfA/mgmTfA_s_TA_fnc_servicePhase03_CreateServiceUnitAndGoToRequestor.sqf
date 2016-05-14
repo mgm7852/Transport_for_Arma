@@ -210,10 +210,14 @@ _SUTaxiAIVehicleObject setVariable ["GUSUIDNumber", _myGUSUIDNumber, true];
 _SUTaxiAIVehicleObject setVariable ["commandingCustomerPlayerUIDNumber", _taxiAnywhereRequestorPlayerUIDTextString, true];
 _SUTaxiAIVehicleObject setVariable ["customerCannotAffordService", false, true];
 _SUTaxiAIVehicleObject setVariable ["exitRequestedAndAuthorized", false, true];
-missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTxAnywPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber], true];
-publicVariable format ["mgmTfA_gv_PV_SU%1SUTxAnywPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber];
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber], _doorsLockedBool];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
+
+//NO LONGER IN USE -- TO BE CLEANED UP		//missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTxAnywPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber], true];
+//NO LONGER IN USE -- TO BE CLEANED UP		//publicVariable format ["mgmTfA_gv_PV_SU%1SUTxAnywPayNowMenuIsCurrentlyNotAttachedBool", _myGUSUIDNumber];
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTxAnywServiceFeeHasBeenPaidBool", _myGUSUIDNumber], false];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUTxAnywServiceFeeHasBeenPaidBool", _myGUSUIDNumber];
+
 // Is 1st Mile Fee enabled on the server?
 if (mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0) then {
 	// yes 1st Mile Fee is enabled and thus it need to be paid -- log the detected 1st Mile Fee setting
@@ -300,6 +304,8 @@ _SUTaxiAIVehicleObject lockDriver true;
 _SUTaxiAIVehicleObject lockCargo true;
 //Save the new status of vehicleDoorLock
 _doorsLockedBool=true;
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber], _doorsLockedBool];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 //check distance to our Current Waypoint (_taxiAnywhereRequestorPosition3DArray) and write to server RPT log
 _SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round (_SUTaxiAIVehicleObject distance _taxiAnywhereRequestorPosition3DArray));
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV4] Distance to Waypoint _taxiAnywhereRequestorPosition3DArray is: (%1). Locked the doors & going there now.", _SUTaxiAIVehicleDistanceToWayPointMetersNumber];};//dbg
