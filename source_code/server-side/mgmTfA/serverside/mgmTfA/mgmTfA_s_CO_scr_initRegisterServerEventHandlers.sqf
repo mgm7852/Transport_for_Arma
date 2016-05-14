@@ -406,7 +406,6 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6]      [AN AUTHORIZED TA PLEASE ALLOW EXIT REQUEST RECEIVED]    _taxiAnywhereExitRequestorClientIDNumber: (%1).	_taxiAnywhereExitRequestorProfileNameTextString: (%2).		_taxiAnywhereExitRequestorPlayerUIDTextString: (%3).", _taxiAnywhereExitRequestorClientIDNumber, _taxiAnywhereExitRequestorProfileNameTextString, _taxiAnywhereExitRequestorPlayerUIDTextString];};//dbg
 
 	// ACTION the request
-	_exitRequestedAndAuthorized
 	_SUTaxiAIVehicleObject setVariable ["exitRequestedAndAuthorized", true, true];
 
 	// Report to log
