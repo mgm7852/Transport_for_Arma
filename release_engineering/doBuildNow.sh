@@ -127,11 +127,31 @@ LIGHT_MODIFYCLONEFILE_FULLPATH='/c/tmp/x9/scc/client-side/epoch.Altis/epoch_conf
 DO_NOT_MODIFY_FILE1_CLEAN_FULLPATH='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA/serverside/mgmTfA/EPOCH_exp_functions/EPOCH_exp_server_effectCrypto.sqf'
 DO_NOT_MODIFY_FILE1_CLONE_FULLPATH='/c/tmp/x9/scc/server-side/mgmTfA/serverside/mgmTfA/EPOCH_exp_functions/EPOCH_exp_server_effectCrypto.sqf'
 #
+DO_NOT_MODIFY_FILE2_CLEAN_FULLPATH='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA/serverside/mgmTfA/mgmTfA_s_CO_dat_maleFirstnamesTextStringArray.hpp'
+DO_NOT_MODIFY_FILE2_CLONE_FULLPATH='/c/tmp/x9/scc/server-side/mgmTfA/serverside/mgmTfA/mgmTfA_s_CO_dat_maleFirstnamesTextStringArray.hpp'
+#
 #
 # cPBO Windows application to pack directories into ".PBO" format -- provide the full path
 CPBO_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/cpbo/cpbo.exe'
 # 7zip Windows application to pack source code into a single archive file in ".7z" format -- provide the full path
 SEVENZ_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/7z/7z.exe'
+#
+# GNUPG md5sum.exe full path
+CHECKSUMMD5_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/gnupg_checksummers/md5sum.exe'
+# GNUPG md5sum.exe full path
+CHECKSUMSHA1_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/gnupg_checksummers/sha1sum.exe'
+# GNUPG md5sum.exe full path
+CHECKSUMSHA256_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/gnupg_checksummers/sha256sum.exe'
+#
+# bc application to do maths in command line -- provide the full path
+BC_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineering/bc/bc.exe'
+#
+VERSIONHPPFILEFULLPATH='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA/serverside/mgmTfA/mgmTfA_s_CO_dat_TfAVersion.hpp'
+#
+VERSIONMAJORFILEFULLPATH='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA/serverside/mgmTfA/vn/mgmTfAVersionAMajorNumber.txt'
+VERSIONMINORFILEFULLPATH='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA/serverside/mgmTfA/vn/mgmTfAVersionBMinorNumber.txt'
+VERSIONPATCHFILEFULLPATH='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA/serverside/mgmTfA/vn/mgmTfAVersionCPatchNumber.txt'
+VERSIONBUILDFILEFULLPATH='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA/serverside/mgmTfA/vn/mgmTfAVersionDBuildIDNumber.txt'
 #======================================##======================================#
 #
 #
@@ -160,12 +180,98 @@ SEVENZ_BINARY_PATH='/c/git_repos.public/pub__Transport_for_Arma/release_engineer
 #======================================##======================================#
 # *** MAIN ***
 #
+# clean up tmp dir & re-create it
+mkdir -p $TMP_PATH
+rm -rf $TMP_PATH/*
+mkdir -p $TMP_SOURCE_CODECLONE_PATH
+#
+# clean up staging dir & re-create it
+rm -rf $STAGING_PATH
 mkdir -p $STAGING_PATH
 cd $STAGING_PATH
-rm -rf $STAGING_PATH/*
-rm -rf $TMP_SOURCE_CODECLONE_PATH
-mkdir -p $TMP_SOURCE_CODECLONE_PATH
+#
+#
 cp -r $SOURCE_CODE_ROOT/* $TMP_SOURCE_CODECLONE_PATH
+
+
+
+
+
+
+
+
+
+############################################################
+#	BUILD ID AUTO-INCREMENT BY BUILDER -- HOW THIS WORKS
+#
+#	1. On each execution, doBuildNow.sh will read the BUILDID value from VERSIONBUILDFILEFULLPATH file:								BUILDID=$(<$VERSIONBUILDFILEFULLPATH)
+#	2. doBuildNow.sh will then increment the BUILDID value by one and write it back into the same file:							BUILDID=$(<$VERSIONBUILDFILEFULLPATH) ; echo "$BUILDID+1" | $BC_BINARY_PATH > $VERSIONBUILDFILEFULLPATH
+#	3. doBuildNow.sh will also update the document mgmTfA_s_CO_dat_TfAVersion.hpp with the just-incremented BUILDID number:		TODO
+#		HOW TO DO THIS STEP
+#			find the line beginning with:			mgmTfA_configgv_TfAScriptVersionbuildIDNumber=
+#			replace the content with:				mgmTfA_configgv_TfAScriptVersionbuildIDNumber=	and append $BUILDID	and append the character ;
+#			sed -i "s/$var1/ZZ/g" "$file"
+#			sed -i "s/mgmTfA_configgv_TfAScriptVersionbuildIDNumber=/mgmTfA_configgv_TfAScriptVersionbuildIDNumber=$var1/g" "$VERSIONHPPFILEFULLPATH"
+#			sed --in-place "s/^mgmTfA_configgv_TfAScriptVersionbuildIDNumber=.*$/mgmTfA_configgv_TfAScriptVersionbuildIDNumber=$BUILDID;/" "$VERSIONHPPFILEFULLPATH"
+############################################################
+#
+# prefix tag
+SEMANTIC_VERSIONED_FILENAME_PREFIX="mgmTfA_v"
+SEMANTIC_VERSIONED_FILENAME_DOT="."
+SEMANTIC_VERSIONED_FILENAME_WORDBUILD="build"
+SEMANTIC_VERSIONED_FILENAME_EXTENSION="7z"
+#
+# Obtain the current MAJORVERSION from the .txt file
+MAJORVERSION=$(<$VERSIONMAJORFILEFULLPATH)
+#
+# Obtain the current MINORVERSION from the .txt file
+MINORVERSION=$(<$VERSIONMINORFILEFULLPATH)
+#
+# Obtain the current PATCHVERSION from the .txt file
+PATCHVERSION=$(<$VERSIONPATCHFILEFULLPATH)
+#
+# Obtain the current BUILDID from the .txt file
+BUILDID=$(<$VERSIONBUILDFILEFULLPATH) ; echo "$BUILDID+1" | $BC_BINARY_PATH > $VERSIONBUILDFILEFULLPATH
+# we just bumped it, so re-read to obtain the actual number
+BUILDID=$(<$VERSIONBUILDFILEFULLPATH)
+#
+# Increment the VERSION values in versionHPP file so that it can be displayed in-game
+sed --in-place -e "s/^mgmTfA_configgv_TfAScriptVersionMajorNumber=.*$/mgmTfA_configgv_TfAScriptVersionMajorNumber=$MAJORVERSION;/" "$VERSIONHPPFILEFULLPATH"
+sed --in-place -e "s/^mgmTfA_configgv_TfAScriptVersionMinorNumber=.*$/mgmTfA_configgv_TfAScriptVersionMinorNumber=$MINORVERSION;/" "$VERSIONHPPFILEFULLPATH"
+sed --in-place -e "s/^mgmTfA_configgv_TfAScriptVersionPatchNumber=.*$/mgmTfA_configgv_TfAScriptVersionPatchNumber=$PATCHVERSION;/" "$VERSIONHPPFILEFULLPATH"
+sed --in-place -e "s/^mgmTfA_configgv_TfAScriptVersionbuildIDNumber=.*$/mgmTfA_configgv_TfAScriptVersionbuildIDNumber=$BUILDID;/" "$VERSIONHPPFILEFULLPATH"
+#======================================#
+#
+#
+#
+# Now let's construct the semantic version which we will need for the 7z archive file filename. 
+# This should be something like:	mgmTfA_v.0.5.0.7z
+#
+#
+# start empty
+SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME=""
+# append prefix tag
+SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME+=$SEMANTIC_VERSIONED_FILENAME_PREFIX
+#
+# APPEND VERSION NUMBERS
+# MAJOR
+SEMANTIC_VERSIONED_FILENAME_DOT="."
+SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME+=$MAJORVERSION
+# MINOR
+SEMANTIC_VERSIONED_FILENAME_DOT="."
+SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME+=$MINORVERSION
+# PATCH
+SEMANTIC_VERSIONED_FILENAME_DOT="."
+SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME+=$PATCHVERSION
+# BUILDID
+SEMANTIC_VERSIONED_FILENAME_DOT="."
+SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME+=$SEMANTIC_VERSIONED_FILENAME_WORDBUILD
+SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME+=$BUILDID
+# FILE EXTENSION
+SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME+=$SEMANTIC_VERSIONED_FILENAME_DOT
+SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME+=$SEMANTIC_VERSIONED_FILENAME_EXTENSION
+#
+#
 #
 #
 #======================================#
@@ -227,6 +333,7 @@ grep --no-messages --files-with-matches --null "//__builder___UNCOMMENT_THIS_LIN
 #
 # Bring in any DO_NOT_MODIFY files
 cp $DO_NOT_MODIFY_FILE1_CLEAN_FULLPATH $DO_NOT_MODIFY_FILE1_CLONE_FULLPATH
+cp $DO_NOT_MODIFY_FILE2_CLEAN_FULLPATH $DO_NOT_MODIFY_FILE2_CLONE_FULLPATH
 #
 #
 # Create the server-side PBO
@@ -236,12 +343,12 @@ $CPBO_BINARY_PATH -y -p $CLIENT_MPMISSION_DIR $CLIENT_SIDE_PBO_OUT_FULLPATH
 #
 #
 # move server-side PBO into a clearly marked directory
-mkdir -p $STAGING_PATH/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/0__Epoch_AutoStart_PBO__[server-side]'
-mv $SERVER_SIDE_PBO_OUT_FULLPATH $STAGING_PATH/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/0__Epoch_AutoStart_PBO__[server-side]'
+mkdir -p $STAGING_PATH/'0__INSTALL_ON_YOUR_SERVER__PBO_Files/0__Epoch_AutoStart_PBO____server-side'
+mv $SERVER_SIDE_PBO_OUT_FULLPATH $STAGING_PATH/'0__INSTALL_ON_YOUR_SERVER__PBO_Files/0__Epoch_AutoStart_PBO____server-side/'
 #======================================##======================================#
 # move client-side PBO into a clearly marked directory
-mkdir -p $STAGING_PATH/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/1__Epoch_Altis_Mission_PBO___[client-side]'
-mv $CLIENT_SIDE_PBO_OUT_FULLPATH $STAGING_PATH/'0__INSTALL_ON_YOUR_SERVER__[PBO_Files]/1__Epoch_Altis_Mission_PBO___[client-side]'
+mkdir -p $STAGING_PATH/'0__INSTALL_ON_YOUR_SERVER__PBO_Files/1__Epoch_Altis_Mission_PBO_____client-side'
+mv $CLIENT_SIDE_PBO_OUT_FULLPATH $STAGING_PATH/'0__INSTALL_ON_YOUR_SERVER__PBO_Files/1__Epoch_Altis_Mission_PBO_____client-side/'
 #======================================##======================================#
 # Copy documentation
 cp -r $DOCUMENTATION_PATH $STAGING_PATH/
@@ -251,20 +358,42 @@ cp -r $SOURCE_CODE_ROOT $STAGING_PATH/
 #======================================##======================================#
 # Copy light processed __CONFIGURATION__ file (human-readable) into documentation for easy reference
 cp $CONFIGURATION_FILECLONE_FULLPATH $STAGING_PATH/documentation/___CONFIGURATION___DEFAULT.hpp
-
+#
 # Now pack the cloned source code in staging directory into a single ultra compressed 7zip archive file
+# ref:	https://sevenzip.osdn.jp/chm/cmdline/switches/method.htm
+# ref:	http://stackoverflow.com/a/28474846
 $SEVENZ_BINARY_PATH a -bd -bb0 -t7z $SOURCE_CODE_PACKEDARCHIVEFILENAME $STAGING_PATH/$SOURCE_CODE_DIRNAME/*
+#
+#
 # delete everything from STAGING source code clone directory
 rm -rf $STAGING_PATH/$SOURCE_CODE_DIRNAME/*
 # move the source_code archive package into its own directory
 mv $STAGING_PATH/$SOURCE_CODE_PACKEDARCHIVEFILENAME $STAGING_PATH/$SOURCE_CODE_DIRNAME/$SOURCE_CODE_PACKEDARCHIVEFILENAME
 #
 #
+# Now pack the release-ready STAGING directory contents into a single compressed 7zip archive file
+#	INPUT		C:\git_repos.public\pub__Transport_for_Arma\release_engineering\__STAGING__
+#	OUTPUT		C:\git_repos.public\pub__Transport_for_Arma\release_engineering\__STAGING__\mgmTfA.7z
+$SEVENZ_BINARY_PATH a -bd -bb0 -t7z $TMP_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME $STAGING_PATH/*
+# delete everything from STAGING
+rm -rf $STAGING_PATH/*
+# move the single compressed 7zip archive file into the staging directory
+mv $TMP_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME $STAGING_PATH/
+# create checksums for the single compressed 7zip archive file
+# GNUPG md5sum.exe full path
+$CHECKSUMMD5_BINARY_PATH $STAGING_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME > $STAGING_PATH/md5sum.txt
+# GNUPG md5sum.exe full path
+$CHECKSUMSHA1_BINARY_PATH $STAGING_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME > $STAGING_PATH/sha1sum.txt
+# GNUPG md5sum.exe full path
+$CHECKSUMSHA256_BINARY_PATH $STAGING_PATH/$SEMANTIC_VERSIONED_FILENAME_FULLFINALFILENAME > $STAGING_PATH/sha256sum.txt
+#	
 #
-# all done - clean up clone source_code directory
-rm -rf $TMP_SOURCE_CODECLONE_PATH
+############
+# all done
+############
 #
-#
+# clean up tmp_path
+rm -rf $TMP_PATH/*
 #
 #
 #======================================#
