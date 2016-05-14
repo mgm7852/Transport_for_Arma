@@ -71,6 +71,7 @@ SOURCE_CODE_TOP_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_code'
 #
 # Configuration file full filename (include extension)
 CLEAN_CONFIGURATION_FILE_FULLPATH='/c/git_repos.public/pub__Transport_for_Arma/source_code/server-side/mgmTfA/serverside/mgmTfA/___CONFIGURATION___.hpp'
+CLONE_CONFIGURATION_FILE_FULLPATH='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/server-side/mgmTfA/serverside/mgmTfA/___CONFIGURATION___.hpp'
 #
 # Full path to SERVER-side code CLONE directory   (inside DEVELOPMENT_DIR) (contains init)
 SERVER_CODECLONE_ROOT='/c/git_repos.public/pub__Transport_for_Arma/source_codeCLONE/server-side/mgmTfA'
@@ -109,6 +110,9 @@ cd $WORKDIR
 #
 # clean up staging directory
 rm -rf $STAGINGDIR/*
+#
+# clean up clone
+rm -rf $SOURCE_CODECLONE_TOP_ROOT
 #
 # create clone
 cp -r $SOURCE_CODE_TOP_ROOT $SOURCE_CODECLONE_TOP_ROOT
@@ -155,6 +159,20 @@ grep --no-messages --files-with-matches --null " " $MODIFYPATH1/* $MODIFYPATH2/*
 cp $CLEAN_CONFIGURATION_FILE_FULLPATH $MODIFYPATH1/
 #
 #
+# ### Now partially process the clean config file -- do the preprocessing work but do not do any minification
+# STEP:	Find all files under modification_dir which contain the string:			//__builder___DELETE_THIS
+#		then modify these matching files in place with the in-line sed expression
+#			modification #1:	delete the whole line
+#CLONE_CONFIGURATION_FILE_FULLPATH
+sed --in-place -e '/\/\/__builder___DELETE_THIS/d' $CLONE_CONFIGURATION_FILE_FULLPATH
+#======================================#
+# STEP:	Find all files under modification_dir which contain the string:			//__builder___UNCOMMENT_THIS
+#		then modify these matching files in place with the in-line sed expression
+#			modification #1:	delete the very first (most-left) two characters on each line
+#			modification #2:	remove the string //__builder___UNCOMMENT_THIS
+sed --in-place -e '/__builder___UNCOMMENT_THIS/{s/#//g;s/\/\/__builder___UNCOMMENT_THIS//g;s/\/\///g;}' $CLONE_CONFIGURATION_FILE_FULLPATH
+#
+#
 #
 #======================================##======================================#
 # STEP:	Create the server-side PBO
@@ -178,7 +196,6 @@ cp -r $DOCUMENTATION_ROOT $STAGINGDIR/
 cp -r $SOURCE_CODE_TOP_ROOT $STAGINGDIR/
 #======================================##======================================#
 # STEP:	Copy __CONFIGURATION__ file (human-readable) into documentation for easy reference for users 
-cp $MODIFYPATH1/$CONFIGURATION_FILE_FNAME $STAGINGDIR/documentation/___CONFIGURATION___\(DEFAULT\).hpp
 cp $CLEAN_CONFIGURATION_FILE_FULLPATH $STAGINGDIR/documentation/___CONFIGURATION___DEFAULT.hpp
 #
 #
