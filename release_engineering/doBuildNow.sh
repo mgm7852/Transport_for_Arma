@@ -249,8 +249,8 @@ cp -r $DOCUMENTATION_PATH $STAGING_PATH/
 # Copy human-readable source code
 cp -r $SOURCE_CODE_ROOT $STAGING_PATH/
 #======================================##======================================#
-# Copy __CONFIGURATION__ file (human-readable) into documentation for easy reference for users 
-cp $CLEAN_CONFIGURATION_FILE_FULLPATH $STAGING_PATH/documentation/___CONFIGURATION___DEFAULT.hpp
+# Copy light processed __CONFIGURATION__ file (human-readable) into documentation for easy reference
+cp $CONFIGURATION_FILECLONE_FULLPATH $STAGING_PATH/documentation/___CONFIGURATION___DEFAULT.hpp
 
 # Now pack the cloned source code in staging directory into a single ultra compressed 7zip archive file
 $SEVENZ_BINARY_PATH a -bd -bb0 -t7z $SOURCE_CODE_PACKEDARCHIVEFILENAME $STAGING_PATH/$SOURCE_CODE_DIRNAME/*
