@@ -52,7 +52,7 @@ while {true} do {
 	//	STEP 3: return to top of the loop & start over
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	uiSleep mgmTfA_configgv_CATPCheckFrequencySecondsNumber;
-	if (_thisFileVerbosityLevelNumber>=10) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_scr_presentCATPActionMenu.sqf] [TV9] BEGIN reading file. Before calling the function _nearbyCATPCheckResult is: %1 (should be 'false' now)", _nearbyCATPCheckResult];};//dbg
+	if (_thisFileVerbosityLevelNumber>=10) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_scr_presentCATPActionMenu.sqf] [TV10] BEGIN reading file. Before calling the function _nearbyCATPCheckResult is: %1 (should be 'false' now)", _nearbyCATPCheckResult];};//dbg
 
 	// if we do not have the main display 46 let's wait for it to appear -- to eliminate unnecessary checks while player not in game (e.g.: while connecting)
 	waitUntil {!isnull (finddisplay 46)};
@@ -123,7 +123,7 @@ while {true} do {
 					_CATPNearByObject removeAction mgmTfA_gv_actionMenuItemTaxiFixedDestination03;
 					_CATPNearByObject setVariable["menuAttachedStatus", "noObjectDoesNotHaveToggleMenu", true];
 					publicVariable "menuAttachedStatus";
-					if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_scr_presentCATPActionMenu.sqf] [TV8]      Removed actionMenu from the CATPobject.  mgmTfA_gv_pvs_requestorPositionArray3D is: (%1)", (str mgmTfA_gv_pvs_requestorPositionArray3D)];}; // RELEASETODO	// debug
+					if (_thisFileVerbosityLevelNumber>=9) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_scr_presentCATPActionMenu.sqf] [TV9]      Removed actionMenu from the CATPobject.  mgmTfA_gv_pvs_requestorPositionArray3D is: (%1)", (str mgmTfA_gv_pvs_requestorPositionArray3D)];};// RELEASETODO	// debug
 
 					//Show the "You have left a Call-A-Taxi-Point" message only if the player is on foot
 					if (vehicle player == player) then {
@@ -137,5 +137,5 @@ while {true} do {
 			};
 	};
 };
-if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_scr_presentCATPActionMenu.sqf] [TV8] END reading file. _nearbyCATPCheckResult is: %1 (should reflect real status now)", _nearbyCATPCheckResult];};//dbg
+if (_thisFileVerbosityLevelNumber>=9) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_scr_presentCATPActionMenu.sqf] [TV9] END reading file. _nearbyCATPCheckResult is: %1 (should reflect real status now)", _nearbyCATPCheckResult];};//dbg
 // EOF
