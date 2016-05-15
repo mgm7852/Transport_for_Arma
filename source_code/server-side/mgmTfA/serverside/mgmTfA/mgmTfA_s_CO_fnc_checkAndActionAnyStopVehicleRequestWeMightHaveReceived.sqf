@@ -112,6 +112,8 @@ private	[
 		"_requestorPlayerObject",
 		"_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber",
 		"_taxiAnywhereTaxiRequestedDestinationPosition3DArray",
+		"_SUTaxiAIVehicleWaypointMainArray",
+		"_SUAICharacterDriverObject",
 		//
 		/// created locally
 		"_doorsLockedBool",
@@ -161,6 +163,8 @@ private	[
 31	_requestorPlayerObject
 32	_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber
 33	_taxiAnywhereTaxiRequestedDestinationPosition3DArray
+34	_SUTaxiAIVehicleWaypointMainArray
+35	_SUAICharacterDriverObject
 */
 // LIST OF LOCAL VARIABLES WITH INITIAL VALUES PASSED ON FROM CALLINGFUNCTION
 _myGUSUIDNumber = (_this select 0);
@@ -201,6 +205,8 @@ _taxiAnywhereRequestorProfileNameTextString = (_this select 30);
 _requestorPlayerObject = (_this select 31);
 _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber = (_this select 32);
 _taxiAnywhereTaxiRequestedDestinationPosition3DArray = (_this select 33);
+_SUTaxiAIVehicleWaypointMainArray = (_this select 34);
+_SUAICharacterDriverObject = (_this select 35);
 
 //	LIST OF LOCAL VARIABLES WITH INITIAL VALUES GENERATED LOCALLY
 		//	note that, the return value of this function is handled upstream as follows:
@@ -235,24 +241,9 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 
 	// STOP VEHICLE:	Use the horn to signal upcoming STOP action
 	driver _SUTaxiAIVehicleObject forceWeaponFire [currentWeapon _SUTaxiAIVehicleObject, currentWeapon _SUTaxiAIVehicleObject];
-	// bring the vehicle to a full stop, in 5 kmh steps, a new step every 0.25 seconds, until its speed is 0
-	private	[
-			"_SUVehicleSpeedOfVehicleInKMHNumber"
-			];
-	_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
-	while {_SUVehicleSpeedOfVehicleInKMHNumber > 0} do {
-		uiSleep 0.05;
-		// Slow down by 5 kmh
-		_vel = (velocity	_SUTaxiAIVehicleObject);
-		_dir = (direction	_SUTaxiAIVehicleObject);
-		_speedStep			= -5;
-		_SUTaxiAIVehicleObject	setVelocity	[
-											(_vel select 0) + (sin _dir * _speedStep),
-											(_vel select 1) + (cos _dir * _speedStep),
-											(_vel select 2)
-											];
-	_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
-	};
+
+	// new method to temporarily stop - does this work?
+	_SUAICharacterDriverObject disableAI "MOVE";
 	uiSleep 0.05;
 	// prep: we'll be allowing player(s) to get off - unlock doors first
 	_SUTaxiAIVehicleObject lockCargo false;
@@ -288,6 +279,7 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 			"_startTimeForRequestorGetOutInSecondsNumber",
 			"_beenWaitingForRequestorToGetOutInSecondsNumber"
 			];
+	_beenWaitingForRequestorToGetOutInSecondsNumber = 0;
 	if (_requestorPlayerObject in _SUTaxiAIVehicleObject) then {
 		//He's in!
 		_requestorInsideVehicle = true;
@@ -355,7 +347,11 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 			_emergencyEscapeNeeded = true;
 		};
 		 // Let emergency escapees pass
-		if(_emergencyEscapeNeeded) then { breakTo "mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceivedMainScope";	};
+		if(_emergencyEscapeNeeded) then {
+			// we will breakTo but first fix the PAUSEd vehicle state!
+			//_SUTaxiAIVehicleWaypointMainArray setWaypointType "MOVE";
+			breakTo "mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceivedMainScope";
+		};
 
 		// PING			log only every Nth package			(uiSleep=0.05)		(n=300)  => 	log every 15 seconds
 		// Let emergency escapees pass
@@ -382,6 +378,10 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 				//NO, requestor did not get out. He has changed his mind! We will carry on with the normal taxi service phase. return to callingFunction (_stopVehReqHandlerFncReturnValueBool = true). (callingFunction will then carry an as per normal)
 				// log it
 				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV5] WAIT FOR REQUESTOR GET OUT TIMEOUT VALUE REACHED!		we won't wait anymore for him to get out. proceeding as if no stopVehicle requested.  (_beenWaitingForRequestorToGetOutInSecondsNumber) is: (%1).", _beenWaitingForRequestorToGetOutInSecondsNumber];};
+				// keep going
+				_SUAICharacterDriverObject enableAI "MOVE";
+				//_SUTaxiAIVehicleWaypointMainArray setWaypointType "MOVE";
+				breakTo "mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceivedMainScope";
 			} else {
 				// still good to wait some more
 				// log it

@@ -1,4 +1,3 @@
-//H
 //H ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf
 //H $PURPOSE$	:	This function manage the SU during its approach to PickUpPoint, Awaiting Requestor, Awaiting Get In, Payment phases. It will end when SU start travelling towards DropOff Point
@@ -86,7 +85,9 @@ private	[
 		"_paygCustomerCanAffordTheNextPaymentBool",
 		"_paygLastCheckCounterNumber",
 		"_TA1stMileFeeNeedToBePaidBool",
-		"_currentTimeInSecondsNumber"
+		"_currentTimeInSecondsNumber",
+		"_SUTypeNumber",
+		"_stopVehicleRequestedAndAuthorizedFncReturnBool"
 		];
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 _taxiAnywhereRequestorClientIDNumber = (_this select 0);
@@ -162,6 +163,14 @@ _paygIsItTimeYetCheckCounterNumber = 0;
 _paygCustomerCanAffordTheNextPaymentBool = false;
 _TA1stMileFeeNeedToBePaidBool = true;
 // do NOT set it yet:	_currentTimeInSecondsNumber
+// TODO: add this _SUTypeNumber to vehicle spawn script and then keep passing down the line between Phase scripts
+		// _SUTypeNumber OPTIONS
+		// 0 = TA
+		// 1 = FD
+		// 2 = BU
+// This being a TA, let's set it to 0
+_SUTypeNumber = 0;
+
 
 //We are at the requestorPosition
 _broadcastSUInformationCounter = 0;
@@ -360,48 +369,6 @@ if (mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0
 	_TA1stMileFeeNeedToBePaidBool = false;
 };
 
-
-
-/*
-missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], true];
-publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
-_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
-if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncContinuouslyRequestPayment.sqf] [TV4] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
-*/
-
-
-
-// CHARGE the player (take moeny from 's wallet	-- 1st Mile Fee/Initial Fee ==> take this much => mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// old code below commented out
-	/*
-	// TAKE PAYMENT from player's wallet	-- 1st Mile Fee/Initial Fee ==> take this much => mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
-	_null = [_requestorPlayerObject, mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber] call EPOCH_exp_server_effectCrypto;
-
-	// log the fee charge
-	diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]		CHARGED PLAYER		just called EPOCH_exp_server_effectCrypto and processed player's wallet by (mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber)=(%1)", (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber)];//dbg
-
-	// inform the customer THANK YOU FOR PAYING THE 1ST MILE FEE		-- Client Communications - Send the message to the Requestor
-	///// RENAMED: mgmTfA_gv_pvc_pos_youJustPaidclickNGo1stMileFeePacketSignalOnly = ".";
-	//COMMENTED OUT NOW mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly = ".";
-	//COMMENTED OUT NOW _taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly";
-	*/
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
 //Lock the vehicle doors
 _SUTaxiAIVehicleObject lockCargo true;
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS locked"];};
@@ -470,57 +437,50 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+			/*
+			// TODO:		REMOVE THIS BIT WHEN THE CODE IS STABLE
+			// TODO:		REMOVE THIS BIT WHEN THE CODE IS STABLE
+			// TODO:		REMOVE THIS BIT WHEN THE CODE IS STABLE
+			*/
+													/*
+													// LIST OF PARAMETERS being passed from TA_Phase04 to mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived
+													0	_myGUSUIDNumber
+													1	_SUTypeTextString
+													2	_SUActiveWaypointPositionPosition3DArray
+													3	_SUCurrentActionInProgressTextString
+													4	_SUCurrentTaskThresholdInSecondsNumber
+													5	_SUCurrentTaskBirthTimeInSecondsNumber
+													6	_SUDriversFirstnameTextString
+													7	_SUMarkerShouldBeDestroyedAfterExpiryBool
+													8	_SURequestorPlayerUIDTextString
+													9	_SURequestorProfileNameTextString
+													10	_SUAIVehicleObject
+													11	_SUAIVehicleObjectBirthTimeInSecondsNumber
+													12	_SUPickUpHasOccurredBool
+													13	_SUPickUpPositionPosition3DArray
+													14	_SUDropOffPositionHasBeenDeterminedBool
+													15	_SUDropOffHasOccurredBool
+													16	_SUDropOffPositionPosition3DArray
+													17	_SUDropOffPositionNameTextString
+													18	_SUTerminationPointPositionHasBeenDeterminedBool
+													19	_SUTerminationPointPosition3DArray
+													20	_SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray
+													21	_SUAIVehicleObjectCurrentPositionPosition3DArray
+													22	_SUAIVehicleVehicleDirectionInDegreesNumber
+													23	_SUAIVehicleObjectAgeInSecondsNumber
+													24	_SUCurrentTaskAgeInSecondsNumber
+													25	_SUAIVehicleSpeedOfVehicleInKMHNumber
+													26	_SUDistanceToActiveWaypointInMetersNumber
+													27	_SUTypeNumber
+													28	_SUTaxiAIVehicleObject
+													29	_taxiAnywhereRequestorClientIDNumber
+													30	_taxiAnywhereRequestorProfileNameTextString
+													31	_requestorPlayerObject
+													32	_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber
+													33	_taxiAnywhereTaxiRequestedDestinationPosition3DArray
+													*/
 			// CHECK every second exit requested and authorized?
-			// TODO: add this _SUTypeNumber to vehicle spawn script and then keep passing down the line between Phase scripts
-			private	[
-					"_SUTypeNumber",
-					"_stopVehicleRequestedAndAuthorizedFncReturnBool"
-					];
-			_SUTypeNumber = 0;
-			_stopVehicleRequestedAndAuthorizedFncReturnBool = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUTypeNumber, _SUTaxiAIVehicleObject, _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _requestorPlayerObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _taxiAnywhereTaxiRequestedDestinationPosition3DArray] call mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived;
-			/*
-			// TODO:		REMOVE THIS BIT WHEN THE CODE IS STABLE
-			// TODO:		REMOVE THIS BIT WHEN THE CODE IS STABLE
-			// TODO:		REMOVE THIS BIT WHEN THE CODE IS STABLE
-			*/
-			/*
-			// LIST OF PARAMETERS being passed from TA_Phase04 to mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived
-			0	_myGUSUIDNumber
-			1	_SUTypeTextString
-			2	_SUActiveWaypointPositionPosition3DArray
-			3	_SUCurrentActionInProgressTextString
-			4	_SUCurrentTaskThresholdInSecondsNumber
-			5	_SUCurrentTaskBirthTimeInSecondsNumber
-			6	_SUDriversFirstnameTextString
-			7	_SUMarkerShouldBeDestroyedAfterExpiryBool
-			8	_SURequestorPlayerUIDTextString
-			9	_SURequestorProfileNameTextString
-			10	_SUAIVehicleObject
-			11	_SUAIVehicleObjectBirthTimeInSecondsNumber
-			12	_SUPickUpHasOccurredBool
-			13	_SUPickUpPositionPosition3DArray
-			14	_SUDropOffPositionHasBeenDeterminedBool
-			15	_SUDropOffHasOccurredBool
-			16	_SUDropOffPositionPosition3DArray
-			17	_SUDropOffPositionNameTextString
-			18	_SUTerminationPointPositionHasBeenDeterminedBool
-			19	_SUTerminationPointPosition3DArray
-			20	_SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray
-			21	_SUAIVehicleObjectCurrentPositionPosition3DArray
-			22	_SUAIVehicleVehicleDirectionInDegreesNumber
-			23	_SUAIVehicleObjectAgeInSecondsNumber
-			24	_SUCurrentTaskAgeInSecondsNumber
-			25	_SUAIVehicleSpeedOfVehicleInKMHNumber
-			26	_SUDistanceToActiveWaypointInMetersNumber
-			27	_SUTypeNumber
-			28	_SUTaxiAIVehicleObject
-			29	_taxiAnywhereRequestorClientIDNumber
-			30	_taxiAnywhereRequestorProfileNameTextString
-			31	_requestorPlayerObject
-			32	_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber
-			33	_taxiAnywhereTaxiRequestedDestinationPosition3DArray
-			*/
-
+			_stopVehicleRequestedAndAuthorizedFncReturnBool = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUTypeNumber, _SUTaxiAIVehicleObject, _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _requestorPlayerObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _taxiAnywhereTaxiRequestedDestinationPosition3DArray, _SUTaxiAIVehicleWaypointMainArray, _SUAICharacterDriverObject] call mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived;
 
 			// within the function door lock status might have changed - update it
 			_doorsLockedBool = call compile format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
@@ -731,25 +691,63 @@ if (!_emergencyEscapeNeeded) then {
 
 
 
-
-
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+			/*
+			// TODO:		REMOVE THIS BIT WHEN THE CODE IS STABLE
+			// TODO:		REMOVE THIS BIT WHEN THE CODE IS STABLE
+			// TODO:		REMOVE THIS BIT WHEN THE CODE IS STABLE
+			*/
+													/*
+													// LIST OF PARAMETERS being passed from TA_Phase04 to mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived
+													0	_myGUSUIDNumber
+													1	_SUTypeTextString
+													2	_SUActiveWaypointPositionPosition3DArray
+													3	_SUCurrentActionInProgressTextString
+													4	_SUCurrentTaskThresholdInSecondsNumber
+													5	_SUCurrentTaskBirthTimeInSecondsNumber
+													6	_SUDriversFirstnameTextString
+													7	_SUMarkerShouldBeDestroyedAfterExpiryBool
+													8	_SURequestorPlayerUIDTextString
+													9	_SURequestorProfileNameTextString
+													10	_SUAIVehicleObject
+													11	_SUAIVehicleObjectBirthTimeInSecondsNumber
+													12	_SUPickUpHasOccurredBool
+													13	_SUPickUpPositionPosition3DArray
+													14	_SUDropOffPositionHasBeenDeterminedBool
+													15	_SUDropOffHasOccurredBool
+													16	_SUDropOffPositionPosition3DArray
+													17	_SUDropOffPositionNameTextString
+													18	_SUTerminationPointPositionHasBeenDeterminedBool
+													19	_SUTerminationPointPosition3DArray
+													20	_SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray
+													21	_SUAIVehicleObjectCurrentPositionPosition3DArray
+													22	_SUAIVehicleVehicleDirectionInDegreesNumber
+													23	_SUAIVehicleObjectAgeInSecondsNumber
+													24	_SUCurrentTaskAgeInSecondsNumber
+													25	_SUAIVehicleSpeedOfVehicleInKMHNumber
+													26	_SUDistanceToActiveWaypointInMetersNumber
+													27	_SUTypeNumber
+													28	_SUTaxiAIVehicleObject
+													29	_taxiAnywhereRequestorClientIDNumber
+													30	_taxiAnywhereRequestorProfileNameTextString
+													31	_requestorPlayerObject
+													32	_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber
+													33	_taxiAnywhereTaxiRequestedDestinationPosition3DArray
+													*/
 			// CHECK every second exit requested and authorized?
-			// TODO: add this _SUTypeNumber to vehicle spawn script and then keep passing down the line between Phase scripts
-			private	[
-					"_SUTypeNumber",
-					"_stopVehicleRequestedAndAuthorizedFncReturnBool"
-					];
-			_SUTypeNumber = 0;
-			_stopVehicleRequestedAndAuthorizedFncReturnBool = [_myGUSUIDNumber, _SUTypeNumber] call mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived;
+			_stopVehicleRequestedAndAuthorizedFncReturnBool = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUTypeNumber, _SUTaxiAIVehicleObject, _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _requestorPlayerObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _taxiAnywhereTaxiRequestedDestinationPosition3DArray, _SUTaxiAIVehicleWaypointMainArray, _SUAICharacterDriverObject] call mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived;
+
+			// within the function door lock status might have changed - update it
+			_doorsLockedBool = call compile format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 
 			if (_stopVehicleRequestedAndAuthorizedFncReturnBool) then {
 				// YES, there is a requested & authorized stopVehicle request
 				// TODO CHANGE THIS TO 10
 				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehicleRequestedAndAuthorizedFncReturnBool) with the following: (%1)", _stopVehicleRequestedAndAuthorizedFncReturnBool];};//dbg
-				_emergencyEscapeNeeded = true;
+				//TURNING THIS OFF FOR TEST 
+				//TURNING THIS OFF FOR TEST >>		_emergencyEscapeNeeded = true;
 			} else {
 				// NO, there are no authorized stopVehicle requests
 				// TODO CHANGE THIS TO 10
@@ -759,8 +757,6 @@ if (!_emergencyEscapeNeeded) then {
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
-
-
 
 
 
