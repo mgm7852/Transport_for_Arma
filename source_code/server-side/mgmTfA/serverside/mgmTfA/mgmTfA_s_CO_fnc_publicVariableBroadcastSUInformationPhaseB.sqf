@@ -59,7 +59,7 @@ _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 
 // WARNING! THIS LINE MUST* BE above the next one or _myGUSUIDNumber will throw error: "Error Undefined variable in expression: _mygusuidnumber"
 _myGUSUIDNumber = (_this select 0);
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB.sqf]  [TV3] 	<ThisIs:%1> 	I have been CALL'd.	This is what I have received:	(%2).		(str mgmTfA_gvdb_PV_GUSUIDNumber) is: (%3)", (str _myGUSUIDNumber), (str _this), (str mgmTfA_gvdb_PV_GUSUIDNumber)];};//dbg
+if (_thisFileVerbosityLevelNumber>=10) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB.sqf]  [TV10] 	<ThisIs:%1> 	I have been CALL'd.	This is what I have received:	(%2).		(str mgmTfA_gvdb_PV_GUSUIDNumber) is: (%3)", (str _myGUSUIDNumber), (str _this), (str mgmTfA_gvdb_PV_GUSUIDNumber)];};//dbg
 _SUTypeTextString = (_this select 1);
 _SUActiveWaypointPositionPosition3DArray = (_this select 2);
 _SUCurrentActionInProgressTextString = (_this select 3);
