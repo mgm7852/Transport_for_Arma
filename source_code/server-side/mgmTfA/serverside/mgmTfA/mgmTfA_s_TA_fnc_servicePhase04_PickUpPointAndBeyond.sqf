@@ -88,7 +88,8 @@ private	[
 		"_TA1stMileFeeNeedToBePaidBool",
 		"_currentTimeInSecondsNumber",
 		"_exitRequestedAndAuthorizedBool",
-		"_shouldKeepWaitingToAllowRequestedAndAuthorizedExitBool"
+		"_shouldKeepWaitingToAllowExitBool",
+		"_shouldKeepWaitingWaitTillSeconds"
 		];
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 _taxiAnywhereRequestorClientIDNumber = (_this select 0);
@@ -165,7 +166,7 @@ _paygCustomerCanAffordTheNextPaymentBool = false;
 _TA1stMileFeeNeedToBePaidBool = true;
 // do NOT set it yet:	_currentTimeInSecondsNumber
 _exitRequestedAndAuthorizedBool = false;
-_shouldKeepWaitingToAllowRequestedAndAuthorizedExitBool = false;
+_shouldKeepWaitingToAllowExitBool = false;
 
 //We are at the requestorPosition
 _broadcastSUInformationCounter = 0;
@@ -364,48 +365,9 @@ if (mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0
 	_TA1stMileFeeNeedToBePaidBool = false;
 };
 
-
-
-/*
-missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], true];
-publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
-_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
-if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncContinuouslyRequestPayment.sqf] [TV4] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
-*/
-
-
-
-// CHARGE the player (take moeny from 's wallet	-- 1st Mile Fee/Initial Fee ==> take this much => mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// old code below commented out
-	/*
-	// TAKE PAYMENT from player's wallet	-- 1st Mile Fee/Initial Fee ==> take this much => mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
-	_null = [_requestorPlayerObject, mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber] call EPOCH_exp_server_effectCrypto;
-
-	// log the fee charge
-	diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]		CHARGED PLAYER		just called EPOCH_exp_server_effectCrypto and processed player's wallet by (mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber)=(%1)", (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber)];//dbg
-
-	// inform the customer THANK YOU FOR PAYING THE 1ST MILE FEE		-- Client Communications - Send the message to the Requestor
-	///// RENAMED: mgmTfA_gv_pvc_pos_youJustPaidclickNGo1stMileFeePacketSignalOnly = ".";
-	//COMMENTED OUT NOW mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly = ".";
-	//COMMENTED OUT NOW _taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly";
-	*/
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
+// STOP THE VEHICLE FUNCTION MEANINGFUL RANGE: BEGIN
+// STOP THE VEHICLE FUNCTION MEANINGFUL RANGE: BEGIN
+// STOP THE VEHICLE FUNCTION MEANINGFUL RANGE: BEGIN
 //Lock the vehicle doors
 _SUTaxiAIVehicleObject lockCargo true;
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS locked"];};
@@ -471,11 +433,17 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 		_exitRequestedAndAuthorizedBool = call compile format ["mgmTfA_gv_PV_SU%1SUExitRequestedAndAuthorized", _myGUSUIDNumber];
 		if (_exitRequestedAndAuthorizedBool) then {
 
-			// exit requested & authorized - let's allow it
-			_shouldKeepWaitingToAllowRequestedAndAuthorizedExitBool = true;
+			// ACTION IT -- basically stop vehicle, unlock the doors, and wait for requestor to exit for up to 10 seconds in a loop.
 
-			// ACTION IT -- basically stop vehicle, unlock the doors, and wait for 10 seconds in a loop, don't go anywhere, don't do anything else.
-			// First, let's bring the vehicle to a full stop, in 5 kmh steps, a new step every 0.25 seconds, until its speed is 0
+			// exit requested & authorized - let's allow it
+			_shouldKeepWaitingToAllowExitBool = true;
+			_shouldKeepWaitingWaitTillSeconds = time+10;
+			_requestorOutsideVehicle = false;
+
+			// If requestor does not get out by then, carry on as usual.
+			// If requestor does get out by then, start waitTill loop and wait for the requestor to hop back in, in the next 60 seconds. If this times out cary on as usual (emergency exit & To Termination)
+
+			// Let's bring the vehicle to a full stop, in 5 kmh steps, a new step every 0.25 seconds, until its speed is 0
 			_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
 			while {_SUVehicleSpeedOfVehicleInKMHNumber > 0} do {
 				uiSleep 0.05;
@@ -493,7 +461,7 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] VEHICLE STOPPED to allow REQUESTED & AUTHORIZED EXIT"];};
 			// UNLOCK doors
 			_SUTaxiAIVehicleObject lockCargo false;
-			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS now unlocked to allow REQUESTED & AUTHORIZED EXIT"];};
+			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS now unlocked to allow REQUESTED & AUTHORIZED EXIT. I will wait 10 seconds for the requestor to get out"];};
 
 			// TODO clear this duplicate
 			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV2] ALLOWING REQUESTED & AUTHORIZED EXIT		SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
@@ -501,8 +469,8 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 		// WAIT 10 SEC FOR EXIT FIRST. SYSCHAT INFORM EVERY SECOND
 		// THEN CARRY ON IF STILL IN VEHICLE.
 		// WAIT FOR GET IN IF OUTSIDE
-		while {_shouldKeepWaitingToAllowRequestedAndAuthorizedExitBool} do {
-			// we will keep patiently waiting till requestor get back in if he doesn't eventually task will time out and we will go to termination.
+		while {(!_requestorOutsideVehicle) && (time < _shouldKeepWaitingWaitTillSeconds)} do {
+			// we will keep patiently waiting till requestor get out, if he does not, eventually task will time out and we will go to termination.
 			// While we wait, must keep updating the Service Unit information on the map - thus the loop & broadcast SU info bit below
 
 			// TODO:	make the 10 second time frame a configuration option
@@ -512,7 +480,7 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 			// in-loop evaluation
 			if (_requestorPlayerObject in _SUTaxiAIVehicleObject) then {
 				_requestorOutsideVehicle = false;
-				_shouldKeepWaitingToAllowRequestedAndAuthorizedExitBool = false;
+				_shouldKeepWaitingToAllowExitBool = false;
 			} else {
 				// do nothing requestor still outside vehicle...
 			};
