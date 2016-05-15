@@ -331,9 +331,9 @@ while {(((time) - _delayedDeletionStartTimeInSecondsNumber) < mgmTfA_configgv_ma
 	if (_counterForDelayedDeletionLoop == 5) then {
 //	TODO	THIS IS NOT READY. FIRST FINISH BASIC WORKFLOW. THEN COME FIX THIS.			[false] call PublicVariableBroadcastSUInformation;
 	};
-	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV5]          TICK in TERMINATION point, _delayedDeletion SLEEP LOOP."];};//dbg
+	if (_thisFileVerbosityLevelNumber>=10) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV10]          TICK in TERMINATION point, _delayedDeletion SLEEP LOOP."];};//dbg
 };
-if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4]          EXITed TERMINATION point, _delayedDeletion SLEEP LOOP."];};//dbg
+if (_thisFileVerbosityLevelNumber>=9) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV9]          EXITed TERMINATION point, _delayedDeletion SLEEP LOOP."];};//dbg
 
 
 //	let's try once more: 	spinning whilst driver is in vehicle  		//Delete the driver now - otherwise kicks him out during the spin!
