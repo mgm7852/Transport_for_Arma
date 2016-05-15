@@ -512,9 +512,11 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 			// TODO: Change this test value to 90 seconds 
 			// TODO: make this a CONFIGURATION file setting
 			if (_beenWaitingForRequestorToGetInInSecondsNumber >= 15) then {
+
 				// hit the timeout max value - we'll terminate!
+				
 				// log it
-				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV5] WAIT FOR REQUESTOR GET OUT TIMEOUT VALUE REACHED!		we won't wait anymore for him to get out. proceeding as if no stopVehicle requested.  (_beenWaitingForRequestorToGetOutInSecondsNumber) is: (%1).", _beenWaitingForRequestorToGetOutInSecondsNumber];};
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV5] WAIT FOR REQUESTOR GET IN TIMEOUT VALUE REACHED!		we won't wait anymore for him to get in. proceeding as if no stopVehicle requested.  (_beenWaitingForRequestorToGetInInSecondsNumber) is: (%1).", _beenWaitingForRequestorToGetInInSecondsNumber];};
 
 				//NO, requestor did not get back in. He dont't need us! We will terminate this taxi service phase and the whole workflow. return to callingFunction (_stopVehReqHandlerFncReturnValueBool = false). (callingFunction will then instantly terminate)
 				// enable driver movement
@@ -526,7 +528,7 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 			} else {
 				// still good to wait some more
 				// log it
-				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV5] WAIT FOR REQUESTOR GET OUT TIMEOUT VALUE IS STILL GOOD		will wait some more...			(_beenWaitingForRequestorToGetOutInSecondsNumber) is: (%1).", _beenWaitingForRequestorToGetOutInSecondsNumber];};
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV5] WAIT FOR REQUESTOR GET IN TIMEOUT VALUE IS STILL GOOD		will wait some more...			(_beenWaitingForRequestorToGetInInSecondsNumber) is: (%1).", _beenWaitingForRequestorToGetInInSecondsNumber];};
 			};
 		};
 	};
@@ -579,11 +581,7 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 // we are about to exit function and return no NormalPhase or EmergencyTermination Phase		-- in either case, we can toggle this back to false now
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUStopVehicleRequestedAndAuthorized", _myGUSUIDNumber], false];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUStopVehicleRequestedAndAuthorized", _myGUSUIDNumber];
-if (_thisFileVerbosityLevelNumber>=0) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV0] 	for test purposes I have now set (1SUStopVehicleRequestedAndAuthorized) to FALSE 		for SU:(%1)		.", (str _myGUSUIDNumber)];};//dbg
-
-
-// TODO CHANGE THIS TO 10
-if (_thisFileVerbosityLevelNumber>=0) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV0]   Reached checkpoint: Bottom of function. The next line will exit the function.		(_stopVehReqHandlerFncReturnValueBool) is: (%1).", _stopVehReqHandlerFncReturnValueBool];};
+if (_thisFileVerbosityLevelNumber>=0) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV0] 	exiting function. I just set (1SUStopVehicleRequestedAndAuthorized) to FALSE 		for SU:(%1)		.", (str _myGUSUIDNumber)];};//dbg
 
 // return appropriate response to the callingFunction
 if (_emergencyEscapeNeeded) then {
@@ -591,5 +589,7 @@ if (_emergencyEscapeNeeded) then {
 } else {
 	_stopVehReqHandlerFncReturnValueBool = true;
 };
+// TODO CHANGE THIS TO 10
+if (_thisFileVerbosityLevelNumber>=0) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV0]   Reached checkpoint: Bottom of function. The next line will exit the function.		(_stopVehReqHandlerFncReturnValueBool) is: (%1).", _stopVehReqHandlerFncReturnValueBool];};
 _stopVehReqHandlerFncReturnValueBool
 // EOF

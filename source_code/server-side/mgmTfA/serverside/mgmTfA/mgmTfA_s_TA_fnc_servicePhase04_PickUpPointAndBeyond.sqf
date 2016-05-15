@@ -87,7 +87,7 @@ private	[
 		"_TA1stMileFeeNeedToBePaidBool",
 		"_currentTimeInSecondsNumber",
 		"_SUTypeNumber",
-		"_stopVehicleRequestedAndAuthorizedFncReturnBool"
+		"_stopVehReqHandlerFncReturnValueBool"
 		];
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 _taxiAnywhereRequestorClientIDNumber = (_this select 0);
@@ -170,6 +170,11 @@ _TA1stMileFeeNeedToBePaidBool = true;
 		// 2 = BU
 // This being a TA, let's set it to 0
 _SUTypeNumber = 0;
+// _stopVehReqHandlerFncReturnValueBool
+// true	= signal the callingFunction to carry on as per normal
+// false	= signal the callingFunction to immediately terminate the workflow (requestor abandoned the SU & we don't think they're coming back!)
+// so we set it to true initially as we have no reason to terminate now!
+_stopVehReqHandlerFncReturnValueBool = true;
 
 
 //We are at the requestorPosition
@@ -480,22 +485,21 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 													33	_taxiAnywhereTaxiRequestedDestinationPosition3DArray
 													*/
 			// CHECK every second exit requested and authorized?
-			_stopVehicleRequestedAndAuthorizedFncReturnBool = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUTypeNumber, _SUTaxiAIVehicleObject, _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _requestorPlayerObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _taxiAnywhereTaxiRequestedDestinationPosition3DArray, _SUAICharacterDriverObject] call mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived;
+			_stopVehReqHandlerFncReturnValueBool = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUTypeNumber, _SUTaxiAIVehicleObject, _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _requestorPlayerObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _taxiAnywhereTaxiRequestedDestinationPosition3DArray, _SUAICharacterDriverObject] call mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived;
 
 			// within the function door lock status might have changed - update it
 			_doorsLockedBool = call compile format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 
-			if (_stopVehicleRequestedAndAuthorizedFncReturnBool) then {
+			if (_stopVehReqHandlerFncReturnValueBool) then {
+				// NO, there are no authorized stopVehicle requests		-- carry on
+				// TODO CHANGE THIS TO 10
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehReqHandlerFncReturnValueBool) with the following: (%1)", _stopVehReqHandlerFncReturnValueBool];};//dbg
+				// nothing to be done here
+			} else {
 				// YES, there is a requested & authorized stopVehicle request
 				// TODO CHANGE THIS TO 10
-				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehicleRequestedAndAuthorizedFncReturnBool) with the following: (%1)", _stopVehicleRequestedAndAuthorizedFncReturnBool];};//dbg
-				//TURNING THIS OFF FOR TEST 
-				//TURNING THIS OFF FOR TEST >>		_emergencyEscapeNeeded = true;
-			} else {
-				// NO, there are no authorized stopVehicle requests
-				// TODO CHANGE THIS TO 10
-				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehicleRequestedAndAuthorizedFncReturnBool) with the following: (%1)", _stopVehicleRequestedAndAuthorizedFncReturnBool];};//dbg
-				// nothing to be done here
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehReqHandlerFncReturnValueBool) with the following: (%1)			I am setting _emergencyEscapeNeeded = true and terminating now!", _stopVehReqHandlerFncReturnValueBool];};//dbg
+				_emergencyEscapeNeeded = true;
 			};
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
@@ -737,22 +741,21 @@ if (!_emergencyEscapeNeeded) then {
 													33	_taxiAnywhereTaxiRequestedDestinationPosition3DArray
 													*/
 			// CHECK every second exit requested and authorized?
-			_stopVehicleRequestedAndAuthorizedFncReturnBool = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUTypeNumber, _SUTaxiAIVehicleObject, _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _requestorPlayerObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _taxiAnywhereTaxiRequestedDestinationPosition3DArray, _SUAICharacterDriverObject] call mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived;
+			_stopVehReqHandlerFncReturnValueBool = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUTypeNumber, _SUTaxiAIVehicleObject, _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _requestorPlayerObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _taxiAnywhereTaxiRequestedDestinationPosition3DArray, _SUAICharacterDriverObject] call mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived;
 
 			// within the function door lock status might have changed - update it
 			_doorsLockedBool = call compile format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 
-			if (_stopVehicleRequestedAndAuthorizedFncReturnBool) then {
+			if (_stopVehReqHandlerFncReturnValueBool) then {
+				// NO, there are no authorized stopVehicle requests		-- carry on
+				// TODO CHANGE THIS TO 10
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehReqHandlerFncReturnValueBool) with the following: (%1)", _stopVehReqHandlerFncReturnValueBool];};//dbg
+				// nothing to be done here
+			} else {
 				// YES, there is a requested & authorized stopVehicle request
 				// TODO CHANGE THIS TO 10
-				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehicleRequestedAndAuthorizedFncReturnBool) with the following: (%1)", _stopVehicleRequestedAndAuthorizedFncReturnBool];};//dbg
-				//TURNING THIS OFF FOR TEST 
-				//TURNING THIS OFF FOR TEST >>		_emergencyEscapeNeeded = true;
-			} else {
-				// NO, there are no authorized stopVehicle requests
-				// TODO CHANGE THIS TO 10
-				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehicleRequestedAndAuthorizedFncReturnBool) with the following: (%1)", _stopVehicleRequestedAndAuthorizedFncReturnBool];};//dbg
-				// nothing to be done here
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehReqHandlerFncReturnValueBool) with the following: (%1)			I am setting _emergencyEscapeNeeded = true and terminating now!", _stopVehReqHandlerFncReturnValueBool];};//dbg
+				_emergencyEscapeNeeded = true;
 			};
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
