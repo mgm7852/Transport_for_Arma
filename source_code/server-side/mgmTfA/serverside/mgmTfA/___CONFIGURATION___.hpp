@@ -333,6 +333,7 @@ mgmTfA_configgv_currentFixedDestinationTaxiActionInProgressIs08TextString = "Ter
 mgmTfA_configgv_currentTATaxiActionInProgressIs00TextString = "Awaiting Init Clearance";
 mgmTfA_configgv_currentTATaxiActionInProgressIs01TextString = "Driving to Requestor";
 mgmTfA_configgv_currentTATaxiActionInProgressIs02TextString = "Awaiting Get In";
+mgmTfA_configgv_currentTATaxiActionInProgressIs02bTextString = "Awaiting Get In (Stop Requested)";
 mgmTfA_configgv_currentTATaxiActionInProgressIs03TextString = "Awaiting Payment";
 mgmTfA_configgv_currentTATaxiActionInProgressIs04TextString = "Driving to Requested Destination";
 mgmTfA_configgv_currentTATaxiActionInProgressIs05TextString = "Awaiting Get Off";
