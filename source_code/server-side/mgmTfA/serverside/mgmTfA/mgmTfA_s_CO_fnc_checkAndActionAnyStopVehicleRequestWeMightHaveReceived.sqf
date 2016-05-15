@@ -112,7 +112,6 @@ private	[
 		"_requestorPlayerObject",
 		"_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber",
 		"_taxiAnywhereTaxiRequestedDestinationPosition3DArray",
-		"_SUTaxiAIVehicleWaypointMainArray",
 		"_SUAICharacterDriverObject",
 		//
 		/// created locally
@@ -163,8 +162,7 @@ private	[
 31	_requestorPlayerObject
 32	_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber
 33	_taxiAnywhereTaxiRequestedDestinationPosition3DArray
-34	_SUTaxiAIVehicleWaypointMainArray
-35	_SUAICharacterDriverObject
+34	_SUAICharacterDriverObject
 */
 // LIST OF LOCAL VARIABLES WITH INITIAL VALUES PASSED ON FROM CALLINGFUNCTION
 _myGUSUIDNumber = (_this select 0);
@@ -205,8 +203,7 @@ _taxiAnywhereRequestorProfileNameTextString = (_this select 30);
 _requestorPlayerObject = (_this select 31);
 _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber = (_this select 32);
 _taxiAnywhereTaxiRequestedDestinationPosition3DArray = (_this select 33);
-_SUTaxiAIVehicleWaypointMainArray = (_this select 34);
-_SUAICharacterDriverObject = (_this select 35);
+_SUAICharacterDriverObject = (_this select 34);
 
 //	LIST OF LOCAL VARIABLES WITH INITIAL VALUES GENERATED LOCALLY
 		//	note that, the return value of this function is handled upstream as follows:
@@ -242,7 +239,7 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 	// STOP VEHICLE:	Use the horn to signal upcoming STOP action
 	driver _SUTaxiAIVehicleObject forceWeaponFire [currentWeapon _SUTaxiAIVehicleObject, currentWeapon _SUTaxiAIVehicleObject];
 
-	// new method to temporarily stop - does this work?
+	// disable Taxi driver & vehicle movement
 	_SUAICharacterDriverObject disableAI "MOVE";
 	uiSleep 0.05;
 	// prep: we'll be allowing player(s) to get off - unlock doors first
@@ -266,17 +263,16 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 
 	//	SEND SIGNAL to commandingPlayer's PC		-- we do NOT message if we are still moving - that's how accidents happen!
 	waitUntil {speed _SUTaxiAIVehicleObject == 0};
-
 	// Create the global variable that will be sent to the requestor's PC		-- send the _myGUSUIDNumber here
 	mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetOutPacket = _myGUSUIDNumber;
 	_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetOutPacket";
 	if (_thisFileVerbosityLevelNumber>8) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV8]  SIGNAL SENT to the commandingPlayer's PC (mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetOutPacket). _taxiAnywhereRequestorProfileNameTextString: (%1) 		 on computer (_taxiAnywhereRequestorClientIDNumber):(%2)		_myGUSUIDNumber is: (%3).", _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorClientIDNumber, _myGUSUIDNumber];};
 
-	//Initial evaluation
-	// don't add this var to the top of page var list because this will never be needed if it's a NO answer in the first/main IF condition
+	//	Initial evaluation
+	//	don't add this var to the top of page var list because this will never be needed if it's a NO answer in the first/main IF condition
 	private	[
 			"_requestorInsideVehicle",
-			"_startTimeForRequestorGetOutInSecondsNumber",
+			"_waitStartTimeForRequestorGetOutInSecondsNumber",
 			"_beenWaitingForRequestorToGetOutInSecondsNumber"
 			];
 	_beenWaitingForRequestorToGetOutInSecondsNumber = 0;
@@ -295,7 +291,6 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 	//Start the Current Task Age Timer
 	_SUCurrentTaskBirthTimeInSecondsNumber = (time);
 	*/
-	_counterForLogOnlyEveryNthPINGNumber = 0;
 	/* DONE IN THE CALLING FUNCTION - DO NOT REPEAT HERE
 	// Set distance to Current Waypoint to zero as we are at the DropOff Point and awaiting Requestor to get off the vehicle...
 	_SUTaxiAIVehicleDistanceToWayPointMetersNumber = 0;
@@ -306,8 +301,9 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 	// MAIN LOOP
 	////////////////////////////////////////////////////////////////////////////
 	//As long as he is inside, we will patiently wait for him to get out UNTIL PhaseTask timelimit is exceeded OR our own timelimit is exceeded
+	_counterForLogOnlyEveryNthPINGNumber = 0;
 	_broadcastSUInformationCounter = 0;
-	_startTimeForRequestorGetOutInSecondsNumber = (time);
+	_waitStartTimeForRequestorGetOutInSecondsNumber = (time);
 	while {_requestorInsideVehicle} do {
 		scopeName "RequestorInsideVehicleLoop";
 		
@@ -348,8 +344,8 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 		};
 		 // Let emergency escapees pass
 		if(_emergencyEscapeNeeded) then {
-			// we will breakTo but first fix the PAUSEd vehicle state!
-			//_SUTaxiAIVehicleWaypointMainArray setWaypointType "MOVE";
+			// we will breakTo, to terminate -- but first reenable Taxi driver & vehicle's movement
+			_SUAICharacterDriverObject enableAI "MOVE";
 			breakTo "mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceivedMainScope";
 		};
 
@@ -372,15 +368,14 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 			//He is still in
 
 			// we won't wait forever!
-			_beenWaitingForRequestorToGetOutInSecondsNumber = ((time) - _startTimeForRequestorGetOutInSecondsNumber);
+			_beenWaitingForRequestorToGetOutInSecondsNumber = ((time) - _waitStartTimeForRequestorGetOutInSecondsNumber);
 			if (_beenWaitingForRequestorToGetOutInSecondsNumber >= 10) then {
 				// hit the timeout max value - terminate!
 				//NO, requestor did not get out. He has changed his mind! We will carry on with the normal taxi service phase. return to callingFunction (_stopVehReqHandlerFncReturnValueBool = true). (callingFunction will then carry an as per normal)
 				// log it
 				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV5] WAIT FOR REQUESTOR GET OUT TIMEOUT VALUE REACHED!		we won't wait anymore for him to get out. proceeding as if no stopVehicle requested.  (_beenWaitingForRequestorToGetOutInSecondsNumber) is: (%1).", _beenWaitingForRequestorToGetOutInSecondsNumber];};
-				// keep going
+				// stopVehRequestor is not getting out -- reenable Taxi driver & vehicle's movement
 				_SUAICharacterDriverObject enableAI "MOVE";
-				//_SUTaxiAIVehicleWaypointMainArray setWaypointType "MOVE";
 				breakTo "mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceivedMainScope";
 			} else {
 				// still good to wait some more
@@ -390,40 +385,189 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 		} else {
 			//He is out!
 			_requestorInsideVehicle=false;
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
-			// TODO add more code here to handle the situation when the requestor pops out for a second to loot something etc. we will give him a chance to get back in
 		};
 	};
 	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV5] EXITed loop _requestorInsideVehicle.		The value for (_requestorInsideVehicle) is: (%1).", _requestorInsideVehicle];};
 	uiSleep 0.05;
 
-	// ADD CODE:	THE REQUESTOR is OUTSIDE -- handle situation here
+
+
+
+
+
+	//	THE REQUESTOR is OUTSIDE -- handle situation here -- do not immediately terminate the SU, perhaps requestor is using ATM or looting just for a second! give him some time and let's see if he's getting back in. say in about 90 seconds...
+
+	// n. Keep looping & waiting n seconds
+		// inside the loop
+		//	n. Keep broadcasting service unit information from inside the loop
+		//	n. Keep checking for potential phase timeouts
+
+	//// BEGIN
+	//Change our status to:		2b AWAITING GET IN (STOP REQUESTED) 						to proceed, first the commandingPlayer must get in...
+	_SUCurrentActionInProgressTextString  = mgmTfA_configgv_currentTATaxiActionInProgressIs02bTextString;
+
+	//	SEND SIGNAL to commandingPlayer's PC		-- we do NOT message if we are still moving - that's how accidents happen!
+	waitUntil {speed _SUTaxiAIVehicleObject == 0};
+	// Create the global variable that will be sent to the requestor's PC		-- send the _myGUSUIDNumber here
+	mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetInPacket = _myGUSUIDNumber;
+	_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetInPacket";
+	if (_thisFileVerbosityLevelNumber>8) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV8]  SIGNAL SENT to the commandingPlayer's PC (mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetInPacket). _taxiAnywhereRequestorProfileNameTextString: (%1) 		 on computer (_taxiAnywhereRequestorClientIDNumber):(%2)		_myGUSUIDNumber is: (%3).", _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorClientIDNumber, _myGUSUIDNumber];};
+
+	//	Initial evaluation
+	//	don't add this var to the top of page var list because this will never be needed if it's a NO answer in the first/main IF condition
+	private	[
+			"_requestorOutsideVehicle",
+			"_waitStartTimeForRequestorGetInInSecondsNumber",
+			"_beenWaitingForRequestorToGetInInSecondsNumber"
+			];	
+	if (_requestorPlayerObject in _SUTaxiAIVehicleObject) then {
+		_requestorOutsideVehicle = false;
+	} else {
+		_requestorOutsideVehicle = true;
+	};
+	/* DONE IN THE CALLING FUNCTION - DO NOT REPEAT HERE
+	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdTATaxiRequestorOutsideVehicleInSecondsNumber;
+	// Reset Current Task Age
+	_SUCurrentTaskAgeInSecondsNumber = 0;
+	//Start the Current Task Age Timer
+	_SUCurrentTaskBirthTimeInSecondsNumber = (time);
+	*/
+	//	might have popped out for a sec - keep looping & waiting...
+	////////////////////////////////////////////////////////////////////////////
+	// MAIN LOOP
+	////////////////////////////////////////////////////////////////////////////
+	//As long as he is outside, we will patiently wait for him to get in UNTIL PhaseTask timelimit is exceeded OR our own timelimit is exceeded
+	_counterForLogOnlyEveryNthPINGNumber = 0;
+	_broadcastSUInformationCounter = 0;
+	_waitStartTimeForRequestorGetInInSecondsNumber = (time);
+	while {_requestorOutsideVehicle} do {
+		scopeName "TheRequestorOutsideVehicleLoop";
+		uiSleep 0.05;
+
+		///
+		// Broadcast ServiceUnit Information
+		///
+		// Only if it has been at least 1 second!	currently uiSleep`ing 0.05 seconds, meaning at least 1 second = 1.00 / 0.05 = 20th package.
+		_broadcastSUInformationCounter = _broadcastSUInformationCounter + 1;
+		if (_broadcastSUInformationCounter >= 20) then {
+			_broadcastSUInformationCounter = 0;
+			// Need to calculate these now as we will publish it in the next line!
+			_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
+			_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time) -_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
+			_SUAIVehicleObjectAgeInSecondsNumber = _SUTaxiAIVehicleObjectAgeInSecondsNumber;
+			_SUAIVehicleObjectCurrentPositionPosition3DArray		= (getPosATL _SUTaxiAIVehicleObject);
+			_SUTaxiAIVehicleVehicleDirectionInDegreesNumber = (getDir _SUTaxiAIVehicleObject) + 45;
+			_SUAIVehicleVehicleDirectionInDegreesNumber = _SUTaxiAIVehicleVehicleDirectionInDegreesNumber;
+			_SUAIVehicleSpeedOfVehicleInKMHNumber = (round (speed _SUTaxiAIVehicleObject));
+			_SUPickUpPositionPosition3DArray = _taxiAnywhereRequestorPosition3DArray;
+			_SUAIVehicleObject = _SUTaxiAIVehicleObject;
+			_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
+			_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
+			_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
+		};
+		///
+		// Pit-stop checks: AutoRefuel
+		if (fuel _SUTaxiAIVehicleObject < 0.2) then {
+			_SUTaxiAIVehicleObject setFuel 1;
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+		};
+		// Pit-stop checks: AutoRepair
+		if (damage _SUTaxiAIVehicleObject>0.2) then {
+			_SUTaxiAIVehicleObject setDamage 0;
+			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
+		};
+		// Calculate Current Task Age and Initiate Abnormal SU Termination (logged) if necessary
+		_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
+		if (_SUCurrentTaskAgeInSecondsNumber > _SUCurrentTaskThresholdInSecondsNumber) then {
+			_emergencyEscapeNeeded = true;
+		};
+		// Let emergency escapees pass
+		if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceivedMainScope";	};
+		_counterForLogOnlyEveryNthPINGNumber = _counterForLogOnlyEveryNthPINGNumber + 1;
+		if (_counterForLogOnlyEveryNthPINGNumber==300) then {
+
+			//check distance to our Current Waypoint (_taxiAnywhereRequestorPosition3DArray) and write to server RPT log
+			_SUTaxiAIVehicleDistanceToWayPointMetersNumber = (round (_SUTaxiAIVehicleObject distance _taxiAnywhereTaxiRequestedDestinationPosition3DArray));
+
+			if (_thisFileVerbosityLevelNumber>=1) then {
+				_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time)-_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
+				diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceivedMainScope.sqf] [TV1] PING from SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3) | MyAge: (%4) | Distance to WP: (%5) metres | Action In Progress: (%6)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time)), _SUTaxiAIVehicleObjectAgeInSecondsNumber, _SUTaxiAIVehicleDistanceToWayPointMetersNumber, _SUCurrentActionInProgressTextString];
+			};
+			_counterForLogOnlyEveryNthPINGNumber=0;
+		};
+		if (_requestorPlayerObject in _SUTaxiAIVehicleObject) then {
+			//	He got in!
+			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV3] Requestor IS IN!		%1 is now in %2. 		Locking doors & driving!", _taxiAnywhereRequestorProfileNameTextString, _SUTaxiAIVehicleObject];};
+			// END THE LOOP
+			// IMPORTANT: DO NOT MOVE THIS LINE ANY HIGHER OR IT WILL ABRUPTLY STOP EXECUTION!
+			_requestorOutsideVehicle = false;
+		} else {
+			//	He is still not in - keep looping
+
+			//	log it
+			if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV7] WAITING for %1 to get in %2...", _requestorPlayerObject, _SUTaxiAIVehicleObject];};
+
+			// we won't wait forever!
+			_beenWaitingForRequestorToGetInInSecondsNumber = ((time) - _waitStartTimeForRequestorGetInInSecondsNumber);
+			// TODO: Change this test value to 90 seconds 
+			// TODO: make this a CONFIGURATION file setting
+			if (_beenWaitingForRequestorToGetInInSecondsNumber >= 15) then {
+				// hit the timeout max value - we'll terminate!
+				// log it
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV5] WAIT FOR REQUESTOR GET OUT TIMEOUT VALUE REACHED!		we won't wait anymore for him to get out. proceeding as if no stopVehicle requested.  (_beenWaitingForRequestorToGetOutInSecondsNumber) is: (%1).", _beenWaitingForRequestorToGetOutInSecondsNumber];};
+
+				//NO, requestor did not get back in. He dont't need us! We will terminate this taxi service phase and the whole workflow. return to callingFunction (_stopVehReqHandlerFncReturnValueBool = false). (callingFunction will then instantly terminate)
+				// enable driver movement
+				_SUAICharacterDriverObject enableAI "MOVE";
+
+				// we signal the callingFunction that it should terminate via setting "_emergencyEscapeNeeded = true;" (last lines of this function will then return false which the callingFunction will process)
+				_emergencyEscapeNeeded = true;
+				breakTo "mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceivedMainScope";
+			} else {
+				// still good to wait some more
+				// log it
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV5] WAIT FOR REQUESTOR GET OUT TIMEOUT VALUE IS STILL GOOD		will wait some more...			(_beenWaitingForRequestorToGetOutInSecondsNumber) is: (%1).", _beenWaitingForRequestorToGetOutInSecondsNumber];};
+			};
+		};
+	};
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV3] EXITed loop _requestorOutsideVehicle"];};
+	uiSleep 0.05;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 } else {
 	// NO, we do NOT have any authorized exitRequests
