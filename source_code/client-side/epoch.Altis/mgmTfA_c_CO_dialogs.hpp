@@ -218,7 +218,7 @@ class MGMTFA_DIALOG
 		class MGMTFA_BUTTONACTUALBUTTONPUBLICBUSSTOPTHEBUS: MGMTFA_TEMPLATEACTUALBUTTON
 		{
 			idc = -1;
-			tooltip = "STOP THE BUS";
+			tooltip = "NOT IMPLEMENTED: STOP THE BUS";
 			text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnStopBU.jpg";
 			action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_BU_scr_pleaseStopVehicle.sqf""";
 			x = 0.45875 * safezoneW + safezoneX;
@@ -240,7 +240,7 @@ class MGMTFA_DIALOG
 		class MGMTFA_BUTTONACTUALBUTTONPUBLICBUSEXITVEHICLE: MGMTFA_TEMPLATEACTUALBUTTON
 		{
 			idc = -1;
-			tooltip = "EXIT VEHICLE";
+			tooltip = "NOT IMPLEMENTED: BUS - EXIT VEHICLE";
 			text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnExit.jpg";
 			action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_BU_scr_exitVehicle.sqf""";
 			x = 0.463906 * safezoneW + safezoneX;
@@ -287,7 +287,7 @@ class MGMTFA_DIALOG
 		class MGMTFA_BUTTONACTUALBUTTONFIXEDDESTINATIONTAXIEXITVEHICLE: MGMTFA_TEMPLATEACTUALBUTTON
 		{
 			idc = -1;
-			tooltip = "EXIT VEHICLE";
+			tooltip = "NOT IMPLEMENTED: FIXED DEST. TAXI - EXIT VEHICLE";
 			text = "custom\mgmTfA\img\mgmTfA_c_CO_img_guibtnExit.jpg";
 			action = "CloseDialog 0;_null=[]execVM ""custom\mgmTfA\mgmTfA_c_FD_scr_pleaseStopVehicle.sqf""";
 			/*
