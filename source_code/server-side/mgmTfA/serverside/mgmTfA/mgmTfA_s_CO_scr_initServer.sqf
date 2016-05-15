@@ -35,6 +35,7 @@ if (isServer) then {
 	mgmTfA_s_BU_fnc_doBusProvision = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_BU_fnc_doBusProvision.sqf";
 	mgmTfA_s_TA_fnc_servicePhase04a_SendResponse_Charge1stMileFeeRequestActioned = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_TA_fnc_servicePhase04a_SendResponse_Charge1stMileFeeRequestActioned.sqf";
 	mgmTfA_s_TA_fnc_servicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_TA_fnc_servicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned.sqf";
+	mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf";
 	// 3rd Party Functions
 	EPOCH_exp_effectCrypto = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\EPOCH_exp_functions\EPOCH_exp_effectCrypto.sqf";
 	EPOCH_exp_server_effectCrypto = compileFinal preprocessFileLineNumbers "\x\addons\custom\serverside\mgmTfA\EPOCH_exp_functions\EPOCH_exp_server_effectCrypto.sqf";
