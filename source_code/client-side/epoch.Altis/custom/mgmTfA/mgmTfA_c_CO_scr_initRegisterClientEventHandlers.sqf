@@ -455,8 +455,12 @@
 	hint _msg2HintTextString;
 	// inform the player via systemChat 	-- only if the global config allows
 	// display systemChat messages requested -- let's do that	// let the customer know that he just has been charged $amount
-	private	["_messageTextOnlyFormat"];
-	_messageTextOnlyFormat = parsetext format ["[RADIO_IN]  YOU PAID PAYG BOOKING FEE %1 CRYPTO, THANKS. NEW BALANCE %2 CRYPTO", (str mgmTfA_configgv_taxiAnywhereTaxisNonRefundableBookingFeeCostInCryptoNumber), (str EPOCH_playerCrypto)];
+	private	[
+			"_messageTextOnlyFormat1",
+			"_messageTextOnlyFormat2"
+			];
+	_messageTextOnlyFormat1 = parsetext format ["[RADIO_IN]  YOU PAID PAYG BOOKING FEE %1 CRYPTO, THANKS", (str mgmTfA_configgv_taxiAnywhereTaxisNonRefundableBookingFeeCostInCryptoNumber)];
+	_messageTextOnlyFormat2 = parsetext format ["[RADIO_IN]  NEW BALANCE %1 CRYPTO", (str EPOCH_playerCrypto)];
 	systemChat 		(str _messageTextOnlyFormat);
 	/*
 					NOT IMPLEMENTED
@@ -527,8 +531,12 @@
 	// inform the player via systemChat 	-- only if the global config allows
 	if (true) then {
 		// not a config option yet - just go ahead & inform the player
-		private	["_messageTextOnlyFormat"];
-		_messageTextOnlyFormat = parsetext format ["[DRIVER]  YOU PAID TAXI ANYWHERE 1ST MILE FEE %1 CRYPTO, THANKS. NEW BALANCE %2 CRYPTO.", (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber), (str _playerActualCashBalance)];
+		private	[
+				"_messageTextOnlyFormat1",
+				"_messageTextOnlyFormat2"
+				];
+		_messageTextOnlyFormat1 = parsetext format ["[DRIVER]  YOU PAID TAXI ANYWHERE 1ST MILE FEE %1 CRYPTO, THANKS", (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber)];
+		_messageTextOnlyFormat2 = parsetext format ["[DRIVER]  NEW BALANCE %1 CRYPTO.", (str _playerActualCashBalance)];
 		systemChat (str _messageTextOnlyFormat);
 	};
 	// IDEA/TODO:	inform the player via cutText 	-- only if the global config allows
