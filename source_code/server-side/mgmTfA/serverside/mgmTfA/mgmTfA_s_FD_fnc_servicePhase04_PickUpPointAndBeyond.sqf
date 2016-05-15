@@ -226,8 +226,8 @@ while {_requestorIsNotHere} do {
  };
 if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV2] EXITED LOOP: IsTheRequestorAtPickUpPointChecksLoop"];};//dbg
  
- // The code between previous while and the next one	split it to two;		emergency escape needed OR not?
- if (!_emergencyEscapeNeeded) then { 
+// The code between previous while and the next one	split it to two;		emergency escape needed OR not?
+if (!_emergencyEscapeNeeded) then { 
 	uiSleep 0.05;
 	//Initial evaluation
 	if (_requestorPlayerObject in _SUTaxiAIVehicleObject) then {
@@ -306,10 +306,10 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s
 	 //TAKE PAYMENT from player's cash amount
 	//Change our status to:		3 AWAITING PAYMENT			to proceed, first the requestor must pay...
 	_SUCurrentActionInProgressTextString = mgmTfA_configgv_currentFixedDestinationTaxiActionInProgressIs03TextString;
- };
- 
- // The code between previous while and the next one	split it to two;		emergency escape needed OR not?
- if (!_emergencyEscapeNeeded) then { 
+};
+
+// The code between previous while and the next one	split it to two;		emergency escape needed OR not?
+if (!_emergencyEscapeNeeded) then { 
 	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiRequestorHasNotPaidInSecondsNumber;
 	// Reset Current Task Age
 	_SUCurrentTaskAgeInSecondsNumber = 0;
