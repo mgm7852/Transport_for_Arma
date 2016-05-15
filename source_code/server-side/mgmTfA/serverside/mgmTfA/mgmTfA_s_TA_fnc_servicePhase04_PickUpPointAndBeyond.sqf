@@ -86,10 +86,7 @@ private	[
 		"_paygCustomerCanAffordTheNextPaymentBool",
 		"_paygLastCheckCounterNumber",
 		"_TA1stMileFeeNeedToBePaidBool",
-		"_currentTimeInSecondsNumber",
-		"_exitRequestedAndAuthorizedBool",
-		"_shouldKeepWaitingToAllowExitBool",
-		"_shouldKeepWaitingWaitTillSeconds"
+		"_currentTimeInSecondsNumber"
 		];
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 _taxiAnywhereRequestorClientIDNumber = (_this select 0);
@@ -165,8 +162,6 @@ _paygIsItTimeYetCheckCounterNumber = 0;
 _paygCustomerCanAffordTheNextPaymentBool = false;
 _TA1stMileFeeNeedToBePaidBool = true;
 // do NOT set it yet:	_currentTimeInSecondsNumber
-_exitRequestedAndAuthorizedBool = false;
-_shouldKeepWaitingToAllowExitBool = false;
 
 //We are at the requestorPosition
 _broadcastSUInformationCounter = 0;
@@ -264,7 +259,7 @@ while {_requestorIsNotHere} do {
 };
 if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV2] EXITED LOOP: IsTheRequestorAtPickUpPointChecksLoop"];};//dbg
  
-// The code between previous while and the next one	split it to two;		emergency escape needed OR not?
+ // The code between previous while and the next one	split it to two;		emergency escape needed OR not?
 if (!_emergencyEscapeNeeded) then {
 	uiSleep 0.05;
 	//Initial evaluation
@@ -365,9 +360,48 @@ if (mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber > 0
 	_TA1stMileFeeNeedToBePaidBool = false;
 };
 
-// STOP THE VEHICLE FUNCTION MEANINGFUL RANGE: BEGIN
-// STOP THE VEHICLE FUNCTION MEANINGFUL RANGE: BEGIN
-// STOP THE VEHICLE FUNCTION MEANINGFUL RANGE: BEGIN
+
+
+/*
+missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], true];
+publicVariable format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber];
+_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
+if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncContinuouslyRequestPayment.sqf] [TV4] _myGUSUIDNumber has been obtained as: (%1)", (str _myGUSUIDNumber)];};
+*/
+
+
+
+// CHARGE the player (take moeny from 's wallet	-- 1st Mile Fee/Initial Fee ==> take this much => mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// old code below commented out
+	/*
+	// TAKE PAYMENT from player's wallet	-- 1st Mile Fee/Initial Fee ==> take this much => mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNumber
+	_null = [_requestorPlayerObject, mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber] call EPOCH_exp_server_effectCrypto;
+
+	// log the fee charge
+	diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]		CHARGED PLAYER		just called EPOCH_exp_server_effectCrypto and processed player's wallet by (mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber)=(%1)", (str mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber)];//dbg
+
+	// inform the customer THANK YOU FOR PAYING THE 1ST MILE FEE		-- Client Communications - Send the message to the Requestor
+	///// RENAMED: mgmTfA_gv_pvc_pos_youJustPaidclickNGo1stMileFeePacketSignalOnly = ".";
+	//COMMENTED OUT NOW mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly = ".";
+	//COMMENTED OUT NOW _taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_pos_TAYouJustPaid1stMileFeePacketSignalOnly";
+	*/
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 //Lock the vehicle doors
 _SUTaxiAIVehicleObject lockCargo true;
 if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS locked"];};
@@ -426,224 +460,63 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 			_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
 			_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
 			[_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+			// CHECK every second exit requested and authorized?
+			// TODO: add this _SUTypeNumber to vehicle spawn script and then keep passing down the line between Phase scripts
+			private	[
+					"_SUTypeNumber",
+					"_stopVehicleRequestedAndAuthorizedFncReturnBool"
+					];
+			_SUTypeNumber = 0;
+			_stopVehicleRequestedAndAuthorizedFncReturnBool = [_myGUSUIDNumber, _SUTypeNumber] call mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived;
+
+			if (_stopVehicleRequestedAndAuthorizedFncReturnBool) then {
+				// YES, there is a requested & authorized stopVehicle request
+				// TODO CHANGE THIS TO 10
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehicleRequestedAndAuthorizedFncReturnBool) with the following: (%1)", _stopVehicleRequestedAndAuthorizedFncReturnBool];};//dbg
+				//TURNING THIS OFF FOR TEST 
+				//TURNING THIS OFF FOR TEST >>		_emergencyEscapeNeeded = true;
+			} else {
+				// NO, there are no authorized stopVehicle requests
+				// TODO CHANGE THIS TO 10
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehicleRequestedAndAuthorizedFncReturnBool) with the following: (%1)", _stopVehicleRequestedAndAuthorizedFncReturnBool];};//dbg
+				// nothing to be done here
+			};
+			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		};
 		///
-
-		// exit requested and authorized?
-		_exitRequestedAndAuthorizedBool = call compile format ["mgmTfA_gv_PV_SU%1SUExitRequestedAndAuthorized", _myGUSUIDNumber];
-		if (_exitRequestedAndAuthorizedBool) then {
-
-			// ACTION IT -- basically stop vehicle, unlock the doors, and wait for requestor to exit for up to 10 seconds in a loop.
-
-			// exit requested & authorized - let's allow it
-			_shouldKeepWaitingToAllowExitBool = true;
-			_shouldKeepWaitingWaitTillSeconds = time+10;
-			_requestorOutsideVehicle = false;
-
-			// If requestor does not get out by then, carry on as usual.
-			// If requestor does get out by then, start waitTill loop and wait for the requestor to hop back in, in the next 60 seconds. If this times out cary on as usual (emergency exit & To Termination)
-
-			// Let's bring the vehicle to a full stop, in 5 kmh steps, a new step every 0.25 seconds, until its speed is 0
-			_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
-			while {_SUVehicleSpeedOfVehicleInKMHNumber > 0} do {
-				uiSleep 0.05;
-				// Slow down by 5 kmh
-				_vel = (velocity	_SUTaxiAIVehicleObject);
-				_dir = (direction	_SUTaxiAIVehicleObject);
-				_speedStep			= -5;
-				_SUTaxiAIVehicleObject	setVelocity	[
-													(_vel select 0) + (sin _dir * _speedStep),
-													(_vel select 1) + (cos _dir * _speedStep),
-													(_vel select 2)
-													];
-			_SUVehicleSpeedOfVehicleInKMHNumber = (speed _SUTaxiAIVehicleObject);
-			};
-			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] VEHICLE STOPPED to allow REQUESTED & AUTHORIZED EXIT"];};
-			// UNLOCK doors
-			_SUTaxiAIVehicleObject lockCargo false;
-			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS now unlocked to allow REQUESTED & AUTHORIZED EXIT. I will wait 10 seconds for the requestor to get out"];};
-
-			// TODO clear this duplicate
-			if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV2] ALLOWING REQUESTED & AUTHORIZED EXIT		SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
-		};
-		// WAIT 10 SEC FOR EXIT FIRST. SYSCHAT INFORM EVERY SECOND
-		// THEN CARRY ON IF STILL IN VEHICLE.
-		// WAIT FOR GET IN IF OUTSIDE
-		while {(!_requestorOutsideVehicle) && (time < _shouldKeepWaitingWaitTillSeconds)} do {
-			// we will keep patiently waiting till requestor get out, if he does not, eventually task will time out and we will go to termination.
-			// While we wait, must keep updating the Service Unit information on the map - thus the loop & broadcast SU info bit below
-
-			// TODO:	make the 10 second time frame a configuration option
-			// TODO:	add a new status here so the 10 second time window is clearly visible on the map
-			// TODO:	for the above TODO, add a new status code to config
-
-			// in-loop evaluation
-			if (_requestorPlayerObject in _SUTaxiAIVehicleObject) then {
-				_requestorOutsideVehicle = false;
-				_shouldKeepWaitingToAllowExitBool = false;
-			} else {
-				// do nothing requestor still outside vehicle...
-			};
-
-			///
-			// Broadcast ServiceUnit Information
-			///
-			// Only if it has been at least 1 second!	currently uiSleep`ing 0.05 seconds, meaning at least 1 second = 1.00 / 0.05 = 20th package.
-			_broadcastSUInformationCounter = _broadcastSUInformationCounter + 1;
-			if (_broadcastSUInformationCounter >= 20) then {
-				// Need to calculate these now as we will publish it in the next line!
-				_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
-				_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time) -_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
-				_SUAIVehicleObjectAgeInSecondsNumber = _SUTaxiAIVehicleObjectAgeInSecondsNumber;
-				_SUAIVehicleObjectCurrentPositionPosition3DArray = (getPosATL _SUTaxiAIVehicleObject);
-				_SUTaxiAIVehicleVehicleDirectionInDegreesNumber = (getDir _SUTaxiAIVehicleObject) + 45;
-				_SUAIVehicleVehicleDirectionInDegreesNumber = _SUTaxiAIVehicleVehicleDirectionInDegreesNumber;
-				_SUAIVehicleSpeedOfVehicleInKMHNumber = (round (speed _SUTaxiAIVehicleObject));
-				_SUPickUpPositionPosition3DArray = _taxiAnywhereRequestorPosition3DArray;
-				_SUAIVehicleObject = _SUTaxiAIVehicleObject;
-				_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
-				_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
-				_null	= [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
-				_broadcastSUInformationCounter = 0;
-
-				///
-				// Pit-stop checks: AutoRefuel
-				if (fuel _SUTaxiAIVehicleObject < 0.2) then {
-					_SUTaxiAIVehicleObject setFuel 1;
-					if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
-				};
-				// Pit-stop checks: AutoRepair
-				if (damage _SUTaxiAIVehicleObject>0.2) then {
-					_SUTaxiAIVehicleObject setDamage 0;
-					if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
-				};
-				// Calculate Current Task Age and Initiate Abnormal SU Termination (logged) if necessary
-				_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
-				if (_SUCurrentTaskAgeInSecondsNumber > _SUCurrentTaskThresholdInSecondsNumber) then {
-					_emergencyEscapeNeeded = true;
-				};
-				// Let emergency escapees pass
-				if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyondMainScope";	};
-				}
-			};
-			uiSleep 0.25;
-		};
-
-		// prevent unnecessarily entering the loop above on next iteration -- set this to false
-		missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUExitRequestedAndAuthorized", _myGUSUIDNumber], false];
-		publicVariable format ["mgmTfA_gv_PV_SU%1SUExitRequestedAndAuthorized", _myGUSUIDNumber];
-
-		// after 10 seconds, start waiting for the requestor to get back in - it's pointless to lock doors BEFORE he gets back in
-
-		// start the loop // check requestor is in?
-		if (!_emergencyEscapeNeeded) then {
-			uiSleep 0.10;
-			//Initial evaluation
-			if (_requestorPlayerObject in _SUTaxiAIVehicleObject) then {
-				_requestorOutsideVehicle = false;
-			} else {
-				_requestorOutsideVehicle = true;
-			};
-			//Requestor called us but hopped out. Keep looping & waiting...
-			_broadcastSUInformationCounter = 0;
-			while {_requestorOutsideVehicle} do {
-				scopeName "TheRequestorIsOutsideVehicleLoop";
-				uiSleep 0.10;
-			
-				///
-				// Broadcast ServiceUnit Information
-				///
-				// Only if it has been at least 1 second!	currently uiSleep`ing 0.05 seconds, meaning at least 1 second = 1.00 / 0.05 = 20th package.
-
-				_broadcastSUInformationCounter = _broadcastSUInformationCounter + 1;
-				if (_broadcastSUInformationCounter >= 20) then {
-					_broadcastSUInformationCounter = 0;
-					// Need to calculate these now as we will publish it in the next line!
-					_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
-					_SUTaxiAIVehicleObjectAgeInSecondsNumber = (round ((time) -_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber));
-					_SUAIVehicleObjectAgeInSecondsNumber = _SUTaxiAIVehicleObjectAgeInSecondsNumber;
-					_SUAIVehicleObjectCurrentPositionPosition3DArray		= (getPosATL _SUTaxiAIVehicleObject);
-					_SUTaxiAIVehicleVehicleDirectionInDegreesNumber = (getDir _SUTaxiAIVehicleObject) + 45;
-					_SUAIVehicleVehicleDirectionInDegreesNumber = _SUTaxiAIVehicleVehicleDirectionInDegreesNumber;
-					_SUAIVehicleSpeedOfVehicleInKMHNumber = (round (speed _SUTaxiAIVehicleObject));
-					_SUPickUpPositionPosition3DArray = _taxiAnywhereRequestorPosition3DArray;
-					_SUAIVehicleObject = _SUTaxiAIVehicleObject;
-					_SUAIVehicleObjectBirthTimeInSecondsNumber = _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber;
-					_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
-					[_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
-				};
-				///
-				// Pit-stop checks: AutoRefuel
-				if (fuel _SUTaxiAIVehicleObject < 0.2) then {
-					_SUTaxiAIVehicleObject setFuel 1;
-					if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV2] REFUELing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
-				};
-				// Pit-stop checks: AutoRepair
-				if (damage _SUTaxiAIVehicleObject>0.2) then {
-					_SUTaxiAIVehicleObject setDamage 0;
-					if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV2] REPAIRing SU Vehicle: (%1) | Driver: (%2) | ServerUpTime: (%3)", _myGUSUIDNumber, _SUDriversFirstnameTextString, (round (time))];};//dbg
-				};
-				// Calculate Current Task Age and Initiate Abnormal SU Termination (logged) if necessary
-				_SUCurrentTaskAgeInSecondsNumber = (round ((time) - _SUCurrentTaskBirthTimeInSecondsNumber));
-				if (_SUCurrentTaskAgeInSecondsNumber > _SUCurrentTaskThresholdInSecondsNumber) then {
-					_emergencyEscapeNeeded = true;
-				};
-				// Let emergency escapees pass
-				if(_emergencyEscapeNeeded) then {	breakTo "mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyondMainScope";	};
-				if (_requestorPlayerObject in _SUTaxiAIVehicleObject) then {
-					//He is in
-					if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] Requestor IS IN!		%1 is now in %2. 		Locking doors & driving!", _taxiAnywhereRequestorProfileNameTextString, _SUTaxiAIVehicleObject];};
-					
-					// Signal all map-trackers that Pick Up has occurred
-					_SUPickUpHasOccurredBool = true;
-					missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUPickupHasOccurredNumber", _myGUSUIDNumber], _SUPickUpHasOccurredBool];
-					publicVariable format ["mgmTfA_gv_PV_SU%1SUPickupHasOccurredNumber", _myGUSUIDNumber];
-
-					// END THE LOOP
-					// IMPORTANT: DO NOT MOVE THIS LINE ANY HIGHER OR IT WILL ABRUPTLY STOP EXECUTION!
-					_requestorOutsideVehicle = false;
-				} else {
-					//He is not in - keep looping
-					if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV7] WAITING for %1 to get in %2...", _requestorPlayerObject, _SUTaxiAIVehicleObject];};
-				};
-			};
-			if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] EXITed loop _requestorOutsideVehicle"];};
-			uiSleep 0.05;
-		};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			// if not loop again
-		// if he's in
-			//lock the doors, and carry on as per normal
-			// LOCK doors
-			_SUTaxiAIVehicleObject lockCargo true;
-
 		// Pit-stop checks: AutoRefuel
 		if (fuel _SUTaxiAIVehicleObject < 0.2) then {
 			_SUTaxiAIVehicleObject setFuel 1;
@@ -713,8 +586,6 @@ if (_emergencyEscapeNeeded) then {
 	// prep for forced eject -- once we eject them, we will want the passengers to stay out!
 	_SUTaxiAIVehicleObject lockCargo true;
 	_doorsLockedBool = true;
-	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber], _doorsLockedBool];
-	publicVariable format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 	uiSleep 0.05;
 	// Now we can Eject All Passengers (keep the driver in!) and Delete the Vehicle	//Traverse all crew with forEach
 	{
@@ -799,6 +670,88 @@ if (!_emergencyEscapeNeeded) then {
 			_SUDistanceToActiveWaypointInMetersNumber = (round (_SUAIVehicleObject distance _SUActiveWaypointPositionPosition3DArray));
 			_null = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber] call mgmTfA_s_CO_fnc_publicVariableBroadcastSUInformationPhaseB;
 			_broadcastSUInformationCounter = 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+			// CHECK every second exit requested and authorized?
+			// TODO: add this _SUTypeNumber to vehicle spawn script and then keep passing down the line between Phase scripts
+			private	[
+					"_SUTypeNumber",
+					"_stopVehicleRequestedAndAuthorizedFncReturnBool"
+					];
+			_SUTypeNumber = 0;
+			_stopVehicleRequestedAndAuthorizedFncReturnBool = [_myGUSUIDNumber, _SUTypeNumber] call mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived;
+
+			if (_stopVehicleRequestedAndAuthorizedFncReturnBool) then {
+				// YES, there is a requested & authorized stopVehicle request
+				// TODO CHANGE THIS TO 10
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehicleRequestedAndAuthorizedFncReturnBool) with the following: (%1)", _stopVehicleRequestedAndAuthorizedFncReturnBool];};//dbg
+				_emergencyEscapeNeeded = true;
+			} else {
+				// NO, there are no authorized stopVehicle requests
+				// TODO CHANGE THIS TO 10
+				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV5] FUNCTION RETURNED		I CALLed a function (mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived) 		and it filled variable (_stopVehicleRequestedAndAuthorizedFncReturnBool) with the following: (%1)", _stopVehicleRequestedAndAuthorizedFncReturnBool];};//dbg
+				// nothing to be done here
+			};
+			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		};
 		///
 		//First let's refresh the distance value
@@ -850,11 +803,11 @@ if (!_emergencyEscapeNeeded) then {
 			// INSIDE LOOP CHECK
 			// is PAYG active?				if it is not active, that means (a)1st Mile Fee has not been paid yet		OR		(b) TaxiAnywhere-prePaid-Initial-Journey-time is still active
 			_SUPAYGisActiveBool = call compile format ["mgmTfA_gv_PV_SU%1SUTxAnywPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
-			if (_thisFileVerbosityLevelNumber>=10) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV10] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_TA1stMileFeeNeedToBePaidBool) is: (%2)			", (str _myGUSUIDNumber), (str _TA1stMileFeeNeedToBePaidBool)];};
+			if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV4] This is _myGUSUIDNumber: (%1)		INSIDE LOOP EVALUATION 		(_TA1stMileFeeNeedToBePaidBool) is: (%2)			", (str _myGUSUIDNumber), (str _TA1stMileFeeNeedToBePaidBool)];};
 
 			if (_SUPAYGisActiveBool) then {
 				// PAYG is active
-				if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV8]	PAYG payment model is active on this vehicle"];};//dbg
+				if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf]  [TV7]	PAYG payment model is active on this vehicle"];};//dbg
 				// TfA client-side handles the (purchasing power checks) and (PAYG charging).	if it determines that player is unable to pay the next tick, it sets the following variable to true.		let's check & action accordingly.
 				if (_SUTaxiAIVehicleObject getVariable ["customerCannotAffordService", false]) then {
 					// requestor and his friends in vehicle CANNOT AFFORD the service -- we will not serve them any more!
@@ -890,8 +843,6 @@ if (!_emergencyEscapeNeeded) then {
 					// prep for forced eject -- once we eject them, we will want the passengers to stay out!
 					_SUTaxiAIVehicleObject lockCargo true;
 					_doorsLockedBool = true;
-					missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber], _doorsLockedBool];
-					publicVariable format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 					uiSleep 0.05;
 					// Now we can Eject All Passengers (keep the driver in!) and Delete the Vehicle	//Traverse all crew with forEach
 					{
@@ -951,8 +902,6 @@ if (!_emergencyEscapeNeeded) then {
 	_SUTaxiAIVehicleObject lockCargo false;
 	//Save the new status of vehicleDoorLock
 	 _doorsLockedBool = false;
-	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber], _doorsLockedBool];
-	publicVariable format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] DOORS unlocked"];};
 	uiSleep 0.05;
 	//Doors Unlocked
