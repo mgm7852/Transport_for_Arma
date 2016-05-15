@@ -336,6 +336,7 @@ mgmTfA_configgv_currentTATaxiActionInProgressIs02TextString = "Awaiting Get In";
 mgmTfA_configgv_currentTATaxiActionInProgressIs03TextString = "Awaiting Payment";
 mgmTfA_configgv_currentTATaxiActionInProgressIs04TextString = "Driving to Requested Destination";
 mgmTfA_configgv_currentTATaxiActionInProgressIs05TextString = "Awaiting Get Off";
+mgmTfA_configgv_currentTATaxiActionInProgressIs05bTextString = "Awaiting Get Off (Stop Requested)";
 mgmTfA_configgv_currentTATaxiActionInProgressIs06TextString = "Driving to Termination";
 mgmTfA_configgv_currentTATaxiActionInProgressIs07TextString = "At Termination";
 mgmTfA_configgv_currentTATaxiActionInProgressIs08TextString = "Terminated (Map Marker In Deletion Queue)";
