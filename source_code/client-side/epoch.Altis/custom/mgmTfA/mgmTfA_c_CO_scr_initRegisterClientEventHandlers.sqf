@@ -190,8 +190,8 @@
 			];
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiclickNGoNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_c_CO_img_requestApproved.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>CLICKNGO<br/>TAXI REQUEST APPROVED<br/><br/>DRIVER EN ROUTE<br/><br/></t>", (profileName)];
-	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  %1 CLICKNGO TAXI REQUEST APPROVED.     DRIVER EN ROUTE", (profileName)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_c_CO_img_requestApproved.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>TAXI ANYWHERE<br/>REQUEST APPROVED<br/><br/>DRIVER EN ROUTE<br/><br/></t>", (profileName)];
+	_msg2SyschatTextString = parsetext format ["[RADIO_IN]  %1 TAXI ANYWHERE REQUEST APPROVED.     DRIVER EN ROUTE", (profileName)];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 };
