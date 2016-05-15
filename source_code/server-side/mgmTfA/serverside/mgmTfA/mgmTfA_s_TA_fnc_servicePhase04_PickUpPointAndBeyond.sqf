@@ -467,13 +467,6 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 
 
 
-
-
-
-
-
-
-
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
 			//////////////// STOP VEH REQUESTED FUNCTION CALLER & RETURN HANDLER ////////////////
@@ -484,7 +477,53 @@ if (_TA1stMileFeeNeedToBePaidBool) then {
 					"_stopVehicleRequestedAndAuthorizedFncReturnBool"
 					];
 			_SUTypeNumber = 0;
-			_stopVehicleRequestedAndAuthorizedFncReturnBool = [_myGUSUIDNumber, _SUTypeNumber] call mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived;
+			_stopVehicleRequestedAndAuthorizedFncReturnBool = [_myGUSUIDNumber, _SUTypeTextString, _SUActiveWaypointPositionPosition3DArray, _SUCurrentActionInProgressTextString, _SUCurrentTaskThresholdInSecondsNumber, _SUCurrentTaskBirthTimeInSecondsNumber, _SUDriversFirstnameTextString, _SUMarkerShouldBeDestroyedAfterExpiryBool, _SURequestorPlayerUIDTextString, _SURequestorProfileNameTextString, _SUAIVehicleObject, _SUAIVehicleObjectBirthTimeInSecondsNumber, _SUPickUpHasOccurredBool, _SUPickUpPositionPosition3DArray, _SUDropOffPositionHasBeenDeterminedBool, _SUDropOffHasOccurredBool, _SUDropOffPositionPosition3DArray, _SUDropOffPositionNameTextString, _SUTerminationPointPositionHasBeenDeterminedBool, _SUTerminationPointPosition3DArray, _SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray, _SUAIVehicleObjectCurrentPositionPosition3DArray, _SUAIVehicleVehicleDirectionInDegreesNumber, _SUAIVehicleObjectAgeInSecondsNumber, _SUCurrentTaskAgeInSecondsNumber, _SUAIVehicleSpeedOfVehicleInKMHNumber, _SUDistanceToActiveWaypointInMetersNumber, _SUTypeNumber, _SUTaxiAIVehicleObject, _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _requestorPlayerObject, _SUTaxiAIVehicleObjectBirthTimeInSecondsNumber, _taxiAnywhereTaxiRequestedDestinationPosition3DArray] call mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived;
+			/*
+			// TODO:		REMOVE THIS BIT WHEN THE CODE IS STABLE
+			// TODO:		REMOVE THIS BIT WHEN THE CODE IS STABLE
+			// TODO:		REMOVE THIS BIT WHEN THE CODE IS STABLE
+			*/
+			/*
+			// LIST OF PARAMETERS being passed from TA_Phase04 to mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived
+			0	_myGUSUIDNumber
+			1	_SUTypeTextString
+			2	_SUActiveWaypointPositionPosition3DArray
+			3	_SUCurrentActionInProgressTextString
+			4	_SUCurrentTaskThresholdInSecondsNumber
+			5	_SUCurrentTaskBirthTimeInSecondsNumber
+			6	_SUDriversFirstnameTextString
+			7	_SUMarkerShouldBeDestroyedAfterExpiryBool
+			8	_SURequestorPlayerUIDTextString
+			9	_SURequestorProfileNameTextString
+			10	_SUAIVehicleObject
+			11	_SUAIVehicleObjectBirthTimeInSecondsNumber
+			12	_SUPickUpHasOccurredBool
+			13	_SUPickUpPositionPosition3DArray
+			14	_SUDropOffPositionHasBeenDeterminedBool
+			15	_SUDropOffHasOccurredBool
+			16	_SUDropOffPositionPosition3DArray
+			17	_SUDropOffPositionNameTextString
+			18	_SUTerminationPointPositionHasBeenDeterminedBool
+			19	_SUTerminationPointPosition3DArray
+			20	_SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray
+			21	_SUAIVehicleObjectCurrentPositionPosition3DArray
+			22	_SUAIVehicleVehicleDirectionInDegreesNumber
+			23	_SUAIVehicleObjectAgeInSecondsNumber
+			24	_SUCurrentTaskAgeInSecondsNumber
+			25	_SUAIVehicleSpeedOfVehicleInKMHNumber
+			26	_SUDistanceToActiveWaypointInMetersNumber
+			27	_SUTypeNumber
+			28	_SUTaxiAIVehicleObject
+			29	_taxiAnywhereRequestorClientIDNumber
+			30	_taxiAnywhereRequestorProfileNameTextString
+			31	_requestorPlayerObject
+			32	_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber
+			33	_taxiAnywhereTaxiRequestedDestinationPosition3DArray
+			*/
+
+
+			// within the function door lock status might have changed - update it
+			_doorsLockedBool = call compile format ["mgmTfA_gv_PV_SU%1SUVehDoorsLockedBool", _myGUSUIDNumber];
 
 			if (_stopVehicleRequestedAndAuthorizedFncReturnBool) then {
 				// YES, there is a requested & authorized stopVehicle request
