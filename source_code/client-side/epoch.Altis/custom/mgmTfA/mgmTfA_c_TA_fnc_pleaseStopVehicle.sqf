@@ -172,7 +172,7 @@ if (_playerInTAVehicleBool) then {
 			"_msg2SyschatTextString"
 			];
 	// with hint
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_c_CO_img_warningSign.jpg'/><br/><br/><t size='1.40' color='#00FF00'><br/>%1<br/><br/><br/>YOU ARE NOT<br/>IN A TAXI ANYWHERE VEHICLE<br/><br/>", (profileName)];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_c_CO_img_warningSign.jpg'/><br/><br/><t size='1.40' color='#00FF00'><br/>%1<br/><br/><br/>YOU ARE NOT IN A<br/>TAXI ANYWHERE VEHICLE<br/><br/>", (profileName)];
 	hint _msg2HintTextString;
 	_msg2SyschatTextString = parsetext format ["[SYSTEM]  %1 YOU ARE NOT IN A TAXI ANYWHERE VEHICLE"];
 	systemChat str _msg2SyschatTextString;
