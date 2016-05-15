@@ -367,14 +367,17 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3] SPAWN'ing function to inform customer: mgmTfA_s_TA_fnc_servicePhase02aa_SendResponse_ChargePAYGInitialBookingFeeRequestActioned"];};//dbg
 	_null = [_taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereRequestorProfileNameTextString] spawn mgmTfA_s_TA_fnc_servicePhase02aa_SendResponse_ChargePAYGInitialBookingFeeRequestActioned;
 };
-"mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPleaseConfirmPacket" addPublicVariableEventHandler {
-	scopeName "mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPleaseConfirmPacketMainScope";
+"mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitNoResponsePacket" addPublicVariableEventHandler {
+	scopeName "mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitNoResponsePacketMainScope";
 	private	[
 			"_taxiAnywhereExitRequestorClientIDNumber",
 			"_taxiAnywhereExitRequestorPlayerUIDTextString",
 			"_taxiAnywhereExitRequestorProfileNameTextString",
-			"_taxiAnywhereExitRequestorPlayerObject"
+			"_taxiAnywhereExitRequestorPlayerObject",
+			"_myGUSUIDNumber"
 			];
+	_myGUSUIDNumber = (_this select 1 select 2);
+
 	// STAGE IN WORKFLOW:		Parse Arguments & Prepare Local Variables
 	_taxiAnywhereExitRequestorClientIDNumber = (owner (_this select 1 select 0));
 	_taxiAnywhereExitRequestorPlayerObject = (_this select 1 select 0);
@@ -392,7 +395,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 		// If PUID  matches, we will return the profileName
 		{
 			if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6]          Traversing the mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray. Current index is: (%1)     Content PUID/name is: (%2)/(%3)", _forEachIndex, (_x select 0), (_x select 1)];};//dbg
-			if (_taxiAnywhereExitRequestorPlayerUIDTextString == (_x select 6)) then {
+			if (_taxiAnywhereRequestorPlayerUIDTextString == (_x select 0)) then {
 				if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6]          We got a match! Player with PUID (%1) has the following profileName: (%2).", (_x select 0), (_x select 1)];};//dbg
 				_taxiAnywhereExitRequestorProfileNameTextString = (_x select 1);
 				// This below is just to report in STATUS REPORT...
@@ -405,12 +408,12 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6]      [AN AUTHORIZED TA PLEASE ALLOW EXIT REQUEST RECEIVED]    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
 	if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6]      [AN AUTHORIZED TA PLEASE ALLOW EXIT REQUEST RECEIVED]    _taxiAnywhereExitRequestorClientIDNumber: (%1).	_taxiAnywhereExitRequestorProfileNameTextString: (%2).		_taxiAnywhereExitRequestorPlayerUIDTextString: (%3).", _taxiAnywhereExitRequestorClientIDNumber, _taxiAnywhereExitRequestorProfileNameTextString, _taxiAnywhereExitRequestorPlayerUIDTextString];};//dbg
 
-	// ACTION the request
-	_SUTaxiAIVehicleObject setVariable ["exitRequestedAndAuthorized", true, true];
+	// ACTION the request -- set it to true
+	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUExitRequestedAndAuthorized", _myGUSUIDNumber], true];
+	publicVariable format ["mgmTfA_gv_PV_SU%1SUExitRequestedAndAuthorized", _myGUSUIDNumber];
 
 	// Report to log
-	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV5]		I have set exitRequestedAndAuthorized to true"];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV5]		I have set mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool to true"];};//dbg
 };
-//_SUTaxiAIVehicleObject setVariable ["exitRequestedAndAuthorized", false, true];
 if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV4] END reading file."];};//dbg
 // EOF
