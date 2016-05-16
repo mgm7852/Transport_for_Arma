@@ -102,6 +102,11 @@ mgmTfA_dynamicgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber =
 
 // for quick hop on/offs we do not wish to re-display instructions every time. do not display if the last get in time was sooner than this threshold below.
 mgmTfA_dynamicgv_taxiAnywhereTaxiReDisplayInstructionsOnGetInTimeThresholdInSecondsNumber = 300;
+
+// When a legitimite stopVehicle request is received & vehicle stopped, driver will wait for the commandingPlayer to get out.
+// While he waits, he will keep informing the player that he is awaiting a get off for N seconds.
+// If the player changes his mind and prefer to stay in, due to countdown style (10... 9...) reminder, player can easily tell when vehicle will carry on the journey
+mgmTfA_configgv_taxiAnywhereTaxisKeepSystemChatInformingCommandingPlayerSUAwaitingGetOutTimeoutInSecondsNumber = 10;
 //-----
 
 
