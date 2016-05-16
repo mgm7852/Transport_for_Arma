@@ -574,7 +574,7 @@
 			];
 	// The requested action is relevant only if player is still in the mentioned clickNGo Taxi vehicle	i.e.: if player ejected/got out, let's NOT send him this message!	//Compare current vehicle's Classname with the pre-defined Taxi Classname, if it matches, message the player. Otherwise do nothing.
 	_classnameOfTheCurrentVehicle = typeOf (vehicle player);
-	_GUSUIDNumberOfTheCurrentVehicle									= ((vehicle player) getVariable "GUSUIDNumber");
+	_GUSUIDNumberOfTheCurrentVehicle = ((vehicle player) getVariable "GUSUIDNumber");
 	if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [V4]          I have received mgmTfA_gv_pvc_req_pleaseBeginPurchasingPowerCheckAndPAYGChargeForTimeTicksSignalOnly package. _this is: (%1).		(str _GUSUIDNumberOfTheCurrentVehicle) is: (%2).", (str _this), (str _GUSUIDNumberOfTheCurrentVehicle)];};
 	if (_classnameOfTheCurrentVehicle == mgmTfA_configgv_taxiAnywhereTaxisTaxiVehicleClassnameTextString) then {
 		// yes, player is still in a clickNGo vehicle -- quite possibly the same one!	launch the function [_GUSUIDNumberReceivedFromServer] mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks;
@@ -584,6 +584,17 @@
 		// no, player is no longer in the mentioned vehicle -- do nothing
 		if (mgmTfA_configgv_clientVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [V4]          I have determined that player is NOT in the matching vehicle. I will NOT spawn (mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks)."];};
 	};	
+};
+"mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetOutPacket" addPublicVariableEventHandler {
+	private	[
+			"_receivedGUSUIDNumber",
+			"_GUSUIDNumberOfTheCurrentVehicle"
+			];
+	// when we receive this signal, we immediately call a local function without doing any checks. that local function will then handle the situation as appropriate.
+	_receivedGUSUIDNumber = (_this select 1 select 0);
+	_GUSUIDNumberOfTheCurrentVehicle = ((vehicle player) getVariable "GUSUIDNumber");
+	if (mgmTfA_configgv_clientVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_scr_initRegisterClientEventHandlers.sqf]  [TV5]		I have received mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetOutPacket package.	(_receivedGUSUIDNumber) is: (%1)		(_GUSUIDNumberOfTheCurrentVehicle) is: (%2)		_this is: (%3)", _receivedGUSUIDNumber, _GUSUIDNumberOfTheCurrentVehicle, _this];};
+	_null = [_receivedGUSUIDNumber] spawn mgmTfA_c_TA_fnc_pleaseBeginSystemChatInformingCommandingPlayerSUWaitingForGetOutPacket;
 };
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ code - begin ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // SYNOPSIS: Player press INS (INSERT) key. eventHandler added via this file detect the keypress and do the following:
