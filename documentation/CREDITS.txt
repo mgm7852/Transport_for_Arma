@@ -3,19 +3,18 @@
 // CREDITS
 //
 
-This project in its entirety is not a fork of any existing work; it's been built from scratch.
-Admittedly not time effective however I believe it is the best way to learn and well worth  the effort.
-Having said that, I have happily utilized publicly available ideas and code pieces where appropriate.
+This project in its entirety is not a fork of any existing work in any way - it has been built from scratch.
+Admittedly not time effective however I believe it is the best way of learning and I feel it was well worth the effort.
 
-*Random position generator algorithm is based on several others work including Kronzky, JW Custom and several people on BI forums (too many to list here).
+Having said that, I have happily utilized publicly available ideas and code pieces when license and practicalities permitted.
+
+*Random position generator algorithm is based on several others work including Kronzky, JW Custom and several people on BI forums - too many to list each discussion contributor here.
 *Map position updater code directly is taken from ShootingBlanks's proof-of-concept post in axeman's dayz-AI bus thread on opendayz forums.
 *ActionMenu-on-object code is based on the code taken from computermancer's earplugs script
 
 Many thanks to the authors of work listed above. Each bit helped me solve another piece of the big puzzle.
 
-
-I also would like to thank the following for their work. List is in random order. Apologies for those who haven't made it in yet.
-
+I also would like to thank the following people for their work an Arma. The list is in random order.
 
 Bohemia Interactive
 		Good game, excellent wiki.
@@ -24,54 +23,56 @@ Bohemia Interactive
 Andrew "AxeMan" Gregory
 		I still remember the moment I opened "dayZ-AI-Bus-Route" armaholic page.
 		The concept AI taking you from A to B in "DayZ world!" made me think of that old TV series twilight zone! :)
+		Even though it appears very simple now (obviously!), att the time I felt it was advanced alien technology!
 		Thanks for creating the AxeBus and sharing your work with the community.
-		EDIT: axe also gave a hand with my wonderfully named variable named variables thread - eternally grateful.
+		EDIT: axe also gave a hand with my wonderfully named 'variably named variables' thread - eternally grateful.
+		EDIT: axe is now working 'playable hoverboards for Arma 3' - sainthood guaranteed!
 
 Face
-		Thank you very much Face, for showing me how to implement variably named variables (arrays with incremented IDs as part of name).
-		Without this technique I wouldn't be able to implement dynamic ACLs but now map-tracking is only available to authorized players 
+		Thank you very much Face, for showing me how to implement 'variably named variables' (arrays with incremented IDs as part of name).
+		Without this technique I wouldn't be able to implement dynamic ACLs.
 		You've been a great help really!!
 		
 vbawol
-		creator of EpochMod.
-		If Epoch did not exist I probably won't be playing this game (Arma) by now so thanks! [more helis and bring back the old mozzie pls]
+		creator of EpochMod - need I say more?
+		Had Epoch not exist I probably wouldn't playing Arma - so thanks!
+		vbawol also provided the improved, 2nd generation of payment processing functions.
 		
-killzone_kid
-		I wanted to create _this and possibly a few other scripts but I was  perplexed about where to start. I read a few tutorials but to a long story short it didn't look good.
-		Till I heard about killzone_kid 's blog on a YouTube video. Immediately started reading it took a while to go through most articles and I still keep referring to often.
-		Thanks for helping me and an ever growing army of JIP scripters.
+Killzone_Kid
+		I wanted to create this end-to-end taxi+bus script but didn't know where to start. I read a few tutorials but long story short, it didn't look good.
+		Till I heard about Killzone_Kid's blog on a YouTube video - bookmarked instantly!
+		Thanks for helping me and an ever growing army of scripters.
 
 [FOCK] Mikie J
-		Tutorial is good but the humour in it -which made me laugh more than any other scripting reference!- makes it priceless entry point for new scripters.
+		Tutorial is good but the humour in it -which made me laugh more than any other technical reference!- makes it priceless entry point for new scripters.
 		Thanks for sharing your experience!
 
 ShootingBlanks
-		Map position updater code is greatly appreciated - thanks!  ref: http://opendayz.net/threads/dayz-arma-ai-controlled-bus-route.10057/page-15#post-113820
+		As stated above, map position updater code is greatly appreciated - thanks!
 
 computermancer
-		That earplugs script is excellent and a MUST HAVE. Thanks for releasing your work.
-		I have used (if I may say so optimized) actionMe
+		Earplugs script is excellent and a MUST HAVE for any Arma player IMO. Thanks for releasing your work.
+		In particular I have used (if I may say so optimized) actionMe bit.
 
 Kronzky
 		Urban Patrol Script is a classic taught across the globe in SQF scripting classes or it should be :)
-		Still a tad complicated my taste but I enjoy learning something new from this almost every time I open it.
+		Still a tad complicated for my taste but I enjoy learning something new from it, every time I open it.
 		Thanks!
 
 JW Custom	
-		Ultra Simple Patrol Script gave me some useful ideas.
+		Ultra Simple Patrol Script gave me some useful ideas, many thanks!
 		
 Vampire
 		"Vampire's Epoch Mission Framework" is one of the detailed scripts I have studied to understand how this SQF-thingie work.
-		(I am also a long time fan of his work BTW)
-		Thanks!
+		I am also a long time fan of his work BTW. Thanks!
 
 5nine
-		5nine renewed my interest on the subject by posting that forum thread in EpochMod Forums.
-		He then proceeded to releasing the first* ever taxi script for Arma. [* = As far as I know]
+		5nine renewed my interest on the subject by posting that forum thread in EpochMod Forums about taxis.
+		He then proceeded to releasing the first ever* taxi script for Arma. [* = As far as I know]
 		Hats off!
 
 second_coming
-		second_coming has provided the knowledge to accept payments [i.e.: take cash from an EpochMod player].
+		second_coming has provided the required information to charge players using Epoch Crypto currency.
 		Cheers SC!
 		
 nedfox	
@@ -88,6 +89,8 @@ Iceman77
 		Thanks for the help on Arma 3 GUI with your work: 'Dialog Tutorial For Noobs [By A Noob]'
 h8ermaker
 		Thanks for the help on Arma 3 GUI with your work: Summary Video on 'Dialog Tutorial For Noobs [By A Noob]'
+ebaydayz
+		Thanks for the BattlEye filters guide!
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

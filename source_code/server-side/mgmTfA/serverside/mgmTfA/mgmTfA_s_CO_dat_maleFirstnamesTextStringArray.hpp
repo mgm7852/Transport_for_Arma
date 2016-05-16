@@ -1210,6 +1210,21 @@ mgmTfA_staticgv_firstnamesMaleTextStringArray=	[
 												"RICHIE",
 												"ORANGESHERBET",
 												// Tribute to Face
-												"A3EAI_FACE"
+												"A3EAI_FACE",
+												// people referenced in CREDITS.txt is listed below
+												"KILLZONE_KID",
+												"FOCK_MIKIE_J",
+												"SHOOTINGBLANKS",
+												"COMPUTERMANCER",
+												"KRONZKY",
+												"JW_CUSTOM",
+												"VAMPIRE",
+												"5NINE",
+												"SECOND_COMING",
+												"NEDFOX	",
+												"GEN0CIDE",
+												"DIRTYSANCHEZ",
+												"ICEMAN77",
+												"H8ERMAKER"
 												];
 // EOF
