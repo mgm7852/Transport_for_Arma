@@ -1225,6 +1225,7 @@ mgmTfA_staticgv_firstnamesMaleTextStringArray=	[
 												"GEN0CIDE",
 												"DIRTYSANCHEZ",
 												"ICEMAN77",
-												"H8ERMAKER"
+												"H8ERMAKER",
+												"EBAYDAYZ"
 												];
 // EOF
