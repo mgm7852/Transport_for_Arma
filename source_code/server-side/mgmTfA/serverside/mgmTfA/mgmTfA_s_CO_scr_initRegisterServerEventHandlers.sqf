@@ -16,7 +16,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 			"_fixedDestinationRequestorProfileNameTextString",
 			"_fixedDestinationRequestorIsInBlacklist"
 			];
-	// STAGE IN WORKFLOW:		Parse Arguments & Prepare Local Variables
+	// Parse arguments
 	// Number - ID of the client where the request originates		this is the clientComputerID
 	_fixedDestinationRequestorClientIDNumber = (owner	(_this select 1 select 0));
 	_fixedDestinationRequestorPosition3DArray = (_this select 1 select 1);
@@ -33,7 +33,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	_fixedDestinationRequestorPlayerUIDTextString = (_this select 1 select 3);
 	_fixedDestinationRequestorProfileNameTextString = "CANTFINDAMATCHINGNAME";
 	// TODO:		MOVE THIS TO A SEPARATE FUNCTION FILE 		MOVE THIS TO A SEPARATE FUNCTION FILE 		MOVE THIS TO A SEPARATE FUNCTION FILE 		MOVE THIS TO A SEPARATE FUNCTION FILE 
-	// STAGE IN WORKFLOW:		Determine Requestor's profileName
+	// Determine requestor's profileName
 	// NOTE: Clients, in client-side init stage, pushBack their PUID & profileNames to a PV =>	mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray	<= we will use this array to find matching profileName
 	private	[
 			"_PUIDsAndPlayernamesTextStringArrayCountNumber"
@@ -61,7 +61,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	};
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3] [Call-a-fdTaxi]    RECEIVED FIXED DESTINATION TAXI REQUEST		here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3] [Call-a-fdTaxi]    RECEIVED FIXED DESTINATION TAXI REQUEST		_fixedDestinationRequestorClientIDNumber: (%1).		_fixedDestinationRequestorPosition3DArray: (%2).		_fixedDestinationRequestedTaxiFixedDestinationIDNumber: (%3) / resolved to locationName: (%4).		_fixedDestinationRequestorPlayerUIDTextString: (%5) / resolved to profileName: (%6)", (str _fixedDestinationRequestorClientIDNumber), (str _fixedDestinationRequestorPosition3DArray), (str _fixedDestinationRequestedTaxiFixedDestinationIDNumber), _fixedDestinationRequestedDestinationNameTextString, _fixedDestinationRequestorPlayerUIDTextString, _fixedDestinationRequestorProfileNameTextString];};//dbg
-	// STAGE IN WORKFLOW:		Determine what the response should be (accept or reject) and pass the request to the appropriate function via SPAWN	(the next function will inject artificial delay via uiSleep)
+	// Determine what the response should be (accept or reject) and pass the request to the appropriate function via SPAWN	(the next function will inject artificial delay via uiSleep)
 	// Let's make a decision here: are we going to APPROVE or REJECT the booking request? Then pass the request to appropriate script to respond AFTER an artificial delay.
 	// Is the Requestor blacklisted?		is his PUID in mgmTfA_dynamicgv_fixedDestinationTaxisBlacklistedPlayerPUIDsTextStringArray?
 	// He is not blacklisted unless the code block below say otherwise!
@@ -108,13 +108,13 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 			"_taxiAnywhereRequestorIsInBlacklist",
 			"_taxiAnywhereTaxiRequestedDestinationPosition3DArray"			
 			];
-	// STAGE IN WORKFLOW:		Parse Arguments & Prepare Local Variables
+	// Parse arguments
 	_taxiAnywhereRequestorClientIDNumber	 = (owner	(_this select 1 select 0));
 	_taxiAnywhereRequestorPosition3DArray	 = (_this select 1 select 1);
 	_taxiAnywhereRequestorPlayerUIDTextString = (_this select 1 select 2);
 	_taxiAnywhereTaxiRequestedDestinationPosition3DArray	 = (_this select 1 select 3);
 	// TODO:		MOVE	THIS TO A SEPARATE FUNCTION FILE 		MOVE THIS TO A SEPARATE FUNCTION FILE 		MOVE THIS TO A SEPARATE FUNCTION FILE 		MOVE THIS TO A SEPARATE FUNCTION FILE 
-	// STAGE IN WORKFLOW:		Determine Requestor's profileName
+	// Determine requestor's profileName
 	// NOTE: Clients, in client-side init stage, pushBack their PUID & profileNames to a PV =>	mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray	<= we will use this array to find matching profileName
 	private	[
 			"_PUIDsAndPlayernamesTextStringArrayCountNumber"
@@ -141,7 +141,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	};
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]      [Call-a-clickNGo-Taxi]    RECEIVED clickNGo REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]      [Call-a-clickNGo-Taxi]    RECEIVED clickNGo REQUEST    _taxiAnywhereRequestorClientIDNumber: (%1).	_taxiAnywhereRequestorProfileNameTextString: (%2).		Requestor Position: (%3).		_taxiAnywhereRequestorPlayerUIDTextString: (%4).		_taxiAnywhereTaxiRequestedDestinationPosition3DArray: (%5).", _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorPosition3DArray, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereTaxiRequestedDestinationPosition3DArray];};//dbg
-	// STAGE IN WORKFLOW:		Determine what the response should be (accept or reject) and pass the request to the appropriate function via SPAWN	(the next function will inject artificial delay via uiSleep)
+	// Determine what the response should be (accept or reject) and pass the request to the appropriate function via SPAWN	(the next function will inject artificial delay via uiSleep)
 	// Let's make a decision here: are we going to APPROVE or REJECT the booking request? Then pass the request to appropriate script to respond AFTER an artificial delay.
 	// Is the Requestor blacklisted?		is his PUID in mgmTfA_dynamicgv_taxiAnywhereTaxisBlacklistedPlayerPUIDsTextStringArray?
 	// He is not blacklisted unless the code block below say otherwise!
@@ -184,12 +184,12 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 			"_myGUSUIDNumber",
 			"_requestorPlayerObject"
 			];
-	// STAGE IN WORKFLOW:		Parse Arguments & Prepare Local Variables
+	// Parse arguments
 	_taxiAnywhereRequestorClientIDNumber = (owner (_this select 1 select 0));
 	_requestorPlayerObject = (_this select 1 select 0);
 	_taxiAnywhereRequestorPlayerUIDTextString = (_this select 1 select 1);
 	_myGUSUIDNumber = (_this select 1 select 2);
-	// STAGE IN WORKFLOW:		Determine Requestor's profileName
+	// Determine requestor's profileName
 	// NOTE: Clients, in client-side init stage, pushBack their PUID & profileNames to a PV =>	mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray	<= we will use this array to find matching profileName
 	private	["_PUIDsAndPlayernamesTextStringArrayCountNumber"];
 	_PUIDsAndPlayernamesTextStringArrayCountNumber = count	(mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray);
@@ -214,7 +214,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	};
 	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV9]    [PAYG CHARGE ME TICK COST]    RECEIVED chargeMeTickCost REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
 	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV9]    [PAYG CHARGE ME TICK COST]    RECEIVED chargeMeTickCost REQUEST    _taxiAnywhereRequestorClientIDNumber: (%1).	_taxiAnywhereRequestorProfileNameTextString: (%2).		_taxiAnywhereRequestorPlayerUIDTextString: (%3).", _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorPlayerUIDTextString];};//dbg
-	// STAGE IN WORKFLOW:		Action the request = Charge the player
+	// Action the request = Charge the player
 	_null = [_requestorPlayerObject, mgmTfA_configgv_taxiAnywhereTaxisTickCostInCryptoNegativeNumber] call EPOCH_exp_server_effectCrypto;
 	// Report to log
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3] SPAWN'ing function to inform customer: mgmTfA_s_TA_fnc_servicePhase04b_SendResponse_ChargePAYGTickCostRequestActioned"];};//dbg
@@ -230,12 +230,12 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 			"_requestorPlayerObject",
 			"_null"
 			];
-	// STAGE IN WORKFLOW:		Parse Arguments & Prepare Local Variables
+	// Parse arguments
 	_taxiAnywhereRequestorClientIDNumber = (owner (_this select 1 select 0));
 	_requestorPlayerObject = (_this select 1 select 0);
 	_taxiAnywhereRequestorPlayerUIDTextString = (_this select 1 select 1);
 	_myGUSUIDNumber = (_this select 1 select 2);
-	// STAGE IN WORKFLOW:		Determine Requestor's profileName
+	// Determine requestor's profileName
 	// NOTE: Clients, in client-side init stage, pushBack their PUID & profileNames to a PV =>	mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray	<= we will use this array to find matching profileName
 	private	["_PUIDsAndPlayernamesTextStringArrayCountNumber"];
 	_PUIDsAndPlayernamesTextStringArrayCountNumber = count	(mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray);
@@ -261,7 +261,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	};
 	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]      [TAXI ANYWHERE CHARGE ME 1ST MILE FEE REQUEST]    RECEIVED REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
 	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]      [TAXI ANYWHERE CHARGE ME 1ST MILE FEE REQUEST]    RECEIVED REQUEST    _taxiAnywhereRequestorClientIDNumber: (%1).	_taxiAnywhereRequestorProfileNameTextString: (%2).		_taxiAnywhereRequestorPlayerUIDTextString: (%3).", _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorPlayerUIDTextString];};//dbg
-	// STAGE IN WORKFLOW:		Action the request = Charge the player
+	// Action the request = Charge the player
 	_null = [_requestorPlayerObject, mgmTfA_configgv_taxiAnywhereTaxisAbsoluteMinimumJourneyFeeInCryptoNegativeNumber] call EPOCH_exp_server_effectCrypto;
 	// mark vehicle as 1st Mile Fee paid
 	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTA1stMileFeeNeedToBePaidBool", _myGUSUIDNumber], false];
@@ -282,14 +282,14 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 			"_journeyServiceFeeCostInCryptoNegativeNumber",
 			"_null"
 			];
-	// STAGE IN WORKFLOW:		Parse Arguments & Prepare Local Variables
+	// Parse arguments
 	_FD_RequestorClientIDNumber = (owner (_this select 1 select 0));
 	_requestorPlayerObject = (_this select 1 select 0);
 	_FD_RequestorPlayerUIDTextString = (_this select 1 select 1);
 	_myGUSUIDNumber = (_this select 1 select 2);
 	_FD_journeyServiceFeeCostInCryptoNumber = (_this select 1 select 3);
 	_journeyServiceFeeCostInCryptoNegativeNumber = 0 - _FD_journeyServiceFeeCostInCryptoNumber;
-	// STAGE IN WORKFLOW:		Determine Requestor's profileName
+	// Determine requestor's profileName
 	// NOTE: Clients, in client-side init stage, pushBack their PUID & profileNames to a PV =>	mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray	<= we will use this array to find matching profileName
 	private	["_PUIDsAndPlayernamesTextStringArrayCountNumber"];
 	_PUIDsAndPlayernamesTextStringArrayCountNumber = count	(mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray);
@@ -315,7 +315,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	};
 	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]      [FIXED DESTINATION TAXI CHARGE ME SERVICE FEE REQUEST]    RECEIVED REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
 	if (mgmTfA_configgv_serverVerbosityLevel>=9) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]      [FIXED DESTINATION TAXI CHARGE ME SERVICE FEE REQUEST]    RECEIVED REQUEST    _FD_RequestorClientIDNumber: (%1).	_FD_RequestorProfileNameTextString: (%2).		_FD_RequestorPlayerUIDTextString: (%3).", _FD_RequestorClientIDNumber, _FD_RequestorProfileNameTextString, _FD_RequestorPlayerUIDTextString];};//dbg
-	// STAGE IN WORKFLOW:		Action the request = Charge the player
+	// Action the request = Charge the player
 	_null = [_requestorPlayerObject, _journeyServiceFeeCostInCryptoNegativeNumber] call EPOCH_exp_server_effectCrypto;
 	// mark vehicle as SERVICE FEE paid
 	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUFDServiceFeeNeedToBePaidBool", _myGUSUIDNumber], false];
@@ -332,11 +332,11 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 			"_taxiAnywhereRequestorProfileNameTextString",
 			"_requestorPlayerObject"
 			];
-	// STAGE IN WORKFLOW:		Parse Arguments & Prepare Local Variables
+	// Parse arguments
 	_taxiAnywhereRequestorClientIDNumber = (owner (_this select 1 select 0));
 	_requestorPlayerObject = (_this select 1 select 0);
 	_taxiAnywhereRequestorPlayerUIDTextString = (_this select 1 select 1);
-	// STAGE IN WORKFLOW:		Determine Requestor's profileName
+	// Determine requestor's profileName
 	// NOTE: Clients, in client-side init stage, pushBack their PUID & profileNames to a PV =>	mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray	<= we will use this array to find matching profileName
 	private	["_PUIDsAndPlayernamesTextStringArrayCountNumber"];
 	_PUIDsAndPlayernamesTextStringArrayCountNumber = count	(mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray);
@@ -361,7 +361,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	};
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME INITIAL BOOKING FEE ]    RECEIVED chargeMeInitialBookingFee REQUEST    here is the full raw DUMP via (str _this): (%1)", (str _this)];};//dbg
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]      [PAYG CHARGE ME INITIAL BOOKING FEE ]    RECEIVED chargeMeInitialBookingFee REQUEST    _taxiAnywhereRequestorClientIDNumber: (%1).	_taxiAnywhereRequestorProfileNameTextString: (%2).		_taxiAnywhereRequestorPlayerUIDTextString: (%3).", _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorPlayerUIDTextString];};//dbg
-	// STAGE IN WORKFLOW:		Action the request
+	// Action the request
 	_null = [_requestorPlayerObject, mgmTfA_configgv_taxiAnywhereTaxisNonRefundableBookingFeeCostInCryptoNegativeNumber] call EPOCH_exp_server_effectCrypto;
 	// Report to log
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3] SPAWN'ing function to inform customer: mgmTfA_s_TA_fnc_servicePhase02aa_SendResponse_ChargePAYGInitialBookingFeeRequestActioned"];};//dbg
@@ -378,11 +378,12 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 			];
 	_myGUSUIDNumber = (_this select 1 select 2);
 
-	// STAGE IN WORKFLOW:		Parse Arguments & Prepare Local Variables
+	// Parse arguments
 	_taxiAnywhereExitRequestorClientIDNumber = (owner (_this select 1 select 0));
 	_taxiAnywhereExitRequestorPlayerObject = (_this select 1 select 0);
 	_taxiAnywhereExitRequestorPlayerUIDTextString = (_this select 1 select 1);
-	// STAGE IN WORKFLOW:		Determine Requestor's profileName
+	
+	// Determine requestor's profileName
 	// NOTE: Clients, in client-side init stage, pushBack their PUID & profileNames to a PV =>	mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray	<= we will use this array to find matching profileName
 	private	["_PUIDsAndPlayernamesTextStringArrayCountNumber"];
 	_PUIDsAndPlayernamesTextStringArrayCountNumber = count	(mgmTfA_pvdb_PUIDsAndPlayernamesTextStringArray);
