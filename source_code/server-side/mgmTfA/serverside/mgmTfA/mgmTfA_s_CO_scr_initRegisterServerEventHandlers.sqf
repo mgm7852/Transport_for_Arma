@@ -367,7 +367,6 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3] SPAWN'ing function to inform customer: mgmTfA_s_TA_fnc_servicePhase02aa_SendResponse_ChargePAYGInitialBookingFeeRequestActioned"];};//dbg
 	_null = [_taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereRequestorProfileNameTextString] spawn mgmTfA_s_TA_fnc_servicePhase02aa_SendResponse_ChargePAYGInitialBookingFeeRequestActioned;
 };
-//change this
 "mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPacketSignalOnly" addPublicVariableEventHandler {
 	scopeName "mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPacketSignalOnlyMainScope";
 	private	[
