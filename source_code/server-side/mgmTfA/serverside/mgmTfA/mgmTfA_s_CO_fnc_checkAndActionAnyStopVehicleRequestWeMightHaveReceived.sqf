@@ -1,28 +1,41 @@
+// TODO
+// LIST OF SIGNAL PACKAGES WE NEED TO PROCESS ON THE CLIENT SIDE WITH LOOPS  & TRIGGERS (GOT IN/GOT OUT etc)
+//
+//	mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetOutPacket
+//	mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetInPacket
+
+	
+
+
+
+
+
+
+
+
 //H
 //H ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf
-//H $PURPOSE$	:	1. 'StopVehicle (&allow me to exit)' button on the GUI is processed by the client side.
-//H					2. When a request is deemed eligible then it is sent to the server with a PVS packet:	mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPacketSignalOnly
-//H					3. Server EH will then set to true:	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUStopVehicleRequestedAndAuthorized", _myGUSUIDNumber], true];
+//H $PURPOSE$	:	stopVehicle workflow:
+//H					1. [client-side] 'StopVehicle (& allow me to exit)' button on the GUI is processed by the client side and checked whether it is eligible for sending upstream
+//H					2. [client-side] When a request is deemed eligible, then it is sent to the server with a PVS packet:	mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPacketSignalOnly
+//H					3. [server-side] Server EH will then set to true:	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUStopVehicleRequestedAndAuthorized", _myGUSUIDNumber], true];
 //H					---
-//H					4. This function is relevant, and therefore called by the PhaseN functions, from inside the following loops during the workflow:
+//H					4. [THEN WE TAKE OVER] This function is regularly called by server-side PhaseN functions, from inside each loop, such as:
 //H						while {_TA1stMileFeeNeedToBePaidBool}
 //H						while {_SUTaxiAIVehicleDistanceToWayPointMetersNumber>250}
 //H						while {_SUTaxiAIVehicleDistanceToWayPointMetersNumber>25}
 //H
-//H
-//H					Our job is to action the request. 
-//H					We will hold the execution of calling script while we wait for the player(s) to get out/get back in. We will do the actions listed below.
-//H
-//H
+//H					Our job is to action the request that originated from the client-side, we hold the execution of callingFunction (PhaseN fnc) while we wait for the player(s) to get out/get back in.
+//H					Workflow:
 //H						+n. call compile and obtain the variable status:	is there a waiting authorized stopVehicle request?
 //H							+n. NO,	there is no pending authorized stopVeh requests at this time
 //H								+n. return to callingFunction (_stopVehReqHandlerFncReturnValueBool = true).
 //H							+n. YES,	there is a pending authorized stopVeh request
 //H								+n. stop the vehicle - we will wait for 10 seconds to allow the requestor to get out.
 //H								+n. send the packet to requestor (TODO: all passengers): 'pleaseBeginSysChatInformingAllPassengersStopVehRequested'. Client-side code => stop the sysChat messages (if counter hits 10 seconds) OR (if pleaseStopSysChatInformingAllPassengersStopVehRequested packet received)
-//H											[DRIVER] Stop Vehicle requested - waiting for passengers get out [10]
-//H											[DRIVER] Stop Vehicle requested - waiting for passengers get out [9] ... and so on
+//H											[DRIVER] Stop vehicle requested - waiting for passengers get out [10]
+//H											[DRIVER] Stop vehicle requested - waiting for passengers get out [9] ... and so on
 //H											+n. Set the vehicle phase status correctly
 //H											+n. Keep checking for potential phase timeouts
 //H											+n. Keep broadcasting service unit information from inside the loop
@@ -75,7 +88,6 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 scopeName "mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceivedMainScope";
 _thisFileVerbosityLevelNumber = mgmTfA_configgv_serverVerbosityLevel;
 
-
 private	[
 		// obtained from callingFunction
 		"_myGUSUIDNumber",
@@ -113,7 +125,6 @@ private	[
 		"_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber",
 		"_taxiAnywhereTaxiRequestedDestinationPosition3DArray",
 		"_SUAICharacterDriverObject",
-		//
 		/// created locally
 		"_doorsLockedBool",
 		"_SUVehicleSpeedOfVehicleInKMHNumber",
@@ -126,44 +137,44 @@ private	[
 		"_emergencyEscapeNeeded",
 		"_stopVehicleRequestedAndAuthorizedBool"
 		];
-/*
+
 // LIST OF PARAMETERS being passed from TA_Phase04 to mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived
-0	_myGUSUIDNumber
-1	_SUTypeTextString
-2	_SUActiveWaypointPositionPosition3DArray
-3	_SUCurrentActionInProgressTextString
-4	_SUCurrentTaskThresholdInSecondsNumber
-5	_SUCurrentTaskBirthTimeInSecondsNumber
-6	_SUDriversFirstnameTextString
-7	_SUMarkerShouldBeDestroyedAfterExpiryBool
-8	_SURequestorPlayerUIDTextString
-9	_SURequestorProfileNameTextString
-10	_SUAIVehicleObject
-11	_SUAIVehicleObjectBirthTimeInSecondsNumber
-12	_SUPickUpHasOccurredBool
-13	_SUPickUpPositionPosition3DArray
-14	_SUDropOffPositionHasBeenDeterminedBool
-15	_SUDropOffHasOccurredBool
-16	_SUDropOffPositionPosition3DArray
-17	_SUDropOffPositionNameTextString
-18	_SUTerminationPointPositionHasBeenDeterminedBool
-19	_SUTerminationPointPosition3DArray
-20	_SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray
-21	_SUAIVehicleObjectCurrentPositionPosition3DArray
-22	_SUAIVehicleVehicleDirectionInDegreesNumber
-23	_SUAIVehicleObjectAgeInSecondsNumber
-24	_SUCurrentTaskAgeInSecondsNumber
-25	_SUAIVehicleSpeedOfVehicleInKMHNumber
-26	_SUDistanceToActiveWaypointInMetersNumber
-27	_SUTypeNumber
-28	_SUTaxiAIVehicleObject
-29	_taxiAnywhereRequestorClientIDNumber
-30	_taxiAnywhereRequestorProfileNameTextString
-31	_requestorPlayerObject
-32	_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber
-33	_taxiAnywhereTaxiRequestedDestinationPosition3DArray
-34	_SUAICharacterDriverObject
-*/
+//	0	_myGUSUIDNumber
+//	1	_SUTypeTextString
+//	2	_SUActiveWaypointPositionPosition3DArray
+//	3	_SUCurrentActionInProgressTextString
+//	4	_SUCurrentTaskThresholdInSecondsNumber
+//	5	_SUCurrentTaskBirthTimeInSecondsNumber
+//	6	_SUDriversFirstnameTextString
+//	7	_SUMarkerShouldBeDestroyedAfterExpiryBool
+//	8	_SURequestorPlayerUIDTextString
+//	9	_SURequestorProfileNameTextString
+//	10	_SUAIVehicleObject
+//	11	_SUAIVehicleObjectBirthTimeInSecondsNumber
+//	12	_SUPickUpHasOccurredBool
+//	13	_SUPickUpPositionPosition3DArray
+//	14	_SUDropOffPositionHasBeenDeterminedBool
+//	15	_SUDropOffHasOccurredBool
+//	16	_SUDropOffPositionPosition3DArray
+//	17	_SUDropOffPositionNameTextString
+//	18	_SUTerminationPointPositionHasBeenDeterminedBool
+//	19	_SUTerminationPointPosition3DArray
+//	20	_SUServiceAdditionalRecipientsPUIDAndProfileNameTextStringArray
+//	21	_SUAIVehicleObjectCurrentPositionPosition3DArray
+//	22	_SUAIVehicleVehicleDirectionInDegreesNumber
+//	23	_SUAIVehicleObjectAgeInSecondsNumber
+//	24	_SUCurrentTaskAgeInSecondsNumber
+//	25	_SUAIVehicleSpeedOfVehicleInKMHNumber
+//	26	_SUDistanceToActiveWaypointInMetersNumber
+//	27	_SUTypeNumber
+//	28	_SUTaxiAIVehicleObject
+//	29	_taxiAnywhereRequestorClientIDNumber
+//	30	_taxiAnywhereRequestorProfileNameTextString
+//	31	_requestorPlayerObject
+//	32	_SUTaxiAIVehicleObjectBirthTimeInSecondsNumber
+//	33	_taxiAnywhereTaxiRequestedDestinationPosition3DArray
+//	34	_SUAICharacterDriverObject
+
 // LIST OF LOCAL VARIABLES WITH INITIAL VALUES PASSED ON FROM CALLINGFUNCTION
 _myGUSUIDNumber = (_this select 0);
 _SUTypeTextString = (_this select 1);
@@ -211,8 +222,8 @@ _SUAICharacterDriverObject = (_this select 34);
 		//		false	= there's a problem (i.e.: requestor got out & didn't return). do emergency termination
 		//	initially there is no reason to cause an emergency termination so we start with TRUE
 _stopVehReqHandlerFncReturnValueBool = true;
-// do NOT initialize here - will be done later in this file:			_broadcastSUInformationCounter = 0;
-// we will assign values to these below - DO NOT initialize here
+// do NOT initialize here - will be done later in this file: _broadcastSUInformationCounter = 0;
+// later in the file, we will assign values to these below - DO NOT initialize here
 //	_counterForLogOnlyEveryNthPINGNumber
 //	_SUTaxiAIVehicleDistanceToWayPointMetersNumber
 //	_SUTaxiAIVehicleObjectAgeInSecondsNumber
@@ -221,28 +232,24 @@ _stopVehReqHandlerFncReturnValueBool = true;
 _emergencyEscapeNeeded = false;
 // unless otherwise proven below, by default, no such request was authorized
 _stopVehicleRequestedAndAuthorizedBool = false;
-
 // TODO CHANGE THIS TO 10
 if (_thisFileVerbosityLevelNumber>=0) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV0] 	<ThisIs:%1> 	I have been CALL'd.	(_this) is: (%2)		(_SUTypeNumber) is: (%3)	.", (str _myGUSUIDNumber), (str _this), (str _SUTypeNumber)];};//dbg
 
-
-
-
 // MAIN CHECK
-// stopVehicle requested and authorized on the client-side?
+// any authorized stopVehicle requests from the client-side for this SU?
 _stopVehicleRequestedAndAuthorizedBool = call compile format ["mgmTfA_gv_PV_SU%1SUStopVehicleRequestedAndAuthorized", _myGUSUIDNumber];
 if (_stopVehicleRequestedAndAuthorizedBool) then {
 	// YES, we have an authorized exitRequest		-- log it	
 	// TODO CHANGE THIS TO 10
 	if (_thisFileVerbosityLevelNumber>=0) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV0] 	YES, WE HAVE an authorized exitRequest for SU: (%1)		.", (str _myGUSUIDNumber)];};//dbg
 
-	// STOP VEHICLE:	Use the horn to signal upcoming STOP action
+	// Stop vehicle:	Use the horn to signal upcoming STOP action
 	driver _SUTaxiAIVehicleObject forceWeaponFire [currentWeapon _SUTaxiAIVehicleObject, currentWeapon _SUTaxiAIVehicleObject];
 
-	// disable Taxi driver & vehicle movement
+	// Disable taxi driver & vehicle movement
 	_SUAICharacterDriverObject disableAI "MOVE";
 	uiSleep 0.05;
-	// prep: we'll be allowing player(s) to get off - unlock doors first
+	// We will allow player(s) to get off - unlock doors first
 	_SUTaxiAIVehicleObject lockCargo false;
 	_doorsLockedBool = true;
 	uiSleep 0.05;
@@ -263,8 +270,9 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 
 	//	SEND SIGNAL to commandingPlayer's PC		-- we do NOT message if we are still moving - that's how accidents happen!
 	waitUntil {speed _SUTaxiAIVehicleObject == 0};
-	// Create the global variable that will be sent to the requestor's PC		-- send the _myGUSUIDNumber here
-	mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetOutPacket = _myGUSUIDNumber;
+	// Copy GUSUID to a global variable & send to the commandingPlayer's PC
+	myGUSUIDNumber = _myGUSUIDNumber;
+	mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetOutPacket = [myGUSUIDNumber];
 	_taxiAnywhereRequestorClientIDNumber publicVariableClient "mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetOutPacket";
 	if (_thisFileVerbosityLevelNumber>8) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV8]  SIGNAL SENT to the commandingPlayer's PC (mgmTfA_gv_pvc_req_pleaseBeginSysChatInformingCommandingPlayerWaitingForGetOutPacket). _taxiAnywhereRequestorProfileNameTextString: (%1) 		 on computer (_taxiAnywhereRequestorClientIDNumber):(%2)		_myGUSUIDNumber is: (%3).", _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorClientIDNumber, _myGUSUIDNumber];};
 
@@ -284,22 +292,17 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 		_requestorInsideVehicle = false;
 	};
 
-	/* DONE IN THE CALLING FUNCTION - DO NOT REPEAT HERE
-	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiRequestorInsideVehicleInSecondsNumber;
-	// Reset Current Task Age
-	_SUCurrentTaskAgeInSecondsNumber = 0;
-	//Start the Current Task Age Timer
-	_SUCurrentTaskBirthTimeInSecondsNumber = (time);
-	*/
-	/* DONE IN THE CALLING FUNCTION - DO NOT REPEAT HERE
-	// Set distance to Current Waypoint to zero as we are at the DropOff Point and awaiting Requestor to get off the vehicle...
-	_SUTaxiAIVehicleDistanceToWayPointMetersNumber = 0;
-	*/
+	// DONE IN THE CALLING FUNCTION - DO NOT REPEAT HERE
+	// _SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdfixedDestinationTaxiRequestorInsideVehicleInSecondsNumber;
+	// // Reset Current Task Age
+	// _SUCurrentTaskAgeInSecondsNumber = 0;
+	// //Start the Current Task Age Timer
+	// _SUCurrentTaskBirthTimeInSecondsNumber = (time);
+	// // Set distance to Current Waypoint to zero as we are at the DropOff Point and awaiting Requestor to get off the vehicle...
+	// _SUTaxiAIVehicleDistanceToWayPointMetersNumber = 0;
+	
 
-
-	////////////////////////////////////////////////////////////////////////////
 	// MAIN LOOP
-	////////////////////////////////////////////////////////////////////////////
 	//As long as he is inside, we will patiently wait for him to get out UNTIL PhaseTask timelimit is exceeded OR our own timelimit is exceeded
 	_counterForLogOnlyEveryNthPINGNumber = 0;
 	_broadcastSUInformationCounter = 0;
@@ -391,10 +394,6 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 	uiSleep 0.05;
 
 
-
-
-
-
 	//	THE REQUESTOR is OUTSIDE -- handle situation here -- do not immediately terminate the SU, perhaps requestor is using ATM or looting just for a second! give him some time and let's see if he's getting back in. say in about 90 seconds...
 
 	// n. Keep looping & waiting n seconds
@@ -425,17 +424,18 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 	} else {
 		_requestorOutsideVehicle = true;
 	};
-	/* DONE IN THE CALLING FUNCTION - DO NOT REPEAT HERE
-	_SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdTATaxiRequestorOutsideVehicleInSecondsNumber;
-	// Reset Current Task Age
-	_SUCurrentTaskAgeInSecondsNumber = 0;
-	//Start the Current Task Age Timer
-	_SUCurrentTaskBirthTimeInSecondsNumber = (time);
-	*/
+
+	// DONE IN THE CALLING FUNCTION - DO NOT REPEAT HERE
+	// _SUCurrentTaskThresholdInSecondsNumber = mgmTfA_configgv_expiryTimeOutThresholdTATaxiRequestorOutsideVehicleInSecondsNumber;
+	// // Reset Current Task Age
+	// _SUCurrentTaskAgeInSecondsNumber = 0;
+	// //Start the Current Task Age Timer
+	// _SUCurrentTaskBirthTimeInSecondsNumber = (time);
+
+	
 	//	might have popped out for a sec - keep looping & waiting...
-	////////////////////////////////////////////////////////////////////////////
+
 	// MAIN LOOP
-	////////////////////////////////////////////////////////////////////////////
 	//As long as he is outside, we will patiently wait for him to get in UNTIL PhaseTask timelimit is exceeded OR our own timelimit is exceeded
 	_counterForLogOnlyEveryNthPINGNumber = 0;
 	_broadcastSUInformationCounter = 0;
@@ -534,50 +534,11 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 	};
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV3] EXITed loop _requestorOutsideVehicle"];};
 	uiSleep 0.05;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 } else {
 	// NO, we do NOT have any authorized exitRequests
 	// TODO CHANGE THIS TO 10
 	if (_thisFileVerbosityLevelNumber>=0) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV0] 	NO, we DO NOT have an authorized exitRequest for SU:(%1)		.", (str _myGUSUIDNumber)];};//dbg
 };
-
-
 // we are about to exit function and return no NormalPhase or EmergencyTermination Phase		-- in either case, we can toggle this back to false now
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUStopVehicleRequestedAndAuthorized", _myGUSUIDNumber], false];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUStopVehicleRequestedAndAuthorized", _myGUSUIDNumber];
