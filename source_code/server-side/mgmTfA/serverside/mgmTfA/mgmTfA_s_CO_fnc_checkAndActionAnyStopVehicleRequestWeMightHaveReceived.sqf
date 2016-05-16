@@ -2,7 +2,7 @@
 //H ~~
 //H $FILE$		:	<mission>/custom/mgmTfA/mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf
 //H $PURPOSE$	:	1. 'StopVehicle (&allow me to exit)' button on the GUI is processed by the client side.
-//H					2. When a request is deemed eligible then it is sent to the server with a PVS packet:	mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitNoResponsePacket
+//H					2. When a request is deemed eligible then it is sent to the server with a PVS packet:	mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPacketSignalOnly
 //H					3. Server EH will then set to true:	missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUStopVehicleRequestedAndAuthorized", _myGUSUIDNumber], true];
 //H					---
 //H					4. This function is relevant, and therefore called by the PhaseN functions, from inside the following loops during the workflow:

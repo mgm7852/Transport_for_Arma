@@ -116,8 +116,8 @@ if (_playerInTAVehicleBool) then {
 					mgmTfA_gv_pvs_TAStopVehicleRequestorPlayerUIDTextString = _mgmTfA_gv_pvs_TAStopVehicleRequestorPlayerUIDTextString;
 					_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
 					myGUSUIDNumber = _myGUSUIDNumber;
-					mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitNoResponsePacket = [player, mgmTfA_gv_pvs_TAStopVehicleRequestorPlayerUIDTextString, myGUSUIDNumber];
-					publicVariableServer "mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitNoResponsePacket";
+					mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPacketSignalOnly = [player, mgmTfA_gv_pvs_TAStopVehicleRequestorPlayerUIDTextString, myGUSUIDNumber];
+					publicVariableServer "mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPacketSignalOnly";
 					if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_pleaseStopVehicle.sqf]	[TV8]    REQUEST VEH STOP SET TO SERVER		- I HAVE THE FOLLOWING DETAILS: mgmTfA_gv_pvs_TAStopVehicleRequestorPlayerUIDTextString is: (%1).		(myGUSUIDNumber): (%2).		", mgmTfA_gv_pvs_TAStopVehicleRequestorPlayerUIDTextString, (str myGUSUIDNumber)];};
 
 					// update player:	we are stopping
@@ -148,8 +148,8 @@ if (_playerInTAVehicleBool) then {
 				mgmTfA_gv_pvs_TAStopVehicleRequestorPlayerUIDTextString = (getPlayerUID player);
 				_myGUSUIDNumber = ((vehicle player) getVariable ["GUSUIDNumber", -1]);
 				myGUSUIDNumber = _myGUSUIDNumber;
-				mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitNoResponsePacket = [player, mgmTfA_gv_pvs_TAStopVehicleRequestorPlayerUIDTextString, myGUSUIDNumber];
-				publicVariableServer "mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitNoResponsePacket";
+				mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPacketSignalOnly = [player, mgmTfA_gv_pvs_TAStopVehicleRequestorPlayerUIDTextString, myGUSUIDNumber];
+				publicVariableServer "mgmTfA_gv_pvs_req_taxiAnywhereTaxiPleaseAllowExitPacketSignalOnly";
 				if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_pleaseStopVehicle.sqf]	[TV8]    REQUEST VEH STOP SET TO SERVER		- I HAVE THE FOLLOWING DETAILS: mgmTfA_gv_pvs_TAStopVehicleRequestorPlayerUIDTextString is: (%1).		(myGUSUIDNumber): (%2).		", mgmTfA_gv_pvs_TAStopVehicleRequestorPlayerUIDTextString, (str myGUSUIDNumber)];};
 
 				// update player:	we are stopping
