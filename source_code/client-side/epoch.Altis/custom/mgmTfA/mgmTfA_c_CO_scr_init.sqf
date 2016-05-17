@@ -42,7 +42,7 @@ if (!isServer) then {
 	mgmTfA_dynamicgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber = (time);
 	mgmTfA_dynamicgv_taxiAnywhereTaxiFirstGetInHasOccurred = false;
 	mgmTfA_dynamicgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber = -1;
-	mgmTfA_PurchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool = false;
+	mgmTfA_dynamicgv_purchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool = false;
 	mgmTfA_dynamicgv_mapOpenedAtTimestampsInSecondTextStringArray = [];
 	mgmTfA_dynamicgv_taxiAnywhereRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool = false;
 

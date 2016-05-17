@@ -38,10 +38,10 @@ _functionExecutionTimeInSecondsNumber= (time);
 if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf]  [TV8] 		DEVDEBUG		I have been SPAWN'd		at: (%1).		This is what I have received:	(%2).", (str _functionExecutionTimeInSecondsNumber), (str _this)];};
 //// FUNCTION INIT STAGE
 // if another instance is running, terminate this to prevent multiple active threads
-if (mgmTfA_PurchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool) exitWith {if (mgmTfA_configgv_clientVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5]          I have been SPAWN'd however (mgmTfA_PurchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool) is  already active. I will now terminate this function."];};};
+if (mgmTfA_dynamicgv_purchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool) exitWith {if (mgmTfA_configgv_clientVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5]          I have been SPAWN'd however (mgmTfA_dynamicgv_purchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool) is  already active. I will now terminate this function."];};};
 // we are now active.		mark it to prevent multiple active threads by possible future SPAWNs & let the log now
 scopeName "mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicksMainScope";
-mgmTfA_PurchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool = true;
+mgmTfA_dynamicgv_purchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool = true;
 _emergencyEscapeNeeded = false;
 // during this run, so far, we have observed 0 failed checks
 mgmTfA_configgv_numberOfFailedPAYGTransactionsObservedOnThisClientNumber = 0;
@@ -53,7 +53,7 @@ _checkedAndPlayerWasNotInAclickNGoVehicleCountNumber = 0;
 _player = player;
 // not active unless otherwise proven
 _SUPAYGisActiveBool = false;
-if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          Just set this to true => (mgmTfA_PurchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool).		Current time is: (%1).", (str (time))];};
+if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV8]          Just set this to true => (mgmTfA_dynamicgv_purchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool).		Current time is: (%1).", (str (time))];};
 
 //// now that we are 'running', let's do any other necessary initial variable assignments
 // the variable below is used to determine how long has it been since the last check. only for the first run, it will be nil, thus we will set it to current time
@@ -157,5 +157,5 @@ while {true} do {
 if (_tooManyFailedPAYGTransactionsObservedBool) then {	if (mgmTfA_configgv_clientVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5]          This is the bottom of the function. I noticed (_tooManyFailedPAYGTransactionsObservedBool) is  true!	This is the last line."];};		};
 if (_playerWentBankruptBool) then {	if (mgmTfA_configgv_clientVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5]          This is the bottom of the function. I noticed (_playerWentBankruptBool) is  true!	This is the last line."];};						};
 if (_checkedAndPlayerWasNotInAclickNGoVehicleCountNumber == 15)	then {	if (mgmTfA_configgv_clientVerbosityLevel>=5) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fnc_purchasingPowerCheckAndPAYGChargeForTimeTicks.sqf] [TV5]          _checkedAndPlayerWasNotInAclickNGoVehicleCountNumber = 15!	Terminating now. This is the last line."];};					};
-mgmTfA_PurchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool = false;
+mgmTfA_dynamicgv_purchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool = false;
 // EOF
