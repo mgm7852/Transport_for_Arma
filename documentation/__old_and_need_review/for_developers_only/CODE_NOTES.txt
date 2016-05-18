@@ -1,0 +1,9 @@
+﻿//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//			TRANSPORT FOR ARMA -- CODE NOTES
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* All global variables begin with the prefix mgmTfA_
+* All global variables that are expected to change (such as total number of customers served) are marked with dgv_ prefix which is added to the project prefix mgmTfA_ thus it becomes:	mgmTfA_dgv_blahBlah
+* All global variables that are not expected to change (such as TaxiAnywhere module On/Off setting) are marked with sgv_ prefix which is added to the project prefix mgmTfA_ thus it becomes:	mgmTfA_sgv_blahBlah
+// EOF
