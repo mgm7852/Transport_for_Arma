@@ -29,7 +29,7 @@ private	[
 //Undefine return container
 _mgmTfA_s_CO_fnc_returnARandomFirstnameTextStringNameToReturn = objNull;
 //Pick a random Firstname from requested gender array
-_mgmTfA_s_CO_fnc_returnARandomFirstnameTextStringNameToReturn = mgmTfA_staticgv_firstnamesMaleTextStringArray select (floor (random (count mgmTfA_staticgv_firstnamesMaleTextStringArray)));
+_mgmTfA_s_CO_fnc_returnARandomFirstnameTextStringNameToReturn = mgmTfA_sgv_firstnamesMaleTextStringArray select (floor (random (count mgmTfA_sgv_firstnamesMaleTextStringArray)));
 	if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_returnARandomFirstnameTextString.sqf]  [TV5]   Reached checkpoint: Bottom of function. The next line will exit the function & return the value. _mgmTfA_s_CO_fnc_returnARandomFirstnameTextStringNameToReturn is set to: (%1).", _mgmTfA_s_CO_fnc_returnARandomFirstnameTextStringNameToReturn];};
 //Return the randomly chosen name
 _mgmTfA_s_CO_fnc_returnARandomFirstnameTextStringNameToReturn;

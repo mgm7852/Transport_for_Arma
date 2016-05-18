@@ -135,9 +135,9 @@ _fixedDestinationRequestorClientIDNumber		publicVariableClient		"mgmTfA_gv_pvc_p
 if (_thisFileVerbosityLevelNumber>2) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase05_DropOffPointAndBeyond.sqf]  [TV2]  SIGNAL SENT to the Requestor (We have arrived. Thank you for your business. Have a nice day.). _fixedDestinationRequestorProfileNameTextString: (%1)  on computer (_fixedDestinationRequestorClientIDNumber)=(%2). The _myGUSUIDNumber is: (%3).", _fixedDestinationRequestorProfileNameTextString, _fixedDestinationRequestorClientIDNumber, _myGUSUIDNumber];};
 
 //On arrival to waypoint (drop off point) add the travelled distance to the global counter and then reset our local counter
-mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
-// We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber
+mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
+// We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber
 _iWantToTravelThisManyMetresNumber = 0;
 
 // ADD FORCE EJECT CODE HERE

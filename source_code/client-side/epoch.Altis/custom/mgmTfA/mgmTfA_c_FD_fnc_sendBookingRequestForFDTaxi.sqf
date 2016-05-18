@@ -15,17 +15,17 @@
 //HH		mgmTfA_configgv_FixedDestinationTaxiBookingFirstTimersCanBookWithoutWaitingBool
 //HH
 //HH	The client-side init file create the following value(s) this function rely on:
-//HH		mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber
+//HH		mgmTfA_dgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber
 //HH
-//HH	on start a zero counter on player :	mgmTfA_dynamicgv_lastTaxiBookingPlacedAtTimestampInSecondsNumber
+//HH	on start a zero counter on player :	mgmTfA_dgv_lastTaxiBookingPlacedAtTimestampInSecondsNumber
 //HH	The following information will be placed into the variable which is sent to the server:
 //HH				_requestorPosition					Array - format Position							e.g.: [2412.01, 6036.33, -0.839965]
 //HH				_requestedTaxiFixedDestinationID		Number										e.g.: 3
 //HH				_requestorPlayerUID
 //HH
 //HH	We will create two new global variables:
-//HH				mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber
-//HH				mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber
+//HH				mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber
+//HH				mgmTfA_dgv_journeyTotalDistanceInMetersNumber
 //HH
 if (isServer) exitWith {}; if (isNil("mgmTfA_Client_Init")) then {mgmTfA_Client_Init=0;}; waitUntil {mgmTfA_Client_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
 private	[
@@ -37,9 +37,9 @@ private	[
 // Before doing a time calculation, let's clarify one thing is this the first ever Booking Request? // And if so, does the player still need to wait or can he go ahead? (masterConfig configuration value determines this behaviour)
 // he can book if he meets either of the options (FirstTimers can immediately book && this guy is a FirstTimer) OR (Cooldown time threshold has been honoured)
 if	(
-	((mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingRecordKeeperThisIsTheFirstTimeBool) && (mgmTfA_configgv_FixedDestinationTaxiBookingFirstTimersCanBookWithoutWaitingBool)) 
+	((mgmTfA_dgv_lastFixedDestinationTaxiBookingRecordKeeperThisIsTheFirstTimeBool) && (mgmTfA_configgv_FixedDestinationTaxiBookingFirstTimersCanBookWithoutWaitingBool)) 
 	|| 
-	(mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber <= (time - mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber))
+	(mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber <= (time - mgmTfA_dgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber))
 	)	then {
 	// he is a first timer & first timers can book immediately
 	// OR
@@ -48,7 +48,7 @@ if	(
 } else {
 	// Player may not book at this time - it is too soon since the last Booking that was placed!
 	_bookingPermitted = false;
-	_timeToWaitInSecondsNumber = (round (mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber - ((time) - mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber)));
+	_timeToWaitInSecondsNumber = (round (mgmTfA_configgv_minimumWaitingTimeBetweenFixedDestinationTaxiBookingsInSecondsNumber - ((time) - mgmTfA_dgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber)));
 	// Note that anything below 1 second and above 0 second (e.g.: 0.374s) will cause the message "PLEASE WAIT 0 SECONDS" to be displayed, so artificially increment by 1 if it is zero.
 	if (_timeToWaitInSecondsNumber == 0) then { _timeToWaitInSecondsNumber = _timeToWaitInSecondsNumber + 1 };
 	private	[
@@ -157,14 +157,14 @@ if (_bookingPermitted) then {
 		// Player just paid for the standard booking fee. The outstanding balance (assuming he will complete the journey fully) is:		_journeyServiceFeeCostInCryptoNumber	<= we should charge him this much when he gets in the vehicle!
 		_journeyServiceFeeCostInCryptoNumber = (round (_journeyTotalCostInCryptoNumber - mgmTfA_configgv_fixedDestinationTaxisNonRefundableStandardBookingFeeCostInCryptoNumber));
 		// Let's store this in a global variable as next phase(s) will require this information.
-		mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber = _journeyServiceFeeCostInCryptoNumber;
+		mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber = _journeyServiceFeeCostInCryptoNumber;
 		// We might also need the total journey distance to refund any 'untravelled distance'
-		mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber = _journeyTotalDistanceInMetersNumber;
+		mgmTfA_dgv_journeyTotalDistanceInMetersNumber = _journeyTotalDistanceInMetersNumber;
 		// SEND THE BOOKING TO THE SERVER
 		if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi.sqf] [TV4] (_bookingPermitted) is true. executing main function block now."];};//dbg
 		// Do these at this stage
-		mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingRecordKeeperThisIsTheFirstTimeBool = false;
-		mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
+		mgmTfA_dgv_lastFixedDestinationTaxiBookingRecordKeeperThisIsTheFirstTimeBool = false;
+		mgmTfA_dgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
 		// Craft the booking request package		
 		mgmTfA_gv_pvs_req_fixedDestinationTaxiToMyPositionPleaseConfirmPacket = [player, mgmTfA_gv_pvs_requestorPositionArray3D, mgmTfA_gv_pvs_requestedTaxiFixedDestinationID, (getPlayerUID player)];
 		publicVariableServer "mgmTfA_gv_pvs_req_fixedDestinationTaxiToMyPositionPleaseConfirmPacket";

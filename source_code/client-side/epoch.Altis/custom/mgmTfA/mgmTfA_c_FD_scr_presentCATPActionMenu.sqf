@@ -12,7 +12,7 @@
 //HH		mgmTfA_configgv_CATPCheckFrequencySecondsNumber
 //HH
 //HH	The client-side init file create the following value(s) this function rely on:
-//HH		mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber
+//HH		mgmTfA_dgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber
 //HH
 //HH	This script will fill in the following global variables:
 //HH		mgmTfA_gv_pvs_requestorPositionArray3D

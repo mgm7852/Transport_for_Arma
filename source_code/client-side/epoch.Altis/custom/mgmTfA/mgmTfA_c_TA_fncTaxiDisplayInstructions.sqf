@@ -11,17 +11,17 @@
 //HH	Return Value	:	none.		if conditions are met, this script will display on screen instructions.
 //HH	~~
 //HH	The server publishes the following publicVariables this function relies on:
-//HH		mgmTfA_dynamicgv_taxiAnywhereTaxiDisplayInstructionsOnGetInEnabledBool
-//HH		mgmTfA_dynamicgv_taxiAnywhereTaxiReDisplayInstructionsOnGetInTimeThresholdInSecondsNumber
-//HH		mgmTfA_dynamicgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber
+//HH		mgmTfA_dgv_taxiAnywhereTaxiDisplayInstructionsOnGetInEnabledBool
+//HH		mgmTfA_dgv_taxiAnywhereTaxiReDisplayInstructionsOnGetInTimeThresholdInSecondsNumber
+//HH		mgmTfA_dgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber
 //HH
 //HH	Local client computer has the following global variables this function relies on:
-//HH		mgmTfA_dynamicgv_taxiAnywhereTaxiLastTimePlayerGotInInOneOfOurVehicles
-//HH		mgmTfA_dynamicgv_taxiAnywhereTaxiFirstGetInHasOccurred
+//HH		mgmTfA_dgv_taxiAnywhereTaxiLastTimePlayerGotInInOneOfOurVehicles
+//HH		mgmTfA_dgv_taxiAnywhereTaxiFirstGetInHasOccurred
 //HH
 //HH	This function does updates the following global variables:
-//HH		mgmTfA_dynamicgv_taxiAnywhereTaxiLastTimePlayerGotInInOneOfOurVehicles
-//HH		mgmTfA_dynamicgv_taxiAnywhereTaxiFirstGetInHasOccurred
+//HH		mgmTfA_dgv_taxiAnywhereTaxiLastTimePlayerGotInInOneOfOurVehicles
+//HH		mgmTfA_dgv_taxiAnywhereTaxiFirstGetInHasOccurred
 //HH
 //HH
 private ["_thisFileVerbosityLevelNumber"];
@@ -30,12 +30,12 @@ _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
 //	GetIn EH will call us every time player getIn a vehicle.
 //	We will check if it is a clickNGo Taxi
 //	It will then run a check: Is this the first time player got in a clickNGo Taxi?
-//		YES:	display hintC fancy Instructions box and also mark that 1st get in has occurred ==>	mgmTfA_dynamicgv_taxiAnywhereTaxiFirstGetInHasOccurred
+//		YES:	display hintC fancy Instructions box and also mark that 1st get in has occurred ==>	mgmTfA_dgv_taxiAnywhereTaxiFirstGetInHasOccurred
 //		NO:	display hint only (without disrupting the player as this won't require player to  click 'CONTINUE')
 //
 //	We do not want to message spam the player for quick hop off & hop back ons; 
-//	thus a global variable (mgmTfA_dynamicgv_taxiAnywhereTaxiLastTimePlayerGotInInOneOfOurVehicles) keeps track of last getIn to TATaxi and if 
-//	mgmTfA_dynamicgv_taxiAnywhereTaxiReDisplayInstructionsOnGetInTimeThresholdInSecondsNumber seconds have not passed since last getIn, the message will not be displayed
+//	thus a global variable (mgmTfA_dgv_taxiAnywhereTaxiLastTimePlayerGotInInOneOfOurVehicles) keeps track of last getIn to TATaxi and if 
+//	mgmTfA_dgv_taxiAnywhereTaxiReDisplayInstructionsOnGetInTimeThresholdInSecondsNumber seconds have not passed since last getIn, the message will not be displayed
 if (!((vehicle player) getVariable ["mgmTfAisTATaxi", false])) exitWith {
 	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		result of (str (((vehicle player) getVariable [''mgmTfAisTATaxi'', false]))) is: (%1).	note that the actual check reverses this with a ! sign", (str (((vehicle player) getVariable ["mgmTfAisTATaxi", false])))];};//dbg
 	if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Just determined player currently IS NOT in a TATaxi!"];};//dbg
@@ -49,22 +49,22 @@ private	[
 _reminderShouldBeDisplayedNow = false;
 
 // let's check timings now:			if enough time has not passed, then the rest of this file should not even be processed
-if (mgmTfA_dynamicgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber == -1) then {
+if (mgmTfA_dgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber == -1) then {
 	// this was set to -1 in client init, it is still the same meaning firstDisplay has not occurred yet
 	_thisIsTheFirstDisplay = true;
 	// firstDisplay is happening right now so let's update the global variable timestamp for future iterations
-	mgmTfA_dynamicgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber = (time);
+	mgmTfA_dgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber = (time);
 } else {
 	// this is not the firstDisplay
 	_thisIsTheFirstDisplay = false;
 
 	// should we display a reminder at this time?
-	_timeElapsedInSecondsNumber = (time) - mgmTfA_dynamicgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber;
-	if (_timeElapsedInSecondsNumber > mgmTfA_dynamicgv_taxiAnywhereTaxiReDisplayInstructionsOnGetInTimeThresholdInSecondsNumber) then {
+	_timeElapsedInSecondsNumber = (time) - mgmTfA_dgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber;
+	if (_timeElapsedInSecondsNumber > mgmTfA_dgv_taxiAnywhereTaxiReDisplayInstructionsOnGetInTimeThresholdInSecondsNumber) then {
 		// more than threshold seconds have passed, we will need to display a reminder time 
 		_reminderShouldBeDisplayedNow = true;
 		// update the global variable so that it can be evaluated in any future iterations
-		mgmTfA_dynamicgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber = (time);
+		mgmTfA_dgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber = (time);
 		if (_thisFileVerbosityLevelNumber>=7) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncTaxiDisplayInstructions.sqf] [TV7]		DEVDEBUG		Just determined more than threshold seconds HAVE passed. we SHOULD display Instructions. Time Elapsed since last display is calculated as: (%1).", (str _timeElapsedInSecondsNumber)];};//dbg
 	} else {
 		// more than threshold seconds have NOT passed. we should not display a hint  reminder at this time
@@ -143,16 +143,16 @@ _functionToExecuteNow = 0;
 // if we end up with:		_functionToExecuteNow == 2		then we will execute the "display instructions as hint" 	function
 
 // show popup, if this method is chosen in masterConfig =>								method #2:	always show as popup
-if (mgmTfA_dynamicgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber == 2) 							then { _functionToExecuteNow = 1 };
+if (mgmTfA_dgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber == 2) 							then { _functionToExecuteNow = 1 };
 	
 // show popup, if this IS the first display and this method is chosen in masterConfig =>			method #1:	show popup first time, in the future, show memory refresher as hint
-if ((mgmTfA_dynamicgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber == 1) && (_thisIsTheFirstDisplay)) 		then { _functionToExecuteNow = 1 };
+if ((mgmTfA_dgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber == 1) && (_thisIsTheFirstDisplay)) 		then { _functionToExecuteNow = 1 };
 
 // show hint, if this is NOT the first display and this method is chosen in masterConfig =>			method #1:	show popup first time, in the future, show memory refresher as hint
-if ((mgmTfA_dynamicgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber == 1) && (!_thisIsTheFirstDisplay)) 		then { _functionToExecuteNow = 2 };
+if ((mgmTfA_dgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber == 1) && (!_thisIsTheFirstDisplay)) 		then { _functionToExecuteNow = 2 };
 
 // show hint, if this method is chosen in masterConfig =>								method #3:	always show as hint
-if (mgmTfA_dynamicgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber == 3) 							then { _functionToExecuteNow = 2 };
+if (mgmTfA_dgv_taxiAnywhereTaxiDisplayInstructionsOnGetInDisplayMethodNumber == 3) 							then { _functionToExecuteNow = 2 };
 
 // now that we know what to do, let's run the function now...
 if (_functionToExecuteNow == 1) then { _null = [] call DisplayAsPopup;	};

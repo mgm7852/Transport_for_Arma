@@ -74,7 +74,7 @@ if (1>0) then {
 
 	// DO NOT EMBED totalOmniscience group here. Right after Drop Off occur, we will want to know whether map-tracker is map-track authorized due to being requestor (or his buddy) OR because of totalOmniscience group membership.
 	// Add PUIDs from "totalOmniscience group" array
-	//_requestorAndBuddiesCombinedSUACLTextStringArray = mgmTfA_staticgv_totalOmniscienceGroupTextStringArray;
+	//_requestorAndBuddiesCombinedSUACLTextStringArray = mgmTfA_sgv_totalOmniscienceGroupTextStringArray;
 
 	// Add requestor PUID to the end of the array
 	_requestorAndBuddiesCombinedSUACLTextStringArray pushBack _fixedDestinationRequestorPlayerUIDTextString;

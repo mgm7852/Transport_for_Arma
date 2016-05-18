@@ -16,7 +16,7 @@
 //HH	This function updates the following global variable(s):
 //HH		none
 //HH	This function relies on the following global variable(s):
-//HH		mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber	-- created by mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi
+//HH		mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber	-- created by mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi
 //HH
 if (isServer) exitWith {}; if (isNil("mgmTfA_Client_Init")) then {mgmTfA_Client_Init=0;}; waitUntil {mgmTfA_Client_Init==1}; private ["_thisFileVerbosityLevelNumber"]; _thisFileVerbosityLevelNumber = mgmTfA_configgv_clientVerbosityLevel;
 
@@ -97,7 +97,7 @@ if (((vehicle player) getVariable ["mgmTfAisfixedDestinationTaxi", false])) then
 	if (_playerAuthorizedToPayBool && _FD_serviceFeeNeedToBePaidBool) then {
 		_playerCashNumber = (EPOCH_playerCrypto);
 
-		if (_playerCashNumber >= mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber) then {
+		if (_playerCashNumber >= mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber) then {
 			// YES, player can afford the Service Fee - do nothing at this deep level, just proceed.
 			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_scr_chargeMeServiceFee.sqf] [TV8]          YES, player can afford the Service Fee	-- sending a request to the server to get charged.	"];};
 
@@ -108,7 +108,7 @@ if (((vehicle player) getVariable ["mgmTfAisfixedDestinationTaxi", false])) then
 			myGUSUIDNumber = _myGUSUIDNumber;
 			// PUID was already set in RequestTaxi section but just ensuring..
 			mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString = (getPlayerUID player);
-			mgmTfA_gv_pvs_req_FD_chargeMeServiceFeePacket = [player, mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString, myGUSUIDNumber, mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber];
+			mgmTfA_gv_pvs_req_FD_chargeMeServiceFeePacket = [player, mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString, myGUSUIDNumber, mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber];
 			publicVariableServer "mgmTfA_gv_pvs_req_FD_chargeMeServiceFeePacket";
 			// report to log
 			if (_thisFileVerbosityLevelNumber>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_scr_chargeMeServiceFee.sqf] [TV8]          CHARGED		the player TaxiAnywhere Service Fee cost	"];};

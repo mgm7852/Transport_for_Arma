@@ -53,7 +53,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]          We got a match! Player with PUID (%1) has the following profileName: (%2).", (_x select 0), (_x select 1)];};//dbg
 				_fixedDestinationRequestorProfileNameTextString  = (_x select 1);
 				// This below is just to report in STATUS REPORT...
-				mgmTfA_dynamicgv_fixedDestinationTaxisTheLastServedPlayerNameTextString = _fixedDestinationRequestorProfileNameTextString;
+				mgmTfA_dgv_fixedDestinationTaxisTheLastServedPlayerNameTextString = _fixedDestinationRequestorProfileNameTextString;
 				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]          _fixedDestinationRequestorProfileNameTextString is now set to: (%1). issuing (breakTo _PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope) now.", (_x select 1)];};//dbg
 				breakTo "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
 			};
@@ -63,11 +63,11 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3] [Call-a-fdTaxi]    RECEIVED FIXED DESTINATION TAXI REQUEST		_fixedDestinationRequestorClientIDNumber: (%1).		_fixedDestinationRequestorPosition3DArray: (%2).		_fixedDestinationRequestedTaxiFixedDestinationIDNumber: (%3) / resolved to locationName: (%4).		_fixedDestinationRequestorPlayerUIDTextString: (%5) / resolved to profileName: (%6)", (str _fixedDestinationRequestorClientIDNumber), (str _fixedDestinationRequestorPosition3DArray), (str _fixedDestinationRequestedTaxiFixedDestinationIDNumber), _fixedDestinationRequestedDestinationNameTextString, _fixedDestinationRequestorPlayerUIDTextString, _fixedDestinationRequestorProfileNameTextString];};//dbg
 	// Determine what the response should be (accept or reject) and pass the request to the appropriate function via SPAWN	(the next function will inject artificial delay via uiSleep)
 	// Let's make a decision here: are we going to APPROVE or REJECT the booking request? Then pass the request to appropriate script to respond AFTER an artificial delay.
-	// Is the Requestor blacklisted?		is his PUID in mgmTfA_dynamicgv_fixedDestinationTaxisBlacklistedPlayerPUIDsTextStringArray?
+	// Is the Requestor blacklisted?		is his PUID in mgmTfA_dgv_fixedDestinationTaxisBlacklistedPlayerPUIDsTextStringArray?
 	// He is not blacklisted unless the code block below say otherwise!
 	_fixedDestinationRequestorIsInBlacklist = false;
 	// Is the Requestor Blacklisted Check
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]           Will start traversing (mgmTfA_dynamicgv_fixedDestinationTaxisBlacklistedPlayerPUIDsTextStringArray) in the next line."];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]           Will start traversing (mgmTfA_dgv_fixedDestinationTaxisBlacklistedPlayerPUIDsTextStringArray) in the next line."];};//dbg
 	{
 		scopeName "fixedDestinationTaxisBlacklistTraverseScope";
 		// compare player's PUID with the current Blacklisted PUID in array.
@@ -81,7 +81,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 		} else {
 			if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV4]           Requestor's PUID did not match the current blacklisted PUID entry in this iteration. Proceeding to the next iteration (if there are any entries left in blacklist array)."];};
 		};
-	} forEach mgmTfA_dynamicgv_fixedDestinationTaxisBlacklistedPlayerPUIDsTextStringArray;
+	} forEach mgmTfA_dgv_fixedDestinationTaxisBlacklistedPlayerPUIDsTextStringArray;
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]           We are just outside `forEach` loop. The value for _fixedDestinationRequestorIsInBlacklist is: (%1).", (str _fixedDestinationRequestorIsInBlacklist)];};
 			
 	
@@ -133,7 +133,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]          We got a match! Player with PUID (%1) has the following profileName: (%2).", (_x select 0), (_x select 1)];};//dbg
 				_taxiAnywhereRequestorProfileNameTextString = (_x select 1);
 				// This below is just to report in STATUS REPORT...
-				mgmTfA_dynamicgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _taxiAnywhereRequestorProfileNameTextString;
+				mgmTfA_dgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _taxiAnywhereRequestorProfileNameTextString;
 				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]          _taxiAnywhereRequestorProfileNameTextString is now set to: (%1). issuing (breakTo _PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope) now.", (_x select 1)];};//dbg
 				breakTo "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
 			};
@@ -143,11 +143,11 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]      [Call-a-clickNGo-Taxi]    RECEIVED clickNGo REQUEST    _taxiAnywhereRequestorClientIDNumber: (%1).	_taxiAnywhereRequestorProfileNameTextString: (%2).		Requestor Position: (%3).		_taxiAnywhereRequestorPlayerUIDTextString: (%4).		_taxiAnywhereTaxiRequestedDestinationPosition3DArray: (%5).", _taxiAnywhereRequestorClientIDNumber, _taxiAnywhereRequestorProfileNameTextString, _taxiAnywhereRequestorPosition3DArray, _taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereTaxiRequestedDestinationPosition3DArray];};//dbg
 	// Determine what the response should be (accept or reject) and pass the request to the appropriate function via SPAWN	(the next function will inject artificial delay via uiSleep)
 	// Let's make a decision here: are we going to APPROVE or REJECT the booking request? Then pass the request to appropriate script to respond AFTER an artificial delay.
-	// Is the Requestor blacklisted?		is his PUID in mgmTfA_dynamicgv_taxiAnywhereTaxisBlacklistedPlayerPUIDsTextStringArray?
+	// Is the Requestor blacklisted?		is his PUID in mgmTfA_dgv_taxiAnywhereTaxisBlacklistedPlayerPUIDsTextStringArray?
 	// He is not blacklisted unless the code block below say otherwise!
 	_taxiAnywhereRequestorIsInBlacklist = false;
 	// Is the Requestor Blacklisted Check
-	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]           Will start traversing (mgmTfA_dynamicgv_taxiAnywhereTaxisBlacklistedPlayerPUIDsTextStringArray) in the next line."];};//dbg
+	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]           Will start traversing (mgmTfA_dgv_taxiAnywhereTaxisBlacklistedPlayerPUIDsTextStringArray) in the next line."];};//dbg
 	{
 		scopeName "TATaxisBlacklistTraverseScope";
 		
@@ -162,7 +162,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 		} else {
 			if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV4]           Requestor's PUID did not match the current blacklisted PUID entry in this iteration. Proceeding to the next iteration (if there are any entries left in blacklist array)."];};
 		};
-	} forEach mgmTfA_dynamicgv_taxiAnywhereTaxisBlacklistedPlayerPUIDsTextStringArray;
+	} forEach mgmTfA_dgv_taxiAnywhereTaxisBlacklistedPlayerPUIDsTextStringArray;
 	if (mgmTfA_configgv_serverVerbosityLevel>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]           We are just outside `forEach` loop. The value for _taxiAnywhereRequestorIsInBlacklist is: (%1).", (str _taxiAnywhereRequestorIsInBlacklist)];};
 	// We have done the checks above. Now let's proceed accordingly.
 	if(_taxiAnywhereRequestorIsInBlacklist) then {
@@ -206,7 +206,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]          We got a match! Player with PUID (%1) has the following profileName: (%2).", (_x select 0), (_x select 1)];};//dbg
 				_taxiAnywhereRequestorProfileNameTextString = (_x select 1);
 				// This below is just to report in STATUS REPORT...
-				mgmTfA_dynamicgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _taxiAnywhereRequestorProfileNameTextString;
+				mgmTfA_dgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _taxiAnywhereRequestorProfileNameTextString;
 				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]          _taxiAnywhereRequestorProfileNameTextString is now set to: (%1). issuing (breakTo _PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope) now.", (_x select 1)];};//dbg
 				breakTo "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
 			};
@@ -252,7 +252,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]          We got a match! Player with PUID (%1) has the following profileName: (%2).", (_x select 0), (_x select 1)];};//dbg
 				_taxiAnywhereRequestorProfileNameTextString = (_x select 1);
 				// This below is just to report in STATUS REPORT...
-				mgmTfA_dynamicgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _taxiAnywhereRequestorProfileNameTextString;
+				mgmTfA_dgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _taxiAnywhereRequestorProfileNameTextString;
 				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]          _taxiAnywhereRequestorProfileNameTextString is now set to: (%1). issuing (breakTo _PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope) now.", (_x select 1)];};//dbg
 				breakTo "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
 			};
@@ -306,7 +306,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]          We got a match! Player with PUID (%1) has the following profileName: (%2).", (_x select 0), (_x select 1)];};//dbg
 				_FD_RequestorProfileNameTextString = (_x select 1);
 				// This below is just to report in STATUS REPORT...
-				mgmTfA_dynamicgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _FD_RequestorProfileNameTextString;
+				mgmTfA_dgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _FD_RequestorProfileNameTextString;
 				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]          _FD_RequestorProfileNameTextString is now set to: (%1). issuing (breakTo _PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope) now.", (_x select 1)];};//dbg
 				breakTo "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
 			};
@@ -353,7 +353,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]          We got a match! Player with PUID (%1) has the following profileName: (%2).", (_x select 0), (_x select 1)];};//dbg
 				_taxiAnywhereRequestorProfileNameTextString = (_x select 1);
 				// This below is just to report in STATUS REPORT...
-				mgmTfA_dynamicgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _taxiAnywhereRequestorProfileNameTextString;
+				mgmTfA_dgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _taxiAnywhereRequestorProfileNameTextString;
 				if (mgmTfA_configgv_serverVerbosityLevel>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV3]          _taxiAnywhereRequestorProfileNameTextString is now set to: (%1). issuing (breakTo _PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope) now.", (_x select 1)];};//dbg
 				breakTo "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
 			};
@@ -400,7 +400,7 @@ if (!isServer) exitWith {}; if (isNil("mgmTfA_Server_Init")) then {mgmTfA_Server
 				if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6]          We got a match! Player with PUID (%1) has the following profileName: (%2).", (_x select 0), (_x select 1)];};//dbg
 				_taxiAnywhereExitRequestorProfileNameTextString = (_x select 1);
 				// This below is just to report in STATUS REPORT...
-				mgmTfA_dynamicgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _taxiAnywhereExitRequestorProfileNameTextString;
+				mgmTfA_dgv_taxiAnywhereTaxisTheLastServedPlayerNameTextString = _taxiAnywhereExitRequestorProfileNameTextString;
 				if (mgmTfA_configgv_serverVerbosityLevel>=6) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_scr_initRegisterServerEventHandlers.sqf]  [TV6]          _taxiAnywhereExitRequestorProfileNameTextString is now set to: (%1). issuing (breakTo _PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope) now.", (_x select 1)];};//dbg
 				breakTo "_PUIDsAndPlayernamesTextStringArrayCountNumberGreaterThanZeroScope";
 			};

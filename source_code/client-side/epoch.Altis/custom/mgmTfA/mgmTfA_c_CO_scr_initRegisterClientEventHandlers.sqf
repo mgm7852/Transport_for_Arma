@@ -267,7 +267,7 @@
 	// delete the TATaxi Chosen Position Marker
 	deleteMarker "TATaxiChosenPosition";
 	// once player exits clickNGo taxi, allow player to use clickNGoHotKey again
-	mgmTfA_dynamicgv_thisPlayerCanOrderTATaxiViaHotkey = true;
+	mgmTfA_dgv_thisPlayerCanOrderTATaxiViaHotkey = true;
 };
 "mgmTfA_gv_pvc_neg_yourFixedDestinationTaxiRequestHasBeenRejectedAsYouAreBlacklistedPacketSignalOnly" addPublicVariableEventHandler {
 	// initialize local variables
@@ -376,9 +376,9 @@
 			];
 			
 	// We assume, on the client PC "mgmTfA_gv_requestedTaxiFixedDestinationNameTextString" globalVariable is still holding the correct location name	 [it was (switch...do...) determined just few seconds ago]
-	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_c_CO_img_payGeneric.jpg'/><br/><br/><t size='1.40' color='#00FF00'>GREETINGS<br/>%1<br/><br/><br/>PLEASE PAY<br/>%2 CRYPTO<br/><br/>FOR<br/>%3 METRES<br/><br/>TO<br/>%4<br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
-	_msg2SyschatTextString1 = parsetext format ["[DRIVER]  %1 PLEASE PAY %2 CRYPTO  FOR", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber)];
-	_msg2SyschatTextString2 = parsetext format ["[DRIVER]  %1 METRES TO %2. THANKS!", (str mgmTfA_dynamicgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_c_CO_img_payGeneric.jpg'/><br/><br/><t size='1.40' color='#00FF00'>GREETINGS<br/>%1<br/><br/><br/>PLEASE PAY<br/>%2 CRYPTO<br/><br/>FOR<br/>%3 METRES<br/><br/>TO<br/>%4<br/><br/>THANKS!<br/><br/></t>", (profileName), (str mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber), (str mgmTfA_dgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
+	_msg2SyschatTextString1 = parsetext format ["[DRIVER]  %1 PLEASE PAY %2 CRYPTO  FOR", (profileName), (str mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber)];
+	_msg2SyschatTextString2 = parsetext format ["[DRIVER]  %1 METRES TO %2. THANKS!", (str mgmTfA_dgv_journeyTotalDistanceInMetersNumber), mgmTfA_gv_requestedTaxiFixedDestinationNameTextString];
 	hint _msg2HintTextString;
 	systemChat (str _msg2SyschatTextString);
 	systemChat (str _msg2SyschatTextString);
@@ -542,7 +542,7 @@
 	// IDEA/TODO:	inform the player via cutText 	-- only if the global config allows
 };
 "mgmTfA_gv_pvc_pos_yourFDServiceFeeChargeRequestActionedPacketSignalOnly" addPublicVariableEventHandler {
-	// NOTE: this EH rely on mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber still being in memory
+	// NOTE: this EH rely on mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber still being in memory
 	// initialize local variables
 	private	[
 			"_msg2HintTextString",
@@ -550,19 +550,19 @@
 			"_playerActualCashBalance"
 			];
 	//it seems we always show the "pre-transaction balance" for some reason. maybe it's due to communication delay? let's try doing the calculation on this side and show the result
-	_playerActualCashBalance = (EPOCH_playerCrypto - mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber);
+	_playerActualCashBalance = (EPOCH_playerCrypto - mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber);
 	// inform the player via Hint 	-- only if the global config allows
 	if (true) then {
 		// not a config option yet - just go ahead & inform the player
 		private	["_msg2HintTextString"];
-		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_c_CO_img_paymentReceivedThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID<br/>FIXED DESTINATION TAXI<br/>SERVICE FEE<br/><br/>%2 CRYPTO<br/><br/><br/>THANK YOU<br/>FOR THE PAYMENT<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str _playerActualCashBalance)];
+		_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_c_CO_img_paymentReceivedThanks.jpg'/><br/><br/><t size='1.40' color='#00FF00'>%1<br/><br/>YOU JUST PAID<br/>FIXED DESTINATION TAXI<br/>SERVICE FEE<br/><br/>%2 CRYPTO<br/><br/><br/>THANK YOU<br/>FOR THE PAYMENT<br/><br/><br/><br/>YOUR NEW<br/>CASH BALANCE<br/><br/>%3 CRYPTO<br/><br/>", (profileName), (str mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber), (str _playerActualCashBalance)];
 		hint _msg2HintTextString;
 	};
 	// inform the player via systemChat 	-- only if the global config allows
 	if (true) then {
 		// not a config option yet - just go ahead & inform the player
 		private	["_messageTextOnlyFormat"];
-		_messageTextOnlyFormat = parsetext format ["[DRIVER]  YOU PAID FIXED DESTINATION TAXI SERVICE FEE %1 CRYPTO, THANKS. NEW BALANCE %2 CRYPTO.", (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str _playerActualCashBalance)];
+		_messageTextOnlyFormat = parsetext format ["[DRIVER]  YOU PAID FIXED DESTINATION TAXI SERVICE FEE %1 CRYPTO, THANKS. NEW BALANCE %2 CRYPTO.", (str mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber), (str _playerActualCashBalance)];
 		systemChat (str _messageTextOnlyFormat);
 	};
 	// IDEA/TODO:	inform the player via cutText 	-- only if the global config allows

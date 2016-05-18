@@ -36,9 +36,9 @@ private	[
 		"_timeToWaitInSecondsNumber"
 		];
 if	(
-	((mgmTfA_dynamicgv_lastTATaxiBookingRecordKeeperThisIsTheFirstTimeBool) && (mgmTfA_configgv_taxiAnywhereTaxiBookingFirstTimersCanBookWithoutWaitingBool)) 
+	((mgmTfA_dgv_lastTATaxiBookingRecordKeeperThisIsTheFirstTimeBool) && (mgmTfA_configgv_taxiAnywhereTaxiBookingFirstTimersCanBookWithoutWaitingBool)) 
 	|| 
-	(mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber <= (time - mgmTfA_dynamicgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber))
+	(mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber <= (time - mgmTfA_dgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber))
 	)	then {
 	// he is a first timer & first timers can book immediately
 	// OR
@@ -47,7 +47,7 @@ if	(
 } else {
 	// Player may not book at this time - it is too soon since the last Booking that was placed!
 	_bookingPermitted 															= false;
-	_timeToWaitInSecondsNumber = (round (mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber - ((time) - mgmTfA_dynamicgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber)));
+	_timeToWaitInSecondsNumber = (round (mgmTfA_configgv_minimumWaitingTimeBetweenTATaxiBookingsInSecondsNumber - ((time) - mgmTfA_dgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber)));
 	// Note that anything below 1 second and above 0 second (e.g.: 0.374s) will cause the message "PLEASE WAIT 0 SECONDS" to be displayed, so artificially increment by 1 if it is zero.
 	if (_timeToWaitInSecondsNumber == 0) then { _timeToWaitInSecondsNumber = _timeToWaitInSecondsNumber + 1 };
 	_msg2HintTextString = parsetext format ["<img size='6' image='custom\mgmTfA\img\mgmTfA_c_CO_img_warningSign.jpg'/><br/><br/><t size='1.40' color='#FF0037'>SORRY %1!<br/><br/>YOU MAY NOT BOOK<br/>ANOTHER TAXI<br/>THAT QUICKLY.<br/>PLEASE WAIT ANOTHER<br/>%2 SECONDS<br/>BEFORE TRYING AGAIN.", (profileName), (str _timeToWaitInSecondsNumber)];
@@ -73,11 +73,11 @@ if (_bookingPermitted) then {
 	// Kill the workflow if there is another instance active		("TATaxiDestinationChoser_systemReady" global variable should be nil if not nil, there must be another instance currently running...)
 	if (!(isNil "TATaxiDestinationChoser_systemReady")) exitWith {hint "SYSTEM CURRENTLY NOT AVAILABLE"};
 	
-	if (mgmTfA_dynamicgv_thisPlayerCanOrderTATaxiViaHotkey) then {
+	if (mgmTfA_dgv_thisPlayerCanOrderTATaxiViaHotkey) then {
 		
 		// disable players access to the hotkey. this is to prevent keyspam when there is actually zero use case for it.
-		mgmTfA_dynamicgv_thisPlayerCanOrderTATaxiViaHotkey = false;
-		// we mustn't do this here as currently booking is in progress but has not been placed. we will do it further down only when we actually contact the server.		mgmTfA_dynamicgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber = (time);
+		mgmTfA_dgv_thisPlayerCanOrderTATaxiViaHotkey = false;
+		// we mustn't do this here as currently booking is in progress but has not been placed. we will do it further down only when we actually contact the server.		mgmTfA_dgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber = (time);
 
 		///////// STEP:	FINANCIAL CHECKS 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Okay we've checked booking times and it appears this player CAN place a booking at this time.
@@ -197,10 +197,10 @@ if (_bookingPermitted) then {
 			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf] [D4] (_bookingPermitted) is true. executing main function block now."];};//dbg
 
 			// Do these at this stage
-			mgmTfA_dynamicgv_lastTATaxiBookingRecordKeeperThisIsTheFirstTimeBool = false;
-			mgmTfA_dynamicgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber = (time);
+			mgmTfA_dgv_lastTATaxiBookingRecordKeeperThisIsTheFirstTimeBool = false;
+			mgmTfA_dgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber = (time);
 			// re-enable players access to the hotkey. this does not mean he can successfully place another booking in the next second (as cool down timer will prevent that)
-			mgmTfA_dynamicgv_thisPlayerCanOrderTATaxiViaHotkey = true;
+			mgmTfA_dgv_thisPlayerCanOrderTATaxiViaHotkey = true;
 
 			///////// STEP:	PREPARE AND SUBMIT THE CLICKNGO REQUEST
 			mgmTfA_gv_pvs_req_taxiAnywhereTaxiToMyPositionPleaseConfirmPacket = [player, mgmTfA_gv_pvs_taxiAnywhereRequestorPositionArray3D, mgmTfA_gv_pvs_taxiAnywhereRequestorPlayerUIDTextString, _taxiAnywhereTaxiRequestedDestinationPosition3DArray];
@@ -222,7 +222,7 @@ if (_bookingPermitted) then {
 			if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_TA_fncRequestTaxi.sqf] [D4] (_bookingPermitted) is true. executing main function block now."];};//dbg
 			
 			// re-enable players access to the hotkey. this does not mean he can successfully place another booking in the next second (as cool down timer will prevent that)
-			mgmTfA_dynamicgv_thisPlayerCanOrderTATaxiViaHotkey = true;
+			mgmTfA_dgv_thisPlayerCanOrderTATaxiViaHotkey = true;
 		};
 	} else {
 		private	[

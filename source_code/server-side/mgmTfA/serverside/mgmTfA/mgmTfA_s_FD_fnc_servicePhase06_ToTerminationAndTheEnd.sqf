@@ -140,9 +140,9 @@ if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s
 
 //// BEGIN
 //On arrival to waypoint (pick up point) add the travelled distance to the global counter and then reset our local counter
-mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
-	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4] mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
-// We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber
+mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
+	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf]  [TV4] mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
+// We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber
 _iWantToTravelThisManyMetresNumber = 0;
 
 // NEW DESTINATION
@@ -261,9 +261,9 @@ while {_SUTaxiAIVehicleDistanceToWayPointMetersNumber>25} do {
 if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf] [TV4] EXITED LOOP: drivingToTerminationPoint25"];};//dbg
 
 //On arrival to waypoint (termination point) add the travelled distance to the global counter and then reset our local counter
-mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
-	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf] [TV4] mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
-// We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dynamicgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber
+mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
+	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_s_FD_fnc_servicePhase06_ToTerminationAndTheEnd.sqf] [TV4] mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
+// We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dgv_fixedDestinationTaxisTotalDistanceTravelledByTaxisNumber
 _iWantToTravelThisManyMetresNumber = 0;
 
 ///

@@ -12,6 +12,6 @@ if (!isServer) then {
 	_null = [] spawn mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle;
 	// Since we are just spawning now, we cannot have a clickNGo taxi chosen destination
 	deleteMarker "TATaxiChosenPosition";
-	mgmTfA_dynamicgv_thisPlayerCanOrderTATaxiViaHotkey = true;
+	mgmTfA_dgv_thisPlayerCanOrderTATaxiViaHotkey = true;
 };
 // EOF

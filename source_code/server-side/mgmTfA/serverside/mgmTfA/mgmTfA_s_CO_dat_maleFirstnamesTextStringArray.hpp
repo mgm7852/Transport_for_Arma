@@ -1,4 +1,4 @@
-mgmTfA_staticgv_firstnamesMaleTextStringArray=	[
+mgmTfA_sgv_firstnamesMaleTextStringArray=	[
 												"JAMES",
 												"JOHN",
 												"ROBERT",

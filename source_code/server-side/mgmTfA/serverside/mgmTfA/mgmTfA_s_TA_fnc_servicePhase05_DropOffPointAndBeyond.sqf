@@ -138,9 +138,9 @@ missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUTxAnywPAYGIsCurrentlyA
 publicVariable format ["mgmTfA_gv_PV_SU%1SUTxAnywPAYGIsCurrentlyActiveBool", _myGUSUIDNumber];
 
 //On arrival to waypoint (drop off point) add the travelled distance to the global counter and then reset our local counter
-mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
-if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
-// We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber
+mgmTfA_dgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
+if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase05_DropOffPointAndBeyond.sqf] [TV3] mgmTfA_dgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};//dbg
+// We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber
 _iWantToTravelThisManyMetresNumber = 0;
 
 //Initial evaluation

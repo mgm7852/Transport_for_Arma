@@ -36,20 +36,20 @@ if (!isServer) then {
 	mgmTfA_c_TA_fnc_pleaseStopVehicle = compile preprocessFileLineNumbers "custom\mgmTfA\mgmTfA_c_TA_fnc_pleaseStopVehicle.sqf";
 	
 	//// Reset global variables of counter nature
-	mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingRecordKeeperThisIsTheFirstTimeBool = true;
-	mgmTfA_dynamicgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
-	mgmTfA_dynamicgv_lastTATaxiBookingRecordKeeperThisIsTheFirstTimeBool = true;
-	mgmTfA_dynamicgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber = (time);
-	mgmTfA_dynamicgv_taxiAnywhereTaxiFirstGetInHasOccurred = false;
-	mgmTfA_dynamicgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber = -1;
-	mgmTfA_dynamicgv_purchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool = false;
-	mgmTfA_dynamicgv_mapOpenedAtTimestampsInSecondTextStringArray = [];
-	mgmTfA_dynamicgv_taxiAnywhereRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool = false;
+	mgmTfA_dgv_lastFixedDestinationTaxiBookingRecordKeeperThisIsTheFirstTimeBool = true;
+	mgmTfA_dgv_lastFixedDestinationTaxiBookingPlacedAtTimestampInSecondsNumber = (time);
+	mgmTfA_dgv_lastTATaxiBookingRecordKeeperThisIsTheFirstTimeBool = true;
+	mgmTfA_dgv_lastTATaxiBookingPlacedAtTimestampInSecondsNumber = (time);
+	mgmTfA_dgv_taxiAnywhereTaxiFirstGetInHasOccurred = false;
+	mgmTfA_dgv_taxiAnywhereTaxiInstructionsAutoDisplayOnGetInHappenedAtTimeInSecondsNumber = -1;
+	mgmTfA_dgv_purchasingPowerCheckAndPAYGChargeForTimeTicksFunctionCurrentlyRunningBool = false;
+	mgmTfA_dgv_mapOpenedAtTimestampsInSecondTextStringArray = [];
+	mgmTfA_dgv_taxiAnywhereRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool = false;
 
 	// Since we are just spawning now, we cannot have any fixedDestinationTaxis checked
-	mgmTfA_dynamicgv_mapOpenedAtTimestampsInSecondTextStringArray = [0,0,0];
+	mgmTfA_dgv_mapOpenedAtTimestampsInSecondTextStringArray = [0,0,0];
 	// TaxiAnywhere (a.k.a.: clickNGo does not need it anymore due to simplified payment process) but we still need this for the fixeddestination!!
-	mgmTfA_dynamicgv_listOfFixedDestinationTaxisThatWeHaveAddedActionMenuOptionTextStringArray = [];
+	mgmTfA_dgv_listOfFixedDestinationTaxisThatWeHaveAddedActionMenuOptionTextStringArray = [];
 
 	// Send our PUID & ProfileName to the "server-side global PUID and ProfileNames Database"
 	myPUIDAndProfileNameTextStringArray = [(getPlayerUID player), (profileName)];

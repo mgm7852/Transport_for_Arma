@@ -16,7 +16,7 @@
 //HH		mgmTfA_configgv_fixedDestinationTaxisTaxiVehicleClassnameTextString
 //HH	This function does not create/update any global variables.
 //HH	This function does rely on the following  global variable:
-//HH		mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber << contains a variable 'journey cost'. it was created by mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi
+//HH		mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber << contains a variable 'journey cost'. it was created by mgmTfA_c_FD_fnc_sendBookingRequestForFDTaxi
 //HH	This function does rely on one publicVariable containing the information about the Service Unit:	mgmTfA_gv_PV_SU%1SUFDServiceFeeNeedToBePaidBool
 //HH		For example, for Service Unit 27, the publicVariables would be:
 //HH		mgmTfA_gv_PV_SU27SUTA1stMileFeeNeedToBePaidBool
@@ -75,7 +75,7 @@ while {_continueRequestingServiceFeePayment} do
 			_currentVehiclesGUSUIDNumber = ((vehicle player) getVariable "GUSUIDNumber");
 			//Compare current vehicle's GUSUID with the supplied-as-parameter GUSUID; if they match, message the player. Otherwise do nothing.
 			if (_originalVehiclesGUSUIDNumber == _currentVehiclesGUSUIDNumber) then {
-				_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE SERVICE FEE %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_dynamicgv_journeyServiceFeeCostInCryptoNumber), (str _counterInfinite)];
+				_msg2SyschatTextString = parsetext format ["[DRIVER]  PLEASE PAY THE SERVICE FEE %1 CRYPTO, THANKS!  [%2]", (str mgmTfA_dgv_journeyServiceFeeCostInCryptoNumber), (str _counterInfinite)];
 				systemChat (str _msg2SyschatTextString);
 				if (mgmTfA_configgv_clientVerbosityLevel>=8) then {diag_log format ["[mgmTfA] [mgmTfA_c_FD_fnc_keepRequestingServiceFeePayment.sqf]  [TV8]          VEHICLE COMPARISON MATCHED:		the (str _originalVehiclesGUSUIDNumber) is: (%1) == (str _currentVehiclesGUSUIDNumber) is: (%2)		-- 'please pay the Service Fee' reminder sent to requestor	", (str _originalVehiclesGUSUIDNumber), (str _currentVehiclesGUSUIDNumber)];};
 			} else {

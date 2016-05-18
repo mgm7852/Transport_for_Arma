@@ -16,8 +16,8 @@ if (!isServer) then {
 	waitUntil {mgmTfA_Client_Init==1};
 };
 
-if (mgmTfA_dynamicgv_taxiAnywhereRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool) exitWith {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle.sqf] ATTEMPTED executing another instance of mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle however mgmTfA_dynamicgv_taxiAnywhereRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool is true! Quitting!"];};
-mgmTfA_dynamicgv_taxiAnywhereRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool = true;
+if (mgmTfA_dgv_taxiAnywhereRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool) exitWith {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle.sqf] ATTEMPTED executing another instance of mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle however mgmTfA_dgv_taxiAnywhereRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool is true! Quitting!"];};
+mgmTfA_dgv_taxiAnywhereRequestTaxiViaTripleMapOpenViaTripleMapOpenFunctionRunningBool = true;
 
 private	[
 		"_xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber",
@@ -45,18 +45,18 @@ while {alive player} do {
 	// player just opened the map. let's record this in the database
 	_iterationID = _iterationID + 1;
 	_curTimeSecondsNumber = (time);
-	mgmTfA_dynamicgv_mapOpenedAtTimestampsInSecondTextStringArray pushBack (_curTimeSecondsNumber);
-	_arraySizeCountNumber = (count (mgmTfA_dynamicgv_mapOpenedAtTimestampsInSecondTextStringArray));
+	mgmTfA_dgv_mapOpenedAtTimestampsInSecondTextStringArray pushBack (_curTimeSecondsNumber);
+	_arraySizeCountNumber = (count (mgmTfA_dgv_mapOpenedAtTimestampsInSecondTextStringArray));
 	if (_arraySizeCountNumber >= _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber) then {
 		// YES, the map has been opened at least n times since last spawn, meaning  there is a chance that the map has been opened 3 times in the last 8 seconds // let's dig deeper but first log what we got
 		//if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_c_CO_fnc_launchTfAGUIViaMapRapidToggle.sqf] [TV4] Uptime is now (%1) seconds.		It's a YES (_arraySizeCountNumber IS >=_xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber (%2)).		Since last player spawn, this function has iterated this many times:	_iterationID=(%3).		I have detected that the map has been opened _arraySizeCountNumber=(%4) times since since client init.", (str _curTimeSecondsNumber), (str _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber), (str _iterationID), (str _arraySizeCountNumber)];};//dbg
 		// is the 3rd most recent mapOpen timestamp dated 8 seconds ago or sooner?
 		// get the 3rd timestamp
 		_thirdMostRecentTimestampsIndexPositionFromLeftNumber = (_arraySizeCountNumber - _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesNumber);
-		_thirdMostRecentTimestampNumber = (mgmTfA_dynamicgv_mapOpenedAtTimestampsInSecondTextStringArray select _thirdMostRecentTimestampsIndexPositionFromLeftNumber);
+		_thirdMostRecentTimestampNumber = (mgmTfA_dgv_mapOpenedAtTimestampsInSecondTextStringArray select _thirdMostRecentTimestampsIndexPositionFromLeftNumber);
 		if ((_curTimeSecondsNumber - _thirdMostRecentTimestampNumber) <= _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalThresholdMapOpenedNTimesInSecsNumber) then {
 			// YES, the map has been opened more than n times in the last 8 seconds. Let's log this and activate the clickNGo hotkey, but first ensure the next 2 key presses won't activate this again
-			mgmTfA_dynamicgv_mapOpenedAtTimestampsInSecondTextStringArray = _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalTurnThePage;
+			mgmTfA_dgv_mapOpenedAtTimestampsInSecondTextStringArray = _xclickNGoOpenMapCommandMonitoringThisMustBeTheSignalTurnThePage;
 			// launch function.	note that, clickNGoRequestTaxi function has the following code which will make it wait for the main display:		if (!isServer) then {waitUntil {!isnull (finddisplay 46) blah blah 
 			_null = CreateDialog "MGMTFA_DIALOG"
 			//_null = [] spawn mgmTfA_c_TA_fncRequestTaxi;

@@ -12,7 +12,7 @@
 //HH	Return Value:	none
 //HH ~~
 //HH	The shared configuration file has the following values this function rely on: none
-//HH	This function updates the following global variable(s):	mgmTfA_dynamicgv_thisPlayerCanOrderTATaxiViaHotkey
+//HH	This function updates the following global variable(s):	mgmTfA_dgv_thisPlayerCanOrderTATaxiViaHotkey
 //HH
 
 // TODO reduce the multi switches to a single inline pre-compiled function

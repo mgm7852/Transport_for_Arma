@@ -21,7 +21,7 @@
 //HH ~~
 //HH	The server-side master configuration file read (and/or publicVariable publish) the following value(s) this function rely on:
 //HH		mgmTfA_configgv_serverVerbosityLevel
-//HH		mgmTfA_dynamicgv_sideRelationSetupHasNotBeenDoneYetBool
+//HH		mgmTfA_dgv_sideRelationSetupHasNotBeenDoneYetBool
 //HH		
 //HH	Note: we will send an initial "we are processing your request - please wait" message to the Requestor
 //HH	Note: we will send the FINAL confirmation to the Requestor ONLY AFTER successfully creating the SU (vehicle+driver).
@@ -156,15 +156,15 @@ if (_thisFileVerbosityLevelNumber>=2) then {diag_log format ["[mgmTfA] [mgmTfA_f
 	// go back in gitlogs try and understand what this is about?
 
 //Set Sides (Only If Hasn't Been Done Before)
-if (mgmTfA_dynamicgv_sideRelationSetupHasNotBeenDoneYetBool) then {
-	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV4] Sides DO NEED set up -- I will do it now. I will set mgmTfA_dynamicgv_sideRelationSetupHasNotBeenDoneYetBool to false."];};//dbg
+if (mgmTfA_dgv_sideRelationSetupHasNotBeenDoneYetBool) then {
+	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV4] Sides DO NEED set up -- I will do it now. I will set mgmTfA_dgv_sideRelationSetupHasNotBeenDoneYetBool to false."];};//dbg
 	createCenter RESISTANCE;
 	RESISTANCE setFriend [WEST,1];
 	RESISTANCE setFriend [EAST,0];
 	WEST setFriend [RESISTANCE,1];
 	EAST setFriend [RESISTANCE,0];
 	// This is now done
-	mgmTfA_dynamicgv_sideRelationSetupHasNotBeenDoneYetBool = false;
+	mgmTfA_dgv_sideRelationSetupHasNotBeenDoneYetBool = false;
 } else {
 	if (_thisFileVerbosityLevelNumber>=4) then {diag_log format ["[mgmTfA] [mgmTfA_fnc_server_ClickNGoTaxi_ServicePhase03_CreateServiceUnitAndGoToRequestor.sqf]  [TV4] Sides DO NOT NEED set up -- nothing to be done on this."];};//dbg
 };

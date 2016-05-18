@@ -137,9 +137,9 @@ _playersAroundMeListIsNullLoopCounter = 0;
 
 //// BEGIN
 //On arrival to waypoint (pick up point) add the travelled distance to the global counter and then reset our local counter
-mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
-	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};
-// We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dynamicgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber
+mgmTfA_dgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber = mgmTfA_dgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber + _iWantToTravelThisManyMetresNumber;
+	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_TA_fnc_servicePhase04_PickUpPointAndBeyond.sqf] [TV3] mgmTfA_dgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber is now (%1). It now reflects the distance I just travelled (%2).]", mgmTfA_dgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber, _iWantToTravelThisManyMetresNumber];};
+// We can now reset this SU's distance_travelled counter -- because we already added it to mgmTfA_dgv_taxiAnywhereTaxisTotalDistanceTravelledByTaxisNumber
 _iWantToTravelThisManyMetresNumber = 0;
 
 // We have arrived at PickUpPoint!					
