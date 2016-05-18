@@ -279,10 +279,10 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 	//	Initial evaluation
 	//	don't add this var to the top of page var list because this will never be needed if it's a NO answer in the first/main IF condition
 	private	[
-			"_requestorInsideVehicle",
-			"_waitStartTimeForRequestorGetOutInSecondsNumber",
-			"_beenWaitingForRequestorToGetOutInSecondsNumber"
-			];
+		"_requestorInsideVehicle",
+		"_waitStartTimeForRequestorGetOutInSecondsNumber",
+		"_beenWaitingForRequestorToGetOutInSecondsNumber"
+		];
 	_beenWaitingForRequestorToGetOutInSecondsNumber = 0;
 	if (_requestorPlayerObject in _SUTaxiAIVehicleObject) then {
 		//He's in!
@@ -347,8 +347,7 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 		};
 		 // Let emergency escapees pass
 		if(_emergencyEscapeNeeded) then {
-			// we will breakTo, to terminate -- but first reenable Taxi driver & vehicle's movement
-			_SUAICharacterDriverObject enableAI "MOVE";
+			// terminate
 			breakTo "mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceivedMainScope";
 		};
 
@@ -377,8 +376,7 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 				//NO, requestor did not get out. He has changed his mind! We will carry on with the normal taxi service phase. return to callingFunction (_stopVehReqHandlerFncReturnValueBool = true). (callingFunction will then carry an as per normal)
 				// log it
 				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV5] WAIT FOR REQUESTOR GET OUT TIMEOUT VALUE REACHED!		we won't wait anymore for him to get out. proceeding as if no stopVehicle requested.  (_beenWaitingForRequestorToGetOutInSecondsNumber) is: (%1).", _beenWaitingForRequestorToGetOutInSecondsNumber];};
-				// stopVehRequestor is not getting out -- reenable Taxi driver & vehicle's movement
-				_SUAICharacterDriverObject enableAI "MOVE";
+				// stopVehRequestor is not getting out - let's carry on driving him to requested destination
 				breakTo "mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceivedMainScope";
 			} else {
 				// still good to wait some more
@@ -519,9 +517,6 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 				if (_thisFileVerbosityLevelNumber>=5) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV5] WAIT FOR REQUESTOR GET IN TIMEOUT VALUE REACHED!		we won't wait anymore for him to get in. proceeding as if no stopVehicle requested.  (_beenWaitingForRequestorToGetInInSecondsNumber) is: (%1).", _beenWaitingForRequestorToGetInInSecondsNumber];};
 
 				//NO, requestor did not get back in. He dont't need us! We will terminate this taxi service phase and the whole workflow. return to callingFunction (_stopVehReqHandlerFncReturnValueBool = false). (callingFunction will then instantly terminate)
-				// enable driver movement
-				_SUAICharacterDriverObject enableAI "MOVE";
-
 				// we signal the callingFunction that it should terminate via setting "_emergencyEscapeNeeded = true;" (last lines of this function will then return false which the callingFunction will process)
 				_emergencyEscapeNeeded = true;
 				breakTo "mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceivedMainScope";
@@ -533,7 +528,18 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 		};
 	};
 	if (_thisFileVerbosityLevelNumber>=3) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf] [TV3] EXITed loop _requestorOutsideVehicle"];};
-	uiSleep 0.05;
+
+	// requestor got back in -- we probably need to re-enable AI movement and carry on driving him?
+	// TODO
+	// TODO
+	// TODO
+	// TODO
+	// TODO
+	// TODO
+	// TODO
+	// TODO
+	// TODO
+	// TODO
 } else {
 	// NO, we do NOT have any authorized exitRequests
 	// TODO CHANGE THIS TO 10
@@ -543,6 +549,9 @@ if (_stopVehicleRequestedAndAuthorizedBool) then {
 missionNamespace setVariable [format ["mgmTfA_gv_PV_SU%1SUStopVehicleRequestedAndAuthorized", _myGUSUIDNumber], false];
 publicVariable format ["mgmTfA_gv_PV_SU%1SUStopVehicleRequestedAndAuthorized", _myGUSUIDNumber];
 if (_thisFileVerbosityLevelNumber>=0) then {diag_log format ["[mgmTfA] [mgmTfA_s_CO_fnc_checkAndActionAnyStopVehicleRequestWeMightHaveReceived.sqf]  [TV0] 	exiting function. I just set (1SUStopVehicleRequestedAndAuthorized) to FALSE 		for SU:(%1)		.", (str _myGUSUIDNumber)];};//dbg
+
+// reenable Taxi driver & vehicle's movement
+_SUAICharacterDriverObject enableAI "MOVE";
 
 // return appropriate response to the callingFunction
 if (_emergencyEscapeNeeded) then {
